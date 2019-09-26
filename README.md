@@ -16,7 +16,7 @@ Deploy the bacula community edition on Docker Containers.
 
 ## Support
 
-For techincal support please contact us. 
+For technical support please contact us. 
 
 suporte@fametec.com.br
 
