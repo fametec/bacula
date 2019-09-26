@@ -1,6 +1,6 @@
 # Bacula Container
 
-This is a container of the bacula community edition. 
+Deploy the bacula community edition on Docker Containers. 
 
 ## Workloads
 
@@ -10,6 +10,9 @@ This is a container of the bacula community edition.
 - [ ] Bacula File Daemon
 - [ ] Baculum Web Gui
 
+## Docker Compose
+
+- [ ] docker-compose.yaml
 
 ## Support
 
