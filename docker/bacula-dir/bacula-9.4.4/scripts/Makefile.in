@@ -1,0 +1,120 @@
+#
+# Copyright (C) 2000-2018 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+@MCOMMON@
+
+working_dir=@working_dir@
+
+srcdir =	@srcdir@
+VPATH = 	@srcdir@
+.PATH:		@srcdir@
+topdir = ..
+thisdir = scripts
+
+
+first_rule: all
+dummy:
+
+MKDIR = $(topdir)/autoconf/mkinstalldirs
+
+#-------------------------------------------------------------------------
+
+all: Makefile
+
+depend:
+	
+
+#-------------------------------------------------------------------------
+
+installdirs:
+	$(MKDIR) $(DESTDIR)$(sysconfdir)
+	$(MKDIR) $(DESTDIR)$(sbindir)
+	$(MKDIR) $(DESTDIR)$(scriptdir)
+	$(MKDIR) $(DESTDIR)$(mandir)
+
+install: installdirs
+	$(INSTALL_SCRIPT) bconsole $(DESTDIR)$(scriptdir)/bconsole
+	$(INSTALL_SCRIPT) bacula $(DESTDIR)$(scriptdir)/bacula
+	$(INSTALL_SCRIPT) bacula_config $(DESTDIR)$(scriptdir)/bacula_config
+	$(INSTALL_SCRIPT) bacula $(DESTDIR)$(sbindir)/bacula
+	$(INSTALL_SCRIPT) tapealert $(DESTDIR)$(scriptdir)/tapealert
+	$(INSTALL_SCRIPT) isworm $(DESTDIR)$(scriptdir)/isworm
+	$(INSTALL_SCRIPT) bacula-ctl-dir $(DESTDIR)$(scriptdir)/bacula-ctl-dir
+	$(INSTALL_SCRIPT) bacula-ctl-fd $(DESTDIR)$(scriptdir)/bacula-ctl-fd
+	$(INSTALL_SCRIPT) bacula-ctl-sd $(DESTDIR)$(scriptdir)/bacula-ctl-sd
+	@if  test -f ${DESTDIR}${scriptdir}/mtx-changer; then \
+	   echo "  ==> Saving existing mtx-changer to mtx-changer.old"; \
+	   $(MV) -f ${DESTDIR}${scriptdir}/mtx-changer ${DESTDIR}${scriptdir}/mtx-changer.old; \
+	fi
+	$(INSTALL_SCRIPT) mtx-changer $(DESTDIR)$(scriptdir)/mtx-changer
+	@if  test -f ${DESTDIR}${scriptdir}/mtx-changer.conf; then \
+	   echo "  ==> Installing mtx-changer.conf to mtx-changer.conf.new"; \
+	   $(INSTALL_DATA) mtx-changer.conf $(DESTDIR)$(scriptdir)/mtx-changer.conf.new; \
+	else \
+	   $(INSTALL_DATA) mtx-changer.conf $(DESTDIR)$(scriptdir)/mtx-changer.conf; \
+	fi
+	@if  test -f ${DESTDIR}${scriptdir}/disk-changer; then \
+	   echo "  ==> Saving existing disk-changer to disk-changer.old"; \
+	   $(MV) -f ${DESTDIR}${scriptdir}/disk-changer ${DESTDIR}${scriptdir}/disk-changer.old; \
+	fi
+	$(INSTALL_SCRIPT) disk-changer $(DESTDIR)$(scriptdir)/disk-changer
+	$(INSTALL_DATA)   btraceback.gdb $(DESTDIR)$(scriptdir)/btraceback.gdb
+	$(INSTALL_DATA)   btraceback.dbx $(DESTDIR)$(scriptdir)/btraceback.dbx
+	$(INSTALL_DATA)   btraceback.mdb $(DESTDIR)$(scriptdir)/btraceback.mdb
+	@if  test -f ${DESTDIR}${scriptdir}/baculabackupreport; then \
+	   echo "  ==> Saving existing baculabackupreport to baculabackupreport.old"; \
+	   $(MV) -f ${DESTDIR}${scriptdir}/baculabackupreport ${DESTDIR}${scriptdir}/baculabackupreport.old; \
+	fi
+	$(INSTALL_SCRIPT) baculabackupreport $(DESTDIR)$(scriptdir)/baculabackupreport
+	$(INSTALL_SCRIPT) bacula-tray-monitor.desktop $(DESTDIR)$(scriptdir)/bacula-tray-monitor.desktop
+	chmod 0644 $(DESTDIR)$(scriptdir)/btraceback.gdb \
+		   $(DESTDIR)$(scriptdir)/btraceback.dbx \
+		   $(DESTDIR)$(scriptdir)/btraceback.mdb
+	$(INSTALL_SCRIPT) btraceback $(DESTDIR)$(sbindir)/btraceback
+
+
+uninstall:
+	(cd $(DESTDIR)$(scriptdir); $(RMF) bconsole)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) bacula)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) bacula_config)
+	(cd $(DESTDIR)$(sbindir);   $(RMF) bacula)
+	(cd $(DESTDIR)$(sbindir);   $(RMF) tapealert)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) baculabackupreport)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) bacula-ctl-dir)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) bacula-ctl-fd)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) bacula-ctl-sd)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) fd)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) mtx-changer)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) disk-changer)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) dvd-handler)  
+	(cd $(DESTDIR)$(scriptdir); $(RMF) btraceback.gdb)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) btraceback.dbx)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) btraceback.mdb)
+	(cd $(DESTDIR)$(scriptdir); $(RMF) breload)
+	(cd $(DESTDIR)$(sbindir);   $(RMF) btraceback)
+
+Makefile: Makefile.in
+	cd $(topdir) \
+	    && CONFIG_FILES=$(thisdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+	chmod 755 bacula btraceback
+	chmod 755 bacula-ctl-dir bacula-ctl-fd bacula-ctl-sd bacula_config
+	chmod 755 disk-changer mtx-changer bconsole tapealert
+
+Makefiles:
+	$(SHELL) config.status
+	chmod 755 bacula btraceback
+	chmod 755 bacula-ctl-dir bacula-ctl-fd bacula-ctl-sd
+	chmod 755 mtx-changer bconsole tapealert
+
+clean:
+	@$(RMF) *~ 1 2 3
+
+# clean for distribution
+distclean: clean
+	@$(RMF) bacula fd btraceback
+	@$(RMF) bacula-ctl-dir bacula-ctl-fd bacula-ctl-sd bacula_config
+	@$(RMF) bconsole logrotate bacula.desktop 
+	@$(RMF) mtx-changer dvd-handler
+
+# ------------------------------------------------------------------------

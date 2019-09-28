@@ -1,0 +1,68 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2016 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# Bacula interface to tapeinfo to get tape alerts
+#
+#  tapealert %l (control device name)
+#  
+#  Note: you must have in your SD Device resource:
+#   Alert Command = /full-path/tapealert %l
+#   Control Device = /dev/sg0n  (where this is the scsi control
+#      device for the device you are using).
+#
+
+# Note: to test
+#  1. uncomment out the DEBUG=1 line below
+#  2. Possibly remove or add TapeAlert[nn]: that you want to test.
+#       Note, the message following the : is not used.
+#  3. Run Bacula
+#  
+#DEBUG=1
+
+tapeinfo=`which tapeinfo`
+
+if [ x${tapeinfo} = x ] ; then
+   echo "tapeinfo program not found, but is required."
+   exit 1
+fi
+if [ x$1 = x ] ; then
+   echo "First argument missing. Must be device control name."
+   exit 1
+fi
+
+
+if [ x$DEBUG = x ] ; then
+$tapeinfo -f $1 |grep "^TapeAlert" - |cut -b1-13
+exit $?
+
+else
+
+# For testing only
+cat <<EOF |grep "^TapeAlert" - |cut -b1-13
+Product Type: Tape Drive
+Vendor ID: 'IBM     '
+Product ID: 'ULTRIUM-TD6     '
+Revision: 'G350'
+Attached Changer API: No
+SerialNumber: 'F3A2930090'
+TapeAlert[3]:    Hard Error: Uncorrectable read/write error.
+TapeAlert[5]:  Read Failure: Tape faulty or tape drive broken.
+TapeAlert[39]: Undefined.
+MinBlock: 1
+MaxBlock: 8388608
+SCSI ID: 9
+SCSI LUN: 0
+Ready: yes
+BufferedMode: yes
+Medium Type: 0x58
+Density Code: 0x58
+BlockSize: 0
+DataCompEnabled: yes
+DataCompCapable: yes
+DataDeCompEnabled: yes
+CompType: 0xff
+DeCompType: 0xff 
+EOF
+fi

@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# shell script to drop Bacula database(s)
+#
+
+bindir=@POSTGRESQL_BINDIR@
+db_name=@db_name@
+
+if $bindir/dropdb ${db_name}
+then
+   echo "Drop of ${db_name} database succeeded."
+else
+   echo "Drop of ${db_name} database failed."
+fi
+exit 0

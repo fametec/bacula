@@ -1,0 +1,14 @@
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# Definition of file storage device
+Storage {
+  Name = File
+# Do not use "localhost" here    
+  Address = @storage_address@                # N.B. Use a fully qualified name here
+  SDPort = @storage_port@
+  Password = "@storage_password@"
+  Device = FileStorage
+  Media Type = File
+}

@@ -1,0 +1,858 @@
+#!/bin/sh
+#
+# baculabackupreport.sh
+#
+# ------------------------------------------------------------------------------
+#
+# waa - 20130428 - Initial release.
+#                  Generate basic Bacula backup report.
+#
+# waa - 20170501 - Change Log moved to bottom of script.
+#
+# ------------------------------------------------------------------------------
+#
+# Copyright (c) 2013-2017, William A. Arlofski waa-at-revpol-dot-com
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# 1.  Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2.  Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+# IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+# TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+# PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+# TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+# PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# ------------------------------------------------------------------------------
+
+
+# System variables
+# ----------------
+server="@hostname@"
+admin="@job_email@"
+bcbin="/opt/bacula/bin/bconsole"
+sendmail="/usr/sbin/sendmail"
+bcconfig="/opt/bacula/etc/bconsole.conf"
+
+# Database variables
+# ------------------
+dbtype="pgsql"                          # Supported options are pgsql, mysql, mariadb
+db="bacula"
+dbuser="bacula"
+dbbin="/usr/bin/psql"
+# dbpass="-pPassword"   # Uncomment and set db password if one is used
+
+# Formatting variables
+# --------------------
+html="yes"                                                                              # Generate HTML emails instead of plain text emails?
+boldstatus="yes"                                                        # Set <b> tag on Status field (only if html="yes")
+colorstatusbg="yes"                                             # Colorize the Status cell's background? (only if html="yes")
+
+jobtableheadercolor="#b0b0b0"   # Background color for the HTML table's header
+jobtablejobcolor="#f4f4f4"              # Background color for the job rows in the HTML table
+runningjobcolor="#4d79ff"                       # Background color of the Status cell for "Running" jobs
+goodjobcolor="#00f000"                          # Background color of the Status cell for "OK" jobs
+warnjobcolor="#ffff00"                          # Background color of the Status cell for "OK" jobs (with warnings - well, actually with 'joberrors')
+badjobcolor="#cc3300"                                   # Background color of the Status cell for "bad" jobs
+goodjobwitherrcolor="#cccc00"   # Background color of the Status cell for "OK" jobs (with errors) - Not implemented due to request
+
+fontfamily="Verdana, Arial, Helvetica, sans-serif"      # Set the font family to use for HTML emails
+fontsize="16px"                                                         # Set the font size to use for email title and print summaries
+fontsizejobinfo="12px"                          # Set the font size to use for job information inside of table
+fontsizesumlog="10px"                                   # Set the font size of bad logs and job summaries
+
+printsummary="yes"                                              # Print a short summary after the job list table? (Total Jobs, Files & Bytes)
+emailsummaries="no"                                             # Email all job summaries. Be careful with this, it can generate very large emails
+emailbadlogs="yes"                                              # Email logs of bad jobs or jobs with JobErrors -ne 0. Be careful, this can generate very large emails.
+addsubjecticon="yes"                                    # Prepend the email Subject with UTF-8 icons (a 'checkmark', 'circle with slash', or a bold 'x')
+nojobsicon="=?utf-8?Q?=E2=8A=98?="              # utf-8 subject icon when no jobs have been run
+goodjobsicon="=?utf-8?Q?=E2=9C=94?="    # utf-8 subject icon when all jobs were "OK"
+badjobsicon="=?utf-8?Q?=E2=9C=96?="             # utf-8 subject icon when there are jobs with errors etc
+starbadjobids="yes"                                             # Prepend an asterisk "*" to jobids of "bad" jobs
+sortfield="EndTime"                                             # Which catalog db field to sort on? Multiple,fields,work,here
+sortorder="DESC"                                                        # Which direction to sort?
+emailtitle="Jobs Run On ${server} in the Past ${1} Hours"       # This is prepended at the top of the email, before the jobs table
+
+
+# --------------------------------------------------
+# Nothing should need to be modified below this line
+# --------------------------------------------------
+
+
+hist=${1}
+if [ -z ${hist} ]; then
+        echo -e "\nUSE:\n$0 <history in hours>\n"
+        exit 1
+fi
+
+if [ ! -e ${bcconfig} ]; then
+        echo -e "\nThe bconsole configuration file does not seem to be '${bcconfig}'."
+        echo -e "Please check the setting for the variable 'bcconfig'.\n"
+        exit 1
+fi
+
+if [ ! -x ${bcbin} ]; then
+        echo -e "\nThe bconsole binary does not seem to be '${bcbin}', or it is not executable."
+        echo -e "Please check the setting for the variable 'bcbin'.\n"
+        exit 1
+fi
+
+if [ ! -x ${dbbin} ]; then
+        echo -e "\nThe database client binary does not seem to be '${dbbin}', or it is not executable."
+        echo -e "Please check the setting for the variable 'dbbin'.\n"
+        exit 1
+fi
+
+if [ ! -x ${sendmail} ]; then
+        echo -e "\nThe sendmail binary does not seem to be '${sendmail}', or it is not executable."
+        echo -e "Please check the setting for the variable 'sendmail'.\n"
+        exit 1
+fi
+
+
+# Build query based on dbtype. Good thing we have "standards" Sigh...
+# -------------------------------------------------------------------
+case ${dbtype} in
+        mysql )
+                queryresult=$(echo "SELECT JobId, Name, StartTime, EndTime, Type, Level, JobStatus, JobFiles, JobBytes, \
+                TIMEDIFF (EndTime,StartTime) as RunTime, JobErrors \
+                FROM Job \
+                WHERE (RealEndTime >= DATE_ADD(NOW(), INTERVAL -${hist} HOUR) OR JobStatus='R') \
+                ORDER BY ${sortfield} ${sortorder};" \
+                | ${dbbin} -u ${dbuser} ${dbpass} ${db} \
+                | sed '/^JobId/d' )
+                ;;
+
+        pgsql )
+                queryresult=$(echo "SELECT JobId, Name, StartTime, EndTime, Type, Level, JobStatus, JobFiles, JobBytes, \
+                AGE(EndTime, StartTime) as RunTime, JobErrors \
+                FROM Job \
+                WHERE (RealEndTime >= CURRENT_TIMESTAMP(2) - cast('${hist} HOUR' as INTERVAL) OR JobStatus='R') \
+                ORDER BY ${sortfield} ${sortorder};" \
+                | ${dbbin} -U ${dbuser} ${dbpass} ${db} -0t \
+                | sed -e 's/|//g' -e '/^$/d' )
+                ;;
+
+        mariadb )
+                queryresult=$(echo "SELECT JobId, Name, StartTime, EndTime, Type, Level, JobStatus, JobFiles, JobBytes, \
+                TIMEDIFF (EndTime,StartTime) as RunTime, JobErrors \
+                FROM Job \
+                WHERE (RealEndTime >= DATE_ADD(NOW(), INTERVAL -${hist} HOUR) OR JobStatus='R') \
+                ORDER BY ${sortfield} ${sortorder};" \
+                | ${dbbin} -u ${dbuser} -p${dbpass} ${db} -s -N )
+                ;;
+
+        * )
+                echo "dbtype of '${dbtype}' is invalid. Please set dbtype variable to 'mysql', 'pgsql', or 'mariadb'"
+                exit 1
+                ;;
+esac
+
+
+# If we have no jobs to report on, then
+# we need to skip the entire awk script
+# and some bash stuff and jump all the
+# way to about line 673
+# -------------------------------------
+if [ -z "${queryresult}" ]; then
+        results="0"
+        else
+                results="1"
+
+
+# Now for some fun with awk
+# -------------------------
+IFS=" "
+msg=$(echo ${queryresult} | \
+LC_ALL=en_US.UTF-8 \
+awk \
+-v html="${html}" \
+-v boldstatus="${boldstatus}" \
+-v colorstatusbg="${colorstatusbg}" \
+-v jobtableheadercolor="${jobtableheadercolor}" \
+-v jobtablejobcolor="${jobtablejobcolor}" \
+-v runningjobcolor="${runningjobcolor}" \
+-v goodjobcolor="${goodjobcolor}" \
+-v goodjobwitherrcolor="${goodjobwitherrcolor}" \
+-v warnjobcolor="${warnjobcolor}" \
+-v badjobcolor="${badjobcolor}" \
+-v printsummary="${printsummary}" \
+-v starbadjobids="${starbadjobids}" \
+'BEGIN { awkerr = 0 }
+{star = " " }
+
+
+                                                # List of possible jobstatus codes
+                                                # --------------------------------
+                                                # Enter SQL query: SELECT * FROM status;
+                                                # +-----------+---------------------------------+----------+
+                                                # | jobstatus | jobstatuslong                   | severity |
+                                                # +-----------+---------------------------------+----------+
+                                                # | C         | Created, not yet running        |       15 |
+                                                # | R         | Running                         |       15 |
+                                                # | B         | Blocked                         |       15 |
+                                                # | T         | Completed successfully          |       10 |
+                                                # | E         | Terminated with errors          |       25 |
+                                                # | e         | Non-fatal error                 |       20 |
+                                                # | f         | Fatal error                     |      100 |
+                                                # | D         | Verify found differences        |       15 |
+                                                # | A         | Canceled by user                |       90 |
+                                                # | F         | Waiting for Client              |       15 |
+                                                # | S         | Waiting for Storage daemon      |       15 |
+                                                # | m         | Waiting for new media           |          |
+                                                # | M         | Waiting for media mount         |       15 |
+                                                # | s         | Waiting for storage resource    |       15 |
+                                                # | j         | Waiting for job resource        |       15 |
+                                                # | c         | Waiting for client resource     |       15 |
+                                                # | d         | Waiting on maximum jobs         |       15 |
+                                                # | t         | Waiting on start time           |       15 |
+                                                # | p         | Waiting on higher priority jobs |       15 |
+                                                # | a         | SD despooling attributes        |       15 |
+                                                # | i         | Doing batch insert file records |       15 |
+                                                # | I         | Incomplete Job                  |       25 |
+                                                # +-----------+---------------------------------+----------+
+
+
+                                                # Is this job still running?
+                                                # If a job is still running, then there will be no "Stop Time"
+                                                # fields, so $9 (jobstatus) will be shifted left two columns
+                                                # to $7, and we will need to test and then reassign these variables
+                                                # Note, this seems to be required for PostgreSQL, but MariaDB and
+                                                # MySQL return all zeros for the date and time for running jobs
+                                                # -----------------------------------------------------------------
+                                                { if ($7 == "R" && $8 ~ /^[0-9]+/)
+                                                        {
+                                                                $13 = $10
+                                                                $11 = $9
+                                                                $10 = $8
+                                                                $9  = $7
+                                                                $8  = $6
+                                                                $7  = $5
+                                                                $5  = "--=Still Running=--"
+                                                                $6  = ""
+                                                        }
+                                                }
+
+
+                                                # Assign words to job status code characters
+                                                # ------------------------------------------
+                                                # First, check to see if we need to generate an HTML email
+                                                { if (html == "yes")
+                                                                {
+                                                                        # Set default opening and closing tags for status cell
+                                                                        # ----------------------------------------------------
+                                                                        tdo = "<td align=\"center\">"
+                                                                        tdc = "</td>"
+
+                                                                        # Check to see if the job is "OK" then assign
+                                                                        # the "goodjobcolor" to the cell background
+                                                                        # -------------------------------------------
+                                                                        if ($9 ~ /[T]/ && $13 == 0)
+                                                                                {
+                                                                                        if (colorstatusbg == "yes")
+                                                                                                # Assign jobs that are OK or Running the goodjobcolor
+                                                                                                # ---------------------------------------------------
+                                                                                                {
+                                                                                                        tdo = "<td align=\"center\" bgcolor=\"" goodjobcolor "\">"
+                                                                                                }
+
+                                                                                # Should the status be bolded?
+                                                                                # ----------------------------
+                                                                                if (boldstatus == "yes")
+                                                                                        {
+                                                                                                tdo=tdo"<b>"
+                                                                                                tdc="</b>"tdc
+                                                                                        }
+                                                                                status["T"]=tdo"-OK-"tdc
+
+                                                                                # If it is a good job, but with errors or warnings
+                                                                                # then we will assign the warnjobcolor
+                                                                                # ------------------------------------------------
+                                                                                } else if ($9 == "T" && $13 != 0)
+                                                                                        {
+                                                                                                if (colorstatusbg == "yes")
+                                                                                                        # Assign OK jobs with errors the warnjobcolor
+                                                                                                        # -------------------------------------------
+                                                                                                        {
+                                                                                                                tdo = "<td align=\"center\" bgcolor=\"" warnjobcolor "\">"
+                                                                                                        }
+
+                                                                                                # Should the status be bolded?
+                                                                                                # ----------------------------
+                                                                                                if (boldstatus == "yes")
+                                                                                                        {
+                                                                                                                tdo=tdo"<b>"
+                                                                                                                tdc="</b>"tdc
+                                                                                                        }
+                                                                                                # Since the "W" jobstatus never appears in the DB, we manually
+                                                                                                # assign it here so it can be recognized later on in the script
+                                                                                                # -------------------------------------------------------------
+                                                                                                $9 = "W"
+                                                                                                status["W"]=tdo"OK/Warnings"tdc
+
+                                                                                # If the job is still running we will
+                                                                                # assign it the runningjobcolor
+                                                                                # -----------------------------------
+                                                                                } else if ($9 == "R")
+                                                                                        {
+                                                                                                if (colorstatusbg == "yes")
+                                                                                                        # Assign running jobs the runningjobcolor
+                                                                                                        # ---------------------------------------
+                                                                                                        {
+                                                                                                                tdo = "<td align=\"center\" bgcolor=\"" runningjobcolor "\">"
+                                                                                                        }
+
+                                                                                                # Should the status be bolded?
+                                                                                                # ----------------------------
+                                                                                                if (boldstatus == "yes")
+                                                                                                        {
+                                                                                                                tdo=tdo"<b>"
+                                                                                                                tdc="</b>"tdc
+                                                                                                        }
+                                                                                                status["R"]=tdo"Running"tdc
+
+                                                                                # If it is a bad job, then
+                                                                                # we assign the badjobcolor
+                                                                                # -------------------------
+                                                                                } else if ($9 ~ /[ABDef]/)
+                                                                                        {
+                                                                                                if (colorstatusbg == "yes")
+                                                                                                        # Assign bad jobs the badjobcolor
+                                                                                                        # -------------------------------
+                                                                                                        {
+                                                                                                                tdo = "<td align=\"center\" bgcolor=\"" badjobcolor "\">"
+                                                                                                        }
+
+                                                                                                # Should the status be bolded?
+                                                                                                # ----------------------------
+                                                                                                if (boldstatus == "yes")
+                                                                                                        {
+                                                                                                                tdo=tdo"<b>"
+                                                                                                                tdc="</b>"tdc
+                                                                                                        }
+                                                                                                status["A"]=tdo"Aborted"tdc
+                                                                                                status["D"]=tdo"Verify Diffs"tdc
+                                                                                                status["f"]=tdo"Failed"tdc
+
+                                                                                # If it is a job with warnings or errors, assign the job the warnjobcolor
+                                                                                # I have never seen a "W" status in the db. Jobs that are "OK -- with warnings"
+                                                                                # still have a "T" jobstatus, but the joberrors field is incremented in the db
+                                                                                # -----------------------------------------------------------------------------
+                                                                                } else if ($9 ~ /[EI]/)
+                                                                                        {
+                                                                                                if (colorstatusbg == "yes")
+                                                                                                        # Assign job the warnjobcolor
+                                                                                                        # ---------------------------
+                                                                                                        {
+                                                                                                                tdo = "<td align=\"center\" bgcolor=\"" warnjobcolor "\">"
+                                                                                                        }
+
+                                                                                                # Should the status be bolded?
+                                                                                                # ----------------------------
+                                                                                                if (boldstatus == "yes")
+                                                                                                        {
+                                                                                                                tdo=tdo"<b>"
+                                                                                                                tdc="</b>"tdc
+                                                                                                        }
+                                                                                                status["E"]=tdo"OK, w/Errors"tdc
+                                                                                                status["I"]=tdo"Incomplete"tdc
+                                                                                        }
+                                                                } else
+                                                                # $html is not "yes" so statuses will be normal text
+                                                                # --------------------------------------------------
+                                                                        {
+                                                                                status["A"]="     Aborted   "
+                                                                                status["D"]="  Verify Diffs "
+                                                                                status["E"]="  OK, w/Errors "
+                                                                                status["f"]="     Failed    "
+                                                                                status["I"]="   Incomplete  "
+                                                                                status["R"]="     Running   "
+                                                                                status["T"]="      -OK-     "
+                                                                                # Since the "W" jobstatus never appears in the DB, we manually
+                                                                                # assign it here so it can be recognized later on in the script
+                                                                                # -------------------------------------------------------------
+                                                                                if ($9 == "T" && $13 != 0)
+                                                                                        { $9 = "W"
+                                                                                                status["W"]="   OK/Warnings "
+                                                                                        }
+                                                                        }
+                                                }
+
+
+                                                # These status characters seem to only
+                                                # be Director "in memory" statuses. They
+                                                # do not get entered into the DB ever so we
+                                                # cannot catch them with the db query we use
+                                                # I might have to query the DIR as well as
+                                                # the DB to be able to capture these
+                                                # ------------------------------------------
+                                                {
+                                                        status["C"]="     Created   "
+                                                        status["B"]="     Blocked   "
+                                                        status["F"]="     Wait FD   "
+                                                        status["S"]="     Wait SD   "
+                                                        status["m"]=" Wait New Media"
+                                                        status["M"]="   Wait Mount  "
+                                                        status["s"]="   Wait Storage"
+                                                        status["j"]="    Wait Job   "
+                                                        status["c"]="   Wait Client "
+                                                        status["d"]="  Wait Max Jobs"
+                                                        status["t"]="Wait Start Time"
+                                                        status["p"]="  Wait Priority"
+                                                        status["a"]="  Despool Attrs"
+                                                        status["i"]="  Batch Insert "
+                                                        status["L"]="Spool Last Data"
+                                                }
+
+
+                                                # Assign words to job type code characters
+                                                # ----------------------------------------
+                                                {
+                                                        jobtype["D"]="Admin"
+                                                        jobtype["B"]="Backup"
+                                                        jobtype["C"]="Copy"
+                                                        jobtype["c"]="Control"
+                                                        jobtype["R"]="Restore"
+                                                        jobtype["V"]="Verify"
+                                                }
+
+
+                                                # Assign words to job level code characters
+                                                # -----------------------------------------
+                                                {
+                                                        level["F"]="Full"
+                                                        level["I"]="Incr"
+                                                        level["D"]="Diff"
+                                                        level["f"]="VFul"
+                                                        level["-"]="----"
+                                                }
+
+
+                                                # Assign words to Verify job level code characters
+                                                # ------------------------------------------------
+                                                {
+                                                        level["A"]="VVol"
+                                                        level["C"]="VCat"
+                                                        level["V"]="Init"
+                                                        level["O"]="VV2C"
+                                                        level["d"]="VD2C"
+                                                }
+
+
+                                                # Check to see if the job did not "T"erminate OK then increment $awkerr,
+                                                # and prepend the JobId with an asterisk for quick visual identification
+                                                # of problem jobs.
+
+                                                # Need to choose between a positive or negative test of the job status code
+                                                # -------------------------------------------------------------------------
+                                                # Negative check - testing for non existence of all "good" status codes
+                                                # $9 !~ /[TRCFSMmsjcdtpai]/ { awkerr++; $1 = "* "$1 }
+                                                # Positive check - testing the existence of all "bad" status codes
+                                                # good { if ($9 ~ /[ABDEIWef]/ || $13 != 0) { awkerr++; if (starbadjobids == "yes") { star  = "*" } } }
+                                                { if ($9 ~ /[ABDEIef]/) { awkerr++; if (starbadjobids == "yes") { star  = "*" } } }
+
+
+                                                # If the job is an Admin, Copy, Control,
+                                                # Restore, or Migration job it will have
+                                                # no real "Level", so we set it to "----"
+                                                # ---------------------------------------
+                                                { if ($7 ~ /[CcDRm]/) { $8 = "-" } }
+
+
+                                                # Print out each job, formatted with the following fields:
+                                                # JobId Name Status Errors Type Level Files Bytes StartTime EndTime RunTime
+                                                # -------------------------------------------------------------------------
+                                                { if (html == "yes")
+                                                        { printf("<tr bgcolor=\"%s\"> \
+                                                                <td align=\"center\">%s%s%s</td> \
+                                                                <td>%s</td> \
+                                                                %s \
+                                                                <td align=\"right\">%'"'"'d</td> \
+                                                                <td align=\"center\">%s</td> \
+                                                                <td align=\"center\">%s</td> \
+                                                                <td align=\"right\">%'"'"'d</td> \
+                                                                <td align=\"right\">%'"'"'9.2f GB</td> \
+                                                                <td align=\"center\">%s %s</td> \
+                                                                <td align=\"center\">%s %s</td> \
+                                                                <td align=\"center\">%s</td> \
+                                                                </tr>\n", \
+                                                                jobtablejobcolor, star, $1, star, $2, status[$9], $13, jobtype[$7], level[$8], $10, $11/(1024*1024*1024), $3, $4, $5, $6, $12);
+                                                        } else
+                                                                { printf("%s %-7s %-14s %16s %'"'"'12d %8s %6s %'"'"'9d %'"'"'9.2f GB %11s %-9s %-10s %-9s %-9s\n", \
+                                                                        star, $1, $2, status[$9], $13, jobtype[$7], level[$8], $10, $11/(1024*1024*1024), $3, $4, $5, $6, $12);
+                                                                }
+                                                }
+
+
+                                                # Count the number of jobs
+                                                # ------------------------
+                                                { totaljobs++ }
+
+
+                                                # Count the number of files and bytes from all jobs
+                                                # -------------------------------------------------
+                                                { files += $10 }
+                                                { bytes += $11 }
+
+
+# Finally, print out the summaries
+# --------------------------------
+END {
+if (printsummary == "yes")
+        { if (html == "yes")
+                {
+                        printf("</table>")
+                        printf("<br>\
+                        <hr align=\"left\" width=\"25%\">\
+                        <table width=\"25%\">\
+                                <tr><td><b>Total Jobs</b></td><td  align=\"center\"><b>:</b></td> <td align=\"right\"><b>%'"'"'15d</b></td></tr>\
+                                <tr><td><b>Total Files</b></td><td align=\"center\"><b>:</b></td> <td align=\"right\"><b>%'"'"'15d</b></td></tr>\
+                                <tr><td><b>Total Bytes</b></td><td align=\"center\"><b>:</b></td> <td align=\"right\"><b>%'"'"'15.2f GB</b></td></tr>\
+                        </table>\
+                        <hr align=\"left\" width=\"25%\">",\
+                        totaljobs, files, bytes/(1024*1024*1024));
+                } else
+printf("\
+  =================================\n\
+  Total Jobs  : %'"'"'15d\n\
+  Total Files : %'"'"'15d\n\
+  Total Bytes : %'"'"'15.2f GB\n\
+  =================================\n",\
+totaljobs, files, bytes/(1024*1024*1024));
+} exit awkerr }
+')
+
+
+# Any failed jobs, or jobs with errors?
+# -------------------------------------
+numbadjobs=$?
+
+
+# Do we email the job summaries?
+# ------------------------------
+if [ ${emailsummaries} == "yes" ]; then
+        # Get all of the jobids from the query results, but
+        # skip any running jobs because they will not have
+        # a summary in the DB until the job has terminated
+        # -------------------------------------------------
+        alljobids=$(echo "${queryresult}" \
+        | awk '{ if ($7 != "R") printf("%s ", $1) }')
+
+
+        # If no jobids were returned, skip creating
+        # the header and looping through zero records
+        # -------------------------------------------
+        if [ ! -z "${alljobids}" ]; then
+                # Generate the header
+                # -------------------
+                msg="${msg}"$(
+                if [ ${html} == "yes" ]; then
+                        echo "<pre>====================================="
+                                else
+                                        echo -e "\n\n\n====================================="
+                fi
+                        echo "Job Summaries of All Terminated Jobs:"
+                        echo "====================================="
+                )
+
+
+                # Get the job logs from all jobs and just grep for the summary
+                # ------------------------------------------------------------
+                for jobid in ${alljobids}; do
+                        msg="${msg}"$(
+                                echo -e "\n--------------"
+                                echo "JobId: ${jobid}"
+                                echo "--------------"
+                                echo "llist joblog jobid=${jobid}" | ${bcbin} -c ${bcconfig} | grep -A31 "^  Build OS:"
+                                echo "======================================================================"
+                        )
+                done
+                if [ ${html} == "yes" ]; then
+                        msg=${msg}$(echo "</pre>")
+                fi
+        fi
+fi
+
+
+# Do we email the bad job logs with the report?
+# ---------------------------------------------
+if [ ${emailbadlogs} == "yes" ]; then
+        # Get the badjobs, or the good jobs with
+        # JobErrors != 0 from the query results
+        # --------------------------------------
+        badjobids=$(echo "${queryresult}" \
+        | awk '{ if ($9 ~ /[ABDEIef]/ || ($9 == "T" && $13 != 0)) printf("%s ", $1) }')
+
+
+        # If no jobids were returned, skip creating
+        # the header and looping through zero records
+        # -------------------------------------------
+        if [ ! -z "${badjobids}" ]; then
+                # Generate the header
+                # -------------------
+                msg="${msg}"$(
+                if [ ${html} == "yes" ]; then
+                        echo "<pre>=========================================================="
+                                else
+                                        echo -e "\n\n\n=========================================================="
+                fi
+                        echo "Job logs of failed jobs, or good jobs with JobErrors != 0:"
+                        echo "=========================================================="
+                )
+
+
+                # Get the bad job's log from the Director via bconsole
+                # ----------------------------------------------------
+                for jobid in ${badjobids}; do
+                        msg="${msg}"$(
+                                echo -e "\n--------------"
+                                echo "JobId: ${jobid}"
+                                echo "--------------"
+                                echo "llist joblog jobid=${jobid}" | ${bcbin} -c ${bcconfig}
+                                echo "======================================================================"
+                        )
+                done
+                if [ ${html} == "yes" ]; then
+                        msg=${msg}$(echo "</pre>")
+                fi
+        fi
+fi
+
+
+# Prepend the header to the $msg output
+# -------------------------------------
+if [ ${html} == "yes" ]; then
+        msg="<html>
+        <head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
+                <style>
+                        body {font-family:$fontfamily; font-size:$fontsize;} td {font-size:$fontsizejobinfo;} pre {font-size:$fontsizesumlog;}
+                </style>
+        </head>
+        <body>
+                <p><u><b>${emailtitle}</b></u></p>
+                <table width=\"98%\" align=\"center\" border=\"1\" cellpadding=\"2\" cellspacing=\"0\">
+                        <tr bgcolor=\"${jobtableheadercolor}\">
+                        <td align=\"center\"><b>Job ID</b></td>
+                        <td align=\"center\"><b>Job Name</b></td>
+                        <td align=\"center\"><b>Status</b></td>
+                        <td align=\"center\"><b>Errors</b></td>
+                        <td align=\"center\"><b>Type</b></td>
+                        <td align=\"center\"><b>Level</b></td>
+                        <td align=\"center\"><b>Files</b></td>
+                        <td align=\"center\"><b>Bytes</b></td>
+                        <td align=\"center\"><b>Start Time</b></td>
+                        <td align=\"center\"><b>End Time</b></td>
+                        <td align=\"center\"><b>Run Time</b></td>
+                </tr>
+${msg}
+</body></html>"
+        else
+                msg="
+  ${emailtitle}
+  ------------------------------------------
+
+  JobId      Job Name          Status         Errors     Type    Level   Files       Bytes         Start Time            End Time        Run Time
+  -----   --------------   ---------------  ----------  -------  -----  --------  -----------  -------------------  -------------------  --------
+${msg}"
+fi
+
+fi      # If there were zero results returned from the
+                # SQL the query, we skip the entire awk script,
+                # and a lot of other bash stuff that generates
+                # the email body and we end up here
+# -------------------------------------------------
+if [ ${results} -eq 0 ]; then
+        status="No Jobs Have Been Run"
+        subjecticon="${nojobsicon}"
+        msg="Nothing to see here..."
+        else
+                # Totally unnecessary, but, well...  OCD... :)
+                # --------------------------------------------
+                if [ ${numbadjobs} -ne 0 ]; then
+                        if [ ${numbadjobs} -eq 1 ]; then
+                                job="Job"
+                                        else
+                                                job="Jobs"
+                        fi
+                        status="(${numbadjobs}) ${job} with Errors"
+                        subjecticon="${badjobsicon}"
+                                else
+                                        status="All Jobs OK"
+                                        subjecticon="${goodjobsicon}"
+                fi
+fi
+
+
+# More silliness
+# --------------
+if [ ${hist} -eq 1 ]; then
+        hour="Hour"
+        else
+                hour="Hours"
+fi
+
+
+# Email the report
+# ----------------
+(
+echo "To: ${admin}"
+echo "From: ${admin}"
+if [ ${addsubjecticon} == "yes" ]; then
+        echo "Subject: ${subjecticon} ${server} - ${status} in the Past ${hist} ${hour}"
+                else
+                        echo "Subject: ${server} - ${status} in the Past ${hist} ${hour}"
+fi
+if [ ${html} == "yes" ]  &&  [ ${results} -ne 0 ]; then
+ echo "Content-Type: text/html"
+ echo "MIME-Version: 1.0"
+fi
+echo ""
+echo "${msg}"
+) | /usr/sbin/sendmail -t
+# -------------
+# End of script
+# -------------
+
+
+# ----------
+# Change Log
+# ----------
+# ----------------------------
+# William A. Arlofski
+# Reverse Polarity, LLC
+# helpdesk@revpol.com
+# http://www.revpol.com/bacula
+# ----------------------------
+#
+#
+# 20130428 - Initial release
+#            Generate and email a basic Bacula backup report
+#            1st command line parameter is expected to be a
+#            number of hours. No real error checking is done
+#
+# 20131224 - Removed "AND JobStatus='T'" to get all backup jobs
+#            whether running, or completed with errors etc.
+#          - Added Several fields "StartTime", "EndTime",
+#            "JobFiles"
+#          - Removed "JobType" because we are only selecting
+#            jobs of type "Backup" (AND Type='B')
+#          - Modified header lines and printf lines for better
+#            formatting
+#
+# 20140107 - Modified script to include more information and cleaned
+#            up the output formatting
+#
+# 20150704 - Added ability to work with MySQL or Postgresql
+#
+# 20150723 - Modified query, removed "Type='B'" clause to catch all jobs,
+#            including Copy jobs, Admin jobs etc. Modified header, and
+#            output string to match new query and include job's "Type"
+#            column.
+#
+# 20170225 - Rewrote awk script so that a status/summary could be set in
+#            the email report's subject. eg:
+#            Subject: "serverName - All Jobs OK in the past x hours"
+#            Subject: "serverName - x Jobs FAILED in the past y hours"
+#
+# 20170303 - Fixed output in cases where there are jobs running and there
+#            is no "Stop Time" for a job.
+#
+# 20170406 - Some major modifications:
+#             - Added feature to spell out words instead of using the
+#               single character codes for Job type, Job Status, and
+#               Job Level - Including the different levels for Verify
+#               jobs
+#             - If a job terminates with an error or warning, then the
+#               job's line in the output is prepended with an asterisk
+#               "*" for quick visual identification
+#             - Modified the outputs of the files and bytes fields to
+#               include commas when the number is > 999
+#             - Added totals to the end of the report for Jobs, Files,
+#               and Bytes
+#             - Added $sortfield and $sortorder variables to allow output
+#               to be sorted as desired
+#             - Set the level of a job to "----" when the level is not
+#               applicable as in Restore jobs, Admin jobs etc.
+#
+# 20170408 - Some minor cleanup, and moving things around
+#          - Added $emailsummaries variable to append the job summaries
+#            to the end of the report.
+#          - Added $emailbadlogs variable to append full joblogs of jobs
+#            which have failed or jobs with errors to the end of the report
+#            for quick access to investigate failed jobs.
+#
+# 20170417 - Added some tests for binaries and the bconsole config file
+#
+# 20170429 - Thanks to Chris Couture for contacting me and submitting a
+#            working query for MariaDB. I have added 'mariadb' as a new
+#            dbtype option.
+#          - Thanks to Chris Couture for the ideas and some code examples
+#            to create an HTML email.
+#              - Added $html variable to enable HTML emails.
+#              - Added $boldstatus variable to make the Status <b>bold</b>
+#                in HTML emails.
+#              - Added $colorstatusbg variable to color the background of
+#                the Status cell in HTML emails.
+#          - Thanks to Chris Couture for the idea of adding RunTime
+#            to the email output.
+#          - Thanks to Chris Couture for the idea of using some unicode
+#            characters (a 'checkmark'or a bold 'x') in the Subject:
+#            to quickly see if everything ran OK.
+#              - Added $addsubjecticon variable to enable/disable the
+#                prepending of this icon to the Subject.
+#          - Added $printsumary variable to give the option to print the
+#            total Jobs, Files, and Bytes after the job listing table.
+#          - Added $starbadjobids variable to enable/disable prepending
+#            the bad jobids with an asterisk "*".
+#          - Modified the way the email is built at the end. Thanks to
+#            Chris Courture again for this nice idea.
+#          - Added $jobtableheadercolor, $jobtablejobcolor, $goodjobcolor,
+#            $goodjobwitherrcolor, $runningjobcolor, $warnjobcolor, and
+#            $badjobcolor variables to colorize HTML emails
+#          - Added $emailtitle variable for the title at the top
+#          - Added $fontfamily, $fontsize, $fontsizejobinfo, and $fontsizesumlog
+#            variables to allow styling of the HTML output (Thanks again Chris)
+#          - Added $nojobsicon, $goodjobsicon, and $badjobsicon variables to
+#            allow setting the prepended utf-8 subject icon character
+#          - Reformatted things so that if there are no jobs returned by the
+#            SQL query, the email message sent is nice and short
+#          - Modified the license to allow for inclusion into Bacula Community,
+#            and possibly the Enterprise Edition releases
+#
+# 20170430 - Modified the order of the fields to make more sense
+#          - Re-aligned the text email so that when an asterisk is pre-pended it
+#            does not shift the whole line
+#
+# 20170508 - Re-worked some of the logic so that good jobs (JobStatus="T") which
+#            have errors will have their status listed as "OK/Warnings", and it
+#            will not trigger as a "bad job" on the JobErrors, so it will not
+#            have an asterisk prepended to the JobId in the job listing. I think
+#            this fix is more of a temporary change in the hopes that a "W"
+#            status to represent "good jobs with warnings" is implemented in the
+#            db in the future.
+#          - Added an "Errors" column to the table to show "JobErrors" from the
+#            db.
+#          - Some minor variable name changes and other minor changes
+#
+# 20170511 - Minor adjustments to the alignment formatting of the text email
+#          - Minor 'case' changes to a couple levels (Init & VCat)
+#
+# ------------------------------------------------------------------------------
+
+
+# I like small tabs. Use  :set list in vim to see tabbing etc
+# vim: set tabstop=2:softtabstop=2:shiftwidth=2 #

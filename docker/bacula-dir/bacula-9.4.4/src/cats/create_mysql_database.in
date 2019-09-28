@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2017 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# shell script to create Bacula database(s)
+#
+
+bindir=@MYSQL_BINDIR@
+db_name=@db_name@
+
+if $bindir/mysql $* -f <<END-OF-DATA
+CREATE DATABASE IF NOT EXISTS ${db_name};
+END-OF-DATA
+then
+   echo "Creation of ${db_name} database succeeded."
+else
+   echo "Creation of ${db_name} database failed."
+fi
+exit 0

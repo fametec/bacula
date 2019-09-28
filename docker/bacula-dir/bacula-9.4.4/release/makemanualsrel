@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2017 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# This script is used to make a Bacula manuals release
+#   There are the html manuals and the pdf manuals.  Both
+#   are made from the docs source release.
+#
+# It writes in the current directory, so we recommend that you
+#  do not run it in the Bacula source or Git directory, but
+#  in a special release directory.
+#
+# Commit all changes, export the release, make a release tar.
+#
+# source ./config
+. ./config
+
+cwd=`pwd`
+ver=$1
+tagbase=Release-
+base_name=bacula
+# from where we get out package files
+base_pkg=${base_name}-docs
+html_name=${base_name}-html-manuals-${ver}
+pdf_name=${base_name}-pdf-manuals-${ver}
+
+if [ $# != 1 ] ; then
+  echo "Need $0 <version>"
+  echo "e.g. $0 6.4.0"
+  exit 1
+fi
+
+rm -rf $base_pkg-$ver
+echo "Detarring $base_pkg-$ver.tar.bz2"
+tar xfj $base_pkg-$ver.tar.bz2 
+cd $base_pkg-$ver/manuals/en
+mkdir -p html pdf
+for i in console developers main misc problems utility; do
+  cp -a $i/$i/ html/
+  cp $i/$i.pdf pdf/
+done
+
+# create index for bweb
+../../tools/create_index.pl main/main
+cp ../../tools/index.html .
+
+echo "Creating ${html_name}.tar.gz"
+tar cfz ${html_name}.tar.gz html css js images index.html
+echo "Creating ${pdf_name}.tar.gz"
+tar cfz ${pdf_name}.tar.gz pdf
+
+mv ${html_name}.tar.gz $cwd/
+mv ${pdf_name}.tar.gz $cwd/
+
+cd $cwd
+# Remove detared docs directory
+rm -rf $base_pkg-$ver ${html_name}.tar.gz.sig ${pdf_name}.tar.gz.sig
+./sign ${html_name}.tar.gz
+./sign ${pdf_name}.tar.gz
+echo " "
+echo "Done making html and pdf manuals"
+
+exit 0

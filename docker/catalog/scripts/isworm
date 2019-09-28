@@ -1,0 +1,84 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2018 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# Bacula interface to get worm status of tape
+#
+#  isworm %l (control device name)
+#
+# Typical output:
+# sdparm --page=0x1D -f /dev/sg0
+#    /dev/st0: HP        Ultrium 5-SCSI    I5AW  [tape]
+# Medium configuration (SSC) mode page:
+#   WORMM       1  [cha: n, def:  1, sav:  1]
+#   WMLR        1  [cha: n, def:  1, sav:  1]
+#   WMFR        2  [cha: n, def:  2, sav:  2]
+#
+# Where WORMM is worm mode
+#       WMLR is worm mode label restrictions
+#          0 - No blocks can be overwritten
+#          1 - Some types of format labels may not be overwritten
+#          2 - All format labels can be overwritten
+#       WMFR is worm mode filemark restrictions
+#          0-1  - Reserved
+#          2    - Any number of filemarks immediately preceding EOD can be
+#                 overwritten except file mark closest to BOP (beginning of
+#                 partition).
+#          3    - Any number of filemarks immediately preceding the EOD
+#                 can be overwritten
+#          4-FF - Reserved
+#
+
+if [ x$1 = x ] ; then
+   echo "First argument missing. Must be device control name."
+   exit 1
+fi
+
+sdparm=`which sdparm`
+if [ x${sdparm} = x ] ; then
+   echo "sdparm program not found, but is required."
+   exit 0
+fi
+
+#
+# This should be the correct way to determine if the tape is WORM
+#   but it does not work for mhvtl.  Comment out the next 5 lines
+#   and the code that follows will detect correctly on mhtvl.
+#
+worm=`$sdparm --page=0x1D -f $1 |grep " *WORMM"|cut -b12-16|sed "s:^ *::"`
+if [ $? = 0 ] ; then
+   echo $worm
+   exit 0
+fi
+
+tapeinfo=`which tapeinfo`
+if [ x${tapeinfo} = x ] ; then
+   echo "tapeinfo program not found, but is required."
+   exit 1
+fi
+
+#
+# Unfortunately IBM and HP handle the Medium Type differently,
+#  so we detect the vendor and get the appropriate Worm flag.
+#
+vendor=`$tapeinfo -f $1|grep "^Vendor ID:"|cut -b13-15`
+if [ x$vendor = xHP ] ; then
+   worm=`$tapeinfo -f $1|grep "^Medium Type: 0x"|cut -b16-16`
+   echo $worm
+   exit 0
+fi
+
+if [ x$vendor = xIBM ] ; then
+   worm=`$tapeinfo -f $1|grep "^Medium Type: 0x"|cut -b17-17`
+   if [ x$worm = xc ]; then
+      echo "1"
+      exit 0
+   fi
+   if [ x$worm = xC ]; then
+      echo "1"
+      exit 0
+   fi
+fi
+echo "0"
+exit 0

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RestoreWizard</class>
+ <widget class="QWizard" name="RestoreWizard">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>853</width>
+    <height>444</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Wizard</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
+  <widget class="ClientSelectWizardPage" name="RestWizClientPage">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>2</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="title">
+    <string>Restore</string>
+   </property>
+   <property name="subTitle">
+    <string>Select a Client.</string>
+   </property>
+  </widget>
+  <widget class="JobSelectWizardPage" name="RestWizJobSelectPage">
+   <property name="title">
+    <string>Restore</string>
+   </property>
+   <property name="subTitle">
+    <string>Select Backup to restore.</string>
+   </property>
+  </widget>
+  <widget class="FileSelectWizardPage" name="RestWiFileSelectionPage">
+   <property name="title">
+    <string>Restore</string>
+   </property>
+   <property name="subTitle">
+    <string>Files Selection</string>
+   </property>
+  </widget>
+  <widget class="PluginWizardPage" name="RestWizPluginPage">
+   <property name="title">
+    <string>Plugins</string>
+   </property>
+   <property name="subTitle">
+    <string>Restore pluging values</string>
+   </property>
+  </widget>
+  <widget class="RestoreOptionsWizardPage" name="RestWizAdvancedOptionsPage">
+   <property name="title">
+    <string>Restore Options</string>
+   </property>
+   <property name="subTitle">
+    <string>Select advanced options for restore</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ClientSelectWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header>clientselectwizardpage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>JobSelectWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header>jobselectwizardpage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FileSelectWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header>fileselectwizardpage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RestoreOptionsWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header>restoreoptionswizardpage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PluginWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header location="global">pluginwizardpage.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>RestWizClientPage</sender>
+   <signal>completeChanged()</signal>
+   <receiver>RestoreWizard</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>424</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ResConf</class>
+ <widget class="QWidget" name="ResConf">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>417</width>
+    <height>541</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>General</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="toolTip">
+         <string>The Name will be used only in the Tray Monitor interface</string>
+        </property>
+        <property name="text">
+         <string>Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="editName">
+        <property name="toolTip">
+         <string>The Name will be used only in the Tray Monitor interface</string>
+        </property>
+        <property name="maxLength">
+         <number>127</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Description:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="editDescription">
+        <property name="maxLength">
+         <number>512</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelPassword">
+        <property name="text">
+         <string>Password:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="editPassword">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="maxLength">
+         <number>127</number>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::PasswordEchoOnEdit</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Address:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="editAddress">
+        <property name="maxLength">
+         <number>1024</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Port:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="editPort">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="maxLength">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Timeout:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="editTimeout">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="maxLength">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="labelRemote">
+        <property name="toolTip">
+         <string>Use Client Initiated backup/restore feature</string>
+        </property>
+        <property name="text">
+         <string>Remote</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QCheckBox" name="cbRemote">
+        <property name="toolTip">
+         <string>Use Client Initiated backup/restore feature</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="toolTip">
+         <string>Update the tray monitor icon with the status of this component</string>
+        </property>
+        <property name="text">
+         <string>Monitor:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QCheckBox" name="cbMonitor">
+        <property name="toolTip">
+         <string>Update the tray monitor icon with the status of this component</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QCheckBox" name="cbUseSetIp">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="labelSetIp">
+        <property name="text">
+         <string>Use SetIp:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>TLS</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="3" column="2">
+       <widget class="QToolButton" name="bpCertificate">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>CA Certificate File:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="cbTLSEnabled">
+        <property name="text">
+         <string>Enabled</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QToolButton" name="bpCaCertificateFile">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Key File:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="editCaCertificateDir"/>
+      </item>
+      <item row="2" column="2">
+       <widget class="QToolButton" name="bpCaCertificateDir">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Certificate File:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="editKey"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="editCertificate"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="editCaCertificateFile"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>CA Certificate Directory:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QToolButton" name="bpKey">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+     <zorder>cbTLSEnabled</zorder>
+     <zorder>editCaCertificateFile</zorder>
+     <zorder>label_5</zorder>
+     <zorder>label_6</zorder>
+     <zorder>editCaCertificateDir</zorder>
+     <zorder>label_7</zorder>
+     <zorder>editCertificate</zorder>
+     <zorder>label_8</zorder>
+     <zorder>editKey</zorder>
+     <zorder>bpCaCertificateFile</zorder>
+     <zorder>bpCaCertificateDir</zorder>
+     <zorder>bpCertificate</zorder>
+     <zorder>bpKey</zorder>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QPushButton" name="bpDelete">
+     <property name="maximumSize">
+      <size>
+       <width>64</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>64</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../main.qrc">
+       <normaloff>:/images/purge.png</normaloff>:/images/purge.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>editName</tabstop>
+  <tabstop>editDescription</tabstop>
+  <tabstop>editPassword</tabstop>
+  <tabstop>editAddress</tabstop>
+  <tabstop>editPort</tabstop>
+  <tabstop>editTimeout</tabstop>
+  <tabstop>cbRemote</tabstop>
+  <tabstop>cbTLSEnabled</tabstop>
+  <tabstop>editCaCertificateFile</tabstop>
+  <tabstop>bpCaCertificateFile</tabstop>
+  <tabstop>editCaCertificateDir</tabstop>
+  <tabstop>bpCaCertificateDir</tabstop>
+  <tabstop>editCertificate</tabstop>
+  <tabstop>bpCertificate</tabstop>
+  <tabstop>editKey</tabstop>
+  <tabstop>bpKey</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../main.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>bpCaCertificateFile</sender>
+   <signal>clicked()</signal>
+   <receiver>ResConf</receiver>
+   <slot>selectCaCertificateFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>461</x>
+     <y>294</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>521</x>
+     <y>247</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bpCaCertificateDir</sender>
+   <signal>clicked()</signal>
+   <receiver>ResConf</receiver>
+   <slot>selectCaCertificateDir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>452</x>
+     <y>334</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>501</x>
+     <y>355</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bpCertificate</sender>
+   <signal>clicked()</signal>
+   <receiver>ResConf</receiver>
+   <slot>selectCertificate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>459</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>495</x>
+     <y>384</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bpKey</sender>
+   <signal>clicked()</signal>
+   <receiver>ResConf</receiver>
+   <slot>selectKey()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>461</x>
+     <y>395</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>481</x>
+     <y>410</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbTLSEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>editCaCertificateFile</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>132</x>
+     <y>271</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>249</x>
+     <y>291</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbTLSEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>editCaCertificateDir</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbTLSEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>editCertificate</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>68</x>
+     <y>271</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>220</x>
+     <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbTLSEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>editKey</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>51</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>288</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbTLSEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>bpCaCertificateFile</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>161</x>
+     <y>267</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>449</x>
+     <y>291</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbTLSEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>bpCaCertificateDir</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>145</x>
+     <y>271</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>455</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbTLSEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>bpCertificate</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>266</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>459</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbTLSEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>bpKey</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>118</x>
+     <y>272</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>458</x>
+     <y>389</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>selectCaCertificateFile()</slot>
+  <slot>selectCaCertificateDir()</slot>
+  <slot>selectCertificate()</slot>
+  <slot>selectKey()</slot>
+ </slots>
+</ui>

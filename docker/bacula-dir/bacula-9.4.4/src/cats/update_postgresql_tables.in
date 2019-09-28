@@ -1,0 +1,175 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2017 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# Shell script to update PostgreSQL tables from Bacula Community version 
+#  5.0.x, 5.2.x, 7.0.x, 7.2.x, 7.4.x
+#
+echo " "
+echo "This script will update a Bacula PostgreSQL database from version 12-15 to 16"
+echo " "
+echo "Depending on the current version of your catalog,"
+echo "you may have to run this script multiple times."
+echo " "
+
+bindir=@POSTGRESQL_BINDIR@
+PATH="$bindir:$PATH"
+db_name=@db_name@
+
+ARGS=$*
+
+getVersion()
+{
+    DBVERSION=`psql -d ${db_name} -t --pset format=unaligned -c "select VersionId from Version LIMIT 1" $ARGS`
+}
+
+getVersion
+
+if [ "x$DBVERSION" = x ]; then
+    echo
+    echo "Unable to detect database version, you can specify connection information"
+    echo "on the command line."
+    echo "Error. Cannot upgrade this database."
+    exit 1
+fi
+
+if [ "$DBVERSION" -lt 12 -o "$DBVERSION" -gt 15 ] ; then
+    echo " "
+    echo "The existing database is version $DBVERSION !!"
+    echo "This script can only update an existing version 12-15 database to version 16."
+    echo "Error. Cannot upgrade this database."
+    echo " "
+    exit 1
+fi
+
+if [ "$DBVERSION" -eq 12 ] ; then
+    # from 5.0
+    if psql -f - -d ${db_name} $* <<END-OF-DATA
+BEGIN; -- Necessary for Bacula core
+CREATE TABLE RestoreObject (
+   RestoreObjectId SERIAL NOT NULL,
+   ObjectName TEXT NOT NULL,
+   RestoreObject BYTEA NOT NULL,
+   PluginName TEXT NOT NULL,
+   ObjectLength INTEGER DEFAULT 0,
+   ObjectFullLength INTEGER DEFAULT 0,
+   ObjectIndex INTEGER DEFAULT 0,
+   ObjectType INTEGER DEFAULT 0,
+   FileIndex INTEGER DEFAULT 0,
+   JobId INTEGER,
+   ObjectCompression INTEGER DEFAULT 0,
+   PRIMARY KEY(RestoreObjectId)
+   );
+
+CREATE INDEX restore_jobid_idx on RestoreObject(JobId);
+UPDATE Version SET VersionId=13;
+
+COMMIT;
+END-OF-DATA
+    then
+	echo "Update of Bacula PostgreSQL tables 12 to 13 succeeded."
+	getVersion
+    else
+	echo "Update of Bacula PostgreSQL tables 12 to 13 failed."
+	exit 1
+    fi
+fi
+
+if [ "$DBVERSION" -eq 13 ] ; then
+    # from 4.0
+    if psql -f - -d ${db_name} $* <<END-OF-DATA
+BEGIN; -- Necessary for Bacula core
+
+ALTER TABLE File ADD COLUMN DeltaSeq smallint default 0;
+
+UPDATE Version SET VersionId=14;
+COMMIT;
+
+-- ANALYSE;
+
+END-OF-DATA
+    then
+	echo "Update of Bacula PostgreSQL tables from 13 to 14 succeeded."
+	getVersion
+    else
+	echo "Update of Bacula PostgreSQL tables failed."
+	exit 1
+    fi
+fi
+
+
+if [ "$DBVERSION" -eq 14 ] ; then
+    # from 5.2
+    if psql -f - -d ${db_name} $* <<END-OF-DATA
+INSERT INTO Status (JobStatus,JobStatusLong,Severity) VALUES
+   ('I', 'Incomplete Job',25);
+ALTER TABLE Media ADD COLUMN volabytes bigint default 0;
+ALTER TABLE Media ADD COLUMN volapadding bigint default 0;
+ALTER TABLE Media ADD COLUMN volholebytes bigint default 0;
+ALTER TABLE Media ADD COLUMN volholes integer default 0;
+ALTER TABLE Media ALTER VolWrites TYPE BIGINT;
+
+CREATE TABLE Snapshot (
+  SnapshotId	  serial,
+  Name		  text not null,
+  JobId 	  integer default 0,
+  FileSetId	  integer default 0,
+  CreateTDate	  bigint default 0,
+  CreateDate	  timestamp without time zone not null,
+  ClientId	  int default 0,
+  Volume	  text not null,
+  Device	  text not null,
+  Type		  text not null,
+  Retention	  integer default 0,
+  Comment	  text,
+  primary key (SnapshotId)
+);
+
+CREATE UNIQUE INDEX snapshot_idx ON Snapshot (Device text_pattern_ops, 
+					      Volume text_pattern_ops, 
+					      Name text_pattern_ops);
+UPDATE Version SET VersionId=15;
+
+END-OF-DATA
+    then
+	echo "Update of Bacula PostgreSQL tables 14 to 15 succeeded."
+	getVersion
+    else
+	echo "Update of Bacula PostgreSQL tables 14 to 15 failed."
+	exit 1
+    fi
+fi
+
+if [ "$DBVERSION" -eq 15 ] ; then
+    if psql -f - -d ${db_name} $* <<END-OF-DATA
+begin;
+ALTER TABLE basefiles ALTER COLUMN baseid SET DATA TYPE bigint;
+ALTER TABLE media RENAME COLUMN volparts TO voltype;
+ALTER TABLE media ADD COLUMN volparts INTEGER DEFAULT 0;
+ALTER TABLE media ADD COLUMN volcloudparts INTEGER DEFAULT 0;
+ALTER TABLE media ADD COLUMN lastpartbytes BIGINT DEFAULT 0;
+ALTER TABLE media ADD COLUMN cacheretention BIGINT DEFAULT 0;
+ALTER TABLE pool ADD COLUMN cacheretention BIGINT DEFAULT 0;
+CREATE INDEX job_jobtdate_idx ON job (jobtdate);
+
+UPDATE Version SET VersionId=16;
+commit;
+END-OF-DATA
+    then
+	echo "Update of Bacula PostgreSQL tables 15 to 16 succeeded."
+	getVersion
+    else
+	echo "Update of Bacula PostgreSQL tables 15 to 16 failed."
+	exit 1
+    fi
+fi
+
+
+# For all versions, we need to create the Index on Media(PoolId/StorageId)
+# It may fail, but it's not a big problem
+psql -f - -d ${db_name} $* <<END-OF-DATA
+set client_min_messages = fatal;
+CREATE INDEX media_poolid_idx on Media (PoolId);
+CREATE INDEX media_storageid_idx ON Media (StorageId);
+END-OF-DATA

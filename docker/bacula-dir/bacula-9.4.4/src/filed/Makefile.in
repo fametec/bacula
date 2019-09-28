@@ -1,0 +1,194 @@
+#
+# Bacula Makefile for the File daemon
+#
+# Copyright (C) 2000-2016 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+@MCOMMON@
+
+srcdir =	.
+VPATH = 	.
+.PATH:		.
+
+fd_group=@fd_group@
+
+# one up
+basedir = ..
+# top dir
+topdir = ../..
+# this dir relative to top dir
+thisdir = src/filed
+
+DEBUG=@DEBUG@
+
+GETTEXT_LIBS = @LIBINTL@
+
+AFS_CFLAGS = @AFS_CFLAGS@
+AFS_LIBS = @AFS_LIBS@
+ACLOBJS = @ACLOBJS@
+XATTROBJS=@XATTROBJS@
+
+first_rule: all
+dummy:
+
+#
+SVRSRCS = filed.c authenticate.c backup.c crypto.c \
+	  win_efs.c estimate.c \
+	  fd_plugins.c accurate.c \
+	  filed_conf.c heartbeat.c hello.c job.c fd_snapshot.c \
+	  restore.c status.c verify.c verify_vol.c \
+	  $(ACLOBJS) $(XATTROBJS)
+
+SVROBJS = $(SVRSRCS:.c=.o)
+
+JSONOBJS = bfdjson.o filed_conf.o
+
+# these are the objects that are changed by the .configure process
+EXTRAOBJS = @OBJLIST@
+
+CAP_LIBS = @CAP_LIBS@
+FDLIBS = @FDLIBS@		  # extra libs for File daemon
+ZLIBS = @ZLIBS@
+LZO_LIBS = @LZO_LIBS@
+LZO_INC= @LZO_INC@
+
+# extra items for linking on Win32
+WIN32OBJS = win32/winmain.o win32/winlib.a win32/winres.res
+win32 = $(WIN32OBJS) -luser32 -lgdi32
+
+WIN32LIBS = $(@WIN32@)
+
+.SUFFIXES:	.c .o
+.PHONY:
+.DONTCARE:
+
+# inference rules
+.c.o:
+	@echo "Compiling $<"
+	$(NO_ECHO)$(CXX) $(DEFS) $(DEBUG) -c $(WCFLAGS) $(CPPFLAGS) $(LZO_INC) -I$(srcdir) -I$(basedir) $(DINCLUDE) $(CFLAGS) $<
+#-------------------------------------------------------------------------
+all: Makefile @WIN32@ bacula-fd @STATIC_FD@ bfdjson
+	@echo "==== Make of filed is good ===="
+	@echo " "
+
+bacl.o: bacl.c
+	@echo "Compiling $<"
+	$(NO_ECHO)$(CXX) $(DEFS) $(DEBUG) -c $(WCFLAGS) $(CPPFLAGS) $(LZO_INC) -I$(srcdir) -I$(basedir) $(DINCLUDE) $(CFLAGS) $(AFS_CFLAGS) $<
+
+win32/winlib.a:
+	@if test -f win32/Makefile -a "${GMAKE}" != "none"; then \
+	   (cd win32; $(GMAKE) DESTDIR=$(DESTDIR)); \
+	fi
+	@rm -f bacula-fd.exe
+
+win32/winmain.o:
+	@if test -f win32/Makefile -a "${GMAKE}" != "none"; then \
+	   (cd win32; $(GMAKE) DESTDIR=$(DESTDIR)); \
+	fi
+	@rm -f bacula-fd.exe
+
+win32/winres.res:
+	@if test -f win32/Makefile -a "${GMAKE}" != "none"; then \
+	   (cd win32; $(GMAKE) DESTDIR=$(DESTDIR)); \
+	fi
+	@rm -f bacula-fd.exe
+
+# win32 libraries if needed
+win32:	$(WIN32OBJS)
+	@if test -f win32/Makefile -a "${GMAKE}" != "none"; then \
+	   (cd win32; $(GMAKE) DESTDIR=$(DESTDIR)); \
+	fi
+	@rm -f bacula-fd.exe
+
+bacula-fd:  Makefile $(SVROBJS) ../findlib/libbacfind$(DEFAULT_ARCHIVE_TYPE) ../lib/libbaccfg$(DEFAULT_ARCHIVE_TYPE) ../lib/libbac$(DEFAULT_ARCHIVE_TYPE) @WIN32@
+	@echo "Linking $@ ..."
+	$(LIBTOOL_LINK) $(CXX) $(WLDFLAGS) $(LDFLAGS) -L../lib -L../findlib -o $@ $(SVROBJS) \
+	  $(WIN32LIBS) $(FDLIBS) $(ZLIBS) -lbacfind -lbaccfg -lbac -lm $(LIBS) \
+	  $(DLIB) $(WRAPLIBS) $(GETTEXT_LIBS) $(OPENSSL_LIBS) $(CAP_LIBS) $(AFS_LIBS) $(LZO_LIBS)
+
+bfdjson:  Makefile $(JSONOBJS) ../findlib/libbacfind$(DEFAULT_ARCHIVE_TYPE) ../lib/libbaccfg$(DEFAULT_ARCHIVE_TYPE) ../lib/libbac$(DEFAULT_ARCHIVE_TYPE) @WIN32@
+	@echo "Linking $@ ..."
+	$(LIBTOOL_LINK) $(CXX) $(WLDFLAGS) $(LDFLAGS) -L../lib -L../findlib -o $@ $(JSONOBJS) \
+	  $(WIN32LIBS) $(FDLIBS) $(ZLIBS) -lbacfind -lbaccfg -lbac -lm $(LIBS) \
+	  $(DLIB) $(WRAPLIBS) $(GETTEXT_LIBS) $(OPENSSL_LIBS) $(CAP_LIBS) $(AFS_LIBS) $(LZO_LIBS)
+
+static-bacula-fd: Makefile $(SVROBJS) ../findlib/libbacfind.a ../lib/libbaccfg$(DEFAULT_ARCHIVE_TYPE) ../lib/libbac$(DEFAULT_ARCHIVE_TYPE) @WIN32@
+	$(LIBTOOL_LINK) $(CXX) $(WLDFLAGS) $(LDFLAGS) -static -L../lib -L../findlib -o $@ $(SVROBJS) \
+	   $(WIN32LIBS) $(FDLIBS) $(ZLIBS) -lbacfind -lbaccfg -lbac -lm $(LIBS) \
+	   $(DLIB) $(WRAPLIBS) $(GETTEXT_LIBS) $(OPENSSL_LIBS) $(CAP_LIBS) $(AFS_LIBS) $(LZO_LIBS)
+	strip $@
+
+Makefile: $(srcdir)/Makefile.in $(topdir)/config.status
+	cd $(topdir) \
+	  && CONFIG_FILES=$(thisdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+libtool-clean:
+	@$(RMF) -r .libs _libs
+
+clean:	libtool-clean
+	@$(RMF) bacula-fd filed core core.* a.out *.o *.bak *~ *.intpro *.extpro 1 2 3
+	@$(RMF) static-bacula-fd
+	@if test -f win32/Makefile -a "${GMAKE}" != "none"; then \
+	   (cd win32; $(GMAKE) clean); \
+	fi
+
+realclean: clean
+	@$(RMF) tags bacula-fd.conf
+
+distclean: realclean
+	if test $(srcdir) = .; then $(MAKE) realclean; fi
+	(cd $(srcdir); $(RMF) Makefile)
+	@if test -f win32/Makefile -a "${GMAKE}" != "none"; then \
+	   (cd win32; $(GMAKE) distclean); \
+	fi
+
+devclean: realclean
+	if test $(srcdir) = .; then $(MAKE) realclean; fi
+	(cd $(srcdir); $(RMF) Makefile)
+	@if test -f win32/Makefile -a "${GMAKE}" != "none"; then \
+	   (cd win32; $(GMAKE) devclean); \
+	fi
+
+install: all
+	$(LIBTOOL_INSTALL) $(INSTALL_PROGRAM) bacula-fd $(DESTDIR)$(sbindir)/bacula-fd
+	$(LIBTOOL_INSTALL) $(INSTALL_PROGRAM) bfdjson $(DESTDIR)$(sbindir)/bfdjson
+	@srcconf=bacula-fd.conf; \
+	if  test -f ${DESTDIR}${sysconfdir}/$$srcconf; then \
+	   destconf=$$srcconf.new; \
+	   echo "  ==> Found existing $$srcconf, installing new conf file as $$destconf"; \
+	else \
+	   destconf=$$srcconf; \
+	fi; \
+	echo "${INSTALL_CONFIG} $$srcconf ${DESTDIR}${sysconfdir}/$$destconf"; \
+	${INSTALL_CONFIG} $$srcconf ${DESTDIR}${sysconfdir}/$$destconf
+	@if test "x${fd_group}" != "x" -a "x${DESTDIR}" = "x" ; then \
+	   chgrp -f ${fd_group} ${DESTDIR}${sysconfdir}/$$destconf ; \
+	fi
+	@if test -f static-bacula-fd; then \
+	   $(LIBTOOL_INSTALL) $(INSTALL_PROGRAM) static-bacula-fd $(DESTDIR)$(sbindir)/static-bacula-fd; \
+	fi
+
+uninstall:
+	(cd $(DESTDIR)$(sbindir); $(RMF) bacula-fd bfdjson)
+	(cd $(DESTDIR)$(sysconfdir); $(RMF) bacula-fd.conf)
+	(cd $(DESTDIR)$(sysconfdir); $(RMF) bacula-fd.conf.new)
+
+# Semi-automatic generation of dependencies:
+# Use gcc -MM because X11 `makedepend' doesn't work on all systems
+# and it also includes system headers.
+# `semi'-automatic since dependencies are generated at distribution time.
+
+depend:
+	@$(MV) Makefile Makefile.bak
+	@$(SED) "/^# DO NOT DELETE:/,$$ d" Makefile.bak > Makefile
+	@$(ECHO) "# DO NOT DELETE: nice dependency list follows" >> Makefile
+	@$(CXX) -S -M $(CPPFLAGS) $(XINC) $(LZO_INC) -I$(srcdir) -I$(basedir) *.c >> Makefile
+	@if test -f Makefile ; then \
+	    $(RMF) Makefile.bak; \
+	else \
+	   $(MV) Makefile.bak Makefile; \
+	   echo " ===== Something went wrong in make depend ====="; \
+	fi
+
+# -----------------------------------------------------------------------
+# DO NOT DELETE: nice dependency list follows

@@ -1,0 +1,32 @@
+# Systemd Bacula service file
+#
+# Copyright (C) 2000-2017 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# /lib/systemd/system/bacula-sd.service
+#
+# Description:
+#    Used to start the bacula storage daemon service (bacula-sd)
+#    enable : systemctl enable bacula-sd
+#    start : systemctl start bacula-sd
+#
+#
+
+# from http://www.freedesktop.org/software/systemd/man/systemd.unit.html
+[Unit]
+Description=Bacula Storage Daemon service
+Requires=network.target
+After=network.target
+RequiresMountsFor=@working_dir@ @sysconfdir@ @sbindir@
+
+# from http://www.freedesktop.org/software/systemd/man/systemd.service.html
+[Service]
+Type=simple
+User=@sd_user@
+Group=@sd_group@
+ExecStart=@sbindir@/bacula-sd -fP -c @sysconfdir@/bacula-sd.conf
+SuccessExitStatus=15
+LimitMEMLOCK=infinity
+
+[Install]
+WantedBy=multi-user.target

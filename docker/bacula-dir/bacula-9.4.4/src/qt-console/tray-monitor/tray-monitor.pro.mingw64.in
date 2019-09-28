@@ -1,0 +1,71 @@
+#
+# Copyright (C) 2000-2018 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+######################################################################
+#
+#  !!!!!!! IMPORTANT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+#  Edit only tray-monitor.pro.mingw64.in  -- tray-monitor.pro.mingw64 is built by the ./configure program
+#
+#  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#    
+# CONFIG options for Windows are pulled from win32/qmake.conf
+#
+# Copyright (C) 2000-2017 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+
+CONFIG += qt cross-win32
+#CONFIG += qt debug 
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+cross-win32 {
+  LIBS       +=  ../../win32/lib/obj64/ini.o -mwindows -L../../win32/release64 -lbacula -lpthread
+  INCLUDEPATH += ../../win32/compat
+}
+!cross-win32 {
+  LIBS        += -L../../lib -lbaccfg -lbac -L../../findlib -lbacfind @OPENSSL_LIBS@
+}
+
+
+bins.path = /$(DESTDIR)@sbindir@
+bins.files = bacula-tray-monitor
+confs.path = /$(DESTDIR)@sysconfdir@
+confs.commands = ./install_conf_file
+
+TEMPLATE     = app
+TARGET       = bacula-tray-monitor
+QMAKE_EXTRA_TARGETS += depend
+DEPENDPATH  += .
+INCLUDEPATH += ../.. . 
+LIBTOOL_LINK = @QMAKE_LIBTOOL@ --silent --tag=CXX --mode=link
+LIBTOOL_INSTALL = @QMAKE_LIBTOOL@ --silent --mode=install
+QMAKE_LINK   = $${LIBTOOL_LINK} $(CXX)
+QMAKE_INSTALL_PROGRAM = $${LIBTOOL_INSTALL} install -m @SBINPERM@ -p
+QMAKE_CLEAN += .libs/* bacula-tray-monitor release/bacula-tray-monitor
+QMAKE_CXXFLAGS += -DTRAY_MONITOR
+QMAKE_CFLAGS += -DTRAY_MONITOR
+
+
+RESOURCES               = ../main.qrc
+MOC_DIR                 = moc64
+OBJECTS_DIR             = obj64
+UI_DIR                  = ui64
+QMAKE_CC                = x86_64-w64-mingw32-gcc
+QMAKE_CXX               = x86_64-w64-mingw32-g++
+QMAKE_INCDIR            = $(DEPKGS)/depkgs-mingw-w64/include/pthreads $(DEPKGS)/depkgs-mingw-w64/include/ ../win32/compat 
+QMAKE_INCDIR_QT         = $(DEPKGS)/depkgs-mingw-w64/include/qt
+QMAKE_LIBDIR_QT         = $(DEPKGS)/depkgs-mingw-w64/lib/qt
+QMAKE_LINK              = x86_64-w64-mingw32-g++
+QMAKE_LFLAGS            = -mthreads -Wl,-enable-stdcall-fixup -Wl,-enable-auto-import  -m64 -fno-strict-aliasing -Wl,-enable-runtime-pseudo-reloc
+QMAKE_LIB               = x86_64-w64-mingw32-ar -ru
+QMAKE_RC                = x86_64-w64-mingw32-windres
+
+# Main directory
+HEADERS += tray-monitor.h tray_conf.h tray-ui.h fdstatus.h task.h ../util/fmtwidgetitem.h dirstatus.h conf.h sdstatus.h runjob.h status.h restorewizard.h filesmodel.h clientselectwizardpage.h jobselectwizardpage.h fileselectwizardpage.h restoreoptionswizardpage.h pluginwizardpage.h
+SOURCES +=  tray-monitor.cpp tray_conf.cpp fdstatus.cpp task.cpp authenticate.cpp ../util/fmtwidgetitem.cpp dirstatus.cpp sdstatus.cpp conf.cpp runjob.cpp status.cpp restorewizard.cpp clientselectwizardpage.cpp jobselectwizardpage.cpp fileselectwizardpage.cpp restoreoptionswizardpage.cpp pluginwizardpage.cpp
+FORMS += fd-monitor.ui dir-monitor.ui sd-monitor.ui main-conf.ui res-conf.ui run.ui restorewizard.ui clientselectwizardpage.ui jobselectwizardpage.ui fileselectwizardpage.ui restoreoptionswizardpage.ui pluginwizardpage.ui
+
+TRANSLATIONS += ts/tm_fr.ts ts/tm_de.ts ts/tm_ja.ts

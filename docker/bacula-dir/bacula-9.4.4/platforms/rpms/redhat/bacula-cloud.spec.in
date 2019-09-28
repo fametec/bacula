@@ -1,0 +1,194 @@
+# Bacula RPM spec file
+#
+# Copyright (C) 2012-2017 Bacula Systems SA
+
+# Platform Build Configuration
+# TODO: merge all plugins into one spec file
+
+# basic defines for every build
+%define _release           @RELEASE@
+%define _version           @VERSION@
+%define _lsm               @LSMDATE@
+%define depkgs_version @DEPKGS_VERSION@
+%define azure_version @AZURE_VERSION@
+%define _packager Kern Sibbald <kern@baculasystems.com>
+%define manpage_ext gz
+
+# Don't strip binaries
+%define __os_install_post %{nil}
+%define __debug_install_post %{nil}
+%define debug_package %{nil}
+
+# Installation Directory locations
+%define _prefix         /opt/bacula
+%define _sbindir        /opt/bacula/bin
+%define _bindir         /opt/bacula/bin
+%define _subsysdir      /opt/bacula/working
+%define sqlite_bindir   /opt/bacula/sqlite
+%define _mandir         /usr/share/man
+%define sysconf_dir     /opt/bacula/etc
+%define scripts_dir     /opt/bacula/scripts
+%define working_dir     /opt/bacula/working
+%define pid_dir         /opt/bacula/working
+%define plugin_dir      /opt/bacula/plugins
+%define lib_dir         /opt/bacula/lib
+%define docdir          /usr/share/doc
+
+# Daemon user:group Don't change them unless you know what you are doing
+%define director_daemon_user    bacula
+%define storage_daemon_user     bacula
+%define file_daemon_user        root
+%define daemon_group            bacula
+# group that has write access to tape devices, usually disk on Linux
+%define storage_daemon_group    disk
+
+%define depkgs ../depkgs
+%define depkgs_was ../depkgs-was
+
+#--------------------------------------------------------------------------
+# it should not be necessary to change anything below here for a release
+# except for patch macros in the setup section
+#--------------------------------------------------------------------------
+
+%define demo 0
+%{?build_demo:%define demo 1}
+
+%define base_package_name bacula
+
+%{?contrib_packager:%define _packager %{contrib_packager}}
+
+Summary: Bacula - The Network Backup Solution
+Name: %{base_package_name}-cloud-storage
+Version: %{_version}
+Release: %{_release}
+Group: System Environment/Daemons
+License: AGPLv3
+BuildRoot: %{_tmppath}/%{name}-root
+URL: https://www.bacula.org/
+Vendor: The Bacula Team
+Packager: %{_packager}
+Prefix: %{_prefix}
+Distribution: Bacula Cloud Storage
+
+Source0: http://www.prdownloads.sourceforge.net/bacula/depkgs-%{depkgs_version}.tar.gz
+Source1: https://www.baculasystems.com/dl/download/bacula-%{_version}.tar.gz
+
+Requires: bacula-sd, %{base_package_name}-libs = %{_version}, libcurl
+
+BuildRequires: libcurl-devel
+
+%description
+Bacula Cloud Storage - The Network Backup Solution.
+Bacula Cloud Storage allows you to backup and restore to the cloud
+
+This is Bacula Cloud S3 storage
+
+%prep
+%setup -T -q -b 0 -n depkgs
+%setup -T -q -b 1 -n bacula-%{_version}
+
+%build
+
+cwd=${PWD}
+
+cd %{depkgs}
+make clean || true
+
+# build libs3
+cd libs3*
+make libs3
+make DESTDIR=../libs3 install
+cd ..
+
+cd $cwd
+
+cd ../bacula-%{_version}
+./configure \
+        --prefix=%{_prefix} \
+        --sbindir=%{_sbindir} \
+        --sysconfdir=%{sysconf_dir} \
+        --mandir=%{_mandir} \
+        --with-scriptdir=%{scripts_dir} \
+        --with-working-dir=%{working_dir} \
+        --with-plugindir=%{plugin_dir} \
+        --with-logdir=%{log_dir} \
+        --with-pid-dir=%{pid_dir} \
+        --with-subsys-dir=%{_subsysdir} \
+        --enable-smartalloc \
+        --disable-conio \
+        --disable-readline \
+        --with-oci \
+        --with-gs \
+        --with-s3=${cwd}/%{depkgs}/libs3 \
+        --disable-bat \
+        --with-postgresql \
+        --disable-build-dird \
+        --with-dir-user=%{director_daemon_user} \
+        --with-dir-group=%{daemon_group} \
+        --with-sd-user=%{storage_daemon_user} \
+        --with-sd-group=%{storage_daemon_group} \
+        --with-fd-user=%{file_daemon_user} \
+        --with-fd-group=%{daemon_group} \
+        --with-basename="XXX_HOSTNAME_XXX" \
+        --with-hostname="XXX_HOSTNAME_XXX" \
+        --with-dir-password="XXX_REPLACE_WITH_DIRECTOR_PASSWORD_XXX" \
+        --with-fd-password="XXX_REPLACE_WITH_CLIENT_PASSWORD_XXX" \
+        --with-sd-password="XXX_REPLACE_WITH_STORAGE_PASSWORD_XXX" \
+        --with-mon-dir-password="XXX_REPLACE_WITH_DIRECTOR_MONITOR_PASSWORD_XXX" \
+        --with-mon-fd-password="XXX_REPLACE_WITH_CLIENT_MONITOR_PASSWORD_XXX" \
+        --with-mon-sd-password="XXX_REPLACE_WITH_STORAGE_MONITOR_PASSWORD_XXX" \
+        --with-openssl \
+	     --with-tcp-wrappers
+
+make
+
+%install
+
+mkdir -p $RPM_BUILD_ROOT%{_libdir}/
+mkdir -p $RPM_BUILD_ROOT%{plugin_dir}/
+mkdir -p $RPM_BUILD_ROOT%{lib_dir}/
+mkdir -p $RPM_BUILD_ROOT%{scripts_dir}/
+
+make DESTDIR=$RPM_BUILD_ROOT -C ../bacula-%{_version}/src/stored install-cloud
+
+# install libs3 lib files
+cp -p %{depkgs}/libs3*/build/lib/*.so* $RPM_BUILD_ROOT%{_libdir}
+
+# remove unneeded files
+rm -rf $RPM_BUILD_ROOT%{_mandir}
+rm -rf $RPM_BUILD_ROOT%{_bindir}
+rm -rf $RPM_BUILD_ROOT%{sysconf_dir}
+rm -rf ${RPM_BUILD_ROOT}/opt/bacula/share/doc
+rm -f $RPM_BUILD_ROOT%{docdir}/*
+rm -f $RPM_BUILD_ROOT%{lib_dir}/libbaccats*
+rm -f $RPM_BUILD_ROOT%{lib_dir}/libbacfind*
+rm -f $RPM_BUILD_ROOT%{lib_dir}/libbacsql*
+rm -f $RPM_BUILD_ROOT%{lib_dir}/libbaccfg*
+rm -f $RPM_BUILD_ROOT%{lib_dir}/libbac.*
+rm -f $RPM_BUILD_ROOT%{lib_dir}/libbac-*
+rm -f $RPM_BUILD_ROOT%{lib_dir}/libbacsd*
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/bacula-sd-cloud-driver.so
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/bacula-sd-cloud-s3-driver.so
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/bacula-sd-cloud-was-driver.so
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/bacula-sd-cloud-gs-driver.so
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/bacula-sd-cloud-oci-driver.so
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/bpipe-fd.so
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/bacula-sd-aligned-driver*
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/bacula-sd-dedup-driver*
+
+# libs3 license
+mkdir -p $RPM_BUILD_ROOT%{docdir}/bacula-cloud-storage
+cp -p %{depkgs}/libs3-*/LICENSE $RPM_BUILD_ROOT%{docdir}/bacula-cloud-storage/libs3.license
+
+%files
+%defattr(-,root,root)
+%attr(755, root, root) %{plugin_dir}/bacula-sd-cloud-driver-%{version}.so
+%{_libdir}/libs3*
+%{docdir}/bacula-cloud-storage/libs3.license
+
+%clean
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
+
+%changelog
+* Tue Feb 12 2019 Davide Franco <davide.franco@baculasystems.com>
+- First Cloud s3 package version

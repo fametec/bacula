@@ -1,0 +1,1361 @@
+#
+# Bacula RPM spec file
+#
+
+# Platform Build Configuration
+
+# basic defines for every build
+%define _release           @RELEASE@
+%define _version           @VERSION@
+%define product            bacula
+%define _packager Kern Sibbald <kern@sibbald.com>
+%define depkgs_version @DEPKGS_VERSION@
+
+# Don't strip binaries
+%define __os_install_post %{nil}
+%define __debug_install_post %{nil}
+%define debug_package %{nil}
+
+%define postgres_version 8
+%define pgre84 0
+%{?build_rhel5:%define pgre84 1}
+%{?build_el5:%define pgre84 1}
+%if %{pgre84}
+%define postgres_package postgresql84
+%define postgres_server_package postgresql84-server
+%define postgres_devel_package postgresql84-devel
+%else
+%define postgres_package postgresql
+%define postgres_server_package postgresql-server
+%define postgres_devel_package postgresql-devel
+%endif
+
+%define single_dir 1
+%{?single_dir_install:%define single_dir 1}
+
+# Installation Directory locations
+%define _prefix        /opt/bacula
+%define _sbindir       /opt/bacula/bin
+%define _bindir        /opt/bacula/bin
+%define _subsysdir     /opt/bacula/working
+%define sqlite_bindir  /opt/bacula/sqlite
+%define _mandir        /usr/share/man
+%define docs_dir       /opt/bacula/docs
+%define archive_dir    /opt/bacula/archive
+%define sysconf_dir    /opt/bacula/etc
+%define script_dir     /opt/bacula/scripts
+%define working_dir    /opt/bacula/working
+%define pid_dir        /opt/bacula/working
+%define plugin_dir     /opt/bacula/plugins
+%define lib_dir        /opt/bacula/lib
+%define log_dir        /opt/bacula/log
+%define systemd_dir    /lib/systemd/system
+
+# Daemon user:group Don't change them unless you know what you are doing
+%define director_daemon_user    bacula
+%define storage_daemon_user     bacula
+%define file_daemon_user        root
+%define daemon_group            bacula
+# group that has write access to tape devices, usually disk on Linux
+%define storage_daemon_group    disk
+
+%define depkgs ../depkgs
+
+# problems with mandriva build:
+# nothing provides libbonobo2_0-devel, nothing provides libbonoboui2_0-devel
+
+#--------------------------------------------------------------------------
+# it should not be necessary to change anything below here for a release
+# except for patch macros in the setup section
+#--------------------------------------------------------------------------
+
+%define base_package_name %{product}
+
+%{?contrib_packager:%define _packager %{contrib_packager}}
+
+Summary: Bacula - The Network Backup Solution
+Name: %{base_package_name}
+Version: %{_version}
+Release: %{_release}
+Group: System Environment/Daemons
+License: AGPLv3
+BuildRoot: %{_tmppath}/%{name}-root
+URL: http://www.bacula.org/
+Vendor: The Bacula Team
+Packager: %{_packager}
+Prefix: %{_prefix}
+
+# opensuse build service changes the release itself
+# what happens if the release is not 1? DSB
+Source0: http://www.prdownloads.sourceforge.net/bacula/depkgs-%{depkgs_version}.tar.gz
+Source1: http://www.prdownloads.sourceforge.net/bacula/%{product}-%{version}.tar.gz
+Source2: Release_Notes-%{version}-%{release}.tar.gz
+
+# define the basic package description
+%define blurb Bacula - The Leading Open Source Backup Solution.
+%define blurb2 Bacula is a set of computer programs that permit you (or the system
+%define blurb3 administrator) to manage backup, recovery, and verification of computer
+%define blurb4 data across a network of computers of different kinds. In technical terms,
+%define blurb5 it is a network client/server based backup program. Bacula is relatively
+%define blurb6 easy to use and efficient, while offering many advanced storage management
+%define blurb7 features that make it easy to find and recover lost or damaged files.
+%define blurb8 Bacula source code has been released under the AGPL version 3 license.
+
+%define user_file  /etc/passwd
+%define group_file /etc/group
+
+# program locations
+%define useradd  /usr/sbin/useradd
+%define groupadd /usr/sbin/groupadd
+%define usermod  /usr/sbin/usermod
+
+# platform defines - set one below or define the build_xxx on the command line
+# RedHat builds
+%define rh7 0
+%{?build_rh7:%define rh7 1}
+%define rh8 0
+%{?build_rh8:%define rh8 1}
+%define rh9 0
+%{?build_rh9:%define rh9 1}
+# Fedora Core build
+%define fc16 0
+%{?build_fc16:%define fc16 1}
+%define fc17 0
+%{?build_fc17:%define fc17 1}
+%define fc18 0
+%{?build_fc18:%define fc18 1}
+%define fc22 0
+%{?build_fc22:%define fc22 1}
+%define fc25 0
+%{?build_fc25:%define fc25 1}
+%define fc26 0
+%{?build_fc26:%define fc26 1}
+%define fc27 0
+%{?build_fc27:%define fc27 1}
+# RedHat Enterprise builds
+%define rhel3 0
+%{?build_rhel3:%define rhel3 1}
+%define rhel4 0
+%{?build_rhel4:%define rhel4 1}
+%{?build_rhel4:%define fc3 1}
+%{?build_el4:%define rhel4 1}
+%{?build_el4:%define fc3 1}
+%define rhel5 0
+%{?build_rhel5:%define rhel5 1}
+%{?build_rhel5:%define fc6 1}
+%{?build_el5:%define rhel5 1}
+%{?build_el5:%define fc6 1}
+%define rhel6 0
+%{?build_rhel6:%define rhel6 1}
+%{?build_el6:%define rhel6 1}
+%define rhel7 0
+%{?build_rhel7:%define rhel7 1}
+%{?build_el7:%define rhel7 1}
+# CentOS build
+%define centos3 0
+%{?build_centos3:%define centos3 1}
+%define centos4 0
+%{?build_centos4:%define centos4 1}
+%{?build_centos4:%define fc3 1}
+%define centos5 0
+%{?build_centos5:%define centos5 1}
+%{?build_centos5:%define fc6 1}
+%define centos6 0
+%{?build_centos6:%define centos6 1}
+%define centos7 0
+%{?build_centos7:%define centos7 1}
+# SL build
+%define sl3 0
+%{?build_sl3:%define sl3 1}
+%define sl4 0
+%{?build_sl4:%define sl4 1}
+%{?build_sl4:%define fc3 1}
+%define sl5 0
+%{?build_sl5:%define sl5 1}
+%{?build_sl5:%define fc6 1}
+# SuSE build
+%define su9 0
+%{?build_su9:%define su9 1}
+%define su10 0
+%{?build_su10:%define su10 1}
+%define su102 0
+%{?build_su102:%define su102 1}
+%define su103 0
+%{?build_su103:%define su103 1}
+%define su110 0
+%{?build_su110:%define su110 1}
+%define su111 0
+%{?build_su111:%define su111 1}
+%define su112 0
+%{?build_su112:%define su112 1}
+%define su113 0
+%{?build_su113:%define su113 1}
+%define su120 0
+%{?build_su120:%define su120 1}
+%define su131 0
+%{?build_su131:%define su131 1}
+# Mandrake builds
+%define mdk 0
+%{?build_mdk:%define mdk 1}
+%define mdv 0
+%{?build_mdv:%define mdv 1}
+%{?build_mdv:%define mdk 1}
+
+# client only build
+%define client_only 0
+%{?build_client_only:%define client_only 1}
+
+# if the platform is using systemd
+%define usesystemd 0
+
+%if %{rhel7} || %{fc22}|| %{fc25} || %{fc26} || %{fc27} || %{centos7}
+%define usesystemd 1
+%endif
+
+# depending if we use systemd or not, we use chkconfig or systemctl
+%if %{usesystemd}
+%define service_enable    systemctl enable
+%define service_disable   systemctl disable
+%else
+%define service_enable    /sbin/chkconfig --add
+%define service_disable   /sbin/chkconfig --del
+%endif
+
+# Setup some short cuts
+%define rhat 0
+%if %{rh7} || %{rh8} || %{rh9}
+%define rhat 1
+%endif
+%define fed 0
+%if %{fc16} || %{fc17} || %{fc18} || %{fc22} || %{fc25} || %{fc26} || %{fc27}
+%define fed 1
+%endif
+%define suse 0
+%if %{su9} || %{su10} || %{su102} || %{su103} || %{su110} || %{su111} || %{su112} || %{su120} || %{su131}
+%define suse 1
+%endif
+%define rhel 0
+%if %{rhel3} || %{rhel4} || %{rhel5} || %{rhel6} || %{rhel7} || %{centos3} || %{centos4} || %{centos5} || %{centos6} || %{centos7}
+%define rhel 1
+%endif
+%define scil 0
+%if %{sl3} || %{sl4} || %{sl5}
+%define scil 1
+%endif
+
+
+# test for a platform definition
+%if !%{rhat} && !%{rhel} && !%{fed} && !%{suse} && !%{mdk} && !%{scil}
+%{error: You must specify a platform. Please examine the spec file.}
+exit 1
+%endif
+
+# distribution-specific directory for logwatch
+%if %{rh7} || %{rh8} || %{rh9}
+%define logwatch_dir /etc/log.d
+%else
+%define logwatch_dir /etc/logwatch
+%endif
+
+# database defines
+# set for database support desired or define the build_xxx on the command line
+%define mysql 0
+%{?build_mysql:%define mysql 1}
+%define sqlite 0
+%{?build_sqlite:%define sqlite 1}
+%define postgresql 0
+%{?build_postgresql:%define postgresql 1}
+
+# test for a database definition
+%if ! %{mysql} && ! %{sqlite} && ! %{postgresql} && ! %{client_only}
+%{error: You must specify database support, by passing one of the following to rpmbuild:}
+%{error:   --define build_postgresql=1}
+%{error:   --define build_sqlite=1}
+%{error:   --define build_mysql=1}
+exit 1
+%endif
+
+%if %{mysql}
+%define db_backend mysql
+%endif
+%if %{sqlite}
+%define db_backend sqlite3
+%endif
+%if %{postgresql}
+%define db_backend postgresql
+%endif
+
+# 64 bit support
+%define x86_64 0
+%{?build_x86_64:%define x86_64 1}
+
+# check what distribution we are
+%if %{fc16} || %{fc17} || %{fc18} || %{fc22} || %{fc25} || %{fc26} || %{fc27}
+%define _dist %(grep Fedora /etc/redhat-release)
+%endif
+%if %{centos7} || %{centos6}
+%define _dist %(grep CentOS /etc/redhat-release)
+%endif
+%if %{centos5} || %{centos4} || %{centos3}
+%define _dist %(grep CentOS /etc/redhat-release)
+%endif
+%if %{sl5} ||%{sl4} || %{sl3}
+%define _dist %(grep 'Scientific Linux' /etc/redhat-release)
+%endif
+%if %{suse}
+%define _dist %(grep -i SuSE /etc/SuSE-release)
+%endif
+
+Distribution: %_dist
+
+# should we enable tcp wrappers support
+%define tcpwrappers 1
+%{?build_tcpwrappers:%define tcpwrappers 1}
+
+# do we need to patch for old postgresql version?
+%define old_pgsql 0
+%{?build_old_pgsql:%define old_pgsql 1}
+
+# Mandriva somehow forces the manpage file extension to bz2 rather than gz
+%if %{mdk}
+%define manpage_ext bz2
+%else
+%define manpage_ext gz
+%endif
+
+# for client only build
+%if %{client_only}
+%define mysql 0
+%define postgresql 0
+%define sqlite 0
+%endif
+
+BuildRequires: gcc, gcc-c++, make, autoconf
+BuildRequires: glibc, glibc-devel
+BuildRequires: ncurses-devel, readline-devel
+BuildRequires: libstdc++-devel, zlib-devel
+BuildRequires: openssl-devel
+BuildRequires: libacl-devel
+BuildRequires: pkgconfig
+BuildRequires: bzip2-devel
+%if ! %{rh7}
+BuildRequires: libxml2-devel
+%endif
+
+%if %{rh7}
+BuildRequires: libxml-devel
+%endif
+%if %{mdk}
+BuildRequires: libstdc++-static-devel
+BuildRequires: glibc-static-devel
+%endif
+
+%if %{mysql} && ! %{suse}
+BuildRequires: mysql-devel
+%endif
+
+%if %{postgresql}
+BuildRequires: %{postgres_devel_package} >= %{postgres_version}
+%endif
+
+%description
+%{blurb}
+
+%{blurb2}
+%{blurb3}
+%{blurb4}
+%{blurb5}
+%{blurb6}
+%{blurb7}
+%{blurb8}
+
+#
+# ===========================================================
+# Generate mysql, sqlite, or postgresql rpm
+# ===========================================================
+#
+%if %{mysql}
+%package mysql
+Provides: bacula-mysql
+#
+# The following provides is to work around an 
+#  auto generated requires from src/scripts/logwatch/applybaculadate
+#  this is a gross kludge to keep it from being a requirement
+#
+%endif
+%if %{postgresql}
+%package postgresql
+Provides: bacula-postgresql
+%endif
+
+Summary: Bacula - The Network Backup Solution
+Group: System Environment/Daemons
+Provides: bacula-dir, bacula-sd, bacula-fd, bacula-server
+Provides: libbaccats-%{version}.so()(64bit)
+Conflicts: bacula-client
+
+Requires: ncurses, libstdc++, zlib, openssl
+Requires: glibc, readline, %{name}-libs
+
+%if %{suse}
+Conflicts: bacula
+%endif
+
+%if %{mysql}
+Requires: mysql
+%endif
+
+%if %{postgresql}
+Requires: postgresql >= 7
+%endif
+
+%if %{mysql}
+%description mysql
+%endif
+%if %{sqlite}
+%description sqlite
+%endif
+%if %{postgresql}
+%description postgresql
+%endif
+
+%{blurb}
+
+%{blurb2}
+%{blurb3}
+%{blurb4}
+%{blurb5}
+%{blurb6}
+%{blurb7}
+%{blurb8}
+
+%if %{mysql}
+This build requires MySQL to be installed separately as the catalog database.
+%endif
+%if %{postgresql}
+This build requires PostgreSQL to be installed separately as the catalog database.
+%endif
+%if %{sqlite}
+This build incorporates sqlite3 as the catalog database, statically compiled.
+%endif
+%if %{tcpwrappers}
+This build includes tcp-wrappers support.
+%endif
+
+
+
+#
+# ===========================================================
+# Client -- bacula-fd rpm
+# ===========================================================
+#
+%package client
+Summary: Bacula - The Network Backup Solution
+Group: System Environment/Daemons
+Provides: bacula-fd
+Conflicts: bacula-mysql
+Conflicts: bacula-sqlite
+Conflicts: bacula-postgresql
+
+%if %{suse}
+Provides: %{product}
+Provides: %{product}-libs
+%endif
+
+Requires: libstdc++, zlib, openssl, bzip2-libs
+Requires: glibc, readline, %{name}-libs
+
+%description client
+%{blurb}
+
+%{blurb2}
+%{blurb3}
+%{blurb4}
+%{blurb5}
+%{blurb6}
+%{blurb7}
+%{blurb8}
+
+This is the File daemon (Client) only package. It includes the command line
+console program.
+%if %{tcpwrappers}
+This build includes tcp-wrappers support.
+%endif
+
+#
+# ===========================================================
+# Generate updatedb rpm
+# ===========================================================
+#
+%if ! %{client_only}
+%package updatedb
+
+Summary: Bacula - The Network Backup Solution
+Group: System Environment/Daemons
+
+%description updatedb
+%{blurb}
+
+%{blurb2}
+%{blurb3}
+%{blurb4}
+%{blurb5}
+%{blurb6}
+%{blurb7}
+%{blurb8}
+
+This package installs scripts for updating older versions of the bacula
+database.
+%endif
+
+#
+# ===========================================================
+# Generate libs rpm
+# ===========================================================
+#
+%package libs
+
+Summary: Bacula - The Network Backup Solution
+Group: System Environment/Daemons
+
+%description libs
+%{blurb}
+
+%{blurb2}
+%{blurb3}
+%{blurb4}
+%{blurb5}
+%{blurb6}
+%{blurb7}
+%{blurb8}
+
+This package installs the shared libraries used by many bacula programs.
+
+# Must explicitly enable debug pkg on SuSE
+# but not in opensuse_bs
+#%if %{suse} && ! 0%{?opensuse_bs}
+#%debug_package
+#%endif
+
+%prep
+%setup -T    -b 0 -n depkgs
+%setup -T    -b 1 -n %{product}-%{version}
+%setup -T -D -b 2 -n %{product}-%{version}
+# extract depkgs
+
+
+%build
+
+%if %{suse}
+#export LDFLAGS="${LDFLAGS} -L/usr/lib/termcap -L/usr/lib64/termcap"
+%endif
+
+# You can use a cache for depkgs
+# tar xfz depkgs*gz -C ~/
+# cd ~/depkgs
+# touch %{depkgs_version}       # depkgs version
+
+if [ -f $HOME/depkgs/%{depkgs_version} ]; then
+   rm -rf %{depkgs}
+   ln -s $HOME/depkgs %{depkgs}
+fi
+
+cwd=${PWD}
+%if %{sqlite}
+cd %{depkgs}
+make sqlite3
+cd ${cwd}
+%endif
+
+cd %{depkgs}
+make lzo
+export LDFLAGS="${LDFLAGS} -L${PWD}/lzo/lib"
+export CPPFLAGS="${CPPFLAGS} -I${PWD}/lzo/include"
+cd ${cwd}
+
+# hostname is the build hostname, so use XXX_HOSTNAME_XXX for Address parameter
+sed -i s/hostname/basename/ src/console/bconsole.conf.in src/dird/bacula-dir.conf.in src/qt-console/bat.conf.in
+
+%if %{sqlite}
+# patches for the bundled sqlite scripts
+sed -i s:.SQLITE_BINDIR.:/opt/bacula/sqlite: src/cats/*_sqlite3_*.in
+
+# patch the bacula-dir init script to remove sqlite service
+%if %{suse}
+sed -i 's/network .DB_TYPE./network/' platforms/suse/bacula-dir.in
+%endif
+%endif
+
+# 64 bit lib location hacks
+# as of 1.39.18 it should not be necessary to enable x86_64 as configure is
+# reported to be fixed to properly detect lib locations.
+%if %{x86_64}
+export LDFLAGS="${LDFLAGS} -L/usr/lib64"
+%endif
+%if %{mysql} && %{x86_64}
+export LDFLAGS="${LDFLAGS} -L/usr/lib64/mysql"
+%endif
+
+export BACULA="Bacula"
+
+# Main Bacula configuration
+%configure \
+        --prefix=%{_prefix} \
+        --sbindir=%{_sbindir} \
+        --sysconfdir=%{sysconf_dir} \
+        --mandir=%{_mandir} \
+        --with-scriptdir=%{script_dir} \
+        --with-working-dir=%{working_dir} \
+        --with-plugindir=%{plugin_dir} \
+        --with-logdir=%{log_dir} \
+        --with-pid-dir=%{pid_dir} \
+        --with-subsys-dir=%{_subsysdir} \
+        --enable-smartalloc \
+        --disable-conio \
+        --enable-readline \
+%if %{mysql}
+        --with-mysql \
+%endif
+%if %{postgresql}
+        --with-postgresql \
+%endif
+        --disable-bat \
+%if %{client_only}
+        --enable-client-only \
+%endif
+%if %{rh7} || %{rh8} || %{rh9}
+        --disable-batch-insert \
+%endif
+%if %{usesystemd}
+        --with-systemd=%{systemd_dir} \
+%endif
+        --with-tcp-wrappers  \
+        --with-dir-user=%{director_daemon_user} \
+        --with-dir-group=%{daemon_group} \
+        --with-sd-user=%{storage_daemon_user} \
+        --with-sd-group=%{storage_daemon_group} \
+        --with-fd-user=%{file_daemon_user} \
+        --with-fd-group=%{daemon_group} \
+        --with-basename="XXX_HOSTNAME_XXX" \
+        --with-hostname="XXX_HOSTNAME_XXX" \
+        --with-dir-password="XXX_REPLACE_WITH_DIRECTOR_PASSWORD_XXX" \
+        --with-fd-password="XXX_REPLACE_WITH_CLIENT_PASSWORD_XXX" \
+        --with-sd-password="XXX_REPLACE_WITH_STORAGE_PASSWORD_XXX" \
+        --with-mon-dir-password="XXX_REPLACE_WITH_DIRECTOR_MONITOR_PASSWORD_XXX" \
+        --with-mon-fd-password="XXX_REPLACE_WITH_CLIENT_MONITOR_PASSWORD_XXX" \
+        --with-mon-sd-password="XXX_REPLACE_WITH_STORAGE_MONITOR_PASSWORD_XXX" \
+        --with-openssl
+
+make -j3
+
+%install
+
+cwd=${PWD}
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
+mkdir -p $RPM_BUILD_ROOT/etc/init.d
+mkdir -p $RPM_BUILD_ROOT/etc/logrotate.d
+mkdir -p $RPM_BUILD_ROOT%{logwatch_dir}/conf/logfiles
+mkdir -p $RPM_BUILD_ROOT%{logwatch_dir}/conf/services
+mkdir -p $RPM_BUILD_ROOT%{logwatch_dir}/scripts/services
+mkdir -p $RPM_BUILD_ROOT%{logwatch_dir}/scripts/shared
+mkdir -p $RPM_BUILD_ROOT%{script_dir}/updatedb
+
+mkdir -p $RPM_BUILD_ROOT/etc/pam.d
+mkdir -p $RPM_BUILD_ROOT%{_sbindir}
+
+%if %{sqlite}
+mkdir -p $RPM_BUILD_ROOT%{sqlite_bindir}
+%endif
+
+make DESTDIR=$RPM_BUILD_ROOT install
+
+# bsnapshot
+make DESTDIR=$RPM_BUILD_ROOT -C ../bacula-%{_version}/src/tools/ install-bsnapshot
+
+%if %{usesystemd}
+make DESTDIR=$RPM_BUILD_ROOT -C platforms/systemd install-dir install-service
+%endif
+
+# Remove docs for programs that are depreciated
+rm -f $RPM_BUILD_ROOT%{_mandir}/man1/bacula-bgnome-console.1.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man1/bacula-bwxconsole.1.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man1/bacula-tray-monitor.1.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{script_dir}/gconsole
+
+# Remove docs for programs we do not distribute
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/bpluginfo.8.%{manpage_ext}
+
+# Remove storage-ctl packaged in shstore rpm
+rm -f $RPM_BUILD_ROOT%{script_dir}/storage-ctl
+rm -f $RPM_BUILD_ROOT%{script_dir}/storage-ctl.conf
+
+# fixme - make installs the mysql scripts for sqlite build
+%if %{sqlite}
+rm -f $RPM_BUILD_ROOT%{script_dir}/startmysql
+rm -f $RPM_BUILD_ROOT%{script_dir}/stopmysql
+rm -f $RPM_BUILD_ROOT%{script_dir}/grant_mysql_privileges
+%endif
+
+# fixme - make installs the mysql scripts for postgresql build
+%if %{postgresql}
+rm -f $RPM_BUILD_ROOT%{script_dir}/startmysql
+rm -f $RPM_BUILD_ROOT%{script_dir}/stopmysql
+%endif
+
+# Remove symlinks
+#rm -f $RPM_BUILD_ROOT%{_libdir}/libbaccats.so
+#rm -f $RPM_BUILD_ROOT%{_libdir}/libbaccats-%{version}.so
+rm -f $RPM_BUILD_ROOT%{_libdir}/libbacsd.la
+
+# install the init scripts
+%if !%{usesystemd}
+%if %{suse}
+cp -p platforms/suse/bacula-dir $RPM_BUILD_ROOT/etc/init.d/bacula-dir
+cp -p platforms/suse/bacula-fd $RPM_BUILD_ROOT/etc/init.d/bacula-fd
+cp -p platforms/suse/bacula-sd $RPM_BUILD_ROOT/etc/init.d/bacula-sd
+%endif                           # suse
+%if %{mdk}
+cp -p platforms/mandrake/bacula-dir $RPM_BUILD_ROOT/etc/init.d/bacula-dir
+cp -p platforms/mandrake/bacula-fd $RPM_BUILD_ROOT/etc/init.d/bacula-fd
+cp -p platforms/mandrake/bacula-sd $RPM_BUILD_ROOT/etc/init.d/bacula-sd
+%endif                           # mdk
+%if ! %{suse} && ! %{mdk}
+cp -p platforms/redhat/bacula-dir $RPM_BUILD_ROOT/etc/init.d/bacula-dir
+cp -p platforms/redhat/bacula-fd $RPM_BUILD_ROOT/etc/init.d/bacula-fd
+cp -p platforms/redhat/bacula-sd $RPM_BUILD_ROOT/etc/init.d/bacula-sd
+%endif                           # !suse && !mdk
+chmod 0754 $RPM_BUILD_ROOT/etc/init.d/*
+%endif                           # ! usesystemd
+
+%if %{client_only}
+rm -f $RPM_BUILD_ROOT/etc/init.d/bacula-dir
+rm -f $RPM_BUILD_ROOT/etc/init.d/bacula-sd
+rm -f $RPM_BUILD_ROOT%{script_dir}/breload
+rm -f $RPM_BUILD_ROOT%{script_dir}/manual_prune.pl
+rm -f $RPM_BUILD_ROOT%{systemd_dir}/bacula-dir.service
+rm -f $RPM_BUILD_ROOT%{systemd_dir}/bacula-sd.service
+%endif
+
+# install sqlite
+%if %{sqlite}
+cp -p %{depkgs}/sqlite3/sqlite3 $RPM_BUILD_ROOT%{sqlite_bindir}/sqlite3
+cp -p %{depkgs}/sqlite3/sqlite3.h $RPM_BUILD_ROOT%{sqlite_bindir}/sqlite3.h
+cp -p %{depkgs}/sqlite3/libsqlite3.a $RPM_BUILD_ROOT%{sqlite_bindir}/libsqlite3.a
+%endif
+
+
+# install the logrotate file
+cp -p scripts/logrotate $RPM_BUILD_ROOT/etc/logrotate.d/bacula
+
+# install the updatedb scripts
+cp -p updatedb/* $RPM_BUILD_ROOT%{script_dir}/updatedb/
+
+# install specific scripts
+
+%if ! %{client_only}
+# install the sample-query.sql file
+cp -p examples/sample-query.sql $RPM_BUILD_ROOT%{script_dir}/sample-query.sql
+
+# install the logwatch scripts
+cp -p scripts/logwatch/bacula $RPM_BUILD_ROOT%{logwatch_dir}/scripts/services/bacula
+cp -p scripts/logwatch/applybaculadate $RPM_BUILD_ROOT%{logwatch_dir}/scripts/shared/applybaculadate
+cp -p scripts/logwatch/logfile.bacula.conf $RPM_BUILD_ROOT%{logwatch_dir}/conf/logfiles/bacula.conf
+cp -p scripts/logwatch/services.bacula.conf $RPM_BUILD_ROOT%{logwatch_dir}/conf/services/bacula.conf
+chmod 755 $RPM_BUILD_ROOT%{logwatch_dir}/scripts/services/bacula
+chmod 755 $RPM_BUILD_ROOT%{logwatch_dir}/scripts/shared/applybaculadate
+chmod 644 $RPM_BUILD_ROOT%{logwatch_dir}/conf/logfiles/bacula.conf
+chmod 644 $RPM_BUILD_ROOT%{logwatch_dir}/conf/services/bacula.conf
+%endif
+
+# now clean up permissions that are left broken by the install
+chmod o-rwx $RPM_BUILD_ROOT%{working_dir}
+
+# fix me - building enable-client-only installs files not included in bacula-client package
+%if %{client_only}
+# Program docs not installed on client
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/bacula-dir.8.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/bacula-sd.8.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/bcopy.8.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/bextract.8.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/bls.8.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/bscan.8.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/btape.8.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/dbcheck.8.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/bregex.8.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/bwild.8.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{_mandir}/man1/bsmtp.1.%{manpage_ext}
+rm -f $RPM_BUILD_ROOT%{script_dir}/bacula
+rm -f $RPM_BUILD_ROOT%{script_dir}/bacula_config
+rm -f $RPM_BUILD_ROOT%{script_dir}/bacula-ctl-dir
+rm -f $RPM_BUILD_ROOT%{script_dir}/bacula-ctl-sd
+rm -f $RPM_BUILD_ROOT%{script_dir}/disk-changer
+rm -f $RPM_BUILD_ROOT%{script_dir}/dvd-handler
+rm -f $RPM_BUILD_ROOT%{script_dir}/mtx-changer
+rm -f $RPM_BUILD_ROOT%{script_dir}/startmysql
+rm -f $RPM_BUILD_ROOT%{script_dir}/stopmysql
+rm -rf $RPM_BUILD_ROOT%{script_dir}/updatedb
+rm -f $RPM_BUILD_ROOT%{script_dir}/bconsole
+rm -f $RPM_BUILD_ROOT%{script_dir}/mtx-changer.conf
+rm -f $RPM_BUILD_ROOT%{_sbindir}/bacula
+
+%endif
+
+%clean
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
+rm -f $RPM_BUILD_DIR/Release_Notes-%{version}-%{release}.txt
+
+
+%if %{mysql}
+# MySQL specific files
+%files mysql
+%defattr(-, root, root)
+%attr(-, root, %{daemon_group}) %{script_dir}/create_mysql_database
+%attr(-, root, %{daemon_group}) %{script_dir}/drop_mysql_database
+%attr(-, root, %{daemon_group}) %{script_dir}/make_mysql_tables
+%attr(-, root, %{daemon_group}) %{script_dir}/drop_mysql_tables
+%attr(-, root, %{daemon_group}) %{script_dir}/update_mysql_tables
+%attr(-, root, %{daemon_group}) %{script_dir}/grant_mysql_privileges
+%{_libdir}/libbaccats*
+%{_libdir}/libbacsql*
+%{_libdir}/libbacsd*.so
+%endif
+
+
+%if %{postgresql}
+%files postgresql
+%defattr(-,root,root)
+%attr(755, root, %{daemon_group}) %{script_dir}/create_postgresql_database
+%attr(755, root, %{daemon_group}) %{script_dir}/drop_postgresql_database
+%attr(755, root, %{daemon_group}) %{script_dir}/make_postgresql_tables
+%attr(755, root, %{daemon_group}) %{script_dir}/drop_postgresql_tables
+%attr(755, root, %{daemon_group}) %{script_dir}/update_postgresql_tables
+%attr(755, root, %{daemon_group}) %{script_dir}/grant_postgresql_privileges
+%{_libdir}/libbaccats*
+%{_libdir}/libbacsql*
+%{_libdir}/libbacsd*.so
+%endif
+
+# The rest is DB backend independent
+
+%if ! %{client_only}
+%attr(-, root, %{daemon_group}) %dir %{script_dir}
+%attr(-, root, %{daemon_group}) %dir %{sysconf_dir}
+%attr(-, root, %{daemon_group}) %{script_dir}/bacula
+%attr(-, root, %{daemon_group}) %{script_dir}/bacula_config
+%attr(-, root, %{daemon_group}) %{script_dir}/bconsole
+%attr(755, root, %{daemon_group}) %{script_dir}/create_bacula_database
+%attr(755, root, %{daemon_group}) %{script_dir}/drop_bacula_database
+%attr(755, root, %{daemon_group}) %{script_dir}/grant_bacula_privileges
+%attr(755, root, %{daemon_group}) %{script_dir}/make_bacula_tables
+%attr(755, root, %{daemon_group}) %{script_dir}/drop_bacula_tables
+%attr(755, root, %{daemon_group}) %{script_dir}/update_bacula_tables
+%attr(-, root, %{daemon_group}) %{script_dir}/make_catalog_backup
+%attr(-, root, %{daemon_group}) %{script_dir}/make_catalog_backup.pl
+%attr(-, root, %{daemon_group}) %{script_dir}/delete_catalog_backup
+%attr(-, root, %{daemon_group}) %{script_dir}/btraceback.dbx
+%attr(-, root, %{daemon_group}) %{script_dir}/btraceback.gdb
+%attr(-, root, %{daemon_group}) %{script_dir}/btraceback.mdb
+%attr(-, root, %{daemon_group}) %{script_dir}/disk-changer
+%attr(-, root, %{daemon_group}) %{script_dir}/bacula-ctl-dir
+%attr(-, root, %{daemon_group}) %{script_dir}/bacula-ctl-fd
+%attr(-, root, %{daemon_group}) %{script_dir}/bacula-ctl-sd
+%attr(-, root, %{daemon_group}) %{script_dir}/tapealert
+%attr(-, root, %{daemon_group}) %{script_dir}/baculabackupreport
+
+%attr(-, root, %{daemon_group}) %{script_dir}/isworm
+%attr(-, root, %{daemon_group}) %{plugin_dir}/bpipe-fd.so
+%attr(-, root, %{daemon_group}) %{_sbindir}/dbcheck
+%attr(-, root, %{storage_daemon_group}) %{script_dir}/mtx-changer
+%attr(-, root, %{storage_daemon_group}) %config(noreplace) %{script_dir}/mtx-changer.conf
+
+%if %{usesystemd}
+%attr(-, root, %{daemon_group}) %{systemd_dir}/bacula-dir.service
+%attr(-, root, %{daemon_group}) %{systemd_dir}/bacula-fd.service
+%attr(-, root, %{daemon_group}) %{systemd_dir}/bacula-sd.service
+%else
+%attr(-, root, %{daemon_group}) /etc/init.d/bacula-dir
+%attr(-, root, %{daemon_group}) /etc/init.d/bacula-fd
+%attr(-, root, %{storage_daemon_group}) /etc/init.d/bacula-sd
+%endif
+
+/etc/logrotate.d/bacula
+%{logwatch_dir}/scripts/services/bacula
+%{logwatch_dir}/scripts/shared/applybaculadate
+%attr(-, root, %{daemon_group}) %config(noreplace) %{sysconf_dir}/bacula-dir.conf
+%attr(-, root, %{daemon_group}) %config(noreplace) %{sysconf_dir}/bacula-fd.conf
+%attr(-, root, %{storage_daemon_group}) %config(noreplace) %{sysconf_dir}/bacula-sd.conf
+%attr(-, root, %{daemon_group}) %config(noreplace) %{sysconf_dir}/bconsole.conf
+%attr(-, root, %{daemon_group}) %config(noreplace) %{logwatch_dir}/conf/logfiles/bacula.conf
+%attr(-, root, %{daemon_group}) %config(noreplace) %{logwatch_dir}/conf/services/bacula.conf
+%attr(-, root, %{daemon_group}) %{script_dir}/sample-query.sql
+%attr(-, root, %{daemon_group}) %{script_dir}/query.sql
+
+%attr(-, %{storage_daemon_user}, %{daemon_group}) %dir %{working_dir}
+
+%attr(-, root, %{daemon_group}) %{_sbindir}/bacula-dir
+%attr(-, root, %{daemon_group}) %{_sbindir}/bacula-sd
+%attr(-, root, %{daemon_group}) %{_sbindir}/btraceback
+%attr(-, root, %{daemon_group}) %{_sbindir}/bconsole
+%attr(-, root, %{daemon_group}) %{_sbindir}/bbconsjson
+%attr(-, root, %{daemon_group}) %{_sbindir}/bsmtp
+%attr(-, root, %{daemon_group}) %{_sbindir}/bscan
+%attr(-, root, %{daemon_group}) %{_sbindir}/btape
+%attr(-, root, %{daemon_group}) %{_sbindir}/bdirjson
+%attr(-, root, %{daemon_group}) %{_sbindir}/bsdjson
+
+%attr(755, root, root) %{_sbindir}/bsnapshot
+%attr(755, root, root) %{_sbindir}/bfdjson
+
+%{_sbindir}/bacula-fd
+%{_sbindir}/bacula
+%{_sbindir}/bcopy
+%{_sbindir}/bextract
+%{_sbindir}/bls
+%{_sbindir}/bregex
+%{_sbindir}/bwild
+%{_mandir}/man8/bacula-fd.8.%{manpage_ext}
+%{_mandir}/man8/bacula-dir.8.%{manpage_ext}
+%{_mandir}/man8/bacula-sd.8.%{manpage_ext}
+%{_mandir}/man8/bacula.8.%{manpage_ext}
+%{_mandir}/man8/bconsole.8.%{manpage_ext}
+%{_mandir}/man8/bcopy.8.%{manpage_ext}
+%{_mandir}/man8/bextract.8.%{manpage_ext}
+%{_mandir}/man8/bls.8.%{manpage_ext}
+%{_mandir}/man8/bscan.8.%{manpage_ext}
+%{_mandir}/man8/btape.8.%{manpage_ext}
+%{_mandir}/man8/btraceback.8.%{manpage_ext}
+%{_mandir}/man8/dbcheck.8.%{manpage_ext}
+%{_mandir}/man8/bregex.8.%{manpage_ext}
+%{_mandir}/man8/bwild.8.%{manpage_ext}
+%{_mandir}/man1/bsmtp.1.%{manpage_ext}
+%{_mandir}/man1/bat.1.%{manpage_ext}
+%_prefix/share/doc/*
+
+%attr(-, root, %{daemon_group}) %{script_dir}/bacula-tray-monitor.desktop
+
+%doc ../Release_Notes-%{version}-%{release}.txt
+
+%endif
+
+%if %{mysql}
+%pre mysql
+# test for bacula database older than version 13
+# note: this ASSUMES no password has been set for bacula database
+DB_VER=`mysql 2>/dev/null bacula -e 'select * from Version;'|tail -n 1`
+%endif
+
+%if %{sqlite}
+%pre sqlite
+# are we upgrading from sqlite to sqlite3?
+if [ -s %{working_dir}/bacula.db ] && [ -s %{sqlite_bindir}/sqlite ];then
+        echo "This version of bacula-sqlite involves an upgrade to sqlite3."
+        echo "Your catalog database file is not compatible with sqlite3, thus"
+        echo "you will need to dump the data, delete the old file, and re-run"
+        echo "this rpm upgrade."
+        echo ""
+        echo "Backing up your current database..."
+        echo ".dump" | %{sqlite_bindir}/sqlite %{working_dir}/bacula.db > %{working_dir}/bacula_backup.sql
+        mv %{working_dir}/bacula.db %{working_dir}/bacula.db.old
+        echo "Your catalog data has been saved in %{working_dir}/bacula_backup.sql and your"
+        echo "catalog file has been renamed %{working_dir}/bacula.db.old."
+        echo ""
+        echo "Please re-run this rpm package upgrade."
+        echo "After the upgrade is complete, restore your catalog"
+        echo "with the following commands:"
+        echo "%{script_dir}/drop_sqlite3_tables"
+        echo "cd %{working_dir}"
+        echo "%{sqlite_bindir}/sqlite3 $* bacula.db < bacula_backup.sql"
+        echo "chown bacula.bacula bacula.db"
+        exit 1
+fi
+# test for bacula database older than version 12 and sqlite3
+if [ -s %{working_dir}/bacula.db ] && [ -s %{sqlite_bindir}/sqlite3 ];then
+        DB_VER=`echo "select * from Version;" | %{sqlite_bindir}/sqlite3 2>/dev/null %{working_dir}/bacula.db | tail -n 1`
+%endif
+
+%if %{postgresql}
+%pre postgresql
+DB_VER=`echo 'SELECT * FROM Version LIMIT 1;' | su - postgres -c 'psql bacula' 2>/dev/null | tail -3 | head -1`
+%endif
+
+%if ! %{client_only}
+if [ -n "$DB_VER" ] && [ "$DB_VER" -lt "12" ]; then
+    echo "This bacula upgrade will update a bacula database from version 12 to 1014."
+    echo "You appear to be running database version $DB_VER. You must first update"
+    echo "your database to version 12 and then install this upgrade. The alternative"
+    echo "is to use %{script_dir}/drop_%{db_backend}_tables to delete all your your current"
+    echo "catalog information, then do the upgrade. Information on updating a"
+    echo "database older than version 12 can be found in the release notes."
+    exit 1
+fi
+%endif
+
+%if %{sqlite}
+fi
+%endif
+
+%if ! %{client_only}
+# check for and copy %{sysconf_dir}/console.conf to bconsole.conf
+if [ -s %{sysconf_dir}/console.conf ];then
+    cp -p %{sysconf_dir}/console.conf %{sysconf_dir}/bconsole.conf
+fi
+
+# create the daemon users and groups
+# first create the groups if they don't exist
+HAVE_BACULA=`grep %{daemon_group} %{group_file} 2>/dev/null`
+if [ -z "$HAVE_BACULA" ]; then
+        %{groupadd} -r %{daemon_group} > /dev/null 2>&1
+        echo "The group %{daemon_group} has been added to %{group_file}."
+        echo "See the manual chapter \"Running Bacula\" for details."
+fi
+HAVE_BACULA=`grep %{storage_daemon_group} %{group_file} 2>/dev/null`
+if [ -z "$HAVE_BACULA" ]; then
+        %{groupadd} -r %{storage_daemon_group} > /dev/null 2>&1
+        echo "The group %{storage_daemon_group} has been added to %{group_file}."
+        echo "See the manual chapter \"Running Bacula\" for details."
+fi
+# now create the users if they do not exist
+# we do not use the -g option allowing the primary group to be set to system default
+# this will be a unique group on redhat type systems or the group users on some systems
+HAVE_BACULA=`grep %{storage_daemon_user} %{user_file} 2>/dev/null`
+if [ -z "$HAVE_BACULA" ]; then
+        %{useradd} -r -c "Bacula" -d %{working_dir} -g %{storage_daemon_group} -M -s /sbin/nologin %{storage_daemon_user} > /dev/null 2>&1
+        echo "The user %{storage_daemon_user} has been added to %{user_file}."
+        echo "See the manual chapter \"Running Bacula\" for details."
+fi
+HAVE_BACULA=`grep %{director_daemon_user} %{user_file} 2>/dev/null`
+if [ -z "$HAVE_BACULA" ]; then
+        %{useradd} -r -c "Bacula" -d %{working_dir} -g %{daemon_group} -M -s /sbin/nologin %{director_daemon_user} > /dev/null 2>&1
+        echo "The user %{director_daemon_user} has been added to %{user_file}."
+        echo "See the manual chapter \"Running Bacula\" for details."
+fi
+HAVE_BACULA=`grep %{file_daemon_user} %{user_file} 2>/dev/null`
+if [ -z "$HAVE_BACULA" ]; then
+        %{useradd} -r -c "Bacula" -d %{working_dir} -g %{daemon_group} -M -s /sbin/nologin %{file_daemon_user} > /dev/null 2>&1
+        echo "The user %{file_daemon_user} has been added to %{user_file}."
+        echo "See the manual chapter \"Running Bacula\" for details."
+fi
+# now we add the supplementary groups, this is ok to call even if the users already exist
+# we only do this if the user is NOT root
+IS_ROOT=%{director_daemon_user}
+if [ "$IS_ROOT" != "root" ]; then
+%{usermod} -G %{daemon_group} %{director_daemon_user}
+fi
+IS_ROOT=%{storage_daemon_user}
+if [ "$IS_ROOT" != "root" ]; then
+%{usermod} -G %{daemon_group},%{storage_daemon_group} %{storage_daemon_user}
+fi
+IS_ROOT=%{file_daemon_user}
+if [ "$IS_ROOT" != "root" ]; then
+%{usermod} -G %{daemon_group} %{file_daemon_user}
+fi
+%endif
+
+%if %{mysql}
+%post mysql
+%endif
+%if %{sqlite}
+%post sqlite
+%endif
+%if %{postgresql}
+%post postgresql
+%endif
+%if ! %{client_only}
+# add our links
+if [ "$1" -ge 1 ] ; then
+%if %{suse} && %{mysql}
+  %{service_enable} mysql
+%endif
+%if %{suse} && %{postgresql}
+  %{service_enable} postgresql
+%endif
+  %{service_enable} bacula-dir
+  %{service_enable} bacula-fd
+  %{service_enable} bacula-sd
+fi
+%endif
+
+if [ -d %{sysconf_dir} ]; then
+   cd %{sysconf_dir}
+   if [ ! -f .rpm.sed ]; then
+       (umask 0177
+        echo "# This file is used to ensure that all passwords will" > .rpm.sed
+        echo "# match between configuration files"                  >> .rpm.sed
+       )
+       for string in XXX_REPLACE_WITH_DIRECTOR_PASSWORD_XXX XXX_REPLACE_WITH_CLIENT_PASSWORD_XXX XXX_REPLACE_WITH_STORAGE_PASSWORD_XXX XXX_REPLACE_WITH_DIRECTOR_MONITOR_PASSWORD_XXX XXX_REPLACE_WITH_CLIENT_MONITOR_PASSWORD_XXX XXX_REPLACE_WITH_STORAGE_MONITOR_PASSWORD_XXX; do
+           pass=`openssl rand -base64 33`
+           echo "s@${string}@${pass}@g" >> .rpm.sed
+       done
+   fi
+   host=`hostname -s`
+   if [ "$host" = "" ]; then
+       host=localhost
+   fi
+   for file in *.conf; do
+      sed -f .rpm.sed $file > $file.new
+      sed "s@XXX_HOSTNAME_XXX@${host}@g" $file.new > $file
+      rm -f $file.new
+   done
+fi
+
+
+%if %{mysql}
+
+#check, if mysql can be called successfully at all
+if mysql 2>/dev/null bacula -e 'select * from Version;' ; then
+
+  # test for an existing database
+  # note: this ASSUMES no password has been set for bacula database
+  DB_VER=`mysql 2>/dev/null bacula -e 'select * from Version;'|tail -n 1`
+
+  # grant privileges and create tables if they do not exist
+  if [ -z "$DB_VER" ]; then
+      echo "Hmm, it doesn't look like you have an existing database."
+      echo "Granting privileges for MySQL user bacula..."
+      %{script_dir}/grant_mysql_privileges
+      echo "Creating MySQL bacula database..."
+      %{script_dir}/create_mysql_database
+      echo "Creating bacula tables..."
+      %{script_dir}/make_mysql_tables
+
+  elif [ "$DB_VER" -ge "12" -a "$DB_VER" -lt "1015" ]; then
+      echo "This release requires an upgrade to your bacula database."
+      echo "Backing up your current database..."
+      mysqldump -f --opt bacula | bzip2 > %{working_dir}/bacula_backup.sql.bz2
+      echo "Upgrading bacula database ..."
+      %{script_dir}/update_mysql_tables
+      echo "If bacula works correctly you can remove the backup file %{working_dir}/bacula_backup.sql.bz2"
+
+  fi
+fi
+%endif
+
+%if %{sqlite}
+# test for an existing database
+if [ -s %{working_dir}/bacula.db ]; then
+        DB_VER=`echo "select * from Version;" | %{sqlite_bindir}/sqlite3 2>/dev/null %{working_dir}/bacula.db | tail -n 1`
+        # check to see if we need to upgrade a 3.x database
+        if [ "$DB_VER" -le "13" ] && [ "$DB_VER" -ge "12" ]; then
+                echo "This release requires an upgrade to your bacula database."
+                echo "Backing up your current database..."
+                echo ".dump" | %{sqlite_bindir}/sqlite3 %{working_dir}/bacula.db | bzip2 > %{working_dir}/bacula_backup.sql.bz2
+                echo "Upgrading bacula database ..."
+                %{script_dir}/update_sqlite3_tables
+                echo "If bacula works correctly you can remove the backup file %{working_dir}/bacula_backup.sql.bz2"
+        fi
+else
+        # create the database and tables
+        echo "Hmm, doesn't look like you have an existing database."
+        echo "Creating SQLite database..."
+        %{script_dir}/create_sqlite3_database
+        echo "Creating the SQLite tables..."
+        %{script_dir}/make_sqlite3_tables
+        chown %{director_daemon_user}.%{daemon_group} %{working_dir}/bacula.db
+fi
+%endif
+
+%if %{postgresql}
+# check if psql can be called successfully at all
+if echo 'select * from Version;' | su - postgres -c 'psql bacula' 2>/dev/null; then
+
+  # test for an existing database
+  # note: this ASSUMES no password has been set for bacula database
+  DB_VER=`echo 'SELECT * FROM Version LIMIT 1;' | su - postgres -c 'psql bacula' 2>/dev/null | tail -3 | head -1`
+
+  # grant privileges and create tables if they do not exist
+  if [ -z "$DB_VER" ]; then
+      echo "Hmm, doesn't look like you have an existing database."
+      echo "Creating PostgreSQL bacula database..."
+      su - postgres -c %{script_dir}/create_postgresql_database
+      echo "Creating bacula tables..."
+      su - postgres -c %{script_dir}/make_postgresql_tables
+      echo "Granting privileges for PostgreSQL user bacula..."
+      su - postgres -c %{script_dir}/grant_postgresql_privileges
+
+  elif [ "$DB_VER" -ge "12" -a "$DB_VER" -lt "1015" ]; then
+      echo "This release requires an upgrade to your bacula database."
+      echo "Backing up your current database..."
+      su - postgres -c 'pg_dump bacula' | bzip2 > %{working_dir}/bacula_backup.sql.bz2
+      echo "Upgrading bacula database ..."
+      su - postgres -c %{script_dir}/update_postgresql_tables
+      echo "If bacula works correctly you can remove the backup file %{working_dir}/bacula_backup.sql.bz2"
+      echo "Granting privileges for PostgreSQL user bacula..."
+      su - postgres -c %{script_dir}/grant_postgresql_privileges
+
+  fi
+fi
+%endif
+
+%if ! %{client_only}
+if [ -d %{sysconf_dir} ]; then
+   cd %{sysconf_dir}
+   if [ ! -f .rpm.sed ]; then
+       (umask 0177
+        echo "# This file is used to ensure that all passwords will" > .rpm.sed
+        echo "# match between configuration files"                  >> .rpm.sed
+       )
+       for string in XXX_REPLACE_WITH_DIRECTOR_PASSWORD_XXX XXX_REPLACE_WITH_CLIENT_PASSWORD_XXX XXX_REPLACE_WITH_STORAGE_PASSWORD_XXX XXX_REPLACE_WITH_DIRECTOR_MONITOR_PASSWORD_XXX XXX_REPLACE_WITH_CLIENT_MONITOR_PASSWORD_XXX XXX_REPLACE_WITH_STORAGE_MONITOR_PASSWORD_XXX; do
+           pass=`openssl rand -base64 33`
+           echo "s@${string}@${pass}@g" >> .rpm.sed
+       done
+   fi
+   host=`hostname -s`
+   if [ "$host" = "" ]; then
+       host=localhost
+   fi
+   for file in *.conf; do
+      sed -f .rpm.sed $file > $file.new
+      sed "s@XXX_HOSTNAME_XXX@${host}@g" $file.new > $file
+      rm -f $file.new
+   done
+fi
+%endif
+
+
+%if %{mysql}
+%preun mysql
+%endif
+%if %{sqlite}
+%preun sqlite
+%endif
+%if %{postgresql}
+%preun postgresql
+%endif
+
+%if ! %{client_only}
+# delete our links
+if [ $1 = 0 ]; then
+  %{service_disable} bacula-dir
+  %{service_disable} bacula-fd
+  %{service_disable} bacula-sd
+fi
+%endif
+
+%files client
+%defattr(-,root,root)
+%attr(-, root, %{daemon_group}) %dir %{script_dir}
+%attr(-, root, %{daemon_group}) %dir %{plugin_dir}
+%attr(-, root, %{daemon_group}) %dir %{sysconf_dir}
+
+# SD/DIR might write here
+%attr(-, %{storage_daemon_user}, %{daemon_group}) %dir %{log_dir}
+
+%if %{usesystemd}
+%attr(-, root, %{daemon_group})  %{systemd_dir}/bacula-fd.service
+%else
+%{script_dir}/bacula-ctl-fd
+/etc/init.d/bacula-fd
+%endif
+
+/etc/logrotate.d/bacula
+
+%attr(-, root, %{daemon_group}) %config(noreplace) %{sysconf_dir}/bacula-fd.conf
+%attr(-, root, %{daemon_group}) %config(noreplace) %{sysconf_dir}/bconsole.conf
+%attr(-, root, %{daemon_group}) %dir %{working_dir}
+
+%{_sbindir}/bacula-fd
+%{_sbindir}/btraceback
+%attr(-, root, %{daemon_group}) %{script_dir}/btraceback.gdb
+%attr(-, root, %{daemon_group}) %{script_dir}/btraceback.dbx
+%attr(-, root, %{daemon_group}) %{script_dir}/btraceback.mdb
+%attr(-, root, %{daemon_group}) %{plugin_dir}/bpipe-fd.so
+%{_sbindir}/bconsole
+%{_mandir}/man8/bacula-fd.8.%{manpage_ext}
+%{_mandir}/man8/bacula.8.%{manpage_ext}
+%{_mandir}/man8/bconsole.8.%{manpage_ext}
+%{_mandir}/man8/btraceback.8.%{manpage_ext}
+%{_mandir}/man1/bat.1.%{manpage_ext}
+%_prefix/share/doc/*
+
+%pre client
+# create the daemon group and user
+HAVE_BACULA=`grep %{daemon_group} %{group_file} 2>/dev/null`
+if [ -z "$HAVE_BACULA" ]; then
+    %{groupadd} -r %{daemon_group} > /dev/null 2>&1
+    echo "The group %{daemon_group} has been added to %{group_file}."
+    echo "See the manual chapter \"Running Bacula\" for details."
+fi
+# we do not use the -g option allowing the primary group to be set to system default
+# this will be a unique group on redhat type systems or the group users on some systems
+HAVE_BACULA=`grep %{file_daemon_user} %{user_file} 2>/dev/null`
+if [ -z "$HAVE_BACULA" ]; then
+    %{useradd} -r -c "Bacula" -d %{working_dir} -g %{daemon_group} -M -s /sbin/nologin %{file_daemon_user} > /dev/null 2>&1
+    echo "The user %{file_daemon_user} has been added to %{user_file}."
+    echo "See the manual chapter \"Running Bacula\" for details."
+fi
+# now we add the supplementary group, this is ok to call even if the user already exists
+# we only do this if the user is NOT root
+IS_ROOT=%{file_daemon_user}
+if [ "$IS_ROOT" != "root" ]; then
+%{usermod} -G %{daemon_group} %{file_daemon_user}
+fi
+
+%post client
+# add our link
+if [ "$1" -ge 1 ] ; then
+   %{service_enable} bacula-fd
+fi
+
+if [ -d %{sysconf_dir} ]; then
+   cd %{sysconf_dir}
+   if [ ! -f .rpm.sed ]; then
+       (umask 0177
+        echo "# This file is used to ensure that all passwords will" > .rpm.sed
+        echo "# match between configuration files"                  >> .rpm.sed
+       )
+       for string in XXX_REPLACE_WITH_DIRECTOR_PASSWORD_XXX XXX_REPLACE_WITH_CLIENT_PASSWORD_XXX XXX_REPLACE_WITH_STORAGE_PASSWORD_XXX XXX_REPLACE_WITH_DIRECTOR_MONITOR_PASSWORD_XXX XXX_REPLACE_WITH_CLIENT_MONITOR_PASSWORD_XXX XXX_REPLACE_WITH_STORAGE_MONITOR_PASSWORD_XXX; do
+           pass=`openssl rand -base64 33`
+           echo "s@${string}@${pass}@g" >> .rpm.sed
+       done
+   fi
+   host=`hostname -s`
+   if [ "$host" = "" ]; then
+       host=localhost
+   fi
+   for file in *.conf; do
+      sed -f .rpm.sed $file > $file.new
+      sed "s@XXX_HOSTNAME_XXX@${host}@g" $file.new > $file
+      rm -f $file.new
+   done
+fi
+
+%preun client
+# delete our link
+if [ $1 = 0 ]; then
+   %{service_disable} bacula-fd
+fi
+
+%files libs
+%defattr(-,root,root)
+%{_libdir}/libbac-*
+%{_libdir}/libbac.*
+%{_libdir}/libbaccfg*
+%{_libdir}/libbacfind*
+
+%post libs
+/sbin/ldconfig
+exit 0
+
+%postun libs
+/sbin/ldconfig
+exit 0
+
+%if ! %{client_only}
+%files updatedb
+%defattr(-,root,%{daemon_group})
+%{script_dir}/updatedb/*
+
+%pre updatedb
+# create the daemon group
+HAVE_BACULA=`grep %{daemon_group} %{group_file} 2>/dev/null`
+if [ -z "$HAVE_BACULA" ]; then
+    %{groupadd} -r %{daemon_group} > /dev/null 2>&1
+    echo "The group %{daemon_group} has been added to %{group_file}."
+    echo "See the manual chapter \"Running Bacula\" for details."
+fi
+
+%post updatedb
+echo "The database update scripts were installed to %{script_dir}/updatedb"
+%endif
+
+%changelog

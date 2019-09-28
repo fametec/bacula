@@ -1,0 +1,13 @@
+LIBRARY bacula.dll
+EXPORTS
+
+;drivetype.o
+_Z9drivetypePKcPci
+
+;console_command DATA
+;b_plugin_list DATA
+;plugin_bopen DATA
+;plugin_bclose DATA
+;plugin_bwrite DATA
+;plugin_bread DATA
+;plugin_blseek DATA

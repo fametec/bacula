@@ -1,0 +1,2199 @@
+
+               Release Notes for Bacula 9.4.4
+
+Release 9.4.4
+
+This is a bug fix release to 9.4.3.  It includes some fixes that fix
+bad data records in Copy/Migration jobs or problems doing restores
+of Copy/Migration jobs.
+
+28May19
+ - rpm: Fix mysql dependency for bacula-postgresql
+ - Fix bug 2476 -- copy/migration jobs fail when waiting for a new Volume
+ - Add copy-jobspan-label-wait-test to do_all
+ - Add two new regression tests submitted by Martin Simmons for bug 2476
+ - Remove bacula32.def and bacula64.def.
+ - Add Michael Narigon as author for Mac heap implementation
+ - Add tests/restart-jobmedia-test to do_all
+ - Allow to hangup/blowup inside a file for tests
+   slash - fix suggested by vondi
+ - Add db_get_jobmedia_record() function
+ - Check JobMedia validity after an incomplete job
+ - baculum: Fix #2477 escaping backslashes in config in text directive types
+ - baculum: Fix #2474 error 404 if document root path uses link with ending 
+ - baculum: Remove php database extensions dependency from web requirements
+ - baculum: Fix removing path items selected to restore in restore wizard
+ - baculum: Fix clearing restore path field after selecting backup in restore 
+    wizard
+ - baculum: Fix TPhpFatalErrorException exception on job view page with PHP 
+    version lower than 5.5
+
+Bugs fixed/closed since last release:
+2474 2476 2477
+
+
+========================================================================
+Release 9.4.3
+
+This is a bug fix release for version 9.4.2.  It includes a number of bug
+fixes and patches. 
+
+Baculum: there have been significant additions and changes to Baculum.
+If you want a web gui please check it out.
+
+S3 driver: If you are trying to build the S3 drivers, please remember to use the
+community supplied (from Bacula Enterprise) version of libs3.so found at:
+
+https://www.bacula.org/downloads/libs3-20181010.tar.gz
+
+As usual the binaries that correspond to this release will follow in
+a week or two.
+
+If there are no additional major bugs, this will be the last of the 9.4.x
+releases.  The next release will have a number of new features, and will
+require a major database upgrade (don't worry it will be easy -- just
+run update_bacula_tables)
+
+02May19
+ - Fix Window bpipe-fd strncpy programming error
+ - Change mysql my_bool to bool as it was removed from mysql
+ - Improve assert message
+ - examples: move backup-to-cdwriter.txt to move-backup-to-usb.txt
+ - fix memory leak in DIR for copy-job
+ - Skip empty lines when generating the FileSet from a command
+ - Fix creation of bad JobMedia records in Incomplete Job
+ - Add messages for Incomplete Jobs
+ - Fix misplaced cancel check reported by Alain
+ - Change round() to bround() to avoid library definition conflict
+ - rpms: Fix bacula-cloud spec file
+ - rpms: Add bacula-cloud spec file
+ - rpms: Add missing isworm script
+ - Use more appropriate computation for VolIndex when creating restore .bsr
+ - Fix Daemon message "Message repeated X times" count
+ - Fix Carsten's names
+ - Make diff.pl adapt to different install locations
+ - Fix #4598 Display JobIds used in the restore job log
+ - Add smartalloc function to print the owner of a buffer
+ - Avoid to use the same variable name for two different things in the cmd_parser 
+   class
+ - Fix #4433 about 'UPDATE File SET MD5='...' WHERE FileId=0' error when using 
+   SpoolAttributes=no
+ - Fix MaxVolumeBytes accounting after a mount request
+ - Fix verify volume jobs with sparse files
+ - Fix small memory leak with Console runscripts
+ - Add 'prune jobs/files all' command
+ - fix #4383 Sometime SD hangs when TLS and DEDUP are used together
+
+ - baculum: Add status schedule page
+ - baculum: Add status schedule API endpoint
+ - baculum: Fix schedule directives setting
+ - baculum: Update Portuguese translation file
+ - baculum: Fix #2466 add plugin directive support in fileset resource
+ - baculum: Fix updating whole Bacula config at once
+ - baculum: Fix showing validation error if new config is incorrect
+ - baculum: Fix setting multiple config resources at once
+ - baculum: Fix renaming resources
+ - baculum: Add links to resources in job log output
+ - baculum: Update example web server config files and spec file
+ - baculum: Fix list type directives on configure hosts page
+ - baculum: Fix showing messages resource configuration
+ - baculum: Add parent node property to directive list types
+ - baculum: Add capability to define multiple drivetype and fstype directives in 
+   fileset resource
+ - baculum: Fix showing runscript subresource on job pages
+ - baculum: Update new texts in Portuguese translation file
+ - baculum: Add missing texts to translation files reported by Wanderlei Huttel
+ - baculum: Update Portuguese translations
+ - baculum: Fix showing schedule resource configuration on job view and job 
+   history view pages
+ - baculum: Fix returning one line output from bconsole
+ - baculum: Fix restore wizard error when no fileset available for normal user 
+   with limited access
+ - baculum: Add capability to use many ACL Console directives in one config 
+   resource
+ - baculum: Add client ls command to openapi file
+ - baculum: Add text box list control to support directives that can be defined 
+   multiple times in one resource
+ - baculum: Add cancel button to last step new job wizard
+ - baculum: Change PoolType field from text box into combo box
+ - baculum: Fix adding new schedule run directives
+ - baculum: Add support to multiple schedule run directives
+ - baculum: Fix in API part saving job runscript config if RunsWhen=Always
+ - baculum: Fix adding paths to empty include block
+ - baculum: Fix saving job runscript config if RunsWhen=Always
+ - baculum: New create backup job wizard
+ - baculum: Add API endpoint to list files/dirs on client
+
+
+Bugs fixed/closed since last release:
+2466 4383 4433 4598
+
+=======================================================================
+Release 9.4.2
+
+This is a bug fix release for version 9.4.1.  It includes a number of bug
+fixes and patches.  Thanks to the community for your participation.
+9 bug reports were closed.  This version should fix virtually all 
+the problems found on FreeBSD.
+
+If you are trying to build the S3 drivers, please remember to use the
+community supplied (from Bacula Enterprise) version of libs3.so found at:
+
+https://www.bacula.org/downloads/libs3-20181010.tar.gz
+
+04Feb19
+ - Update Windows .def files
+ - Change create_postgresql_database.in script to be more flexible
+ - Implement eliminate verify records in dbcheck bug #2434
+ - Enhance verify-voltocat-test to detect comparing deleted files
+ - Fix bug #2452 VerifyToCatalog reports deleted files as being new
+ - Use correct quoting for a character -- fixes previous patch
+ - Recompile configure.in
+ - Apply Carsten's multiarch patch fixes bug #2437
+ - Apply Carsten's patch for adding CPPFLAGS to tools/gigaslam.c compile
+ - Allow . to terminate sql queries prompts
+ - baculum: Update Baculum API OpenAPI documentation
+ - Fix rwlock_test unittest bug #2449 Only call thr_setconcurrency if it's 
+   available. Fix order of linking and installation.
+ - FixFix spelling errors found by lintian by Carston in bug #2436
+ - Apply chmods from Leo in bug #2445
+ - Add license files LICENSE and LICENSE-FOSS to the regression directory
+ - Display daemon pid in .apiV2 status output
+ - Attempt to ensure that ctest job output gets uploaded
+ - Apply varargs patch from Martin for bug 2443
+ - Apply recv() hide patch from Martin
+ - Fix lz4.c register compilation from bug #2443
+ - dbcheck: Improve error message when trying to prune Path records with BVFS is 
+   used.
+ - Update cdash for version 9.4
+ - Fix bug #2448 bregex and bwild do not accept -l command line option
+ - Partial update copyright year
+ - Fix struct transfer_manager to be class transfer_manager
+ - Print Device xxx requested by DIR disabled only if verbose is enabled in 
+   SD
+ - Add migrate-job-no-resource-test to all-disk-tests
+ - Remove unused berrno call + return
+ - Remove mention of Beta release from ReleaseNotes
+ - Fix #3225 about Migration issue when the Job resource is no longer defined
+ - baculum: Fix restore paths with apostrophe
+ - baculum: Fix data level
+ - Change endblock edit to unsigned -- suggested by Martin Simmons
+ - Update DEPKGS_VERSION
+ - baculum: Adapt Apache configs to version 2.4
+
+Bugs fixed/closed since last release:
+2434 2436 2437 2443 2445 2448 2449 2452 3225
+
+====================================================================
+Release 9.4.1
+
+This is a minor bug fix release for 9.4.0.  It should fix a few of
+the warning messages, but not all, on FreeBSD and Solaris.  More importantly
+The ./configure process now properly detects that libs3 is installed
+on your system.  If you do not want to use the Amazon S3 driver, this
+update is not required.
+
+In addition to this release, I have posted the current source code with
+patches for libs3 to bacula.org. This package is needed if you wish to
+build the S3 driver. You may download it from the following location:
+
+https://www.bacula.org/downloads/libs3-20181010.tar.gz
+
+21Dec18
+ - Remove register attribute on variables as it is not supported by newer C++ 
+   compilers
+ - Fix regression from 9.2 when backporting Enterprise code in bsock code
+ - Add missing default flag so that configure looks for libs3
+
+
+=====================================================================
+Release 9.4.0
+
+This is a major release comprised of more than
+13,000 lines of differences since version 9.2.2.  It has updates to Baculum
+and small number of bug fixes and back ports from Bacula Systems Enterprise
+since version 9.2.2, but primarily it has two new features ...
+
+The main new feature is the addition support for using Amazon S3 (and other
+*identical* S3 providers), and WORM tape cassettes.  Note: Azur, Oracle S3,
+and Goggle S3 are not compatible with Amazon S3.
+
+16Dec18
+ - Add copyright and correct name on stop-restart-test
+ - Fix #4449 about an incorrect pool selected with the restart command
+ - Fix #4386 About incorrect permission on directories after a restore with 
+   replace=ifnewer
+ - Fix bug #4379 certain fields of Media record not reset after Truncate command
+ - Revert "Update bdirjson.c"
+ - Improve volume truncation error messages
+ - Free ids buffer
+ - Update PO files
+ - Initial version and date update
+ - Initial cut of ChangeLog and ReleaseNotes
+ - Add use_dcr_only in cloud_dev.c so that manual truncate works
+ - More Enterprise backports
+ - More Enterprise backports + changes to the backporting
+ - Minor backport from Enterprise + my own changes
+ - Update bdirjson.c
+ - Add pseudo WORM support for vtape
+ - worm: Fix multiple display of the WORM Recycle message
+ - Add first cut cloud drivers
+ - Use bfopen in place of fopen
+ - Fix #3574 Add "clients" option to the "help list" output
+ - Add makedir() in fd_common.h
+ - Add bfile is_plugin_data() API
+ - Fix issue between FO_PORTABLE and FO_PORTABLE_DATA
+   to api
+ - Fix NOATTR detection
+ - Implement worm cassette support
+ - Make detection of duplicate M_SECURITY messages work
+ - Remove unused prototype recv(len)
+ - Add new security monitoring test
+ - Implement new message numbers in stored/block.c
+ - Fix incorrectly indicating: malformed message
+ - Fix bugs #2335 and #2349 Volume messages printed many times
+ - Add new test for bug printing many multiple Max Volume jobs= info
+ - Add worning message about failure to update volume info
+ - Improve error messages when JobMedia errors
+ - Fix complier warning due to unused subroutine variable
+ - Fix bug #2334 seg fault when releasing globals
+ - Security: sleep(5) on error + aggregating identical messages
+ - Update sellist unittests.
+ - Update unittests for lockmgr.c and fix memory leak.
+ - Update unittests fir ConfigFile/ini.c.
+ - Update 'rm -f' for libtool $(RMF).
+ - Correct libs/Makefile.in separator.
+ - Update htable unittests.
+ - Update sha1 unittests.
+ - Add fnmatch unittests.
+ - Update unit tests and add regression tests for it.
+ - Fix escaping special characters in bvfs restore for sqlite catalog
+ - Add new manual test
+ - baculum: Do not store any main oauth2 client nor main http basic user in api 
+   config
+ - Fix tls_bsock_shutdown() compilation when no TLS available.
+ - Fix bsock compilation warning.
+ - Fix bsock compilation problem in *BSD.
+ - Permit negative FileIndex values in the catalog
+ - Fix format string is not a string literal (potentially insecure).
+
+ - baculum: Update Japanese translation files
+ - baculum: Fix availability web config wizard when there is problem with access 
+ - baculum: Add new size directive control
+ - baculum: Fix basic auth user setting in API install wizard
+ - baculum: Fix undefined index error on web config wizard page
+ - baculum: Fix #2418 creating or updating new resource
+ - baculum: Fix size unit formatters in restore browser reported by Wanderlei 
+   Huttel
+ - baculum: Fix logging output if it is not possible to decode to json
+ - baculum: Improve error handling in web part
+ - baculum: Fix formatted size and time values on the volume details page
+ - baculum: Fix saving logs when an error occurs
+ - baculum: API panel and wizard improvements
+ - baculum: Add name field to api client parameters
+
+Bugs fixed/closed since last release:
+2334 2335 2418 3574 4379 4386 4449
+
+====================== Release 9.2.2 ======================
+Release 9.2.2
+
+This is a minor bug fix release (6,143 lines of diff).  The main fixes to
+this version are: eliminate most messages that are repeately printed,
+eliminate malformed message output, error when compiling without TLS, ... 
+
+Note: if you are running MySQL and have not recently executed
+src/cats/update_bacula_tables, please do so.  It will not change your
+database version but it will fix some potential MySQL problems (for more
+detals see the release notes for version 9.2.1).
+
+06Nov18
+ - Fix bug #2421 by Adam about quoting Windows paths in CreateChildProcess()
+ - Update po files
+ - Implement new message numbers in stored/block.c
+ - Fix incorrectly indicating: malformed message
+ - Fix bugs #2335 and #2349 Volume messages printed many times
+ - Add new test for bug printing many multiple Max Volume jobs= info
+ - Fix complier warning due to unused subroutine variable
+ - Fix bug #2334 seg fault when releasing globals
+ - Fix escaping special characters in bvfs restore for sqlite catalog
+ - Fix tls_bsock_shutdown() compilation when no TLS available.
+ - Fix bsock compilation warning.
+ - Fix bsock compilation problem in *BSD.
+ - Add new manual test
+
+ - rpm: Fix mysql dependency for bacula-postgresql
+
+ - baculum: Fix basic auth user setting in API install wizard
+ - baculum: Improve error handling in web part
+ - baculum: Fix formatted size and time values on the volume details page
+ - baculum: Fix undefined index error on web config wizard page
+ - baculum: Fix #2418 creating or updating new resource
+ - baculum: Fix size unit formatters in restore browser reported by Wanderlei 
+   Huttel
+ - baculum: Do not store any main oauth2 client nor main http basic user in api 
+   config
+ - baculum: Update Japanese translation files
+ - baculum: Fix availability web config wizard when there is problem with access 
+   to api
+ - baculum: Add new size directive control
+ - baculum: Fix logging output if it is not possible to decode to json
+ - baculum: Fix saving logs when an error occurs
+ - baculum: API panel and wizard improvements
+ - baculum: Add name field to api client parameters
+
+Bugs fixed/closed since last release:
+2334 2335 2418 2421
+
+
+=======================================================================
+Release 9.2.1
+
+This is a bug fix release. It also contains some refactoring. That said,
+there are 10,909 lines of diff between release 9.2.0 and this release.
+One major improvement is that this release should eliminate the persistent
+problem we have seen with MySQL unhappy with zero DATETIME fields.  If you
+have problems with that, please simply execute the script update_bacula_tables
+found in the <bacula>/src/cats library.  It will modify the table default
+values for DATETIME fields to be friendly to the whims of MySQL and MariaDB.
+
+12Aug18
+ - baculum: Fix saving directives in messages resource
+ - Refactoring of BSOCK and introducing BSOCKCORE.
+ - baculum: Update API documentation
+ - baculum: Add status endpoint to available scopes endpoints
+ - Make print_ls_output identify delete files more clearly
+ - Backport stored/vbackup.c
+ - baculum: Add status director and status storage endpoints
+ - baculum: Add type and level filters to jobs endpoint
+ - baculum: Add support for .api 2 command in bconsole module
+ - Implement a keepalive on bpipe sockets fixes bug #2347
+ - Backport bpipe enhancements
+ - Permit catalog to contain negative FileIndexes
+ - Fix bug #2319 wrong port value stored in bsock giving incorrect error messages
+ - baculum: Add to jobs endpoint filtering by client and clientid
+ - Fix bug #2410 bdirjson output incorrect for day greater than 24
+ - Attempt to avoid MySQL complaints about not allowing zero or empty in DATETIME
+ - Add M_SECURITY when connection is bad + fix bug where invalid probes sent to 
+   Dir
+ - baculum: Fix schedule single day value setting
+ - Fix bug #2286 copied jobs always have level=Incremental
+ - baculum: Fix add slot parameter to label command
+ - baculum: Fix restoring backup from deleted clients
+ - baculum: Fix click action on remove config resource button
+ - baculum: Fix framework validation for active list type controls
+ - baculum: Implement ideas from Wanderlei Huttel
+ - Fix bug 2395 problem with man dir
+ - baculum: Fix saving subresources in config
+ - Start work on HAVE_CLIENT_ONLY install
+ - Switch to using /lib/systemd/system to install service files
+ - Install Bacula systemd files in /etc/systemd/system
+ - baculum: Update Portuguese translations
+ - baculum: Fix group most recent backups option in restore wizard for mysql
+ - Fix bug #2404 uninstall systemd service
+ - Fix warning during compilations of mainwin.cpp
+ - baculum: Implement second part ideas and fixes proposed by Wanderlei Huttel
+ - Update catalog update scripts in updatedb directory
+ - Fix bug #2340. Display of db_driver
+ - Add warning messages for bad or old self-signed certificates
+ - baculum: Fix #2403 error while writing diraddress directive in Bacula config
+ - baculum: Implement ideas and fixes proposed by Wanderlei Huttel
+ - baculum: Update Portuguese translations
+ - baculum: Fix pool does not exist error on pool details page
+ - baculum: Fix create directive base method
+ - rpm: Fix MySQL dependency on bacula-postgresql package
+
+Bugs fixed/closed since last release:
+2410 2389 2286 2319 2340 2347 2357 2403 2404 2405 2395 2392
+
+=====================================================================
+
+Release 9.2.0
+
+This is one of the biggest Bacula release ever made.  It has
+almost 540,000 lines of diff output between Release 9.0.8 and
+this release.
+
+This is a major new release with a new version number. It has been
+very thoroughly tested, but as always, please backup any previous
+version and test this version prior to putting it into production.
+
+For the most part the changes were contributed to the Bacula 
+project by Bacula Systems SA and myself, but there were a number
+of other contributors that I thank.
+
+Database Update
+---------------
+There are no changes required to the catalog database.
+
+Compatibility:
+--------------
+As always, both the Community Director and Storage daemon(s) must be upgraded
+at the same time.  Any File daemon running on the same machine as a Director
+or Storage daemon must be of the same version.
+
+Older File Daemons should be compatible with the 9.2.0 Director and Storage
+daemons.  There should be no need to upgrade older File Daemons.
+
+20Jul18
+ - Separate dequeuing msgs and dequeuing daemon msgs
+ - Replace uint with uint32_t
+ - Reset default status schedule limit to 30
+ - Comment out use of uint that breaks Windows build
+ - Update win32 .def files
+ - Fix concurrent acquire/release of device
+ - Correct copyright
+ - Fix compiler warning generated by prior commit 1aad2088d21a3
+ - Backport Enterprise src/findlib
+ - Backport Enterprise src/filed
+ - Backport Enterprise src/lib
+ - Add debug code for bug #2356
+ - Fix bug #2385 -- compiler bug IMO
+ - fix #3945: Add "ocfs2" to list of filesystems known by "FsType" directive
+ - Backport parts of src/dird to community
+ - Use bstrcmp in place of strcmp
+ - Recompile configure
+ - Update config.guess and config.sub
+ - Fix #3615 about bconsole Socket errors reported in the bacula log file
+ - Fix permissions of mtx-changer.conf
+ - Use /dev/sg0 rather than /dev/sg1 so vtape devices work
+ - Make out of freespace non-fatal for removable devices -- i.e. behaves like 
+   tape
+ - Pull latest tls*.pem from BEE
+ - Fix #3854 missing tls library initialization in bdirjson, bfdjson, bsdjson 
+   and bbconsjson
+ - Fix bug #2212 where restore jobid=nn file=xxx restores the files twice
+ - Apply patch from Wandlei Huttel to add Run Time and suffix to Restored 
+   bytes
+ - Fix bug #2343 where truncate of explicit Volume name truncates non-purged 
+   volumes
+ - Fix some file execute permissions. Fixes bug #2389
+ - Fix license problems in Bug #2382
+ - Apply patch from Leo to fix bug 2192
+ - Fix bad placement of jcr->pool reference as pointed out by Martin Simmons
+ - rpm: Add OpenSuse Leap 42.3
+ - rpm: Update bacula.spec for Fedora 27
+ - Fix #3824 about incorrect setdebug command description
+ - Fix Solaris 10 compilation error on BXATTR when no linkat(2) found.
+ - win32: Fix backup issue with path > 250 char
+ - Fix #3672 about bdirjson issue with the Autochanger directive
+ - Enable build of Windows 64 bit tray monitor
+ - Fix build of Windows tray-monitor
+ - Some changes to configure.in
+ - Update some old copyrights
+ - Update some old copyrights
+ - Fix showing PkiCipher and PkiDigest values in bfdjson output
+ - Fix buffer overrun at BXATTR_Solaris::os_get_xattr_names.
+ - Bring Branch-9.1 up to date with Branch-9.0
+ - Fix #3745 update the client SQL record after a reload
+ - Fix 'grep -m' when '-m' option is not available.
+ - Update the build for ACL/XATTR support.
+ - Add some debugging information to bacl_solaris.
+ - Fix backup ACL/XATTR when fatal error and not only error.
+ - Fix Solaris XATTR support on Solaris 11.
+ - Fix compile error on !HAVE_EXTENDED_ACL
+ - Add some debugging messages.
+ - Fix compilation warning on FreeBSD.
+ - Add command to change the pool of a job and the associated volumes
+ - Fix #3593 VirtualFull will select jobs to consolidate using Job name in 
+   addition to Client/FileSet
+ - Do not increment the device num_writers if the call to dir_update_volume_info() 
+   fails
+ - Add prune option to select volumes from a/all pool(s)
+ - rpm: Add Fedora26-64 platform
+ - Add the RestoreClient directive for Restore job.
+ - Implementaion of .ls command for Plugins.
+ - Use correct SQL table encoding for Postgresql 10.x
+ - Fix Where/Replace parameter displayed in the Restore job summary
+ - use pthread_kill() instead of pthread_cancel() to terminate SD_msg_chan
+ - Recompile configure.in
+ - Recompile configure.in
+ - Correction of my_name_is() function using realpath()
+ - Add a detection of realpath() function to configure.
+ - Fix tray-monitor compilation
+ - Use breaddir() in the tray monitor
+ - file_dev.c: replace readdir_r() wit new breaddir()
+ - new breaddir() function to replace readdir_r() + core update
+ - Fix #3098 Add debug tag 'record' for traces about records in the SD
+ - Fix #1826 Add Job Where and Replace variables to the Restore job summary
+ - Remove tests about "NULL Volume name. This shouldn't happen!!!*
+   options to api restore
+ - Port missing RestoreObject Plugin Config code from BEE.
+ - Enhance "status schedule" function to allow multiple job= and client= filters
+ - Add next_name() function to scan string lists
+ - Fix #1170. Enhance "status schedule" command. Display ordered output, add 
+   Client and FileSet filters.
+ - bvfs: Add clients= option to .bvfs_get_jobids to handle clusters
+ - Add delete client bconsole command
+ - Fix #2910 about a problem in the "status network" command when the client is 
+   not reachable
+ - Fix #1108 Enhance setdebug help command and console completion
+ - baculum: Fix SQL grouping error in restore wizard reported by Rasmus Linden
+ - baculum: Fix cancel button in web config wizard
+ - baculum: Web interface password is no longer stored in settings.conf
+ - baculum: Fix path validator for UTF-8 characters
+ - baculum: Add capability to set maximum numer of jobs visible in tables
+ - baculum: Add prune and purge actions to volume view page
+ - baculum: Fix compatibility with old api for prune and purge actions
+ - baculum: Update Portuguese translations
+ - baculum: Fix catching API exceptions
+ - baculum: Clean up theme Baculum-v1
+ - baculum: Fix initializing new resource page
+ - baculum: Add button to set job log order
+ - baculum: Add manual loading CSS files with versioning
+ - baculum: Move API panel CSS files to separate directory
+ - baculum: Move Web CSS files to separate directory
+ - baculum: Fix not showing 'gui on' command in bconsole output
+ - baculum: Loading table data performance improvements
+ - baculum: Fix sending path load request by enter key
+ - baculum: Add patch to fix gettext class file in framework
+ - baculum: Add htaccess file to framework directory
+ - baculum: Update rpm and deb templates with apache and lighttpd config files
+ - baculum: Update example api endpoints
+ - baculum: Adapt Web and API to new framework version
+ - baculum: Updated PRADO framework to version 4.0.1
+ - baculum: Highlight main menu items for subpages
+ - baculum: API v1 documentation as open API file
+ - baculum: Update Web requests form for the new API v1
+ - baculum: New improved version API v1
+ - baculum: Fix link to job history page
+ - baculum: Fix previous step button in restore wizard
+ - baculum: Enable debug for first config wizard run
+ - baculum: Fix directing to wizard if application config doesn't exist
+ - baculum: Fix opening configuration tabs bug reported by Heitor Faria
+ - baculum: Set curl connection timeout
+ - baculum: Show error message after connection to api test
+ - baculum: Update LICENSE file
+ - baculum: Solve old browser cache problem for javascript after upgrade
+ - baculum: New redesigned web interface
+ - baculum: Changes in api for the redesigned web interface
+ - baculum: Fix saving boolean values in schedule Run directive
+ - baculum: Add link to go back from job configuration window
+ - baculum: Add new volumes required api endpoint
+ - baculum: Add listbox control and use it for base and device directives
+ - baculum: Fix showing verify job fields in job run configuration window
+ - baculum: Revert back volume pool name in volume list window
+ - baculum: Fix error message about disabled bconsole
+ - baculum: API endpoints code refactor
+ - baculum: Add state, number, boolean and id validators
+ - baculum: Return bconsole disabled error if bconsole support isn't enabled
+ - baculum: Remove unused api endpoints
+ - baculum: Fix oauth2 client working in the web part
+ - baculum: Fix auth setting radio buttons alignement
+ - baculum: Enlarge interface height to 100%
+ - baculum: Add more information to cURL error
+ - baculum: Stop using hidden fields to store item identifiers
+ - baculum: Fix redundant loading users portlet
+ - baculum: Add required config fields asterisk mark
+ - baculum: New reworked restore wizard
+ - baculum: Wizards view improvements
+ - baculum: Add restore hardlinks support in api
+ - baculum: Add strip_prefix, add_prefix, add_suffix and regex_where restore 
+ - baculum: Fix link to job history page
+ - baculum: Fix previous step button in restore wizard
+ - baculum: Enable debug for first config wizard run
+ - baculum: Fix directing to wizard if application config doesn't exist
+ - baculum: Fix opening configuration tabs bug reported by Heitor Faria
+ - baculum: Set curl connection timeout
+ - baculum: Show error message after connection to api test
+ - baculum: Update LICENSE file
+ - baculum: Solve old browser cache problem for javascript after upgrade
+ - baculum: New redesigned web interface
+ - baculum: Changes in api for the redesigned web interface
+
+Bugs fixed/closed since last release:
+1108 1170 1826 2212 2343 2356 2382 2385 2389 2910 3098 3593 3615 3672 3745
+3824 3854 3945
+
+
+=======================================================================
+
+Release 9.0.8
+
+This is a minor release that fixes a couple of bugs and corrects
+some copyrights that were not totally correct.
+
+28May18
+ - Fix bug #2212 where restore jobid=nn file=xxx restores the files twice
+ - Pull regression truncate-test from Branch-9.1
+ - Apply patch from Wandlei Huttel to add Run Time and suffix to Restored 
+   bytes
+ - Fix bug #2343 where truncate of explicit Volume name truncates non-purged 
+   volumes
+ - Fix some file execute permissions. Fixes bug #2389
+ - Fix license problems in Bug #2382
+ - Apply patch from Leo to fix bug 2192
+ - Fix bad placement of jcr->pool reference as pointed out by Martin Simmons
+ - rpm: Add OpenSuse Leap 42.3
+ - rpm: Update bacula.spec for Fedora 27
+ - baculum: Fix SQL grouping error in restore wizard reported by Rasmus Linden
+ - Update some old copyrights
+ - baculum: Update Portuguese translations
+ - Remove old Bacula Systems notices
+
+Bugs fixed/closed since last release:
+2212 2320 2349 2354 2379 2382 2383 2330 2054
+2343 2369 2194 2359 2151 2366 2353 2381 2378
+
+
+=======================================================
+
+Release 9.0.7
+
+This is a significant release because it now has the Windows code
+reintegrated and updated to work with this version.  Other than
+Baculum updates and the new Windows update, there is no significant
+change to the other code.  
+
+If you wish to use the Windows 9.0.7 File daemon binaries with 
+your existing 9.0.x Bacula Director and Storage daemon it should
+work fine but has not been tested.
+
+The 64 bit version of the Windows binaries has been installed and
+very quickly tested, as a consequence, please test it carefully before
+putting into production.  There seem to be some minor installation errors
+that are probably related to .conf files.  Also the Windows binaries do
+not yet contain the tray-monitor or the old Exchange plug.  Both currently
+fail to build.
+
+18Apr18
+ - Remove NSIS debug
+ - baculum: Fix opening configuration tabs bug reported by Heitor Faria
+ - Restore win32 dir from Branch-5.2 and update it
+ - Add Phil Stracchino's fix for Qt5
+ - baculum: Fix saving boolean values in schedule Run directive
+ - rpm: Add Fedora26-64 platform
+ - baculum: Add link to go back from job configuration window
+ - Use correct SQL table encoding for Postgresql 10.x
+ - baculum: Add listbox control and use it for base and device directives
+ - baculum: Fix showing verify job fields in job run configuration window
+ - baculum: Revert back volume pool name in volume list window
+ - baculum: Fix error message about disabled bconsole
+ - baculum: API endpoints code refactor
+ - baculum: Add state, number, boolean and id validators
+ - baculum: Return bconsole disabled error if bconsole support isn't enabled
+ - baculum: Remove unused api endpoints
+ - baculum: Fix oauth2 client working in the web part
+ - baculum: Fix auth setting radio buttons alignement
+ - baculum: Enlarge interface height to 100%
+ - baculum: Add more information to cURL error
+ - baculum: New reworked restore wizard
+ - baculum: Wizards view improvements
+ - baculum: Add restore hardlinks support in api
+ - baculum: Add strip_prefix, add_prefix, add_suffix and regex_where restore 
+   options to api restore
+ - Port missing RestoreObject Plugin Config code from BEE.
+ - baculum: Stop using hidden fields to store item identifiers
+ - baculum: Fix redundant loading users portlet
+ - baculum: Add required config fields asterisk mark
+
+Bugs fixed/closed since last release:
+None
+
+
+==============================================================
+
+Release 9.0.6
+
+This is a bug fix and enhancement release. The two major enhancements are
+support for Qt5 in bat and the tray monitor, and support for OpenSSL-1.1.
+There were also a number of nice bug fixes. Thanks to the users who 
+supplied patches for the enhancements and bug fixes. They are much 
+appreciated.
+
+
+19Nov17
+ - Update AUTHORS for recent commits
+ - Remove incorrecly placed openssl-compat.h
+ - Add openssl-compat.h which went in wrong directory
+ - baculum: Add removing single resource
+ - baculum: Add module to check resource dependencies
+ - baculum: Fix saving names with spaces inside schedule Run directive
+ - baculum: Fix saving entire config by api request
+ - Backout vol size tests in previous attempt to fix bug #2349
+ - Fix compiler warning in previous patch
+ - Apply patches from bugs #2325 and #2326 to fix FIFO bugs
+ - Fix bug #2315 INTEGER misspelled in update_sqlite3_tables.in
+ - Try to fix bug #2349 multiple recycle messages
+ - Add support for items with comma in ini_store_alist_str()
+ - Fix segfault after the reload of an incorrect configuration
+ - Add temporary fix to avoid a deadlock after a reload command on an incorrect 
+   configuration
+ - baculum: Throw 404 error if service not known
+ - Fix race condition between setip and the access to CLIENT::address()
+ - Fix #3284 about Client address not reloaded properly
+ - baculum: Use home page url when an error is shown
+ - Fix bug #2346 Dir blocks when max reloads reached
+ - baculum: Send config to api server as json
+ - Remove enterprise code that breaks Mac install -- fixes bug #2351
+ - Correct FS size calculation for FreeBSD, Solaris, and Windows
+ - baculum: Enable Portuguese language support in makefile
+ - baculum: Fix required directives in schedule resource configuration
+ - baculum: Fix saving messages resource
+ - baculum: Improve slow reloading config resource list
+ - crypto: remove most of OpenSSL initcallbacks for 1.1
+ - Update ACL/XATTR code and define new ACL/XATTR API for Plugins.
+ - baculum: Fix numeric password setting bug reported by Heitor Faria
+ - crypto: convert EVP_PKEY access and remainings bits for OpenSSL 1.1
+ - crypto: convert EVP_MD_CTX + EVP_CIPHER_CTX to OpenSSL 1.1
+ - crypto: Use DEFINE_STACK_OF()
+ - crypto: Add a tiny OpenSSL compat level
+ - crypto: remove support for ancient openssl
+ - fix #3269 obey the user choice of "Are you sure you want to delete X JobIds
+ - Add restore wizard to the tray monitor.
+ - Preparation fixes: remove some warning
+ - Add ASSERTD() to track NULL Volume name error
+ - Add "noautoparent" restore command option to disable the automatic parent 
+  directory selection
+ - Make qt-console compatible to Qt5 (Qt4 still work)
+
+Bugs fixed/closed since last release:
+2315 2325 2346 2349 2351
+
+
+======================================================================
+
+Release 9.0.5
+
+This is an important bug fix release.  In particular it fixes the cases
+where Bacula would print a very large number of error messages. Additional
+backported code from Bacula Enterprise is included as well as updates to
+the rpm scripts.  A number of minor Baculum issues have also been
+corrected.
+
+01Nov17
+ - Use if exists on dropping MAC table in postgres. Fixes bug #2314
+ - Fix bdirjson display of Minutes. Fixes bug #2318
+ - baculum: Set default language if no language set
+ - baculum: Fix language setting in api
+ - baculum: Update generated .mo files for api
+ - baculum: Add missing texts to translations
+ - baculum: Fix add to translation static texts on the api default page
+ - baculum: Fix missing session start
+ - Make verify job log same as other logs -- fixes bug #2328
+ - Take a more conservative approach for setting killable true
+ - Add extra safety for readdir buffer
+
+31Oct17
+ - Retab systemd/Makefile.in
+ - Don't require mount for @piddir@
+ - Use Debian systemd start/stop scripts supplied by Sven Hartge
+
+29Oct17
+ - Fix bug #2316 add CacheRetention to Pool
+ - Skip tape ioctls on FreeBSD when using a FIFO fixes bug #2324
+ - Fix bug #2338 to not truncate already truncated volumes
+ - Remove some old C int code and use bool
+
+28Oct17
+ - Remove unused lib/lz4.c.orig file
+ - Update AUTHORS file
+ - Mark Volume read-only only if no access rights or read-only partition
+ - Add -P daemon option to supress creating PID file
+ - Fix too big copy to test FD plugin_ctx
+
+26Oct17
+ - Backport Enterprise code
+
+23Oct17
+ - When read-only volume found mark it in catalog -- fixes bug #2337
+ - Make out of space on partition fatal
+ - Fix bug 2323 -- loop exit condition was backward and add error message
+ - Add missing copy-plugin-confs for regress
+ - Fix bug reported by jesper@schmitz.computer where bat hangs on FreeBSD
+
+08Oct17
+ - baculum: Fix reading and writing schedule resource
+
+15Sep17
+ - baculum: Fix undefined offset error during saving director config
+ - baculum: Fix listing days of week in schedule setting
+
+14Sep17
+ - baculum: Fix saving schedule run directive value
+
+12Sep17
+ - rpm: Add missing script baculabackupreport and query.sql for Suse
+ - rpm: Add missing libbacsd* file and tapealert script to Suse rpm spec file
+ - rpm: Add missing libs bbconsjson, bdirjson and bsdjson to Suse rpm spec 
+  file
+ - rpm: Add aligned plugin rpm spec file for Suse
+ - rpm: Add bacula-tray-monitor.desktop launcher in scripts directory
+ - rpm: Add Suse Linux ES 12.1 platform
+
+11Sep17
+ - rpm: Add bacula-tray-monitor.desktop file in script dir
+
+Bugs fixed/closed since last release:
+2314 2316 2318 2324 2328 2337 2338
+
+=================================================================
+Release 9.0.4
+This is a minor bug fix release. The main fix in this release
+is to allow SQLite3 to work.
+
+Please note: SQLite3 has been depreciated for a long time. If the
+community will step forward (as it did in this case) and prepare
+the appropriate make_sqlite3_tables and update_sqlite3_tables files,
+we can continue to leave the SQLite3 code in Bacula.  However, we
+strongly urge users to update to MySQL, MariaDB, and PostgreSQL,
+which are our supported SQL databases.
+
+06Sep17
+ - Update po files
+ - Fix SQLite3 upgrade tables script fixes bug #2306
+ - baculum: Fix language setting in config file
+ - Upgrade to latest lz4.c to fix bug #2310 bus error on 64 bit Solaris
+ - Recompile configure.in
+ - Ensure systemd/bacula.conf is created by configure fixed bug #2307
+ - Fix compiler warning noted in bug #2309
+ - Fix SQLite3 Version bug #2305
+ - Remove unused variable to elimiate compiler warning
+ - Recompile configure.in
+ - Fix #2925 Do not try to stop non backup jobs (virtualfull, copy, migration, 
+  restore, etc...)
+ - baculum: Fix broken symbolic links for lang files
+ - don't use add_event() when flag "l" is not set
+ - core: bwlimit measure bandwidth
+ - core: bwlimit handle backlog and allow burst
+ - Do not purge running jobs in autoprune
+
+Bugs fixed/closed since last release:
+2305 2306 2307 2309 2310 2925
+
+==================================================================
+Release 9.0.3
+
+This is a minor bug fix release.
+
+08Aug17
+ - baculum: Fix access denied error on api install wizard page
+ - baculum: Remove assigning to api host when user is deleted
+ - baculum: Fix empty admin setting
+ - baculum: Add ability to assign host to specific user
+ - baculum: Fix bconsole test connection for new api host that works with new 
+   director
+ - baculum: Fix sqlite db support
+ - Fix bug #2301 Solaris Available space incorrectly reported by turning off the 
+   output for Solaris
+ - Fix bug #2300 mount/unmount/release of single tape drive does not work
+ - baculum: Fix bconsole connection test in config wizard
+ - baculum: Fix writing config for schedule and message names with space
+ - bpipe: Fix compiler warning
+ - baculum: Fix drag & drop file version elements
+ - baculum: Add fileset info endpoint and use it in restore wizard
+ - baculum: Use client name instead of clientid and start using fileset to 
+   prepare restore tree
+ - baculum: Remove fileset parameter from run restore
+ - baculum: Fix lstat regex pattern
+ - baculum: Get the most recent jobs by client and fileset or by clientid and 
+   filesetid
+ - Fix: bug #3048: jobs are stuck in endless loop in reserve.c
+ - Add total time to test.out file
+ - baculum: Add restore job selection in restore job wizard
+ - Enhance verify job report from bug 2249
+
+Bugs fixed/closed since last release:
+2300 2301 3048
+
+
+===============================================================
+
+This is a minor bug fix release, but a few of the bugs are important.
+The main items fixed are:
+
+- Postgresql should now work with Postgresql prior to 9.0
+  Note: the ssl connection feature added in 9.0 is not available on
+  postgresql servers older than 9.0 (it needs the new connection API).
+- The issues with MariaDB (reconnect variable) are now fixed
+- The problem of the btape "test" command finding a wrong number
+  of files in the append test was a bug.  It is now fixed.  It is
+  unlikely that it affected anything but btape.
+- The bacula-tray-monitor.deskop script is released in the scripts
+  directory.
+- We recommend that you build with libz and lzo library support (the
+  developer packages must be installed when building, and the shared 
+  object libraries must be installed at run time).  However we have
+  modified the code so that Bacula *should* build and run with either
+  or both libz or lzo absent.
+
+23Jul17
+ - Use Bacula in place of Libz variables so we can build with/without
+   libz and lzo
+ - Apply ideas from bug #2255 prettier status slots output
+ - Configure and install bacula-tray-monitor.desktop
+ - Fix btape test which counted files incorrectly on EOT
+ - Fix bug #2296 where Bacula would not compile with postgres 8 or older
+ - Fix bug #2294 Bacula does not build with MariaDB 10.2
+ - baculum: Fix multiple directors support
+ - baculum: Fix showing errors from the API
+
+Bugs fixed/closed since last release:
+2255 2294 2296
+
+
+==================================================================
+
+Release 9.0.1 12Jul17:
+
+This is a minor bug fix release that mainly to include the new
+tray-monitor files that were omitted. The tray-monitor now builds
+and runs at least on Ubuntu Linux.
+
+12Jul17
+ - Remove two incorrect trailing commas in bsock.h
+ - Fix bug #2293 bad big endian detection in lz4.c
+ - Add new tray-monitor files that were omitted in the backport from Enterprise
+ - bvfs: Do not insert deleted directories in PathVisibility table
+ - Fix compilation for Debian Stretch with GCC 6.3
+
+Bugs fixed/closed since last release:
+2293
+
+========
+
+This is either the biggest Bacula release ever made or one of the
+biggest ones. Even without the new Aligned Volumes source code, which
+is substantial, there are over 400,000 lines of diff output between
+Release 7.4.7 and the release of 9.0.0
+
+This is a major new release with a new version number. It has been
+very thoroughly tested, but as always, please backup any previous
+version and test this version prior to putting it into production.
+
+For the most part the changes were contributed to the Bacula 
+project by Bacula Systems SA and myself, but there were a number
+of other contributors that I thank.
+
+Database Update
+---------------
+This version of Bacula requires a database update.  So either you or the
+installation process must apply the update_bacula_tables script.  As a
+precaution, please do a database dump or run your nightly database backup
+prior to running the update script.
+
+Compatibility:
+--------------
+As always, both the Community Director and Storage daemon(s) must be upgraded
+at the same time.  Any File daemon running on the same machine as a Director
+or Storage daemon must be of the same version.
+
+Older File Daemons should be compatible with the 9.0.0 Director and Storage
+daemons.  There should be no need to upgrade older File Daemons.
+
+Packagers:
+---------
+There are a good number of new binaries (e.g.  bbconsjson, bdirjson,
+bfdjson, and bsdjson) to install; a new tapealert script file that should
+be installed; and some new shared objects (e.g.  libbacsd).  The
+dvd-handler script has been removed.  Note also to run the
+update_bacula_tables script after having dumped the catalog to bring any
+existing catalog up to the new version needed for Bacula 9.0.0.
+
+New Features:
+-------------
+Please see the New Features chapter of the manual for documentation on
+the new features.  The new features are currently only in the New Features
+chapter and have not yet been integrated into the main chapters of the
+manual.
+
+New Features (summary):
+-----------------------
+
+ - Major rewrite of the Storage daemon to: put all drivers in class 
+   structures, provide better separation of core/driver code, add new 
+   drivers (aligned volumes, cloud), simplifies core code, allows loadable
+   device drivers much like plugins but which are better integrated into
+   the SD.
+ - There are a number of new Bacula Systems whitepapers available on
+   www.bacula.org, and a few more will be coming in the next few months.
+ - New unique message id will be added to every message (designed but
+   not yet implemented).
+
+Core Features:
+ - Implement a drive usage counter to do round robin drive assignment
+ - Enhance functionality of TapeAlert
+ - Implement a "Perpetual Virtual Full" feature that creates a Virtual Full backup
+   that is updated every day
+ - Increase Director's default "Maximum Concurrent Jobs" setting from 1 to 20
+ - Add "PluginDirectory" by default in bacula-sd.conf and bacula-fd.conf
+ - Add support for terabytes in sizes. Submitted by Wanderlei Huttel.
+ - Restore mtime & atime for symlinks
+ - New "status network" command to test the connection and the bandwidth
+   between a Client and a Storage Daemon
+ - New Tape Alert tracking
+ - Loadable SD device drivers
+ - PostgeSQL SSL connections permitted
+ - JobStatistics improved
+ - DB update required
+ - Autochanger improvements to group Devices
+ - Improved .estimate command
+ - Comm line compression
+ - Separate bxxjson programs for Console, Dir, FD, SD to output .conf contents
+   in Json for easier reading with programs
+ - Read Only storage devices
+
+
+Bconsole Features:
+ - Add "ExpiresIn" field in list and llist media output
+ - Add command to change the priority of a running job (update jobid=xxx priority=yyy)
+ - Add level= and jobtype= parameters to the "list jobs" command
+ - Add option to bconsole to list and select a specific Console
+ - Add shortcut to RunScript console commands. Submitted by Wanderlei Huttel. 
+ - Display "IgnoreFileSetChanges" in show fileset command (#2107)
+ - Display PrefixLinks in "show job" output
+ - Display permission bits in .bvfs_decode
+ - Display the Comment field in "llist job" command
+ - Add "ActionOnPurge" field to "llist pool" command. Fix #2487
+ - Add "long" keyword to list command, ie "list long job". This is 
+   essentially an alias fo the "llist" command.
+ - Modify the "setbandwidth" limit parameter to accept speed input. ex: limit=10kb/s
+ - Modify the "setbandwidth" limit parameter so that the default 
+   is no longer kb/s but b/s. 
+ - Do not show disabled resources in selection list
+ - Fix bconsole readline and "dumb" terminal handling of CTRL-C
+ - Add the priority field to the .api 2 job listing output
+ - Improved restricted consoles when accessing catalog.
+ 
+Misc Features:
+ - New Tray Monitor program
+ - Client Initiated Backups
+ - Many performance enhancements
+ - Bandwidth limitation timing improved
+ - Global resource variables are not lost during a reload command
+ - Add -w option to btape to specify a working directory
+ - Enhance bls -D/-F help message
+ - The "list" command now filters the results using the current Console ACLs
+ - The WhereACL is now verified after the restore menu
+
+
+02Jul17
+ - Skip verify-data-test if not running Linux
+ - Skip lzo-test if lzo not in Bacula
+ - Remove double define HAVE_LZO in config.h
+ - Add documentation on baculabackupreport to delete_catalog_backup.in
+ - Install baculabackupreport and ignore script without .in
+ - Recompile configure.in
+ - Add Bill's baculabackupreport script
+ - Update po files
+ - Fix error in FreeBSD during maxtime-test
+ - Fix #2853 About character substitution for "virtual full" job level in 
+   RunAfterJob
+ - Attempt to fix timing problem with console-dotcmd-test on FreeBSD
+ - Ensure we have a DIR connection in dequeue_messages
+ - Add more debug to regress for FreeBSD failures
+ - Fix #2940 Allow specific Director job code in WriteBootstrap directive
+ - Fix pragma pack to allow lz4.c work on Solaris and other machines
+ - baculum: Fix working logout button
+ - A more correct fix for lz4.c on Solaris 10
+ - Remove use of #pragma pack in lib/lz4.c for Solaris 10
+ - Recompile configure from configure.in
+ - Detect Solaris 10
+ - Fix bug #2289 version 7.9 not compatible with old FDs -- comm compression
+ - Make getmsg.c compatible with old FDs
+ - Use one MAX_BLOCK_SIZE and set to 20M
+ - rpm: Add Fedora 25 build platform
+ - Remove vestiges of crc32_bad -- fixes Solaris build
+ - Fix #2890 about segfault in .status command on Redhat 5 32bit
+ - Add missing semi-colon in bsys.c
+ - baculum: Fix incorrect table name error during restore start
+ - Display the correct address in lockdump for db_lock()
+ - Fix getmsg to handle additional forms of Progress messages
+ - baculum: Fix double assets and runtime symbolic links in baculum-web deb 
+   package
+ - baculum: Fix missing php-xml dependency in deb metafile
+ - baculum: Improve errors handling in API restore pages
+ - rpm: Remove libbacsd.la for both Red Hat and Suse
+ - rpm: Add missing libs bbconsjson, bdirjson and bsdjson
+ - rpm: Fix libstdc++ version in BAT spec file
+ - Fix some problems noted by clang
+ - baculum: Reorganize run job code
+ - baculum: Reorganize estimate job code
+ - baculum: Make get method definition not obligatory
+ - Make file-span-vol-test portable
+ - Attempt to fix deadlock in FreeBSD maxtime-test
+ - Do not produce error if MySQL database exists in create_mysql_database
+ - rpm: Add missing tapealert script
+ - rpm: Add missing libbacsd
+ - rpm: Remove dvd-handler script
+ - Fix bvfs queries
+ - Use FileId in place of Filename
+ - Revert "Put FilenameId in .bvfs_lsfiles output"
+ - Put FilenameId in .bvfs_lsfiles output
+ - Add more debug in src/cats/bvfs.c
+ - Fix bvfs_lsdirs and bvfs_lsfiles
+ - baculum: Add Japanese language support in deb and rpm packages
+ - Add DirectoryACL directive
+ - baculum: New Baculum API and Baculum Web
+ - Add forking info to LICENSE and LICENSE-FAQ
+ - Minor improvement to error message
+ - Fix race in steal_device_lock shown in truncate-concurrent-test
+ - Apply Marcin's fix for 6th week of the month
+ - Add new truncate test
+ - Retab Makefile.in in platforms/systemd.in
+ - Fix compiler warning
+ - Add FD backwards compatibility
+ - Fix regression minor scripting problems
+ - Fix #2807 about an issue with the show command when using incorrectly JobToVerify 
+   directive
+ - Fix #2806 about the director service started before the database with systemd
+ - Update Dart control files
+ - Massive (70,000+ lines) backport of code from Bacula Enterprise 8.8.
+   See next line ...
+ - Adapt update_bacula_tables scripts for catalog version 15
+ - Allow to use Base directive in a JobDefs
+ - Add more debug to the bpipe plugin
+ - Enhance error message when packets are too big
+ - Add '.storage unique' bconsole command
+ - Allow to use ".jobs type=!B" to display specific job type
+ - Add lockdump storage daemon information
+ - Fix #2698 Display loaded driver list in status storage output
+ - Fix autochanger unload message that contains sometime an incorrect volume name
+ - Fix issue with open_bpipe() function that may flush stdio buffer if the 
+   command is incorrect
+ - Fix unload tape messages to print correct volume + improve output format
+ - Fix unload/re-load same volume
+ - Fix DIR get unexpected "Connection reset by peer" for FD
+ - Fix #2548 about SQL connection leak with RunScript::Console commands
+ - Fix #2588 about segfault in bdirjson with JobDefs/Base directive
+ - Fix #2593 about incomplete jobs incorrectly rescheduled
+ - Fix #2629 about pool argument not listed in the "help cloud" output
+ - Fix #2632 about VolType not set correctly for Cloud volumes after a label problem
+ - Fix #2640 about a reference to the source directory in query.sql file
+ - Fix bug #2271 where poll interval causes tape mount message to repeat
+ - Fix segfault in bdirjson with incorrect configuration files
+
+Bugs fixed/closed since last release:
+2271 2548 2563 2567 2588 2593 2602 2624 2625 2627 2629 2632 2638 2640 2646
+2698 2520 2559 2561 2582 2806 2807 2890 2289 2890 2853 2940
+
+======================================================================
+=======================================================================
+
+Release Version 7.4.7
+
+This is a minor bug fix release, which hopefully corrects a seg fault
+on OpenBSD due to the new ACL/XATTR code, and it also fixes most build
+problems on Solaris 10 as well as EPROTO on OpenBSD.
+
+There is one minor new feature that allows you to specify the query
+item number on the bconsole query command line.
+
+15Mar17
+ - Permit specifying query item number on bconsole query command line
+ - Fix Solaris 10 problems reported by Phil Stracchino
+ - Fix EPROTO on OpenBSD
+
+=====================================================
+
+Release Version 7.4.6
+
+This is a bug fix release, which hopefully corrects a seg fault on OpenBSD
+due to the new ACL/XATTR code, and it also fixes the large number of tape
+mount messages that are repeated at 5 minute intervals due to a bug in the
+poll code. Various small fixes for FreeBSD.
+
+Please note, the signature hash files (.sig) for the source code was
+previously SHA1.  For this and future releases we have changed it to be
+SHA256.
+
+10Mar17
+ - Fix bug #2271 where poll interval causes tape mount message to repeat
+ - Attempt to fix IPV6 not configured
+ - Possible fix for acl seg fault on OpenBSD where no acl code defined
+ - Change release digest from SHA1 to SHA256
+ - Fix getnameinfo() for FreeBSD fixes bug #2083
+
+Bugs fixed/closed since last release:
+2083 2271
+
+=====================================================
+
+Release version 7.4.5
+
+This is a minor bug fix plus a significant total rewrite of the
+ACL and XATTR code by Radoslaw Korzeniewski.
+
+07Feb17
+ - Correct wrong word in message
+ - Remove restriction on using the scratch pool that can 
+   cause restore failures
+ - Remove debug code that breaks btape fill
+ - Initialize freespace_mutex fixes bug 2207
+ - baculum: Update AUTHORS file
+ - baculum: Enable Japanese language on web interface
+ - baculum: Implement Japanese language support
+ - XACL - refactoring an ACL and XATTR codes.
+ - Revert "Warn of Storage Daemon version incompatibility if 
+   label fails. Bug #2193"
+ - Make another attempt to resolve bug #2176
+ - Warn of Storage Daemon version incompatibility if label fails. Bug #2193
+ - Apply patch to list more pool info from bug #2202
+ - Fix status alignment output reported by Wanderlei Huttel
+
+
+
+Release version 7.4.4
+
+This is a bug fix release.
+
+20Sep16
+ - Fix #2085 About director segfault in cram-md5 function
+ - Attempt to fix bug #2237
+ - Recompile configure.in
+ - Fix systemd installation
+ - If using readline reset terminal at bconsole exit
+ - Fix compilation without SMARTALLOC
+ - Fix #2060 about SQL false error message with "update volume fromallpools" 
+   command
+ - Fix spurious MD5 update errors when nothing changed should fix bug #2237 and 
+   others
+ - Fix small memory leak with the restart command
+ - baculum: Update language files
+ - Fix #335 Avoid backups going to the scratch pool
+ - systemd: Give 3mins to the bacula-sd service to stop and close the dde
+ - Minor modifications to Ubuntu packaging
+ - Check if the ScratchPool points to the current Pool and print a warning 
+   message in such case
+ - Fix #1968 print the ScratchPool name instead of just 'Scratch'
+ - Display PrefixLinks in "show job" output
+ - Add explicit LL to big integers to appease older compilers
+ - Enable the plugin directory for the FileDaemon by default
+ - Allow multiple mailcommand+operatorcommand in Messages. Fixes bug #2222
+ - Handle NULL pointers in smartdump() and asciidump()
+ - Modify status to include Admin and Restore in Level field -- clearer
+ - Ensure that zero JobMedias are written for labelling
+ - Fix error message about the stream 26 (PLUGIN_NAME) in bextract
+
+Bugs fixed/closed since last release:
+1968 2060 2085 2222 2237 335
+
+
+
+Release version 7.4.3
+
+This is a bug fix release. Most importantly, it fixes the new
+GCC 6.0 aggressive compiler behavior that elides (deletes) code 
+written by the Bacula developers.  There is no benefit to the
+new GCC agressive optimization and it breaks a lot of programs
+including Bacula.  This problem showed up on ArchLinux and Fedora 24.
+
+17Jul16
+ - Add LICENSE and LICENSE-FOSS files to the documentation
+ - Add shortcut to RunScript console commands. Submitted by Wanderlei Huttel. 
+   Fixes bug #2224
+ - Fail when multiple mailcommand and other strings are specified in .conf. Fixes 
+   bug #2222
+ - Add support for terabytes in sizes. Submitted by Wanderlei Huttel. Fixes bug 
+   #2223
+ - Add error message for truncate command when actiononpurge not set. Fixes bug 
+   #2221
+ - Fix optimization error with GCC 6.1
+ - Fix compilation warnings with GCC 6.1
+ - Explicitly create MySQL user in grant_mysql_privileges.in
+
+Bugs fixed/closed since last release:
+2221 2222 2223 2224
+
+New feature:
+  - There are two new Director directives that simplify doing
+    console commands rather than using RunScripts.  They are
+      ConsoleRunBeforeJob = "console-command"
+      ConsoleRunAfterJob = "console-command"
+
+
+===========================================================
+
+Release version 7.4.2
+
+This is an important bug fix release to version 7.4.1 mainly
+fixes detection of MySQL 5.7 (as found in Ubuntu 16.04).  Certain bug
+fixes contributed by Bacula Systems.
+
+06Jul16
+ - Fix #1926 about wrong duplicate job detection with Copy/Migration and
+   Backup jobs
+ - Recompile configure after db.m4 change
+ - Fix batch insert for MySQL 5.7
+ - Fix zero level debug output -- now at 100
+ - Fix #766 about Job logs displayed with unneeded linefeed
+ - Fix #1902 about a segfault with the "cancel inactive" command
+ - Fix bug where MySQL 5.7 is improperly linked on Ubuntu 16.04
+
+Bugs fixed/closed since last release:
+1902 1926 766
+
+
+=================================================
+
+Release version 7.4.1
+
+This is a minor bug fix release to version 7.4.0.  Most of the
+fixes have been kindly contributed by Bacula Systems SA.
+
+31May16
+ - Fix bug #1849 MySQL does not accept 0 for DATETIME default
+ - Modify the alist object to be reused after a destroy()
+ - baculum: Fix setting invalid timezone value for PHP
+ - Fix compilation for AIX
+ - Fix the restore termination string in the job report to take in account 
+   JobErrors and SDErrors
+ - baculum: Show jobs for client
+ - Fix bconsole "llist job=<xxxx>" output
+ - Fix #146 about update volume command line usage
+ - bat: Fix #1066 about bad update pool command
+ - Fix #1653 about make_catalog_backup default user name
+ - baculum: Show jobs stored on volume
+ - Fix update Volume=x Slot=nn when Slot > MaxVols
+ - Set exit code for create_postgresql_database.in
+ - Fix bug #2197 -- build failure with --disable-libtool
+ - Fix bug #2204 -- superfluous END-OF-DATA in update_mysql_tables.in
+ - Convert a Migration job with errors into a Copy job
+ - Remove exporting add_mtab_item -- fixes bug #2198
+ - Fix possible problem of show multiple resources
+ - Comment out tools/smtp-orig.c as it is for reference only
+
+Bugs fixed/closed since last release:
+1066 146 1653 1849 2197 2198 2204
+
+=======================
+Release version 7.4.0
+
+For the most part the changes were contributed to the Bacula 
+project by Bacula Systems SA.
+
+This is a new release with a new version number. It has been
+very thoroughly tested, but as always, the new features may not
+always work as expected.
+
+The Catalog database format has not changed since version the
+prior release (7.2.0).
+
+Compatibility:
+--------------
+As always, both the Community Director and Storage daemon(s) must be upgraded
+at the same time.  Any File daemon running on the same machine as a Director
+or Storage daemon must be of the same version.
+
+Older File Daemons should be compatible with the 7.4.0 Director and Storage
+daemons.  There should be no need to upgrade older File Daemons.
+
+New features and changes:
+Please see the New Features chapter of the manual for documentation on
+the new features.  The new features are currently only in the New Features
+chapter and have not yet been integrated into the main chapters of the
+manual.
+
+New Features and changes summary:
+- Support for KFREEBSD OS
+- Improved support for Clang
+- Configure SSL connection to MySQL
+- New chio-changer-freebase in examples/autochangers
+  New directives in bacula-dir.conf in Catalog{} resource
+     for the MySQL backend (not currently implemented for
+     Postgresql or SQLite).
+   dbsslkey
+   dbsslcert
+   dbsslca
+   dbsslcapath
+   dbsslcipher
+- examples/autochangers/rc-chio-changer removed
+- examples/devices/DVD.conf removed
+- updated copyrights
+- Add "Expires in" to list and llist volumes
+- Implement a more efficient Volume selection algorithm between DIR and SD
+- Implement new list/llist command keywords:
+   order=asc|ascending
+   order=desc|descending
+   limit=nn
+   jobstatus=
+   Client=
+   JobErrors
+- Implement new bconsole @tall command that outputs input and
+  output to console and terminal.  Note, this also outputs 
+  bconsole input commands.
+- Implement MaxVirtualFullInterval
+- Implement VirtualFullPool override
+- Pool overrides work better
+- Automatic selection of catalog from client where possible.
+- Implement VerifyData level type for Verify jobs.
+
+
+More detailed changes:
+
+14Jan16
+ - Implement MaxVirtualFullInterval
+ - Update AUTHORS
+ - Ensure relabel has latest vol info may fix bug #1412
+ - Change license as per agreement with FSFE
+ - Apply Carsten's patch that fixes bug #2192 builds on kfreebsd
+ - baculum: Enable Portuguese language on web interface
+ - baculum: Implement Portuguese language support
+ - baculum: Assign Baculum copyright to Kern Sibbald
+ - baculum: Fix sorting in restore by group most recent backups
+ - baculum: Fix restore group most recent backups for MySQL
+ - Fix FD DisableCommands
+ - baculum: Fix to change user password
+ - Add ExpiresIn field in list and llist media output
+ - Fix #1548 about Solaris SIGBUS with accurate mode backup
+ - Backport more Enterprise code to sql_list.c
+ - Add info message of #jobs consolidated in Virtual Full
+ - baculum: Unify user validation
+ - Add HasBase+Comment to llist Jobs
+ - Fix seg fault in btape fixes bug #2180
+ - Fix slight error in autoprune -- should fix bug #2151
+ - baculum: Add first unit tests
+ - Fix #1545 about fix in manual_prune.pl script with large number of volumes
+ - Fix false status output. Fixes bug #2103
+ - Integrate patch into latest version, which fixes bug #1882
+ - Fix bug #2090 correct detection of GCC
+ - Fix CLANG warning messages -- fixes bug #2090
+ - Add new chio-changer-freebase from bug #2115
+ - Applied modified patch from bug#2117 to fix bpipe end of stream
+ - Apply patch from bug #2165 to fix the update sqlite3 script
+ - Fix update MD5 failure bug reported by Peter Keller
+ - baculum: Add dashboard panel
+ - Patch to add MySQL ssl access
+ - Manually apply patch in bug #2156 to allow building on KFreeBSD
+ - Fix bug #2153 with patch submitted by Ana Arruda
+ - baculum: Switch to started job status just after job start
+ - baculum: Add possibility to open configuration windows from URL
+ - Fix restore when storage specified on command line
+ - Fix restore of Windows streams to non-Windows machines
+ - Implement level=Data to the Verify job
+ - Fix #1524 about bextract trace file location
+ - Fix truncate bug free_volume problem
+ - baculum: Remember sort order for data grids
+ - baculum: Improve size formatter precision
+ - baculum: Fix jobs count in job list
+ - baculum: Add jobbytes and jobfiles columns in job list
+ - baculum: Get system timezone for PHP if possible
+ - baculum: Fix restore when a lot of jobids given
+ - baculum: Set default job attributes (level, client, fileset, pool, storage, 
+  priority) in Run job panel
+ - Fix truncate race bug #1382
+ - baculum: Fix update pool action when no volumes in pool
+ - baculum: Split configuration windows into two tabs: actions and console
+ - baculum: Change default elements limit to 500 elements
+ - baculum: Add drive parameter to bconsole release command execution
+ - Fix #1470 Fix setdebug command when all components are selected
+ - baculum: Fix expectation failed error during restore
+ - Add new JOB_DBR field
+ - #ifdef out bpluginfo since it does not compile
+ - Fix #1449 about a FileDaemon segfault with the fstype option
+ - Remove vestiges of rechdr_queue hopefully fixes bug #2180
+ - Apply bconsole manpage patch from bug #2182
+ - Apply ppc64el configure detection patch from bug #2183
+ - Fix #1414 When the FD is down, status dir now prints "is waiting for Client 
+  xx-fd"
+ - Implement new options in list command
+ - Add @tall command to log both input/output in a log file
+ - Fix #1360 about bextract -t not documented in the man page
+ - Update spec file for latest OSX versions
+ - Fix compilation on MacOS
+ - Improve Jmsg in response(), display SIGNAL number when appropriate
+ - Avoid segfault in dump_block() when the block_len is invalid
+ - Fix #1368 about xattr error not displayed correctly at restore time
+ - Fix bug 2173 QT tray monitor can not be built due to missing files in configure
+ - Move plugin_free() in free_jcr()
+ - Fix bug #2083 -- Fix sockaddr_to_ascii for FreeBSD
+ - Fix fadvise bug found by Robert Heinzmann
+ - Fix compilation without zlib and lzo
+ - Fix compilation error with new fstype_cmp() function
+ - Fix compilation problem with AFS
+ - Fix compilation on Solaris/FreeBSD
+ - Fix segfault in open_bpipe() when the program is empty
+ - Modify find_next_volume_for_append() to not send the same volume twice
+ - Avoid <NULL> string displayed in restore menu
+ - Do not update state file after a bacula-xxx -t
+ - Fix #804 about misleading message with the purge command
+ - Fix automount feature after a label command
+ - Reinsert tabs in systemd Makefile.in
+ - baculum: Provide LICENSE-FOSS file content in Baculum deb packages (copyright 
+  file)
+ - Use Client Catalog resource in get_catalog_resource() if "client" is specified 
+  in command line
+ - Fix #1131 about Job::Next Pool resource precedence over the Pool::Next pool 
+  directive
+ - Fix #898 truncate volumes larger than 200 bytes
+
+Bugs fixed/closed since last release:
+1131 1360 1362 1368 1382 1412 1414 1449 1470 1524 1545 1548 1882 2083 2090
+2103 2115 2117 2151 2153 2156 2165 2180 2182 2183 2192 804 898
+
+
+
+================================================================
+Release version 7.2.0
+
+Bacula code: Total files = 733 Total lines = 303,426
+The diff between Bacula 7.0.6 and Bacula 7.2.0 is 254,442
+which represents very large change, for the most part 
+contributed to the Bacula project by Bacula Systems SA.
+
+This is a major new release with many new features and a
+number of changes. Please take care to test this code carefully
+before putting it into production.  Although the new features
+have been tested, they have not run in a production environment.
+
+============== !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ===================
+New Catalog format in version 7.2.0 and greater
+-----------------------------------------------
+This release of Bacula uses a new catalog format.  We provide a script
+(update_bacula_tables in bacula/src/cats and in bacula/updatedb) that
+will update from Bacula 3.x, 5.2, or 7.0 to version 7.2.0 format.
+The database upgrade is fast and simply.  As always we strongly 
+recommand that you make a dump of your database prior to doing the
+upgrade.
+
+NOTE: The upgrade will work only for PostgreSQL and MySQL. Upgrading is
+not (yet) supported for SQLite3.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+For packagers, if you change options, naming, and the way 
+we link our shared object files, as at least one of you does,
+you are creating a situation where the user may not be able
+to run multiple versions of Bacula on the same machine, which
+is often very useful, and in addition, you create a configuration
+that the project cannot properly support.
+
+Please note that the documentation has significantly changed.
+You will need additional packages to build it such as inkscape.
+Please see the README and README.pct files in the docs directory.
+The packages come with pre-build English pdf and html files,
+which are located in the docs/docs/manuals/en/pdf-and-html directory.
+
+Packagers: please note that the Bacula LICENSE has changed, it is still
+AGPLv3 and still open source. A new requirement has been added which
+requires other projects using the source to keep the acreditations.
+
+Packagers: please note that the docs license has changed. It is now 
+licensed: Creative Commons Attribution-ShareAlike 4.0 International
+This is a common open source license.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Compatibility:
+--------------
+As always, both the Community Director and Storage daemon(s) must be upgraded
+at the same time.  Any File daemon running on the same machine as a Director
+or Storage daemon must be of the same version.
+
+Older File Daemons should be compatible with the 7.2.0 Director and Storage
+daemons.  There should be no need to upgrade older File Daemons. However,
+this has not been fully tested yet.  Since we expect some problems, please 
+test before putting it into production.
+
+New Features:
+Please see the New Features chapter of the manual for documentation on
+the new features.  The new features are currently only in the New Features
+chapter and have not yet been integrated into the main chapters of the
+manual.  Also, since there were so many new features, it is possible that
+a few that previously existed in version 7.0.x are documented a second
+time in the 7.2.0 new features section.
+
+More detailed changes:
+
+12Aug15
+ - Put back missing close_msg(NULL) to flush daemon messages at job end
+ - Add LICENSE-FOSS and update LICENSE for baculum
+ - Backport from Bacula Enterprise
+29Jul15
+ - Fix max vol size test accidently deleted
+ - Remove gigaslam and grow on uninstall -- from bug report
+ - Revert to Branch-8.3 fd_snapshot.c
+ - Pull more recent changes from Branch-8.2
+ - Fix bvfs_lsdir pattern parameter setting
+ - Remove CheckList nolonger used
+ - Revert "Use db_lock()/unlock() around JobMedia creation transaction"
+ - Fix #1099 about director crash with rescheduled jobs
+ - Fix #1209 about bat segfault when clicking on Media
+ - Qmsg(M_FATAL) set jcr->JobStatus to JS_FatalError immediately
+ - snapshot: Abort the job by default if a snapshot creation fails
+ - Revert to old SD-FD close session protocol
+ - Remove drive reservation if no Jobs running
+ - Remove filename patch
+ - snapshot: Try to detect LVM when the filesystem is ext3 or XFS
+ - Fix bad debug message in mac_sql.c
+ - Fix restore-multi-session test by incrementing found files only on next 
+   file
+ - Add -T description in man pages
+ - Correct incorrect Fatal error message text in bsock
+ - mysql: Add support for multiple instances binary backup in the same fileset
+ - Fix compilation with new debug hook
+ - mysql: Avoid warning with abort_on_job plugin option
+ - Fix compilation after patch "prune volume yes"
+ - Do not print message about retention when using "prune volume yes" command
+ - Fix #536 about Copy/Migration/VF that should not use Client "Maximum Concurrent 
+   Jobs"
+ - Fix potential segfault with unused ConfigFile objects
+ - Fix #1108 Enhance setdebug help command and console completion
+ - Add more JCR variables in lockdump procedure
+ - Fix error in update_postgresql_tables.in caused by bad search and replace
+ - Fix #1127 about the repositioning enhancement during restore
+ - Correct try_reposition() return code after a seek()
+ - Add position information in the block structure
+ - Fix a number of acl and xattr bugs + give more understandable variable 
+   names
+ - Make btraceback.dbx and .gdb use new sql engine name
+ - Revert most of patch ef57e6c4 and replace with old cats code
+ - Revert useless parts of patch 08d8e2d29
+ - Revert patch d7f71d2c94a and rewrite it using simpler public domain example
+ - Fix batch mode detection for SQLite3
+ - Revert d9aa76fa and simplify
+ - Revert patch 30388e447fa3 + fix bug #1948
+ - Use a more appropriate name for the acl context
+ - Use class pointer rather than jcr in src/lib/jcr.c
+ - Revert patch f294b276
+ - Change B_DB to BDB to correspond to naming convention
+ - Add -T option in bacula-sd to use trace file
+ - Force use of newer TLS protocols
+ - Avoid problem with db_get_job_record() when SchedTime or RealEndTime is 
+   NULL
+ - Update our regexec() to support NULL argument
+ - Add function to copy a file in bsys.c
+ - Fix bug 2141 fork before TLS initialization
+ - Update LICENSE-FOSS
+ - Change license on src/lib/crc32.c as agreed with the author, Joakim Tjernlund
+ - Update po
+ - More license updates
+ - Fix compilation
+ - Add read_control command between Plugin/FD and Storage Daemon
+ - Add .bvfs_get_jobs and .bvfs_get_bootstrap functions
+ - Fix compilation for Solaris9
+ - Fix Makefile.in tabs
+ - Update Windows .def files
+ - More copyright notices
+ - Fix Windows plugin licenses
+ - Change license copyright for updatedb and qt-console/tray-monitor
+ - Change copyright for logwatch
+ - Update more copyrights
+ - Update copyrights in pebuilder
+ - Update plugin licenses
+ - Add copyrights + license to platforms
+ - Update copyrights in po
+ - More license clarifications
+ - One more copyright in src/cats
+ - Update src/cats .in file copyrights
+ - Compute Job "Compression Ratio" using SDJobBytes instead of JobBytes
+ - Get correct attributions for bsmtp.c
+ - Switch from LGPLv3 for scripts to BSD 2-Clause
+ - Fix segfault on dot commands used in RunScript::Console directive
+ - Fix patch c0f0e6c01c7 to optimize retries only for autochangers
+ - Fix #876 about SD reads too far with complex bootstrap
+ - Correct unmount test in dev.c
+ - Add debug JobId in next-vol-test script
+ - Fix patch c59e5da29 to not orphan buffers
+ - Fix bad implementation of enable/disable job,client,schedules + implement 
+   enable/disable storage devices
+ - Implement enable/disable schedule and client
+ - Optimize Volume protocol when Volume not InChanger
+ - Do not trash existing record during label of new volume
+ - During accurate restore unstrip as soon as possible
+ - Better handline of no storage device found
+ - Fix #1075 The replace=never flag was not properly handled when combined with 
+   database= option in mysql/postgresql plugin
+ - display timestamp in X_msg() in one single pass to avoid double flush()
+ - Update copyrights in scripts directory
+ - Fix bug #1083 RT14512
+ - configure.in: new HAVE_FCNTL_LOCK detect fcntl() locking capability
+ - Fix #1008 about status storage that displays "Writing" and "Reading" information 
+   for the same DCR
+ - Add new %E job code to use non fatal job errors in scripts
+ - Revert to old htable, but add 64 bit hash
+ - Fix possible race condition in smartalloc
+ - Refactor + optimize fstype.c + revert mntent_cache.c/h
+ - snap: Fix small initialization problem with LVM backend
+ - Fix compilation warning in bextract
+ - lock the pid file using fcntl(F_SETLK)
+ - bat: Fix segfault in client view when the Uname field is empty
+ - bat: Fix #1047 about segfaults in Client, Media and Pool view
+ - Revert patch 62ab7eb5 for filed/backup.c
+ - Revert patch 62ab7eb5 for filed/verify.c
+ - Refactor mount/unmount to use class calls
+ - Add return status to DEVICE:close and report error at end of Job
+ - Fix seg fault
+ - fix a Dmsg in match_bsr.c:match_volume()
+ - Fix #861 about bad help command on status schedule
+ - Add new cats header file
+ - Refactor DB engine to be class based
+ - Remove regression cancel_test from do_all
+ - Fix invalid .mod command in BAT during restore (bugfix #858)
+ - Use B_ISXDIGIT() in rangescanner
+ - Handle hex numbers in str_to_uint64()
+ - Fix prune-migration-test -- wait in wrong place
+ - fix MA 987 cannot copy/migrate jobs with a Level=VF in the job resource
+ - Fix basejob error caused by patch on bug #965
+ - Allow to list restore jobs in llist jobid= command
+ - Fix #940 about segfault in bat when doing an "update slots"
+ - Fix #983 about segfault on win32 filedaemon when using bat to monitor the 
+   status
+ - Fix #969 about a segfault while doing a cancel of a copy job
+ - Fill errmsg after an error with FETCH query in db_big_sql_query()
+ - Fix #965 about an empty error message after a problem when sending accurate 
+   file list
+ - Fix #972 about segfault in show command used with multiple resources
+ - Work bsnapshot for SLES12 and fix issue with ZFS
+ - Fix small memory leak in cancel command with ujobid and job parameters
+ - Ensure that client resource is not freed during setbandwidth command
+ - fix errors in the use of a Mmsg()
+ - Use a specific mutex for auth instead of jcr->mutex
+ - update po
+ - Add missing call to free_jcr() in previous patch
+ - Lock the jcr when using sd_calls_client_bsock variable
+ - Ensure that only one thread can use the auth code in the Storage
+ - Fix #951 about SDCallsClient not used during restore jobs
+ - snapshot: Get the creation date from the zfs list snapshot command
+ - snapshot: Fix small issue with Name parameter in list snapshot
+ - Fix bsnapshot to return status=0 on error
+ - fix a mempool error at SD shutdown
+ - snapshot: Call support() only if the device is in the fileset
+ - snapshot: Avoid double / in path and files when volume is /
+ - Fix segfault with Console runscript introduced by "Stop ua commands if comm 
+   line drops"
+ - handle ctrl-C and SIGTERM the same way in SD
+ - Startup scripts return proper exitcode for service restart action
+ - Implement tables configuration
+ - Add ReadBytes to FD status output
+ - Accept 0/1 for @BOOL@ type in ConfigFile module
+ - Set cmd_plugin only in pluginCreateFile if not SKIP/ERROR/CORE
+ - Fix #13680 about systemd message "unknown lvalue"
+ - Stop ua commands if comm line drops
+ - Fix weird compilation problem on rhel5
+ - Display TLS information in status client/storage
+ - Fix rpms where unix user were not properly defined
+ - update extrajs package in debs/rpm package
+ - Fix segfault with new filesetcmd
+ - snapshot: Reset JobId in Snapshot table when deleting a job
+ - snapshot: Add ability to list snapshots from the FD
+ - snapshot: Add a confirmation message when pruning snapshots
+ - Add RunScript AfterSnapshot event
+ - Fix #431 About upon upgrade, RPMs resets group membership
+ - snapshot: Display bsnapshot error message if possible
+ - Fix jobmedia-bug3
+ - Set error code in return from run regress script
+ - snapshot: More work on LVM backend and on list/sync commands
+ - snapshot: Add EnableSnapshot directive in fileset
+ - snapshot: Add errmsg and status to SNAPSHOT_DBR
+ - snapshot: Send SnapshotRetention parameter to the Client and work on the 
+   prune command
+ - Add bacula-snapshot.spec
+ - Add disabled=yes/no in bsnapshot.conf
+ - Fix #875 about bvfs repeats the same output many times
+ - Revert "Storing the result in a local variable from sql_num_fields saves us a 
+   lot of callbacks."
+ - Remove passing args to cats driver class initialization
+ - Simplify cats by eliminating the B_DB_PRIV class
+ - Convert more db funcs to class calls
+ - Add Snapshot Engine to bacula core
+ - Change more db calls into class calls
+ - Add files missed in last commit
+ - Convert db_lock/unlock to be called via class
+ - Fix small memory leak
+ - Remove more vestages of Ingres
+ - Fix #843 about "show storage" option missing in the help command output
+ - Use bzip2 for sles dependency
+ - Avoid warning with uninitialized variables
+ - update "help status"
+ - Revert "Small fix to Eric great patch for readline commandcompletion so it 
+   also compiles on non gcc compilers."
+ - Separate out definitions into new header
+ - Remove bad restore.h
+ - Revert "Move restore struct defintions to seperate include file. Small change 
+   to acl.h and xattr.h to use define inline with other header files."
+ - Revert "Fix MediaView::getSelection"
+ - Bat: ensure sufficient rows to display drives in storage display
+ - new MmsgDx() macro that combine Mmsg(errmsg, fmt, ...) and Dmsg in once
+ - add a ASEERTD() for DEVELOPPER
+ - Fix wrong KiB value
+ - Revert "Fix bug #1934 Wrong values at media list in BAT"
+ - Change bplugin_list to b_plugin_list which is more appropriate
+ - Remove Ingres related unused files
+ - Simplify rwlock coding
+ - Make subroutine names clearer
+ - Back out useless patches
+ - Put back old code prior to excessive edits
+ - Remove over complicated acl/xattr code
+ - Add license to files without any
+ - Fix #805 about nextpool command line argument not properly used
+ - Remove recursion from free_bsr() and free_bsr_item() to handle very large 
+   BSR
+ - Avoid segfault in connect_to_file_daemon() when jcr->client is NULL
+ - #776 Volume created in the catalog but not on disk and #464 SD can't read an 
+   existing volume
+ - Add schedule to show command tab completion
+ - Make global my_name hold 127 chars
+ - Mark file volumes that are not accessible in Error in mount_next_vol
+ - Fix #743 about bat permission conflict on /opt/bacula/etc
+ - Add copyright to Makefiles
+ - change in lockmgr.c to avoid the report of a memory leak in testls
+ - lib: integrate SHA2 into bacula
+ - Fix #747 about restore problem failing on "Unexpected cryptographic session 
+   data stream
+ - Revert previous copyright accidentally changed
+ - Fix btape fill command by removing some debug code in empty_block()
+ - Add Accurate Fileset option "M" to compare ctime/mtime with the save_time 
+   like with normal Incremental
+ - Add index on Job(JobTDate) to mysql catalog
+ - Fix bad check on bopen_rsrc return status. bug #2106
+ - Do not stop the storage daemon startup if the File device is not yet accessible
+ - Fix double free in btape
+ - Fix failed mount request in btape fill test
+ - Avoid ASSERT() when using btape with vtape driver
+ - Possible fix for NULL client bug #2105
+ - Fix compilation of Nagios check_bacula
+ - Add test for restict c99 in autoconf
+ - Allow to use device= option in release/mount/unmount command
+ - Fix #699 about duplicated job name when starting two jobs at the same time
+ - Fix #701 about status schedule missing from tab completion and correct job 
+   filter
+ - remove autoconf/configre
+ - Fix #346 Add ipv6 support for Solaris
+ - Fix #692 about compatibility issue with community FD
+ - Fix new match_bsr patch
+ - Fix #588 Improve SD bsr read performance
+ - Fix ownership bug in html-manuals package
+ - Add EFS in the client status flag list
+ - Implement Win EFS Support
+ - Fix QT windows build for 32bit
+ - Add SLES113 to spec files
+ - Add @encode and sp_decode functions for plugins
+ - Fix tls-duplicate-job seg fault + harden pthread_kill() code
+ - Update plugin version to ensure 8.0 will not load 6.6 plugins
+ - Add JobBytes and ReadBytes to llist jobid= output
+ - Rewrite store_drivetype and store_fstype to allow a comma separated list of 
+   items
+ - Fix #633 about JobDefs MaximumBandwidth Job inheritance
+ - Fix possible editing truncation due to 32 bit calculations
+ - Remove non-portable -ne in echo
+ - update po
+ - Add Makefile for mssql-fd plugin
+ - Improve error message of open_bpipe() on win32
+ - Add jobid= parameter in .status dir running command
+ - Add worker states
+ - Pull latest worker files from development branch
+ - Add comment about incorrect scripting
+ - Put Dsm_check() on reasonable debug level
+ - Remove auto-generated tray-monitor.pro.mingwxx file
+ - Display message about MaximumBlockSize default value only if a value was 
+   specified
+ - fix solaris : replace be64toh() by unserial_uint64()
+ - update SD <-> SD capabilities exchange
+ - Handle RestoreObjects with Copy/Migration jobs
+ - Add free list to worker class
+ - Fix bad caps with SDcallsClient + debug + fix seg fault on connection error
+ - Implement blowup=nn for FD and hangup+blowup for SD
+ - Correct bat copyright
+ - Change sizeof expressions to be more standard
+ - Remove regress trap that causes sd-sd-test to fail
+ - Dmsg was not handling tag anymore
+ - Fix for SD seg fault while swapping volumes
+ - Make bextract able to handle dedup streams
+ - Remove unused file
+ - Make sure mount_next_read_volume() will cancel the current job
+ - Forbid llist command in runscript
+ - Fix #295 about query file message
+ - Add no_mount_request to DCR
+ - Update Windows .def file
+ - Add spec file for redhat/suse html manual package
+ - Fix bug #2091 bad vtape device definitions
+ - Fix bug #2089 compiler warning
+ - Make sure level is tag free when printing debug message
+ - fix tags in Dmsg
+ - Regenerated configure script
+ - Remove spaces at the end of lines in Bat file
+ - Revert bat.pro.in file
+ - Fix recursive echo bug #2088
+ - Add new fifo class flist.h/c
+ - Allow to create temp DEVICE from DEVRES
+ - For bat always use g++
+ - Make selection by Volume Name or MediaId a bit clearer
+ - Optimize Dmsg() with tags by keeping current tags into a separate variable
+ - Make message more understandable
+
+
+=========================================================================
+
+Bugs fixed in this version:
+1099 1209 536 1108 1127 876 1075 1083 1008 1047 861 858 965 940
+983 969 965 972 951 13680 431 875 843 1934 805 776 743
+
+
+
+
+
+
+================= Old 7.0.x Release ====================================
+
+Release version 7.0.5
+This is an important bug fix release to version 7.0.4.  Since it fixes several
+major problems.  We recommend that everyone upgrade to this version.
+
+28Jul14
+ - Fix #547 by adding .schedule command
+ - Update AUTHORS
+ - Fix bug #2079 with patch from Robert Oschwald
+ - Fix orphaned file descriptors during errors
+ - Yet another client==NULL
+ - Improve FD and SD cancel
+ - Jim Raney's TLS patch
+ - Fix bug #1679 pool overrides not shown in manual run display
+ - Attempt to avoid client==NULL
+ - Fix for bug #2082 (hopefully)
+ - Fix seg fault in jobq.c
+ - make stop after first error
+ - Increase status schedule days from 500 to 3000
+ - Remove bad cherry-pick
+ - Fix compiler warning
+ - Allow options create_postgresql_database from patch in bug #2075 by roos
+ - Fix bug #2074 crashes when no conf file present
+ - Set pthread id in jcr at beginning so the job can be canceled.
+ - Fix possible heartbeat interval timing problems
+ - Fix some errors reported by valgrind. May fix the problem with bsmtp command.
+ - Ensure b_sterror() is using the correct size of input buffer
+ - Fix possible seg fault
+ - Fix segfault when trying to stop the bnet_server thread in terminate_stored()
+ - Fix bad link bug #2076
+ - Fix compilation of bsock.c when TLS is not available
+ - Correct L suffix to be LL
+ - Fix bad copy/migrate data header
+ - On termination shutdown thread server
+ - baculum: Updated README file
+ - baculum: Update English language texts
+ - baculum: Saving auth file for web server HTTP Basic auth
+ - baculum: Added directory for web server logs
+ - baculum: Added example Lighttpd configuration for Baculum and sample web 
+   server auth file
+ - Expanded auth error message
+ - baculum: Support for web servers which do not provide direct info about HTTP 
+   Basic auth
+ - Fix limit bandwidth calculation
+ - Eliminate strcpy() from bsmtp
+ - Fix for configuring sudo option for bconsole access
+ - Display correct NextPool overrides + use Job NextPool in restore if available
+ - Fix Bacula to work with newer Windows pthreads library
+ - Fix bug #180 ERR=success in btape when tape error
+
+Bugs fixed/closed since last release:
+1679 180 2074 2075 2076 2079 2082 547
+
+
+Release version 7.0.4
+This is a bug fix release to version 7.0.3.  We recommend that
+everyone upgrade to this version.
+
+The main fixes are to make copy/migration to a second SD work, and
+to cleanup some of the inconsistencies in the cancel command which 
+could confuse the user.
+
+02Jun14
+ - Better error handling for cancel command
+ - Fix compiler warning + simplify some #ifdefs
+ - Fix copy/migration to second SD
+ - Fix calls to sl.set_string()
+ - Improve sellist code
+
+=============================================================
+Release version 7.0.3
+This is a bug fix release to version 7.0.2. We recommend that
+everyone using version 7.0.2 upgrade to this version.
+
+12May14
+ - Fix error handling in do_alist_prompt
+ - Tighten error condition handling in sellist
+ - Add new cancel test
+ - Update LICENSE and LICENSE-FAQ
+ - Also update autoconf/aclocal.m4
+ - Reschedule on error caused EndTime to be incorrect -- fixes bug #2029
+ - Flush console queued job messages -- should fix bug #2054
+ - Attempt to fix FreeBSD echo/printf, bug #2048
+ - Update to newer libtool + config.guess
+ - Recompile configure
+ - Apply fix supplied for acl.c in bug #2050
+ - Fix a SD seg fault that occurs with over committed drives
+ - Clear bvfs cache and set debug options available only for admin
+ - Moved auth params to curl opts
+ - Filtred single results for restricted consoles
+ - Removed unnecessary debug
+ - Changed e-mail address in gettext file
+ - Support for customized and restricted consoles
+ - Misc changes for rpm building (made by Louis)
+ - Updated requirements for Baculum
+ - Apply fix for bug 2049: wrong drive selected
+ - Fix #2047 about bthread_cond_wait_p not declared
+ - Fix Bacula bug #2044 -- fix Makefile for bplugininfo linking
+ - Fix Bacula bug #2046 -- sellist limited to 10000
+ - Fix Bacula bug #2045 -- multiply defined daemon_event
+ - Fix Bacula bug #2020 overflow in btape -- Andreas Koch
+
+Bugs fixed/closed since last release:
+2020 2029 2044 2045 2046 2047 2048 2050 2054
+
+
+===================================================================
+Release version 7.0.2
+This is a minor update since version 7.0.1 that is mostly cleanup.
+However, there is one annoying bug concerning shell expansion of
+config directory names that is fixed, and there is at least one
+syntax error in building the full docs that appears on some systems
+that is also fixed.
+
+02Apr14
+ - Remove more vestiges of libbacpy
+ - Put back @PYTHON@ path in configure
+ - Fix improper string in parser
+ - Remove libbacpy from rpm spec files
+ - Fix linking check_bacula
+ - Fix new SD login in check_bacula
+ - Tweak docs build process
+
+
+Release version 7.0.1
+This is a minor update since version 7.0.0 that is mostly cleanup.
+
+31Mar14
+ - Remove old plugin-test
+ - Update po files
+ - Enable installation of the bpluginfo utility
+ - More tray-monitor updates
+ - Add Simone Caronii to AUTHORS
+ - Align command line switches in manpages.
+ - Apply upgrade to config.guess
+ - Remove bgnome-console and bwx-console leftovers.
+ - Update tray-monitor header also for new bsock calls
+ - Attempt to fix nagios to use new bsock calls
+ - Update tray-monitor to new bsock calls
+
+========================================
+Release 7.0.0
+
+ Bacula code: Total files = 713 Total lines = 305,722
+ The diff between Bacula 5.2.13 and Bacula 7.0.0 is 622,577 lines,
+ which represents very large change.
+
+This is a major new release with many new features and a
+number of changes. Please take care to test this code carefully
+before putting it into production.  Although the new features
+have been tested, they have not run in a production environment.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+For packagers, if you change options, naming, and the way 
+we link our shared object files, as at least one of you does,
+you are creating a situation where the user may not be able
+to run multiple versions of Bacula on the same machine, which
+is often very useful, and in addition, you create a configuration
+that the project cannot properly support.
+
+Please note that the documentation has significantly changed.
+You will need additional packages to build it such as inkscape.
+Please see the README and README.pct files in the docs directory.
+The packages come with pre-build English pdf and html files,
+which are located in the docs/docs/manuals/en/pdf-and-html directory.
+
+Packagers: please note that the Bacula LICENSE has changed, it is still
+AGPLv3 and still open source. A new requirement has been added which
+requires other projects using the source to keep the acreditations.
+
+Packagers: please note that the docs license has changed. It is now 
+licensed: Creative Commons Attribution-ShareAlike 4.0 International
+This is a common open source license.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Compatibility:
+--------------
+As always, both the Director and Storage daemon(s) must be upgraded at
+the same time. Any File daemon running on the same machine as a Director
+or Storage daemon must be of the same version.
+
+Older File Daemons should be compatible with the 7.0.0 Director and Storage
+daemons.  There should be no need to upgrade older File Daemons.
+
+The following are new directives, commands and features:
+- New Baculum web GUI interface.  See the gui/baculum directory.
+- Directive fdstorageaddress in Client
+- Directive SD Calls Client in Client
+- Directive Maximum Bandwidth per Job in Client
+- Directive FD Storage Address in Storage
+- Directive Maximum Spawned Jobs in Job
+- setbandwidth command in bconsole
+- Progress meter with FD in status dir
+- LastDay of month in schedule
+- sixth 6th week in month in schedule
+- Improvements in bconsole SQL calls
+- Allow list and ranges in cancel as well as the keyword: all
+- truncate command in bconsole
+- prune expired volumes?
+- New hardlink performance enhancements
+- restart command
+- restore optimizespeed=yes|no for hardlinks default yes
+- PkiCipher and PkiDigest in FD Client item
+ Cipher aes128, aes192, aes256, blowfish
+ Digest md5, sha1, sha256
+- Maximum Bandwidth Per Job in FD Client resource
+- Maximum Bandwidth Per Job in FD Director Resource
+- .bvfs_decode_lstat
+- DisableCommand in FD Director resource
+- DisableCommand in FD Client resource
+- status scheduled bconsole command with the following options:
+   days=nn (0-500 default 10); limit=nn (0-2000 default 100)
+   time=YYYY-MM-DD HH:MM:SS
+   schedule=xxx job=xxx
+- NextPool in Run override
+- Directive NextPool in Job
+
+Please see the New Features chapter of the manual for more
+details.
+
+The following features or directives have been removed:
+- Win32
+- tray-monitor
+- wx_console
+- Removed cats DBI driver
+- Python
+
+Detailed changes:
+=================
+24Mar14
+ - Add Josip Almasi to AUTHORS
+ - [PATCH] Support for restricted consoles in BAT config
+ - [PATCH] Fix for free director directive
+ - [PATCH] Fix auto-select restricted console for director in bconsole
+ - Realign output display
+ - Update ua_output.c from Branch-6.7
+ - Add some missing Branch-6.7 updates
+ - Added needed empty directories to Baculum
+ - Fix for support PostgreSQL, MySQL and SQLite
+ - Framework adjusting to Baculum database connections
+ - Framework fix for lower case tables names in MySQL
+ - Fix for Baculum SQLite support
+ - Initial commit Baculum
+ - Add Marcin to AUTHORS file
+ - Strip trailing blanks
+ - Update copyright year
+ - Update LICENSE and header files
+ - Remove old file
+ - Add new header in misc files
+ - Remove tray-monitor bwx-console manual installation
+ - Remove FD python and examples
+ - Fixup spec files
+ - Remove pythonlib from lib
+ - Update package-list
+ - Fix SDCallsClient daemon synchronization
+ - Add debug code + make 127.0.0.1 same as localhost for tls tests
+ - Fix multiple DIRs in console
+ - Make failure for bat to connect to DIR non-fatal
+ - Fix bat style to one that works
+ - Take disk-changer from Branch-6.7
+ - Simplify Version output
+ - Fix FDVersion for SD Calls Client test
+ - Update accurate test
+ - Update differential test
+ - Add new regress timing scripts
+ - Improve plugin make clean
+ - Implement regress FORCE_SDCALLS
+ - Remove win32 tray-monitor and wx-console directories
+ - Remove regress-config need only regress-config.in
+ - Add configure archivedir
+ - Improve SQL failure reporting
+ - First cut backport BEE to community
+ - Add copyright to mtx-changer.in

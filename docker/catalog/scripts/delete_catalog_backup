@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2017 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# This script deletes a catalog dump
+#
+db_name=bacula
+
+rm -f /var/lib/bacula/${db_name}.sql
+
+#
+# We recommend that you email a copy of the bsr file that was
+#  made for the Job that runs this script to yourself.
+#  You just need to put the bsr file in /opt/bacula/bsr/catalog.bsr
+#  or adjust the script below.	Please replace all %xxx% with what
+#  is appropriate at your site.
+#
+#/usr/bin/bsmtp -h %smtp-server% -s "catalog.bsr" \
+#   %your-name@company.org% </opt/bacula/bsr/catalog.bsr
+#
+# The following script will email a summary of the backup jobs that
+#  were completed in the last 24 hours
+#/etc/bacula/scripts/baculabackupreport 24
+#

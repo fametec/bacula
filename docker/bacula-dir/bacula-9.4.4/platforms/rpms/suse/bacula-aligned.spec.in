@@ -1,0 +1,142 @@
+# Bacula RPM spec file
+#
+# Copyright (C) 2013-2014 Bacula Systems SA
+
+# Platform Build Configuration
+# TODO: merge all plugins into one spec file
+
+# basic defines for every build
+%define _release           @RELEASE@
+%define _version           @VERSION@
+%define product            bacula
+%define _lsm               @LSMDATE@
+%define _packager Kern Sibbald <kern@baculasystems.com>
+%define manpage_ext gz
+
+# Don't strip binaries
+%define __os_install_post %{nil}
+%define __debug_install_post %{nil}
+%define debug_package %{nil}
+
+# Installation Directory locations
+%define _prefix        /opt/bacula
+%define _sbindir       /opt/bacula/bin
+%define _bindir        /opt/bacula/bin
+%define _subsysdir     /opt/bacula/working
+%define sqlite_bindir  /opt/bacula/sqlite
+%define _mandir        /usr/share/man
+%define sysconf_dir    /opt/bacula/etc
+%define scripts_dir    /opt/bacula/scripts
+%define working_dir    /opt/bacula/working
+%define pid_dir        /opt/bacula/working
+%define plugin_dir     /opt/bacula/plugins
+%define lib_dir        /opt/bacula/lib
+
+# Daemon user:group Don't change them unless you know what you are doing
+%define director_daemon_user    bacula
+%define storage_daemon_user     bacula
+%define file_daemon_user        root
+%define daemon_group            bacula
+# group that has write access to tape devices, usually disk on Linux
+%define storage_daemon_group    disk
+
+#--------------------------------------------------------------------------
+# it should not be necessary to change anything below here for a release
+# except for patch macros in the setup section
+#--------------------------------------------------------------------------
+
+%define base_package_name bacula
+
+%{?contrib_packager:%define _packager %{contrib_packager}}
+
+Summary: Bacula - The Network Backup Solution
+Name: %{base_package_name}-aligned
+Version: %{_version}
+Release: %{_release}
+Group: System Environment/Daemons
+License: AGPLv3 
+BuildRoot: %{_tmppath}/%{name}-root
+URL: http://www.bacula.org/
+Vendor: The Bacula Team
+Packager: %{_packager}
+Prefix: %{_prefix}
+Distribution: Bacula Aligned Volumes
+
+Source0: http://www.prdownloads.sourceforge.net/bacula/%{product}-%{version}.tar.gz
+
+Requires: bacula-sd, %{base_package_name}-libs = %{_version}
+
+# define the basic package description
+%define blurb Bacula Aligned - The Network Backup Solution.
+%define blurb2 Bacula Aligned plugin allows you to backup to a
+%define blurb3 Volume with aligned blocks permitting easier deduplication.
+
+Summary: Bacula Aligned Volume Storage - The Network Backup Solution
+Group: System Environment/Daemons
+
+%description
+%{blurb}
+
+%{blurb2}
+%{blurb3}
+
+This is Bacula Aligned Volumes Storage plugin.
+
+%prep
+%setup -T -D -n bacula-%{_version} -b 0
+
+%build
+
+cd ../bacula-%{_version}
+./configure \
+        --prefix=%{_prefix} \
+        --sbindir=%{_sbindir} \
+        --sysconfdir=%{sysconf_dir} \
+        --mandir=%{_mandir} \
+        --with-scriptdir=%{scripts_dir} \
+        --with-working-dir=%{working_dir} \
+        --with-plugindir=%{plugin_dir} \
+        --with-pid-dir=%{pid_dir} \
+        --with-subsys-dir=%{_subsysdir} \
+        --enable-smartalloc \
+        --disable-bat \
+        --enable-client-only \
+        --with-dir-user=%{director_daemon_user} \
+        --with-dir-group=%{daemon_group} \
+        --with-sd-user=%{storage_daemon_user} \
+        --with-sd-group=%{storage_daemon_group} \
+        --with-fd-user=%{file_daemon_user} \
+        --with-fd-group=%{daemon_group} \
+        --with-basename="XXX_HOSTNAME_XXX" \
+        --with-hostname="XXX_HOSTNAME_XXX" \
+        --with-dir-password="XXX_REPLACE_WITH_DIRECTOR_PASSWORD_XXX" \
+        --with-fd-password="XXX_REPLACE_WITH_CLIENT_PASSWORD_XXX" \
+        --with-sd-password="XXX_REPLACE_WITH_STORAGE_PASSWORD_XXX" \
+        --with-mon-dir-password="XXX_REPLACE_WITH_DIRECTOR_MONITOR_PASSWORD_XXX" \
+        --with-mon-fd-password="XXX_REPLACE_WITH_CLIENT_MONITOR_PASSWORD_XXX" \
+        --with-mon-sd-password="XXX_REPLACE_WITH_STORAGE_MONITOR_PASSWORD_XXX"
+
+make
+
+%install
+
+mkdir -p $RPM_BUILD_ROOT%{_sbindir} 
+mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
+mkdir -p $RPM_BUILD_ROOT%{scripts_dir}
+mkdir -p $RPM_BUILD_ROOT%{lib_dir}
+
+make DESTDIR=$RPM_BUILD_ROOT -C ../bacula-%{_version}/src/stored install-aligned
+
+# Remove unneeded file(s)
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/bacula-sd-aligned-driver.so
+
+%files
+%defattr(-,root,%{daemon_group})
+%attr(-, root, %{daemon_group}) %{plugin_dir}/bacula-sd-aligned-driver-%{_version}.so
+
+%clean
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
+
+%changelog
+* Mon Jul 3 2017 Davide Franco <davide.franco@baculasystems.com> - 7.4.7-1
+- First version of Bacula aligned plugin rpm spec file 

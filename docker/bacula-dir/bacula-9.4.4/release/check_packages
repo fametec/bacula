@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+. ./config
+
+cp package-list /tmp/$$
+echo "s%@ver@%${ver}%g" >/tmp/$$
+echo "s%@lsmdate@%${lsmdate}%g" >>/tmp/$$
+sed -f /tmp/$$ package-list >/tmp/a$$
+
+echo "Checking that all packages in package-list are built"
+err=0
+for i in `cat /tmp/a$$`; do
+  if test ! -e $i ; then
+    echo "Error: package $i not found"
+    err=1
+  fi
+done
+if [ $err = 0 ] ; then
+   echo "All packages exist ..."
+fi
+
+rm -f /tmp/$$ /tmp/a$$

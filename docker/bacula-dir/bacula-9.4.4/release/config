@@ -1,0 +1,53 @@
+#
+# Configuration for release scripts
+#
+# Copyright (C) 2000-2017 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# Set to the Branch you are working on
+#
+branch=${branch:-Branch-7.9}
+#
+# set reltype to release or beta -- for upload and setting DEVELOPER
+reltype=release
+
+repo=$reltype
+
+# Bacula git repos
+bacula=${bacula:-${HOME}/bee/bacula}
+docs=${docs:-${HOME}/bacula/docs}
+
+# Limit bw to upload on the website
+max_bw=${max_bw:-80}
+upload_opt="--bwlimit=$max_bw"
+
+#
+# Set the following to your remote name.  By default it is origin.
+remote=bs
+
+export push=no
+#
+# Note, you will probably want to set updatepo=no if you
+#   run this script multiple times for a given release.
+export updatepo=no
+
+cwd=`pwd`
+
+cd ${bacula}/bacula
+if [ $? -ne 0 ]; then
+   echo "Directory: $1 does not exist"
+   exit 1
+fi
+current=`git branch | awk '/*/ { print $2 }'`
+git checkout ${branch} >/dev/null 2>&1
+git pull ${remote} ${branch} >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+   echo "Checkout or Pull of branch ${branch} failed."
+   exit 1
+fi
+ver=`sed -n -e 's/^#define VERSION.*"\(.*\)"$/\1/p' src/version.h`
+lsmdate=`sed -n -e 's/^#define LSMDATE.*"\(.*\)"$/\1/p' src/version.h`
+
+git checkout $current >/dev/null 2>&1
+
+cd $cwd
