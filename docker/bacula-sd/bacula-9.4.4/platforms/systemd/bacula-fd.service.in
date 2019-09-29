@@ -1,0 +1,32 @@
+# Systemd Bacula service file
+#
+# Copyright (C) 2000-2017 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# /lib/systemd/system/bacula-fd.service
+#
+# Description:
+#    Used to start the bacula file daemon service (bacula-fd)
+#
+#    enable : systemctl enable bacula-fd
+#    start : systemctl start bacula-fd
+#
+#
+
+# from http://www.freedesktop.org/software/systemd/man/systemd.unit.html
+[Unit]
+Description=Bacula File Daemon service
+Requires=network.target
+After=network.target
+RequiresMountsFor=@working_dir@ @sysconfdir@ @sbindir@
+
+# from http://www.freedesktop.org/software/systemd/man/systemd.service.html
+[Service]
+Type=simple
+User=@fd_user@
+Group=@fd_group@
+ExecStart=@sbindir@/bacula-fd -fP -c @sysconfdir@/bacula-fd.conf
+SuccessExitStatus=15
+
+[Install]
+WantedBy=multi-user.target

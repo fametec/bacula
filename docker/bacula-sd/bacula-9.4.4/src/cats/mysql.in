@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# shell script to create Bacula MySQL tables
+#
+bindir=@MYSQL_BINDIR@
+db_name=@db_name@
+
+$bindir/mysql $* ${db_name}

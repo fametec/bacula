@@ -1,0 +1,63 @@
+#! /bin/sh
+#
+#   Bacula(R) - The Network Backup Solution
+#
+#   Copyright (C) 2000-2016 Kern Sibbald
+#
+#   The original author of Bacula is Kern Sibbald, with contributions
+#   from many others, a complete list can be found in the file AUTHORS.
+#
+#   You may use this file and others of this release according to the
+#   license defined in the LICENSE file, which includes the Affero General
+#   Public License, v3.0 ("AGPLv3") and some additional permissions and
+#   terms pursuant to its AGPLv3 Section 7.
+#
+#   This notice must be preserved when any source code is 
+#   conveyed and/or propagated.
+#
+#   Bacula(R) is a registered trademark of Kern Sibbald.
+#
+# breload This shell script takes care of reloading the director after
+#	  a backup of the configuration and a bacula-dir -t test
+#
+#
+
+BACDIRBIN=@sbindir@
+BACDIRCFG=@sysconfdir@
+BACWORKDIR=@working_dir@
+BACBKPDIR=$BACWORKDIR/bkp
+Bacula="@BACULA@"
+DIR_USER=@dir_user@
+RET=0
+
+if [ -x ${BACDIRBIN}/bacula-dir -a -r ${BACDIRCFG}/bacula-dir.conf ]; then
+  echo "Testing the $Bacula Director daemon configuration"
+
+  if [ $(whoami) != "$DIR_USER" ]; then
+      USER_OPT="-u $DIR_USER"
+  fi
+
+  ${BACDIRBIN}/bacula-dir -t $USER_OPT -c ${BACDIRCFG}/bacula-dir.conf
+
+  RET=$?
+  if [ $RET = 0 ]; then
+      if [ ! -d $BACBKPDIR ]; then
+	 echo "Creating Backup configuration directory"
+	 mkdir -p $BACBKPDIR 
+	 chmod 700 $BACBKPDIR
+	 chown $DIR_USER $BACBKPDIR
+      fi
+      if [ -d $BACDIRCFG/conf.d ]; then
+	  CONFD=$BACDIRCFG/conf.d
+      fi
+      if [ -d $BACBKPDIR ]; then
+	echo "Backup configuration"
+	tar cfz $BACBKPDIR/bacula-dir-conf.$(date +%s).tgz $BACDIRCFG/*conf $CONFD
+      fi
+      echo reload | ${BACDIRBIN}/bconsole >/dev/null
+      echo "Reloading configuration"
+  else
+      echo "Can't reload configuration, please correct errors first"
+  fi
+fi 
+exit $RET

@@ -1,0 +1,37 @@
+version: '3.1'
+#
+services:
+  db:
+    build: catalog/
+    image: fametec/postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: bacula
+      POSTGRES_USER: bacula
+      POSTGRES_DB: bacula
+    volumes:
+      - pgdata:/var/lib/postgresql/data:rw
+    ports:
+      - 5432
+#
+  director:
+    build: bacula-dir/
+    image: fametec/bacula-director:latest
+    restart: unless-stopped
+    depends_on: 
+      - db      
+    ports:
+      - 9101
+#
+  storage:
+    build: bacula-sd/
+    image: fametec/bacula-storage:latest
+    restart: unless-stopped
+    depends_on:
+      - director
+      - db
+    ports:
+      - 9103
+# 
+volumes: 
+  pgdata:

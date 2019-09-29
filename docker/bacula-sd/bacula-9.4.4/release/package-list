@@ -1,0 +1,12 @@
+bacula-@ver@.tar.gz
+bacula-@ver@.tar.gz.sig
+bacula-docs-@ver@.tar.bz2
+bacula-docs-@ver@.tar.bz2.sig
+bacula-gui-@ver@.tar.gz
+bacula-gui-@ver@.tar.gz.sig
+bacula-regress-@ver@.tar.gz
+bacula-regress-@ver@.tar.gz.sig
+bacula-win32-@ver@.exe
+bacula-win32-@ver@.exe.sig
+bacula-win64-@ver@.exe
+bacula-win64-@ver@.exe.sig

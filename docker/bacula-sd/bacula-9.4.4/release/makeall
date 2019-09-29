@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2018 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# Make full release
+#
+
+# Source config
+. ./config
+
+echo "Creating release version: ${ver}"
+
+cd $cwd
+
+#./makedriversrel $drivers origin $branch $ver
+echo "Creating main Bacula release"
+./makebacularel $bacula $remote $branch $ver
+echo "Creating docs release"
+./makedocsrel $bacula $docs $remote $branch $ver

@@ -1,0 +1,286 @@
+# Bacula RPM spec file
+#
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+
+# Platform Build Configuration
+# TODO: merge all plugins into one spec file
+
+# basic defines for every build
+%define _release           @RELEASE@
+%define _version           @VERSION@
+%define product            bacula
+%define _packager Kern Sibbald <kern@sibbald.com>
+%define depkgs_version @DEPKGS_VERSION@
+
+# Don't strip binaries
+%define __os_install_post %{nil}
+%define __debug_install_post %{nil}
+%define debug_package %{nil}
+
+%define single_dir 1
+%{?single_dir_install:%define single_dir 1}
+
+# Installation Directory locations                                                                                            
+%if %{single_dir}
+# Installation Directory locations
+%define _prefix        /opt/bacula
+%define _sbindir       /opt/bacula/sbin
+%define _bindir        /opt/bacula/bin
+%define _subsysdir     /opt/bacula/working
+%define sqlite_bindir  /opt/bacula/sqlite
+%define _mandir        /usr/share/man
+%define _man_bacula    /opt/bacula/share/man/
+%define sysconf_dir    /opt/bacula/etc
+%define scripts_dir    /opt/bacula/scripts
+%define working_dir    /opt/bacula/working
+%define pid_dir        /opt/bacula/working
+%define plugin_dir     /opt/bacula/plugins
+%define lib_dir        /opt/bacula/lib
+%define script_dir     /opt/bacula/scripts
+%define doc_dir        /opt/bacula/share/doc
+%define var_dir        /opt/bacula/var
+%else
+%define _prefix        /usr
+%define _sbindir       %_prefix/sbin
+%define _bindir        %_prefix/bin
+%define _subsysdir     /var/lock/subsys
+%define sqlite_bindir %_libdir/bacula/sqlite
+%define _mandir        %_prefix/share/man
+%define sysconf_dir    /etc/bacula
+%define script_dir     %_libdir/bacula
+%define working_dir    /var/lib/bacula
+%define pid_dir        /var/run
+%define plugin_dir     %_libdir/bacula/plugins
+%define lib_dir        %_libdir/bacula/lib
+%endif
+
+#--------------------------------------------------------------------------
+# it should not be necessary to change anything below here for a release
+# except for patch macros in the setup section
+#--------------------------------------------------------------------------
+
+%define file_daemon_user        root
+%define daemon_group            bacula
+
+%define base_package_name bacula
+
+%{?contrib_packager:%define _packager %{contrib_packager}}
+
+Summary: Bacula - The Network Backup Solution
+Name: %{base_package_name}-client-static
+Version: %{_version}
+Release: %{_release}
+Group: System Environment/Daemons
+License: AGPLv3
+BuildRoot: %{_tmppath}/%{name}-root
+URL: http://www.baculasystems.com/
+Vendor: Bacula Project
+Packager: %{_packager}
+Prefix: %{_prefix}
+Distribution: Bacula Static Client
+Source0: https://www.baculasystems.com/dl/download/bacula-%{_version}.tar.gz
+
+%description
+%{blurb} This is Bacula static FD package.
+
+# define the basic package description
+%define blurb Bacula static FD - The Network Backup Solution.
+%define blurb2 Bacula static FD staticly linked FD
+
+BuildRequires: gcc, gcc-c++, make, autoconf
+BuildRequires: glibc, glibc-devel
+BuildRequires: ncurses-devel, perl, readline-devel
+BuildRequires: libstdc++-devel, zlib-devel
+BuildRequires: libacl-devel
+BuildRequires: pkgconfig
+
+Provides: bacula-fd
+Conflicts: bacula-client
+
+Summary: Bacula static fd package - The Network Backup Solution
+Group: System Environment/Daemons
+
+%prep
+%setup -T -D -n bacula-%{_version} -b 0
+
+%build
+
+cd ../bacula-%{_version}
+./configure \
+        --prefix=%{_prefix} \
+        --sbindir=%{_sbindir} \
+        --sysconfdir=%{sysconf_dir} \
+        --with-scriptdir=%{scripts_dir} \
+        --with-working-dir=%{working_dir} \
+        --with-plugindir=%{plugin_dir} \
+        --with-pid-dir=%{pid_dir} \
+        --with-subsys-dir=%{_subsysdir} \
+        --enable-smartalloc \
+        --disable-bat \
+        --enable-client-only \
+        --with-basename="XXX_HOSTNAME_XXX" \
+        --with-hostname="XXX_HOSTNAME_XXX" \
+        --with-fd-password="XXX_REPLACE_WITH_CLIENT_PASSWORD_XXX" \
+        --with-mon-fd-password="XXX_REPLACE_WITH_CLIENT_MONITOR_PASSWORD_XXX" \
+        --enable-static-fd=yes \
+        --enable-static-tools=yes \
+        --enable-static-cons=yes \
+        --without-openssl \
+        --disable-libtool
+make -j3
+
+%install
+
+cwd=${PWD}
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
+mkdir -p $RPM_BUILD_ROOT/etc/init.d
+mkdir -p $RPM_BUILD_ROOT%{_sbindir}
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
+mkdir -p $RPM_BUILD_ROOT%{sysconf_dir}
+mkdir -p $RPM_BUILD_ROOT%{working_dir}
+mkdir -p $RPM_BUILD_ROOT/etc/logrotate.d/bacula
+
+cp -p platforms/redhat/bacula-fd $RPM_BUILD_ROOT/etc/init.d/static-bacula-fd
+chmod 0754 $RPM_BUILD_ROOT/etc/init.d/*
+
+make DESTDIR=$RPM_BUILD_ROOT install
+
+# fix me - building enable-client-only installs files not included in bacula-client package
+# Program docs not installed on client
+
+cp $RPM_BUILD_ROOT%{sysconf_dir}/bacula-fd.conf $RPM_BUILD_ROOT%{sysconf_dir}/static-bacula-fd.conf
+
+rm -f $RPM_BUILD_ROOT%{_sbindir}/bconsole
+rm -f $RPM_BUILD_ROOT%{_sbindir}/bbconsjson
+rm -f $RPM_BUILD_ROOT%{_sbindir}/btraceback
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/mtx-changer.conf.new
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/btraceback.mdb
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/dvd-handler.old
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/storage-ctl.conf.new
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/disk-changer.old
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/bacula-ctl-sd
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/bconsole
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/btraceback.gdb
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/disk-changer
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/dvd-handler
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/storage-ctl
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/mtx-changer
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/mtx-changer.conf
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/bacula-ctl-dir
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/bconsole.conf.new
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/storage-ctl.conf
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/btraceback.dbx
+rm -f $RPM_BUILD_ROOT%{sysconf_dir}/bacula-fd.conf
+rm -f $RPM_BUILD_ROOT%{_bindir}/bfdjson
+rm -f $RPM_BUILD_ROOT%{_bindir}/bacula
+rm -f $RPM_BUILD_ROOT%{_sbindir}/bacula
+rm -f $RPM_BUILD_ROOT%{_sbindir}/bacula-fd
+rm -f $RPM_BUILD_ROOT%{_sbindir}/bfdjson
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man1/bacula-tray-monitor.1.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man1/bat.1.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man1/bsmtp.1.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/bacula-dir.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/bacula-sd.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/bacula.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/bcopy.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/bextract.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/bls.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/bregex.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/bscan.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/btape.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/btraceback.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/bwild.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man8/dbcheck.8.gz
+rm -f $RPM_BUILD_ROOT%{_man_bacula}/man1/bacula-bwxconsole.1.gz
+rm -f $RPM_BUILD_ROOT%{script_dir}/bacula
+rm -f $RPM_BUILD_ROOT%{script_dir}/bacula-ctl-dir
+rm -f $RPM_BUILD_ROOT%{script_dir}/bacula-ctl-sd
+rm -f $RPM_BUILD_ROOT%{script_dir}/bacula_config
+rm -f $RPM_BUILD_ROOT%{script_dir}/bconsole
+rm -f $RPM_BUILD_ROOT%{script_dir}/breload
+rm -f $RPM_BUILD_ROOT%{script_dir}/btraceback.dbx
+rm -f $RPM_BUILD_ROOT%{script_dir}/btraceback.gdb
+rm -f $RPM_BUILD_ROOT%{script_dir}/btraceback.mdb
+rm -f $RPM_BUILD_ROOT%{script_dir}/disk-changer
+rm -f $RPM_BUILD_ROOT%{script_dir}/dvd-handler
+rm -f $RPM_BUILD_ROOT%{script_dir}/manual_prune.pl
+rm -f $RPM_BUILD_ROOT%{script_dir}/mtx-changer
+rm -f $RPM_BUILD_ROOT%{script_dir}/mtx-changer.conf
+rm -f $RPM_BUILD_ROOT%{script_dir}/storage-ctl
+rm -f $RPM_BUILD_ROOT%{script_dir}/storage-ctl.conf
+rm -f $RPM_BUILD_ROOT%{doc_dir}/bacula/ChangeLog
+rm -f $RPM_BUILD_ROOT%{doc_dir}/bacula/INSTALL
+rm -f $RPM_BUILD_ROOT%{doc_dir}/bacula/LICENSE
+rm -f $RPM_BUILD_ROOT%{doc_dir}/bacula/README
+rm -f $RPM_BUILD_ROOT%{doc_dir}/bacula/ReleaseNotes
+rm -f $RPM_BUILD_ROOT%{doc_dir}/bacula/VERIFYING
+rm -f $RPM_BUILD_ROOT%/opt/bacula/share/man/man1/bacula-bwxconsole.1.gz
+
+%files
+%defattr(-,root,root)
+
+%attr(-, root, %{daemon_group}) %dir %{script_dir}
+%attr(-, root, %{daemon_group}) %dir %{sysconf_dir}
+%attr(-, root, %{daemon_group}) %dir %{working_dir}
+%attr(-, root, %{daemon_group}) %{script_dir}/bacula-ctl-fd
+%attr(-, root, %{daemon_group}) %dir %{plugin_dir}
+%attr(-, root, %{daemon_group}) %config(noreplace) %{sysconf_dir}/static-bacula-fd.conf
+%attr(-, root, %{daemon_group}) %config(noreplace) %{sysconf_dir}/bconsole.conf
+%attr(-, root, %{daemon_group}) %{_sbindir}/static-bconsole
+%attr(-, root, %{daemon_group}) %{_sbindir}/static-bacula-fd
+
+%attr(-, root, %{daemon_group}) /etc/init.d/static-bacula-fd
+%attr(-, root, %{daemon_group}) %dir /etc/logrotate.d/bacula
+%attr(-, root, %{daemon_group}) %{_man_bacula}/man8/bconsole.8.gz
+%attr(-, root, %{daemon_group}) %{_man_bacula}/man8/bacula-fd.8.gz
+
+%post
+# add our link
+
+if [ "$1" -ge 1 ] ; then
+   /sbin/chkconfig --add static-bacula-fd
+fi
+
+if [ -d %{sysconf_dir} ]; then
+   cd %{sysconf_dir}
+   if [ ! -f .rpm.sed ]; then
+       (umask 0177
+        echo "# This file is used to ensure that all passwords will" > .rpm.sed
+        echo "# match between configuration files"                  >> .rpm.sed
+       )
+       for string in XXX_REPLACE_WITH_DIRECTOR_PASSWORD_XXX XXX_REPLACE_WITH_CLIENT_PASSWORD_XXX XXX_REPLACE_WITH_STORAGE_PASSWORD_XXX XXX_REPLACE_WITH_DIRECTOR_MONITOR_PASSWORD_XXX XXX_REPLACE_WITH_CLIENT_MONITOR_PASSWORD_XXX XXX_REPLACE_WITH_STORAGE_MONITOR_PAS\
+SWORD_XXX; do
+           pass=`openssl rand -base64 33`
+           echo "s@${string}@${pass}@g" >> .rpm.sed
+       done
+   fi
+   host=`hostname -s`
+   echo "s@XXX_HOSTNAME_XXX@${host}@g" >> .rpm.sed
+   for file in *.conf; do
+      sed -f .rpm.sed $file > $file.new
+      sed "s@XXX_HOSTNAME_XXX@${host}@g" $file.new > $file
+      rm -f $file.new
+   done
+   rm .rpm.sed
+   cd /tmp
+   cat /etc/init.d/static-bacula-fd | sed s@bacula-fd@static-bacula-fd@g > .rpm.sed
+   cp .rpm.sed /etc/init.d/static-bacula-fd
+   chmod 755 /etc/init.d/static-bacula-fd
+   rm .rpm.sed   
+   cd %{sysconf_dir}
+fi
+
+%preun
+# delete our link
+if [ $1 = 0 ]; then
+   /sbin/chkconfig --del static-bacula-fd
+fi
+
+%clean
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
+
+%changelog

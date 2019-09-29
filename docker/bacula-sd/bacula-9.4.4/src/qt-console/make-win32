@@ -1,0 +1,77 @@
+#!/bin/sh
+#
+#  Used to build the Win32/Win64 version of bat
+#
+#
+# Copyright (C) 2000-2018 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+
+prepare_bat_build ()
+{
+   local version=$1
+   local dpkgs_mingw
+   if test -d ../win32/release${version}; then
+
+
+      if [ ${version} -eq 32 ]
+      then
+        depkgs_mingw='depkgs-mingw32'
+
+      elif [ ${version} -eq 64 ]
+      then
+        depkgs_mingw='depkgs-mingw-w64'
+      else
+        echo "wrong version - '${version}'."
+        exit 1
+      fi
+
+      cp -f ${DEPKGS}/${depkgs_mingw}/lib/qt/QtGui4.dll ../win32/release${version}
+      cp -f ${DEPKGS}/${depkgs_mingw}/lib/qt/QtCore4.dll ../win32/release${version}
+
+      rm -rf ../win32/release${version}/help
+      mkdir ../win32/release${version}/help
+      cp -f help/*.html ../win32/release${version}/help/
+      cp -f images/status.png ../win32/release${version}/help/
+      cp -f images/mail-message-new.png ../win32/release${version}/help/
+      qmake -spec win32 -unix -o Makefile.mingw${version} bat.pro.mingw${version}
+      echo "Make Windows bat"
+      make -j3 -f Makefile.mingw${version} $2
+      if test -f release/bat.exe; then
+         cp -f release/bat.exe ../win32/release${version}
+      else
+         cp -f debug/bat.exe ../win32/release${version}
+      fi
+   fi
+}
+
+prepare_tray_monitor_build ()
+{
+    local version=$1
+    cd tray-monitor
+    qmake -spec ../win32 -unix -o Makefile.mingw${version} tray-monitor.pro.mingw${version}
+    echo "Make Windows tray-monitor"
+    make -j3 -f Makefile.mingw${version} $2
+    if test -f release/bacula-tray-monitor.exe; then
+       cp -f release/bacula-tray-monitor.exe ../../win32/release${version}
+    else
+       cp -f debug/bacula-tray-monitor.exe ../../win32/release${version}
+    fi
+    rm -f release/bacula-tray-monitor.exe debug/bacula-tray-monitor.exe
+    cd ..
+}
+
+readonly BUILD_ARCH="$1"
+
+rm -f debug/bat.exe
+if test -f ../config.h ; then
+   mv -f ../config.h ../config.h.orig
+fi
+
+prepare_bat_build ${BUILD_ARCH:-64}
+
+if test -e ../config.h.orig ; then
+   mv -f ../config.h.orig ../config.h
+fi
+
+prepare_tray_monitor_build ${BUILD_ARCH:-64}

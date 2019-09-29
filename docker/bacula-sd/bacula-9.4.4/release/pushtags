@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2017 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# Push tags
+#
+
+. ./config
+
+push()
+{
+  for i in $bacula $docs ; do
+    cd $i
+    current=`git branch | awk '/*/ { print $2 }'`
+    git checkout ${branch}
+    git push ${1} ${branch}
+    git push ${1} tag ${fulltag}
+    echo "Pushed ${1} and git push ${1} tag ${fulltag} in $i"
+    git checkout ${current}
+  done
+}
+
+echo "Updating repo and tags for release version: ${ver}"
+
+cd $cwd
+
+fulltag=Release-$ver
+
+# Push to both remotes
+push ${remote}
+push bacula

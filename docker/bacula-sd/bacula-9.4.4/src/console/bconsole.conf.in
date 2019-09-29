@@ -1,0 +1,13 @@
+#
+# Bacula User Agent (or Console) Configuration File
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+
+Director {
+  Name = @basename@-dir
+  DIRport = @dir_port@
+  address = @hostname@
+  Password = "@dir_password@"
+}

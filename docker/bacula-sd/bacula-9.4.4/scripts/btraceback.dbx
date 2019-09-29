@@ -1,0 +1,53 @@
+# btraceback.dbx
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+
+dbxenv language_mode c++
+
+echo "fail_time ==> \c"; print -l (char *)fail_time
+echo "exename ==> \c"; print -l (char *)exename
+echo "exepath ==> \c"; print -l (char *)exepath
+echo "assert_msg ==> \c"; print -l (char *)assert_msg
+echo "db_engine_name ==> \c"; print -l (char *)db_engine_name
+echo "version ==> \c"; print -l (char *)version
+echo "host_os ==> \c"; print -l (char *)host_os
+echo "distname ==> \c"; print -l (char *)distname
+echo "distver ==> \c"; print -l (char *)distver
+echo "dist_name ==> \c"; print -l (char *)dist_name
+
+echo "******** RUNNING THREADS/LWPS:"
+echo
+lwps
+
+echo
+echo
+echo "******** STACK TRACE OF CURRENT THREAD/LWP:"
+echo
+where
+
+echo
+echo
+echo "******** VARIABLES DUMP OF CURRENT THREAD/LWP:"
+echo
+dump
+
+for LWP in $(lwps | sh sed -e 's/.*@//' -e 's/ .*//'); do
+(
+   if lwp l@$LWP; then
+      echo "******************************************"
+      echo
+      echo "******** STACK TRACE OF THREAD/LWP ${LWP}:"
+      echo
+      where
+
+      echo
+      echo "******** VARIABLES DUMP OF THREAD/LWP ${LWP}:"
+      echo
+      dump
+      echo "******************************************"
+   fi
+)
+done
+quit

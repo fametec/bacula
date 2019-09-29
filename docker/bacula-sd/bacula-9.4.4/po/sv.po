@@ -1,0 +1,609 @@
+# Swedish translations for PACKAGE package.
+# Copyright (C) 2000-2016 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Bacula 2.1.x\n"
+"Report-Msgid-Bugs-To: bacula-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2018-08-11 21:43+0200\n"
+"PO-Revision-Date: 2007-06-22 19:18+0200\n"
+"Last-Translator: Kern Sibbald <kern@bacula.org>\n"
+"Language-Team: Swedish <bacula-devel@lists.soureforge.net>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/baconfig.h:62 src/baconfig.h:63 src/baconfig.h:68 src/baconfig.h:69
+#: src/baconfig.h:80 src/baconfig.h:81
+#, c-format
+msgid "Failed ASSERT: %s\n"
+msgstr ""
+
+#: src/baconfig.h:89
+msgid "*None*"
+msgstr ""
+
+#: src/lib/status.h:84
+msgid ""
+"\n"
+"Terminated Jobs:\n"
+msgstr ""
+
+#: src/lib/status.h:91
+msgid " JobId  Level    Files      Bytes   Status   Finished        Name \n"
+msgstr ""
+
+#: src/lib/status.h:93
+msgid "===================================================================\n"
+msgstr ""
+
+#: src/lib/status.h:119
+msgid "Created"
+msgstr ""
+
+#: src/lib/status.h:123
+msgid "Error"
+msgstr ""
+
+#: src/lib/status.h:126
+msgid "Diffs"
+msgstr ""
+
+#: src/lib/status.h:129
+msgid "Cancel"
+msgstr ""
+
+#: src/lib/status.h:132
+msgid "OK"
+msgstr ""
+
+#: src/lib/status.h:135
+msgid "OK -- with warnings"
+msgstr ""
+
+#: src/lib/status.h:138
+msgid "Incomplete"
+msgstr ""
+
+#: src/lib/status.h:141
+msgid "Other"
+msgstr ""
+
+#: src/lib/status.h:153
+#, c-format
+msgid "%6d\t%-6s\t%8s\t%10s\t%-7s\t%-8s\t%s\n"
+msgstr ""
+
+#: src/lib/status.h:182
+#, c-format
+msgid "%6d  %-6s %8s %10s  %-7s  %-8s %s\n"
+msgstr ""
+
+#: src/lib/status.h:214 src/lib/status.h:225 src/lib/status.h:239
+#: src/lib/status.h:243 src/lib/status.h:247
+msgid "Bacula "
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:133
+#, c-format
+msgid "No record for %d %s\n"
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:142
+#, c-format
+msgid "Director: name=%s address=%s DIRport=%d\n"
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:146
+#, c-format
+msgid "Console: name=%s\n"
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:149
+#, c-format
+msgid "ConsoleFont: name=%s font face=%s\n"
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:153 src/qt-console/bat_conf.cpp:235
+#: src/qt-console/bat_conf.cpp:282 src/qt-console/bat_conf.cpp:312
+#, c-format
+msgid "Unknown resource type %d\n"
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:259
+#: src/qt-console/tray-monitor/tray_conf.cpp:311
+#, c-format
+msgid "\"%s\" directive is required in \"%s\" resource, but not found.\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:88
+#, c-format
+msgid "Already connected\"%s\".\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:99
+#, c-format
+msgid "Connecting to Director %s:%d"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:101
+#, c-format
+msgid ""
+"Connecting to Director %s:%d\n"
+"\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:153
+#, c-format
+msgid "Failed to initialize TLS context for Console \"%s\".\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:176
+#, c-format
+msgid "Failed to initialize TLS context for Director \"%s\".\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:198
+#: src/qt-console/tray-monitor/task.cpp:233
+msgid "Director daemon"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:236
+msgid "Initializing ..."
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:252 src/qt-console/console/console.cpp:133
+msgid "Connected"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:377
+msgid "Command completed ..."
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:384 src/qt-console/console/console.cpp:370
+msgid "Processing command ..."
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:391
+msgid "At main prompt waiting for input ..."
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:398 src/qt-console/bcomm/dircomm.cpp:408
+msgid "At prompt waiting for input ..."
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:416
+msgid "Command failed."
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:488
+msgid "Director disconnected."
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:110
+#, c-format
+msgid "Director authorization problem at \"%s:%d\"\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:117
+#, c-format
+msgid ""
+"Authorization problem: Remote server at \"%s:%d\" did not advertise required "
+"TLS support.\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:125
+#, c-format
+msgid ""
+"Authorization problem with Director at \"%s:%d\": Remote server requires "
+"TLS.\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:136
+#, c-format
+msgid "TLS negotiation failed with Director at \"%s:%d\"\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:148
+#, c-format
+msgid ""
+"Bad response to Hello command: ERR=%s\n"
+"The Director at \"%s:%d\" is probably not running.\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:165
+#, c-format
+msgid "Director at \"%s:%d\" rejected Hello command\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:182
+#, c-format
+msgid ""
+"Authorization problem with Director at \"%s:%d\"\n"
+"Most likely the passwords do not agree.\n"
+"If you are using TLS, there may have been a certificate validation error "
+"during the TLS handshake.\n"
+"For help, please see "
+msgstr ""
+
+#: src/qt-console/main.cpp:160
+msgid "Cryptography library initialization failed.\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:164
+#, c-format
+msgid "Please correct configuration file: %s\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:188
+#, c-format
+msgid ""
+"\n"
+"%sVersion: %s (%s) %s %s %s\n"
+"\n"
+"Usage: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+"       -c <file>   set configuration file to file\n"
+"       -dnn        set debug level to nn\n"
+"       -s          no signals\n"
+"       -t          test - read configuration and exit\n"
+"       -?          print this message.\n"
+"\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:221 src/qt-console/main.cpp:251
+msgid "TLS required but not configured in Bacula.\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:229
+#, c-format
+msgid ""
+"Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined for "
+"Director \"%s\" in %s. At least one CA certificate store is required.\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:238
+#, c-format
+msgid ""
+"No Director resource defined in %s\n"
+"Without that I don't how to speak to the Director :-(\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:259
+#, c-format
+msgid ""
+"Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined for "
+"Console \"%s\" in %s.\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:86
+msgid ""
+"Authorization problem.\n"
+"Most likely the passwords do not agree.\n"
+"For help, please see "
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:94
+msgid ""
+"Authorization problem: Remote server did not advertise required TLS "
+"support.\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:110
+msgid "TLS negotiation failed\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:117
+#, c-format
+msgid "Bad response to Hello command: ERR=%s\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:134
+msgid "Daemon rejected Hello command\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:89
+msgid "The Name of the Monitor should be set"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:129
+msgid "The name of the Resource should be set"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:138
+#, c-format
+msgid "The address of the Resource should be set for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:147
+#, c-format
+msgid "The Password of should be set for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:171
+#, c-format
+msgid "The TLS CA Certificate File should be a PEM file for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:182
+#, c-format
+msgid "The TLS CA Certificate Directory should be a directory for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:193
+#, c-format
+msgid "The TLS Certificate File should be a file for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:204
+#, c-format
+msgid "The TLS Key File should be a file for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/runjob.cpp:45
+msgid "This restricted console does not have access to Backup jobs"
+msgstr ""
+
+#: src/qt-console/tray-monitor/runjob.cpp:123
+msgid "Nothing selected"
+msgstr ""
+
+#: src/qt-console/tray-monitor/task.cpp:97
+msgid "Bandwidth can set only set on Client"
+msgstr ""
+
+#: src/qt-console/tray-monitor/task.cpp:102
+msgid "Bandwidth parameter is invalid"
+msgstr ""
+
+#: src/qt-console/tray-monitor/task.cpp:177
+msgid "Client daemon"
+msgstr ""
+
+#: src/qt-console/tray-monitor/task.cpp:205
+msgid "Storage daemon"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:45
+#, c-format
+msgid ""
+"\n"
+"%sVersion: %s (%s) %s %s %s\n"
+"\n"
+"Usage: tray-monitor [-c config_file] [-d debug_level]\n"
+"       -c <file>     set configuration file to file\n"
+"       -d <nn>       set debug level to <nn>\n"
+"       -dt           print timestamp in debug output\n"
+"       -t            test - read configuration and exit\n"
+"       -W 0/1        force the detection of the systray\n"
+"       -?            print this message.\n"
+"\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:118
+msgid "TLS PassPhrase"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:164
+#, c-format
+msgid ""
+"Error: %d Monitor resources defined in %s. You must define one Monitor "
+"resource.\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-ui.h:105
+#, c-format
+msgid "Failed to initialize TLS context for \"%s\".\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-ui.h:320
+msgid "Select a Director"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:172
+#, c-format
+msgid "No %s resource defined\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:181
+#, c-format
+msgid "Monitor: name=%s\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:184
+#, c-format
+msgid "Director: name=%s address=%s port=%d\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:188
+#, c-format
+msgid "Client: name=%s address=%s port=%d\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:192
+#, c-format
+msgid "Storage: name=%s address=%s port=%d\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:196
+#, c-format
+msgid "Unknown resource type %d in dump_resource.\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:284
+#, c-format
+msgid "Unknown resource type %d in free_resource.\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:318
+#, c-format
+msgid "Too many directives in \"%s\" resource\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:338
+#: src/qt-console/tray-monitor/tray_conf.cpp:372
+#, c-format
+msgid "Unknown resource type %d in save_resource.\n"
+msgstr ""
+
+#: src/win32/compat/compat.cpp:2879
+msgid ""
+"\n"
+"\n"
+"Bacula ERROR: "
+msgstr ""
+
+#: src/win32/filed/vss.cpp:244 src/win32/filed/vss.cpp:259
+#, c-format
+msgid "pthread key create failed: ERR=%s\n"
+msgstr ""
+
+#: src/win32/filed/vss.cpp:267
+#, c-format
+msgid "pthread_setspecific failed: ERR=%s\n"
+msgstr ""
+
+#: src/win32/filed/vss_generic.cpp:725
+#, c-format
+msgid "Unable to find volume %ls in the device list\n"
+msgstr ""
+
+#: src/win32/libwin32/main.cpp:227
+msgid "Bad Command Line Option"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:98
+msgid "RegisterServiceCtlHandler failed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:99
+msgid "Failure contacting the Service Handler"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:110
+msgid "Service start report failed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:163
+msgid "StartServiceCtrlDispatcher failed."
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:170
+msgid "KERNEL32.DLL not found: Bacula service not started"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:180
+msgid "Registry service not found: Bacula service not started"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:182
+msgid "Registry service entry point not found"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:204
+msgid "Report Service failure"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:235
+msgid "Unable to install the service"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:243
+msgid "Service command length too long"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:244
+msgid "Service command length too long. Service not registered."
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:257
+msgid ""
+"The Service Control Manager could not be contacted - the service was not "
+"installed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:280 src/win32/libwin32/service.cpp:309
+#: src/win32/libwin32/service.cpp:355 src/win32/libwin32/service.cpp:362
+#: src/win32/libwin32/service.cpp:366
+msgid "The Bacula service: "
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:287
+msgid ""
+"Provides file backup and restore services. Bacula -- the network backup "
+"solution."
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:298
+msgid "Cannot write System Registry for "
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:299
+msgid ""
+"The System Registry could not be updated - the Bacula service was not "
+"installed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:308
+msgid "Cannot add Bacula key to System Registry"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:319
+msgid "The "
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:373
+msgid "An existing Bacula service: "
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:381
+msgid ""
+"The service Manager could not be contacted - the Bacula service was not "
+"removed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:394
+msgid ""
+"Could not find registry entry.\n"
+"Service probably not registerd - the Bacula service was not removed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:401
+msgid "Could not delete Registry key for "
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:411
+msgid "Bacula could not be contacted, probably not running"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:418
+msgid "The Bacula service has been removed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:459
+msgid "SetServiceStatus failed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:485
+#, c-format
+msgid ""
+"\n"
+"\n"
+"%s error: %ld at %s:%d"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:561
+#, c-format
+msgid "Locked by: %s, duration: %ld seconds\n"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:565
+#, c-format
+msgid "No longer locked\n"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:569
+msgid "Could not lock database"
+msgstr ""

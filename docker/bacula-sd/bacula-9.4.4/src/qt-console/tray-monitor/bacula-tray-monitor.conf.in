@@ -1,0 +1,32 @@
+#
+# Bacula Tray Monitor Configuration File
+#
+# Copyright (C) 2000-2017 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+
+Monitor {
+  Name = @basename@-mon
+  RefreshInterval = 120 seconds
+}
+   
+Client {
+  Name = @basename@-fd
+  Password = "@mon_fd_password@"          # password for FileDaemon
+  Address = @hostname@
+  Port = @fd_port@
+}
+
+#Storage {
+#  Name = @basename@-sd
+#  Address = @hostname@
+#  Port = @sd_port@
+#  Password = "@mon_sd_password@"          # password for StorageDaemon
+#}
+#
+#Director {
+#  Name = @basename@-dir
+#  Address = @hostname@
+#  Port = @dir_port@
+#  Password = "@mon_dir_password@"         # password for the Directors   
+#}

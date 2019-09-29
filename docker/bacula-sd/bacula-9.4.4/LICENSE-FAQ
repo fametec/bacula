@@ -1,0 +1,135 @@
+       
+                Bacula License FAQ
+
+Note: This file is not the Bacula Community (bacula.org) license,
+which you will find in the LICENSE file. This is a FAQ about the
+Bacula AGPLv3 and the other third-party licenses used in certain
+source code files of the Bacula software.
+
+
+             Affero General Public License
+History:
+The original Bacula code was Copyright Kern Sibbald and John Walker.
+After November 2004, it became Copyright Kern Sibbald, and finally,
+the copyright was transferred to the Free Software Foundation Europe
+on 15 November 2006. The license was changed from GPLv2 to AGPLv3
+on 24 July 2010. The copyright Fiduciary License Agreement signed 
+with Kern Sibbald and the FSFE 15 November 2006 was terminated as
+of 3 March 2015.  Code subsequent to 3 March 2015 is 
+Copyright, Kern Sibbald.
+
+Trademark:
+The name Bacula is a registered trademark of Kern Sibbald.
+
+"Fair use" of the trademark is permitted following standard customs
+that any prominent use (e.g.  cover of a book) or the first use of
+the name Bacula will include a trademark symbol.  If you fork the
+Bacula project and make any significant changes to the functionality
+of Bacula, to avoid confusion between your fork and Bacula, you must
+give your fork another name.  You are not required to remove all
+references to Bacula in the source code or "fair uses" in the
+documentation.
+
+===================================
+
+What follows is information from the authors of the code:
+
+License:
+To the best of our knowledge, all code used in Bacula, which is
+copyrighted by a third party, has licenses that are compatible
+with the OpenSSL license, and so given the exceptions that we have
+made to the AGPLv3 (in LICENSE), Bacula can be freely linked and distributed
+with the OpenSSL libraries, and in binary form with the Microsoft
+VSS libraries.
+
+Intellectual Property rights:
+Recipient understands that although each Contributor to Bacula grants
+the licenses to its Contributions set forth herein, no assurances are
+provided by any Contributor that the Program does not infringe the
+patent or other intellectual property rights of any other entity.
+Each Contributor disclaims any liability to Recipient for claims
+brought by any other entity based on infringement of intellectual
+property rights or otherwise.  As a condition to exercising the rights
+and licenses granted hereunder, each Recipient hereby assumes sole
+responsibility to secure any other intellectual property rights
+needed, if any.  For example, if a third party patent license is
+required to allow Recipient to distribute the Program, it is
+Recipient's responsibility to acquire that license before distributing
+the Program.
+
+Copyrights:
+Each Contributor to Bacula represents that to its knowledge it has
+sufficient copyright rights in its Contribution, if any, to grant
+the copyright license set forth in this Agreement.
+
+Other Licenses used in some source files. Note, this list changes from
+time to time, so is not exhaustive:
+
+GPLv2 or later license:
+ src/tools/bsmtp.c
+    Copyright (C) 1997 Ralf S. Engelschall, All Rights Reserved.
+  (note, bsmtp.c does not use OpenSSL, nor is it used with the code
+   of any other part of Bacula)
+
+3 clause BSD License notice for inclusion with the binary:
+ src/lib/fnmatch.c
+   * Copyright (c) 1989, 1993, 1994
+   *      The Regents of the University of California.  All rights reserved.
+ src/lib/fnmatch.h
+   * Copyright (c) 1992, 1993
+   *      The Regents of the University of California.  All rights reserved.
+
+Permissive licenses:
+ Most Makefile.in, *.in, and script files are copyright BSD 2-Clause as noted
+ in each individual file.
+
+ src/lib/crc32.c
+   Copyright (C) 2010-2015 Joakim Tjernlund
+   Under BSD 2-Clause
+
+ src/lib/var.c/h
+   **  OSSP var - Variable Expansion
+   **  Copyright (c) 2001-2002 Ralf S. Engelschall <rse@engelschall.com>
+   **  Copyright (c) 2001-2002 The OSSP Project (http://www.ossp.org/)
+   **  Copyright (c) 2001-2002 Cable & Wireless Deutschland (http://www.cw.com/de/)
+
+ src/lib/bsnprintf.c
+   * Copyright Patrick Powell 1995
+
+ src/bregex.c/h
+   * Copyright (c) 1991 Tatu Ylonen, Espoo, Finland
+
+ src/lib/sha1.c/h
+   Copyright (C) The Internet Society (2001).  All Rights Reserved.
+
+ src/win32/compat/getopt.c
+   "... licensed under IBM copyrights to use the IBM-provided source code
+   in any way he or she deems fit ..."
+
+ src/win32/compat/sys/mtio.h (LGPL)
+   Copyright (C) 1996, 1997 Free Software Foundation, Inc.
+
+
+Bacula can be enabled with data encryption and/or communications
+encryption. If this is the case, you will be including OpenSSL code that
+contains cryptographic software written by Eric Young
+(eay@cryptsoft.com) and also software written by Tim Hudson
+(tjh@cryptsoft.com).
+
+There are parts of Bacula that are licensed under the BSD 2-Clause so
+that those files may be used in proprietary code to interface with
+Bacula.
+
+Finally there are parts of Bacula that are in the public domain.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

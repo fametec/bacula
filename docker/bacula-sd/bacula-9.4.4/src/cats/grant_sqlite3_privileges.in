@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# shell script to grant privileges to the bacula database
+#
+bindir=@SQLITE_BINDIR@
+
+# nothing to do here

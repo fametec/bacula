@@ -1,0 +1,32 @@
+# Makefile to install logwatch script
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# 08 Jan 2005 D. Scott Barninger
+#
+
+ifeq ("$(shell test -d /etc/log.d)",0)
+	SYSCONFDIR=/etc/log.d
+	SCRIPTDIR=/etc/log.d
+else
+	SYSCONFDIR=/etc/logwatch
+	SCRIPTDIR=/usr/share/logwatch
+endif
+
+INSTALL=@INSTALL@
+
+all:	install
+
+install:
+
+	$(INSTALL) -m 755 bacula $(DESTDIR)$(SCRIPTDIR)/scripts/services/bacula
+	$(INSTALL) -m 755 applybaculadate $(DESTDIR)$(SCRIPTDIR)/scripts/shared/applybaculadate
+	$(INSTALL) -m 644 logfile.bacula.conf $(DESTDIR)$(SYSCONFDIR)/conf/logfiles/bacula.conf
+	$(INSTALL) -m 644 services.bacula.conf $(DESTDIR)$(SYSCONFDIR)/conf/services/bacula.conf
+
+uninstall:
+	rm -f $(DESTDIR)$(SCRIPTDIR)/scripts/services/bacula
+	rm -f $(DESTDIR)$(SCRIPTDIR)/scripts/shared/applybaculadate
+	rm -f $(DESTDIR)$(SYSCONFDIR)/conf/logfiles/bacula.conf
+	rm -f $(DESTDIR)$(SYSCONFDIR)/conf/services/bacula.conf

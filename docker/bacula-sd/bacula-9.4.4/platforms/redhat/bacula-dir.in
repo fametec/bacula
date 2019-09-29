@@ -1,0 +1,93 @@
+#! /bin/sh
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# bacula       This shell script takes care of starting and stopping
+#	       the bacula Director daemon
+#
+# chkconfig: 2345 92 9
+# description: The Leading Open Source Backup Solution.
+#
+#  For Bacula release @VERSION@ (@DATE@) -- @DISTNAME@
+#
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+DAEMON_OPTIONS=''
+DAEMON_USER='yes'
+DIR_USER=@dir_user@
+DIR_GROUP=@dir_group@
+DIR_OPTIONS=''
+OS=`uname -s`
+
+# if /lib/tls exists, force Bacula to use the glibc pthreads instead
+if [ -d "/lib/tls" -a $OS = "Linux" -a `uname -r | cut -c1-3` = "2.4" ] ; then
+     export LD_ASSUME_KERNEL=2.4.19
+fi
+
+# pull in any user defined DIR_DIR_OPTIONS, DIR_USER, DIR_GROUP or DAEMON_USER
+[ -f /etc/sysconfig/bacula ] && . /etc/sysconfig/bacula
+
+#
+# Disable Glibc malloc checks, it doesn't help and it keeps from getting
+#   good dumps
+MALLOC_CHECK_=0
+export MALLOC_CHECK_
+
+RETVAL=0
+case "$1" in
+    start)
+       if [ "${DIR_USER}" != '' ]; then
+	  DIR_OPTIONS="${DIR_OPTIONS} -u ${DIR_USER}"
+       fi
+										   
+       if [ "${DIR_GROUP}" != '' ]; then
+	  DIR_OPTIONS="${DIR_OPTIONS} -g ${DIR_GROUP}"
+       fi
+
+       if [ "${DAEMON_USER}" != '' -a "${DIR_USER}" != '' ]; then
+	  DIR_OPTIONS=""
+	  if [ "${DIR_GROUP}" != '' ]; then
+	     chown ${DIR_USER}:${DIR_GROUP} @working_dir@/bacula-dir* 2> /dev/null
+	  else 
+	     chown ${DIR_USER} @working_dir@/bacula-dir* 2> /dev/null
+	  fi
+	  DAEMON_OPTIONS="--user ${DIR_USER}"
+       fi
+       echo -n "Starting Bacula Director services: "
+       daemon $DAEMON_OPTIONS @sbindir@/bacula-dir $2 ${DIR_OPTIONS} -c @sysconfdir@/bacula-dir.conf
+       RETVAL=$?
+       echo
+       if [ $RETVAL -eq 0 ]; then
+          touch @subsysdir@/bacula-dir
+          logger -p daemon.info "bacula-dir started" >/dev/null 2>/dev/null
+       fi
+       ;;
+    stop)
+       echo -n "Stopping Bacula Director services: "
+       killproc @sbindir@/bacula-dir
+       RETVAL=$?
+       echo
+       if [ $RETVAL -eq 0 ]; then
+          rm -f @subsysdir@/bacula-dir
+          logger -p daemon.info "bacula-dir stopped" >/dev/null 2>/dev/null
+       fi
+       ;;
+    restart)
+       $0 stop
+       sleep 5
+       $0 start
+       RETVAL=$?
+       ;;
+    status)
+       status @sbindir@/bacula-dir
+       RETVAL=$?
+       ;;
+    *)
+       echo "Usage: $0 {start|stop|restart|status}"
+       exit 1
+       ;;
+esac
+exit $RETVAL

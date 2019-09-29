@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# Bacula interface to get device freespace
+#
+#  If you set in your Device resource
+#
+#  Free Space Command = "path-to-this-script/freespace %a"
+#    you will have the following input to this script:
+#
+#
+#  freespace "archive-device"
+#                  $1
+#
+
+OS=`uname`
+case ${OS} in
+  SunOS)
+    cmd="/bin/df -P"
+    ;;
+  FreeBSD)
+    cmd="/bin/df -P"
+    ;;
+  Linux)
+    cmd="/bin/df -P"
+  ;;
+  *)
+    cmd="/bin/df -P"
+  ;;
+esac
+
+$cmd $1 | tail -1 | awk '{ print $4 }'

@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2019 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# Upload to File Release System on serfullver
+#
+. ./config
+
+RSYNC="rsync -av --no-g --progress $upload_opt"
+
+do_upload()
+{
+where=$1
+echo "Creating ${where}:/home/src/$fullver"
+ssh ${where} <<EOF
+cd /home/src/
+mkdir -p $ver
+EOF
+
+echo "Uploading source"
+for i in bacula-$ver* bacula-*-$ver*; do \
+   echo "Upload $i to ${where}:/home/src/$ver"
+   $RSYNC $i ${where}:/home/src/$ver/; \
+done
+
+# Upload release notes
+echo "Uplode ReleaseNotes to ${where}:/home/src/$ver"
+$RSYNC ReleaseNotes ${where}:/home/src/$ver/
+echo "Uplod ChangeLog to ${where}:/home/src/$ver"
+$RSYNC ChangeLog ${where}:/home/src/$ver/
+$RSYNC LICENSE* ${where}:/home/src/$ver/
+
+
+}
+
+do_upload bacula

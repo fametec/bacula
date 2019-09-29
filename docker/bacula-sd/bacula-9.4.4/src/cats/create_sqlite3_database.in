@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# shell script to create Bacula SQLite tables
+
+bindir=@SQLITE_BINDIR@
+PATH=$bindir:$PATH
+cd @working_dir@
+db_name=@db_name@
+
+sqlite3 $* ${db_name}.db <<END-OF-DATA
+END-OF-DATA
+exit 0

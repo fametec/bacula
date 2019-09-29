@@ -1,0 +1,6436 @@
+# Ukrainian translations for bacula package
+# Український переклад bacula.
+# Copyright (C) 2000-2018 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+# Vitaliy Kosharskiy <vkosharskiy@ukrcard.com.ua>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bacula 9.2.1\n"
+"Report-Msgid-Bugs-To: bacula-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2018-08-11 21:43+0200\n"
+"PO-Revision-Date: 2010-01-08 17:32+0300\n"
+"Last-Translator: Vitaliy Kosharskiy <kisa_co@ukrpost.net>\n"
+"Language-Team: Ukrainian\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/baconfig.h:62 src/baconfig.h:63 src/baconfig.h:68 src/baconfig.h:69
+#: src/baconfig.h:80 src/baconfig.h:81
+#, c-format
+msgid "Failed ASSERT: %s\n"
+msgstr ""
+
+#: src/baconfig.h:89
+msgid "*None*"
+msgstr ""
+
+#: src/lib/status.h:84
+msgid ""
+"\n"
+"Terminated Jobs:\n"
+msgstr ""
+
+#: src/lib/status.h:91
+msgid " JobId  Level    Files      Bytes   Status   Finished        Name \n"
+msgstr ""
+
+#: src/lib/status.h:93
+msgid "===================================================================\n"
+msgstr ""
+
+#: src/lib/status.h:119
+msgid "Created"
+msgstr ""
+
+#: src/lib/status.h:123
+msgid "Error"
+msgstr ""
+
+#: src/lib/status.h:126
+msgid "Diffs"
+msgstr ""
+
+#: src/lib/status.h:129
+msgid "Cancel"
+msgstr ""
+
+#: src/lib/status.h:132
+msgid "OK"
+msgstr ""
+
+#: src/lib/status.h:135
+msgid "OK -- with warnings"
+msgstr ""
+
+#: src/lib/status.h:138
+msgid "Incomplete"
+msgstr ""
+
+#: src/lib/status.h:141
+msgid "Other"
+msgstr ""
+
+#: src/lib/status.h:153
+#, c-format
+msgid "%6d\t%-6s\t%8s\t%10s\t%-7s\t%-8s\t%s\n"
+msgstr ""
+
+#: src/lib/status.h:182
+#, c-format
+msgid "%6d  %-6s %8s %10s  %-7s  %-8s %s\n"
+msgstr ""
+
+#: src/lib/status.h:214 src/lib/status.h:225 src/lib/status.h:239
+#: src/lib/status.h:243 src/lib/status.h:247
+msgid "Bacula "
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:133
+#, c-format
+msgid "No record for %d %s\n"
+msgstr "Відсутні записи для %d %s\n"
+
+#: src/qt-console/bat_conf.cpp:142
+#, c-format
+msgid "Director: name=%s address=%s DIRport=%d\n"
+msgstr "Керівник: назва=%s адреса=%s DIRport=%d\n"
+
+#: src/qt-console/bat_conf.cpp:146
+#, c-format
+msgid "Console: name=%s\n"
+msgstr "Консоль: назва=%s\n"
+
+#: src/qt-console/bat_conf.cpp:149
+#, fuzzy, c-format
+msgid "ConsoleFont: name=%s font face=%s\n"
+msgstr "Консоль: назва=%s rcfile=%s histfile=%s\n"
+
+#: src/qt-console/bat_conf.cpp:153 src/qt-console/bat_conf.cpp:235
+#: src/qt-console/bat_conf.cpp:282 src/qt-console/bat_conf.cpp:312
+#, c-format
+msgid "Unknown resource type %d\n"
+msgstr "Невідомий тип ресурсу %d\n"
+
+#: src/qt-console/bat_conf.cpp:259
+#: src/qt-console/tray-monitor/tray_conf.cpp:311
+#, fuzzy, c-format
+msgid "\"%s\" directive is required in \"%s\" resource, but not found.\n"
+msgstr "Не знайдено необхідний елемент %s для ресурсу %s.\n"
+
+#: src/qt-console/bcomm/dircomm.cpp:88
+#, c-format
+msgid "Already connected\"%s\".\n"
+msgstr "Вже приєднано\"%s\".\n"
+
+#: src/qt-console/bcomm/dircomm.cpp:99
+#, c-format
+msgid "Connecting to Director %s:%d"
+msgstr "Приєднуюсь до Керівника %s:%d"
+
+#: src/qt-console/bcomm/dircomm.cpp:101
+#, c-format
+msgid ""
+"Connecting to Director %s:%d\n"
+"\n"
+msgstr ""
+"З'єднуюсь із Керівником %s:%d\n"
+"\n"
+
+#: src/qt-console/bcomm/dircomm.cpp:153
+#, c-format
+msgid "Failed to initialize TLS context for Console \"%s\".\n"
+msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#: src/qt-console/bcomm/dircomm.cpp:176
+#, c-format
+msgid "Failed to initialize TLS context for Director \"%s\".\n"
+msgstr "Ініціалізація контексту TLS для Керівника невдала \"%s\".\n"
+
+#: src/qt-console/bcomm/dircomm.cpp:198
+#: src/qt-console/tray-monitor/task.cpp:233
+msgid "Director daemon"
+msgstr "Керівник"
+
+#: src/qt-console/bcomm/dircomm.cpp:236
+msgid "Initializing ..."
+msgstr "Ініціалізація ..."
+
+#: src/qt-console/bcomm/dircomm.cpp:252 src/qt-console/console/console.cpp:133
+msgid "Connected"
+msgstr "З'єднано"
+
+#: src/qt-console/bcomm/dircomm.cpp:377
+msgid "Command completed ..."
+msgstr "Команду виконано ..."
+
+#: src/qt-console/bcomm/dircomm.cpp:384 src/qt-console/console/console.cpp:370
+msgid "Processing command ..."
+msgstr "Виконання команди ..."
+
+#: src/qt-console/bcomm/dircomm.cpp:391
+msgid "At main prompt waiting for input ..."
+msgstr "Очікуться введення у основній рядку ..."
+
+#: src/qt-console/bcomm/dircomm.cpp:398 src/qt-console/bcomm/dircomm.cpp:408
+msgid "At prompt waiting for input ..."
+msgstr "Очікуться введення у рядку ..."
+
+#: src/qt-console/bcomm/dircomm.cpp:416
+msgid "Command failed."
+msgstr "Помилка команди"
+
+#: src/qt-console/bcomm/dircomm.cpp:488
+msgid "Director disconnected."
+msgstr "Керівник від'єднано"
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:110
+#, c-format
+msgid "Director authorization problem at \"%s:%d\"\n"
+msgstr "Проблеми авторизації Директора \"%s:%d\"\n"
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:117
+#, c-format
+msgid ""
+"Authorization problem: Remote server at \"%s:%d\" did not advertise required "
+"TLS support.\n"
+msgstr ""
+"Проблеми авторизації: Віддалений сервер \"%s:%d\" не повідомляє про "
+"необхідність використання TLS.\n"
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:125
+#, c-format
+msgid ""
+"Authorization problem with Director at \"%s:%d\": Remote server requires "
+"TLS.\n"
+msgstr ""
+"Проблеми авторизації Керівника \"%s:%d\": Віддалений сепвер вимагає TLS.\n"
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:136
+#, c-format
+msgid "TLS negotiation failed with Director at \"%s:%d\"\n"
+msgstr "Встановлення TLS із Керівником невдале \"%s:%d\"\n"
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:148
+#, c-format
+msgid ""
+"Bad response to Hello command: ERR=%s\n"
+"The Director at \"%s:%d\" is probably not running.\n"
+msgstr ""
+"Погана відповідь на команду Hello: ERR=%s\n"
+"Керівник \"%s:%d\" ймовірно не запущений.\n"
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:165
+#, c-format
+msgid "Director at \"%s:%d\" rejected Hello command\n"
+msgstr "Керівник \"%s:%d\" відкинув команду Hello\n"
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:182
+#, fuzzy, c-format
+msgid ""
+"Authorization problem with Director at \"%s:%d\"\n"
+"Most likely the passwords do not agree.\n"
+"If you are using TLS, there may have been a certificate validation error "
+"during the TLS handshake.\n"
+"For help, please see "
+msgstr ""
+"Проблеми авторизації із Керівником \"%s:%d\"\n"
+"Швидше за все, проблема у паролях.\n"
+"Якщо Ви використовуєте TLS, можливо, невдала перевірка сертифікату під час "
+"TLS handshake.\n"
+"Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/rel-"
+"manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#: src/qt-console/main.cpp:160
+msgid "Cryptography library initialization failed.\n"
+msgstr "Ініціалізація криптографії невдала.\n"
+
+#: src/qt-console/main.cpp:164
+#, c-format
+msgid "Please correct configuration file: %s\n"
+msgstr "Будьласка виправте файл конфігурації: %s\n"
+
+#: src/qt-console/main.cpp:188
+#, fuzzy, c-format
+msgid ""
+"\n"
+"%sVersion: %s (%s) %s %s %s\n"
+"\n"
+"Usage: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+"       -c <file>   set configuration file to file\n"
+"       -dnn        set debug level to nn\n"
+"       -s          no signals\n"
+"       -t          test - read configuration and exit\n"
+"       -?          print this message.\n"
+"\n"
+msgstr ""
+"\n"
+"Версія: %s (%s) %s %s %s\n"
+"\n"
+"Використання: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+"       -c <file>   set configuration file to file\n"
+"       -dnn        set debug level to nn\n"
+"       -s          без сигналів\n"
+"       -t          перевірка - прочитати конфігурацію і вийти\n"
+"       -?          print this message.\n"
+"\n"
+
+#: src/qt-console/main.cpp:221 src/qt-console/main.cpp:251
+msgid "TLS required but not configured in Bacula.\n"
+msgstr "TLS необхідний, але не налаштовано у Bacula.\n"
+
+#: src/qt-console/main.cpp:229
+#, c-format
+msgid ""
+"Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined for "
+"Director \"%s\" in %s. At least one CA certificate store is required.\n"
+msgstr ""
+"Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" не "
+"задано для Керівника \"%s\" у %s. Необхідне щонайменше одне сховище для "
+"сертифікату CA.\n"
+
+#: src/qt-console/main.cpp:238
+#, c-format
+msgid ""
+"No Director resource defined in %s\n"
+"Without that I don't how to speak to the Director :-(\n"
+msgstr ""
+"У %s не задано ресурсу Керівника\n"
+"Без цього я не знаю як спілкуватись із Керівником :-(\n"
+
+#: src/qt-console/main.cpp:259
+#, c-format
+msgid ""
+"Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined for "
+"Console \"%s\" in %s.\n"
+msgstr ""
+"Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" не "
+"задано для Консолі \"%s\" у %s.\n"
+
+#: src/qt-console/tray-monitor/authenticate.cpp:86
+#, fuzzy
+msgid ""
+"Authorization problem.\n"
+"Most likely the passwords do not agree.\n"
+"For help, please see "
+msgstr ""
+"Проблеми під час авторизації Керівником.\n"
+"Швидше за все, невірні паролі.\n"
+"Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/rel-"
+"manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#: src/qt-console/tray-monitor/authenticate.cpp:94
+msgid ""
+"Authorization problem: Remote server did not advertise required TLS "
+"support.\n"
+msgstr ""
+"Проблеми авторизації: Віддалений сервер не повідомив про необхідність "
+"використання TLS.\n"
+
+#: src/qt-console/tray-monitor/authenticate.cpp:110
+msgid "TLS negotiation failed\n"
+msgstr "Невдале встановлення з'єднання TLS\n"
+
+#: src/qt-console/tray-monitor/authenticate.cpp:117
+#, c-format
+msgid "Bad response to Hello command: ERR=%s\n"
+msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#: src/qt-console/tray-monitor/authenticate.cpp:134
+#, fuzzy
+msgid "Daemon rejected Hello command\n"
+msgstr "Збирач відхилив команду Hello \n"
+
+#: src/qt-console/tray-monitor/conf.cpp:89
+msgid "The Name of the Monitor should be set"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:129
+msgid "The name of the Resource should be set"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:138
+#, c-format
+msgid "The address of the Resource should be set for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:147
+#, c-format
+msgid "The Password of should be set for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:171
+#, c-format
+msgid "The TLS CA Certificate File should be a PEM file for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:182
+#, c-format
+msgid "The TLS CA Certificate Directory should be a directory for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:193
+#, c-format
+msgid "The TLS Certificate File should be a file for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/conf.cpp:204
+#, c-format
+msgid "The TLS Key File should be a file for resource %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/runjob.cpp:45
+msgid "This restricted console does not have access to Backup jobs"
+msgstr ""
+
+#: src/qt-console/tray-monitor/runjob.cpp:123
+#, fuzzy
+msgid "Nothing selected"
+msgstr "Статус задачі: Відмінена"
+
+#: src/qt-console/tray-monitor/task.cpp:97
+msgid "Bandwidth can set only set on Client"
+msgstr ""
+
+#: src/qt-console/tray-monitor/task.cpp:102
+msgid "Bandwidth parameter is invalid"
+msgstr ""
+
+#: src/qt-console/tray-monitor/task.cpp:177
+#, fuzzy
+msgid "Client daemon"
+msgstr "Збирач"
+
+#: src/qt-console/tray-monitor/task.cpp:205
+msgid "Storage daemon"
+msgstr "Зберігач"
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:45
+#, fuzzy, c-format
+msgid ""
+"\n"
+"%sVersion: %s (%s) %s %s %s\n"
+"\n"
+"Usage: tray-monitor [-c config_file] [-d debug_level]\n"
+"       -c <file>     set configuration file to file\n"
+"       -d <nn>       set debug level to <nn>\n"
+"       -dt           print timestamp in debug output\n"
+"       -t            test - read configuration and exit\n"
+"       -W 0/1        force the detection of the systray\n"
+"       -?            print this message.\n"
+"\n"
+msgstr ""
+"Автор Nicolas Boichat (2004)\n"
+"\n"
+"Версія: %s (%s) %s %s %s\n"
+"\n"
+"Використання: tray-monitor [-c config_file] [-d debug_level]\n"
+"       -c <file>     задати конфігураційний файл <file>\n"
+"       -d <nn>       встановити рівень відлагоджування у <nn>\n"
+"       -dt           виводити часову мітку у даних відлагоджування\n"
+"       -t            перевірка - прогитати конфігурацію і завершити\n"
+"       -?            показати це повідомлення.\n"
+"\n"
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:118
+msgid "TLS PassPhrase"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:164
+#, fuzzy, c-format
+msgid ""
+"Error: %d Monitor resources defined in %s. You must define one Monitor "
+"resource.\n"
+msgstr ""
+"Помилка: %d ресурсів Спостерігача визначено у %s. Ви повинні визначити одині "
+"тільки один ресурс Спостерігача.\n"
+
+#: src/qt-console/tray-monitor/tray-ui.h:105
+#, fuzzy, c-format
+msgid "Failed to initialize TLS context for \"%s\".\n"
+msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#: src/qt-console/tray-monitor/tray-ui.h:320
+#, fuzzy
+msgid "Select a Director"
+msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:172
+#, c-format
+msgid "No %s resource defined\n"
+msgstr "Ресурс %s не визначено\n"
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:181
+#, fuzzy, c-format
+msgid "Monitor: name=%s\n"
+msgstr "Консоль: назва=%s\n"
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:184
+#, fuzzy, c-format
+msgid "Director: name=%s address=%s port=%d\n"
+msgstr "Керівник: назва=%s address=%s FDport=%d\n"
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:188
+#, fuzzy, c-format
+msgid "Client: name=%s address=%s port=%d\n"
+msgstr "Керівник: назва=%s address=%s FDport=%d\n"
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:192
+#, fuzzy, c-format
+msgid "Storage: name=%s address=%s port=%d\n"
+msgstr "Сховище: назва=%s address=%s SDport=%d\n"
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:196
+#, c-format
+msgid "Unknown resource type %d in dump_resource.\n"
+msgstr "Невідомий тип ресурсу %d у dump_resource.\n"
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:284
+#, c-format
+msgid "Unknown resource type %d in free_resource.\n"
+msgstr "Невідомий тип ресурсу %d у free_resource.\n"
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:318
+#, fuzzy, c-format
+msgid "Too many directives in \"%s\" resource\n"
+msgstr "Забагато елементів у ресурсі %s\n"
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:338
+#: src/qt-console/tray-monitor/tray_conf.cpp:372
+#, c-format
+msgid "Unknown resource type %d in save_resource.\n"
+msgstr "Невідомий тип ресурсу %d у save_resource.\n"
+
+#: src/win32/compat/compat.cpp:2879
+msgid ""
+"\n"
+"\n"
+"Bacula ERROR: "
+msgstr ""
+
+#: src/win32/filed/vss.cpp:244 src/win32/filed/vss.cpp:259
+#, fuzzy, c-format
+msgid "pthread key create failed: ERR=%s\n"
+msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#: src/win32/filed/vss.cpp:267
+#, fuzzy, c-format
+msgid "pthread_setspecific failed: ERR=%s\n"
+msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#: src/win32/filed/vss_generic.cpp:725
+#, fuzzy, c-format
+msgid "Unable to find volume %ls in the device list\n"
+msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#: src/win32/libwin32/main.cpp:227
+msgid "Bad Command Line Option"
+msgstr "Не зрозумілий параметр командного рядка"
+
+#: src/win32/libwin32/service.cpp:98
+msgid "RegisterServiceCtlHandler failed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:99
+msgid "Failure contacting the Service Handler"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:110
+msgid "Service start report failed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:163
+msgid "StartServiceCtrlDispatcher failed."
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:170
+msgid "KERNEL32.DLL not found: Bacula service not started"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:180
+msgid "Registry service not found: Bacula service not started"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:182
+#, fuzzy
+msgid "Registry service entry point not found"
+msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#: src/win32/libwin32/service.cpp:204
+#, fuzzy
+msgid "Report Service failure"
+msgstr "Помилка команди"
+
+#: src/win32/libwin32/service.cpp:235
+#, fuzzy
+msgid "Unable to install the service"
+msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#: src/win32/libwin32/service.cpp:243
+msgid "Service command length too long"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:244
+msgid "Service command length too long. Service not registered."
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:257
+msgid ""
+"The Service Control Manager could not be contacted - the service was not "
+"installed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:280 src/win32/libwin32/service.cpp:309
+#: src/win32/libwin32/service.cpp:355 src/win32/libwin32/service.cpp:362
+#: src/win32/libwin32/service.cpp:366
+msgid "The Bacula service: "
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:287
+msgid ""
+"Provides file backup and restore services. Bacula -- the network backup "
+"solution."
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:298
+#, fuzzy
+msgid "Cannot write System Registry for "
+msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#: src/win32/libwin32/service.cpp:299
+msgid ""
+"The System Registry could not be updated - the Bacula service was not "
+"installed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:308
+msgid "Cannot add Bacula key to System Registry"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:319
+msgid "The "
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:373
+msgid "An existing Bacula service: "
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:381
+msgid ""
+"The service Manager could not be contacted - the Bacula service was not "
+"removed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:394
+msgid ""
+"Could not find registry entry.\n"
+"Service probably not registerd - the Bacula service was not removed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:401
+#, fuzzy
+msgid "Could not delete Registry key for "
+msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#: src/win32/libwin32/service.cpp:411
+msgid "Bacula could not be contacted, probably not running"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:418
+msgid "The Bacula service has been removed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:459
+msgid "SetServiceStatus failed"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:485
+#, c-format
+msgid ""
+"\n"
+"\n"
+"%s error: %ld at %s:%d"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:561
+#, c-format
+msgid "Locked by: %s, duration: %ld seconds\n"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:565
+#, c-format
+msgid "No longer locked\n"
+msgstr ""
+
+#: src/win32/libwin32/service.cpp:569
+#, fuzzy
+msgid "Could not lock database"
+msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Query failed: %s: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to initialize DB lock. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Attribute create error. %s"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "error fetching row: %s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fetch failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "error ending batch mode: %s"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "insert %s failed:\n"
+#~ "%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "update %s failed:\n"
+#~ "%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "delete %s failed:\n"
+#~ "%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not init database batch connection\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open database \"%s\": ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Create DB Job record %s failed. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Create JobMedia record %s failed: ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Update Media record %s failed: ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "pool record %s already exists\n"
+#~ msgstr "Файл пропущено. Вже існує: %s\n"
+
+#, fuzzy
+#~ msgid "Create db Pool record %s failed: ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Device record %s already exists\n"
+#~ msgstr "Файл пропущено. Вже існує: %s\n"
+
+#, fuzzy
+#~ msgid "Create db Device record %s failed: ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "More than one Storage record!: %d\n"
+#~ msgstr "Приєднуюсь до Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "error fetching Storage row: %s\n"
+#~ msgstr "Приєднуюсь до Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Create DB Storage record %s failed. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Create db mediatype record %s failed: ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Volume \"%s\" already exists.\n"
+#~ msgstr "Файл пропущено. Вже існує: %s\n"
+
+#, fuzzy
+#~ msgid "Create DB Media record %s failed. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "More than one Client!: %d\n"
+#~ msgstr "Приєднуюсь до Клієнта %s:%d\n"
+
+#, fuzzy
+#~ msgid "Create DB Client record %s failed. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Create db Path record %s failed. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Create DB Counters record %s failed. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "error fetching FileSet row: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Create DB FileSet record %s failed. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Create db File record %s failed. ERR=%s"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error fetching row for file=%s: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Create db Filename record %s failed. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Create db Object record %s failed. ERR=%s"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "No pool record %s exists\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Expecting one pool record, got %d\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error fetching row %s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unknown level=%d\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "No Job record found: ERR=%s\n"
+#~ "CMD=%s\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Unknown Job level=%d\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "No Job found for: %s.\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "No Job found for: %s\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "No Volume record found for item %d.\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Error fetching row: %s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "File record for PathId=%s FilenameId=%s not found.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "File record not found in Catalog.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Filename record: %s not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Path record: %s not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "No Job found for JobId %s\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Error fetching row %d: ERR=%s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Pool id select failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Client id select failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "More than one Client!: %s\n"
+#~ msgstr "Приєднуюсь до Клієнта %s:%d\n"
+
+#, fuzzy
+#~ msgid "Client record not found in Catalog.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "FileSet record \"%s\" not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "FileSet record not found in Catalog.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Media id select failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "query dbids failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Media record with MediaId=%s not found.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Media record for Volume name \"%s\" not found.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Media record for MediaId=%u not found in Catalog.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Media record for Volume Name \"%s\" not found in Catalog.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "More than one Snapshot!: %s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Snapshot record with SnapshotId=%s not found.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Snapshot record for Snapshot name \"%s\" not found.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Query failed: %s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Database %s does not exist, please create it.\n"
+#~ msgstr "Спроба створити вже існуючий Том \"%s\". Спробуйте ще раз.\n"
+
+#, fuzzy
+#~ msgid "Unable to open Database=%s. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#~ msgid "Authorization problem: Remote server requires TLS.\n"
+#~ msgstr "Проблеми авторизації: Віддалений сервер вимагає використання TLS.\n"
+
+#~ msgid "Director rejected Hello command\n"
+#~ msgstr "Керівник не прийняв команду Hello\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Director authorization problem.\n"
+#~ "Most likely the passwords do not agree.\n"
+#~ "If you are using TLS, there may have been a certificate validation error "
+#~ "during the TLS handshake.\n"
+#~ "For help, please see "
+#~ msgstr ""
+#~ "Проблеми авторизації Керівника.\n"
+#~ "Швидше за все, проблема у паролях.\n"
+#~ "Якщо Ви використовуєте TLS, можливо, невдала перевірка сертифікату під "
+#~ "час TLS handshake.\n"
+#~ "Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/"
+#~ "rel-manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: "
+#~ msgstr ""
+#~ "\n"
+#~ "Вірсія: "
+
+#~ msgid "input from file"
+#~ msgstr "введення із файлу"
+
+#~ msgid "output to file"
+#~ msgstr "вивід до файлу"
+
+#~ msgid "output to file and terminal"
+#~ msgstr "вивід до файлу та консолі"
+
+#, fuzzy
+#~ msgid "output everything to file and terminal (tee all)"
+#~ msgstr "вивід до файлу та консолі"
+
+#~ msgid "sleep specified time"
+#~ msgstr "зазначений час сну"
+
+#~ msgid "print current time"
+#~ msgstr "вивести поточний час"
+
+#~ msgid "print Console's version"
+#~ msgstr "вивести версію Консолі"
+
+#~ msgid "echo command string"
+#~ msgstr "луна командного рядку"
+
+#~ msgid "execute an external command"
+#~ msgstr "виконати зовнішню команду"
+
+#~ msgid "zed_keys = use zed keys instead of bash keys"
+#~ msgstr "zed_keys = використовувати zed keys замість bash keys"
+
+#~ msgid "help listing"
+#~ msgstr "допомога"
+
+#~ msgid "set command separator"
+#~ msgstr "задати роздільник команд"
+
+#~ msgid ": is an invalid command\n"
+#~ msgstr ": неправильна команда\n"
+
+#~ msgid "Illegal separator character.\n"
+#~ msgstr "Невірний символ роздільника.\n"
+
+#~ msgid "Command logic problem\n"
+#~ msgstr "Проблеми логіки команди\n"
+
+#, fuzzy
+#~ msgid "Can't find %s in Director list\n"
+#~ msgstr ": неправильна команда\n"
+
+#~ msgid "Available Directors:\n"
+#~ msgstr "Наявні Керівники:\n"
+
+#~ msgid "Select Director by entering a number: "
+#~ msgstr "Оберіть Керівника, увівши номер: "
+
+#~ msgid "%s is not a number. You must enter a number between 1 and %d\n"
+#~ msgstr "%s не є номером. Ви повинні увести номер із проміжку 1..%d\n"
+
+#~ msgid "You must enter a number between 1 and %d\n"
+#~ msgstr "Ви повинні увести номер із проміжку 1..%d\n"
+
+#, fuzzy
+#~ msgid "Can't find %s in Console list\n"
+#~ msgstr ": неправильна команда\n"
+
+#~ msgid "Connecting to Director %s:%d\n"
+#~ msgstr "Підключаюсь до Керівника %s:%d\n"
+
+#~ msgid "Enter a period to cancel a command.\n"
+#~ msgstr "Уведіть цятку для переривання команди.\n"
+
+#~ msgid "Too many arguments on input command.\n"
+#~ msgstr "Забагато параметрів команди.\n"
+
+#~ msgid "First argument to input command must be a filename.\n"
+#~ msgstr "Перший параметр команди повинен бути назвою файлу.\n"
+
+#~ msgid "Cannot open file %s for input. ERR=%s\n"
+#~ msgstr "Не вдається відкрити файл %s для введення. ERR=%s\n"
+
+#~ msgid "Too many arguments on output/tee command.\n"
+#~ msgstr "Забагато параметрів на виході команди.\n"
+
+#~ msgid "Cannot open file %s for output. ERR=%s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#~ msgid "Too many arguments. Enclose command in double quotes.\n"
+#~ msgstr "Забагато параметрів. Оточіть комінду подвійними лапками.\n"
+
+#, fuzzy
+#~ msgid "Cannot popen(\"%s\", \"r\"): ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "@exec error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#~ msgid "Console: name=%s rcfile=%s histfile=%s\n"
+#~ msgstr "Консоль: назва=%s rcfile=%s histfile=%s\n"
+
+#, fuzzy
+#~ msgid "Error getting Job record for Job report: ERR=%s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Admin Canceled"
+#~ msgstr "Статус задачі: Відмінена"
+
+#~ msgid "Error sending Hello to Storage daemon. ERR=%s\n"
+#~ msgstr "Не вдалося надіслати Hello до Зберігача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "TLS negotiation failed with SD at \"%s:%d\"\n"
+#~ msgstr "Встановлення TLS із Керівником невдале \"%s:%d\"\n"
+
+#, fuzzy
+#~ msgid "bdird<stored: \"%s:%s\" bad response to Hello command: ERR=%s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#~ msgid "Storage daemon rejected Hello command\n"
+#~ msgstr "Зберігач відхилив команду Hello\n"
+
+#, fuzzy
+#~ msgid "Storage daemon at \"%s:%d\" rejected Hello command\n"
+#~ msgstr "Зберігач відхилив команду Hello\n"
+
+#, fuzzy
+#~ msgid "Error sending Hello to File daemon at \"%s:%d\". ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Authorization problem: FD \"%s:%s\" did not advertise required TLS "
+#~ "support.\n"
+#~ msgstr ""
+#~ "Проблеми авторизації: Віддалений сервер \"%s:%d\" не повідомляє про "
+#~ "необхідність використання TLS.\n"
+
+#, fuzzy
+#~ msgid "Authorization problem: FD at \"%s:%d\" requires TLS.\n"
+#~ msgstr "Проблеми авторизації: Віддалений сервер вимагає використання TLS.\n"
+
+#, fuzzy
+#~ msgid "TLS negotiation failed with FD at \"%s:%d\".\n"
+#~ msgstr "Встановлення TLS із Керівником невдале \"%s:%d\"\n"
+
+#~ msgid "Bad response from File daemon to Hello command: ERR=%s\n"
+#~ msgstr "Невірна відповідь від Збирача на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Bad response from File daemon at \"%s:%d\" to Hello command: ERR=%s\n"
+#~ msgstr "Невірна відповідь від Збирача на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "File daemon at \"%s:%d\" rejected Hello command\n"
+#~ msgstr "Керівник \"%s:%d\" відкинув команду Hello\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Authorization problem: Remote client did not advertise required TLS "
+#~ "support.\n"
+#~ msgstr ""
+#~ "Проблеми авторизації: Віддалений сервер не повідомив про необхідність "
+#~ "використання TLS.\n"
+
+#, fuzzy
+#~ msgid "Authorization problem: Remote client requires TLS.\n"
+#~ msgstr "Проблеми авторизації: Віддалений сервер вимагає використання TLS.\n"
+
+#, fuzzy
+#~ msgid "TLS negotiation failed.\n"
+#~ msgstr "Невдале встановлення з'єднання TLS\n"
+
+#, fuzzy
+#~ msgid "Unable to authenticate console \"%s\" at %s:%s:%d.\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Network error with FD during %s: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "No Job status returned from FD.\n"
+#~ msgstr "Статус задачі: Створена"
+
+#, fuzzy
+#~ msgid "Error getting Client record for Job report: ERR=%s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error getting Media record for Volume \"%s\": ERR=%s"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Backup Canceled"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not open WriteBootstrap file:\n"
+#~ "%s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bdirjson [<options>] [config_file]\n"
+#~ "       -r <res>    get resource type <res>\n"
+#~ "       -n <name>   get resource <name>\n"
+#~ "       -l <dirs>   get only directives matching dirs (use with -r)\n"
+#~ "       -D          get only data\n"
+#~ "       -R          do not apply JobDefs to Job\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -d <nn>     set debug level to <nn>\n"
+#~ "       -dt         print timestamp in debug output\n"
+#~ "       -t          test - read configuration and exit\n"
+#~ "       -s          output in show text format\n"
+#~ "       -v          verbose user messages\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -dnn        set debug level to nn\n"
+#~ "       -s          без сигналів\n"
+#~ "       -t          перевірка - прочитати конфігурацію і вийти\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "No Director resource defined in %s\n"
+#~ "Without that I don't know who I am :-(\n"
+#~ msgstr ""
+#~ "У %s не задано ресурсу Керівника\n"
+#~ "Без цього я не знаю як спілкуватись із Керівником :-(\n"
+
+#, fuzzy
+#~ msgid "No Messages resource defined in %s\n"
+#~ msgstr "Ресурс %s не визначено\n"
+
+#, fuzzy
+#~ msgid "\"TLS Certificate\" file not defined for Director \"%s\" in %s.\n"
+#~ msgstr ""
+#~ "Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" "
+#~ "не задано для Консолі \"%s\" у %s.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined "
+#~ "for Director \"%s\" in %s. At least one CA certificate store is required "
+#~ "when using \"TLS Verify Peer\".\n"
+#~ msgstr ""
+#~ "Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" "
+#~ "не задано для Керівника \"%s\" у %s. Необхідне щонайменше одне сховище "
+#~ "для сертифікату CA.\n"
+
+#, fuzzy
+#~ msgid "\"TLS Certificate\" file not defined for Console \"%s\" in %s.\n"
+#~ msgstr ""
+#~ "Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" "
+#~ "не задано для Консолі \"%s\" у %s.\n"
+
+#, fuzzy
+#~ msgid "\"TLS Key\" file not defined for Console \"%s\" in %s.\n"
+#~ msgstr ""
+#~ "Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" "
+#~ "не задано для Консолі \"%s\" у %s.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined "
+#~ "for Console \"%s\" in %s. At least one CA certificate store is required "
+#~ "when using \"TLS Verify Peer\".\n"
+#~ msgstr ""
+#~ "Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" "
+#~ "не задано для Керівника \"%s\" у %s. Необхідне щонайменше одне сховище "
+#~ "для сертифікату CA.\n"
+
+#, fuzzy
+#~ msgid "Failed to initialize TLS context for File daemon \"%s\" in %s.\n"
+#~ msgstr "Ініціалізація контексту TLS для Керівника невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined "
+#~ "for File daemon \"%s\" in %s.\n"
+#~ msgstr ""
+#~ "Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" "
+#~ "не задано для Консолі \"%s\" у %s.\n"
+
+#, fuzzy
+#~ msgid "No Job records defined in %s\n"
+#~ msgstr "Ресурс %s не визначено\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\"%s\" directive in Job \"%s\" resource is required, but not found.\n"
+#~ msgstr "Не знайдено необхідний елемент %s для ресурсу %s.\n"
+
+#, fuzzy
+#~ msgid "Too many items in Job resource\n"
+#~ msgstr "Забагато елементів у ресурсі %s\n"
+
+#, fuzzy
+#~ msgid "Unable to get Job record. ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get Job Volume Parameters. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to create bootstrap file %s. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error writing bsr file.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "No Volumes found to restore.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "1990 Invalid Catalog Request: %s"
+#~ msgstr "1994 Помилка оновлення Каталогу: %s"
+
+#, fuzzy
+#~ msgid "Invalid Catalog request; DB not open: %s"
+#~ msgstr "Помилка оновлення Каталогу: БД не відкрита: %s"
+
+#, fuzzy
+#~ msgid "1998 Volume \"%s\" catalog status is %s, %s.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Unable to get Media record for Volume %s: ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Catalog error updating Media record. %s"
+#~ msgstr "Помилка під час оновлення відбитку файлу. %s"
+
+#, fuzzy
+#~ msgid "Catalog error creating JobMedia record. %s"
+#~ msgstr "Помилка під час оновлення відбитку файлу. %s"
+
+#, fuzzy
+#~ msgid "Invalid Catalog request: %s"
+#~ msgstr "1994 Помилка оновлення Каталогу: %s"
+
+#, fuzzy
+#~ msgid "Attribute create error: ERR=%s"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Restore object create error. %s"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Catalog error updating file digest. Unsupported digest stream type: %d"
+#~ msgstr "Помилка під час оновлення відбитку файлу. %s"
+
+#, fuzzy
+#~ msgid "attribute create error. ERR=%s"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#~ msgid "Catalog error updating file digest. %s"
+#~ msgstr "Помилка під час оновлення відбитку файлу. %s"
+
+#~ msgid "1994 Invalid Catalog Update: %s"
+#~ msgstr "1994 Помилка оновлення Каталогу: %s"
+
+#~ msgid "Invalid Catalog Update; DB not open: %s"
+#~ msgstr "Помилка оновлення Каталогу: БД не відкрита: %s"
+
+#, fuzzy
+#~ msgid "fread attr spool error. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bacula-dir [-f -s] [-c config_file] [-d debug_level] "
+#~ "[config_file]\n"
+#~ "     -c <file>        set configuration file to file\n"
+#~ "     -d <nn>[,<tags>] set debug level to <nn>, debug tags to <tags>\n"
+#~ "     -dt              print timestamp in debug output\n"
+#~ "     -T               set trace on\n"
+#~ "     -f               run in foreground (for debugging)\n"
+#~ "     -g               groupid\n"
+#~ "     -m               print kaboom output (for debugging)\n"
+#~ "     -r <job>         run <job> now\n"
+#~ "     -s               no signals\n"
+#~ "     -t               test - read configuration and exit\n"
+#~ "     -u               userid\n"
+#~ "     -v               verbose user messages\n"
+#~ "     -?               print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -dnn        set debug level to nn\n"
+#~ "       -s          без сигналів\n"
+#~ "       -t          перевірка - прочитати конфігурацію і вийти\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "Failed to initialize TLS context for Director \"%s\" in %s.\n"
+#~ msgstr "Ініціалізація контексту TLS для Керівника невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Could not open Catalog \"%s\", database \"%s\".\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not create storage record for %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not update storage record for %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined "
+#~ "for Storage \"%s\" in %s.\n"
+#~ msgstr ""
+#~ "Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" "
+#~ "не задано для Консолі \"%s\" у %s.\n"
+
+#, fuzzy
+#~ msgid "Failed to initialize TLS context for Storage \"%s\" in %s.\n"
+#~ msgstr "Ініціалізація контексту TLS для Керівника невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Could not compile regex pattern \"%s\" ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Director: name=%s MaxJobs=%d FDtimeout=%s SDtimeout=%s\n"
+#~ msgstr "Споглядач: назва=%s FDtimeout=%s SDtimeout=%s\n"
+
+#, fuzzy
+#~ msgid "Console: name=%s SSL=%d\n"
+#~ msgstr "Консоль: назва=%s\n"
+
+#, fuzzy
+#~ msgid "Counter: name=%s min=%d max=%d\n"
+#~ msgstr "Консоль: назва=%s rcfile=%s histfile=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Client: Name=%s Enabled=%d Address=%s FDport=%d MaxJobs=%u NumJobs=%u\n"
+#~ msgstr "Клієнт: назва=%s address=%s FDport=%d\n"
+
+#, fuzzy
+#~ msgid "Schedule: name=%s\n"
+#~ msgstr "Консоль: назва=%s\n"
+
+#, fuzzy
+#~ msgid "Pool: name=%s PoolType=%s\n"
+#~ msgstr "Консоль: назва=%s rcfile=%s histfile=%s\n"
+
+#, fuzzy
+#~ msgid "Messages: name=%s\n"
+#~ msgstr "Консоль: назва=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot find Pool resource %s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot find Console resource %s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot find Director resource %s\n"
+#~ msgstr ": неправильна команда\n"
+
+#, fuzzy
+#~ msgid "Cannot find Storage resource %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot find Job resource %s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot find Counter resource %s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot find Client resource %s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot find Schedule resource %s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not find Storage Resource %s referenced on line %d : %s\n"
+#~ msgstr ""
+#~ "Спроба визначити другий %s ресурс із назвою \"%s\" не дозволяється.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Attempt to redefine Storage resource \"%s\" referenced on line %d : %s\n"
+#~ msgstr ""
+#~ "Спроба визначити другий %s ресурс із назвою \"%s\" не дозволяється.\n"
+
+#, fuzzy
+#~ msgid "Could not find config Resource %s referenced on line %d : %s\n"
+#~ msgstr ""
+#~ "Спроба визначити другий %s ресурс із назвою \"%s\" не дозволяється.\n"
+
+#~ msgid "Count not update counter %s: ERR=%s\n"
+#~ msgstr "Лічильник %s не оновлено: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot create var context: ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot set var callback: ERR=%s\n"
+#~ msgstr "Не можливо перевстановити поточну теку: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot set var operate: ERR=%s\n"
+#~ msgstr "Не можливо перевстановити поточну теку: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot unescape string: ERR=%s\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot expand expression \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо змінити дозволи для %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot destroy var context: ERR=%s\n"
+#~ msgstr "Не можливо перевстановити поточну теку: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Client: "
+#~ msgstr "Збирач"
+
+#, fuzzy
+#~ msgid "File daemon \"%s\" rejected Job command: %s\n"
+#~ msgstr "Зберігач відхилив команду Hello\n"
+
+#, fuzzy
+#~ msgid "Error updating Client record. ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "FD gave bad response to JobId command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot run program: %s. ERR=%s\n"
+#~ msgstr "Не вдалось створити ноду(node) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ">filed: write error on socket\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error running program: %s. ERR=%s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot open included file: %s. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Client \"%s\" RunScript failed.\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "RestoreObject failed.\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "ComponentInfo failed.\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "<filed: Network error getting attributes. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad response to %s command: wanted %s, got %s\n"
+#~ msgstr "Невірна відповідь від Збирача на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Socket error on %s command: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Regex compile error. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not init job queue: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not add job queue: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to init job cond variable: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "unknown source"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Job resource"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Unimplemented job type: %d\n"
+#~ msgstr "Цей тип відбитку не підтримується: %d\n"
+
+#, fuzzy
+#~ msgid "Failed to connect to File daemon.\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Failed to select Storage daemon.\n"
+#~ msgstr "Відкриті з'єднання із Зберігачем.\n"
+
+#, fuzzy
+#~ msgid "Failed to connect to Storage daemon.\n"
+#~ msgstr "Відкриті з'єднання із Зберігачем.\n"
+
+#, fuzzy
+#~ msgid "Job %ld/%s not found in database.\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Client %ld not found in database.\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Client resource \"%s\" does not exist.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "canceled"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "Cannot create cancel thread: ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot create pool \"%s\" in database. ERR=%s"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Created database record for Pool \"%s\".\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "No Client specified.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Could not create Client record. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#~ msgid "FileSet MD5 digest not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Could not create FileSet \"%s\" record. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Client resource"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "No storage specified.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Could not start clone job: \"%s\".\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "pthread_attr_init: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "pthread_cond_init: ERR=%s\n"
+#~ msgstr "Помилка ініціалізації Pthread: %s\n"
+
+#, fuzzy
+#~ msgid "pthread_cond_wait: ERR=%s\n"
+#~ msgstr "Помилка ініціалізації Pthread: %s\n"
+
+#, fuzzy
+#~ msgid "Job %s waiting %d seconds for scheduled start time.\n"
+#~ msgstr "Статус задачі: Очікування часу початку"
+
+#, fuzzy
+#~ msgid "pthread_thread_create: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "pthread_create: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not get or create a Pool record.\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not get or create the FileSet record.\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Create bootstrap file failed.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Job resource not found for \"%s\".\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Previous Job resource not found for \"%s\".\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "setup job failed.\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "Pool for JobId %s not in database. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Pool resource \"%s\" not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Could not get job record for JobId %s to %s. ERR=%s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "%%s Canceled"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "No Storage specification found in Next Pool \"%s\".\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "No %s SQL selection pattern specified.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "SQL failed. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unknown %s Selection Type.\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "SQL to get uncopied jobs failed. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "No %s %s selection pattern specified.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "SQL to get %s failed. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Connecting to Storage daemon %s at %s:%d ...\n"
+#~ msgstr "Приєднуюсь до Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Storage daemon rejected Job command: %s\n"
+#~ msgstr "Зберігач відхилив команду Hello\n"
+
+#, fuzzy
+#~ msgid "<stored: bad response to Job command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "     Storage daemon didn't accept Device \"%s\" command.\n"
+#~ msgstr "Зберігач відхилив команду Hello\n"
+
+#, fuzzy
+#~ msgid "Cannot create message thread: %s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open bootstrap file %s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#~ msgid "Illegal character in Volume name \"%s\"\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Created new Volume=\"%s\", Pool=\"%s\", MediaType=\"%s\" in catalog.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#~ msgid "SQL failed, but ignored. ERR=%s\n"
+#~ msgstr "Проігноровано помилку SQL. ERR=%s\n"
+
+#~ msgid ""
+#~ "Wanted to create Volume \"%s\", but it already exists. Trying again.\n"
+#~ msgstr "Спроба створити вже існуючий Том \"%s\". Спробуйте ще раз.\n"
+
+#~ msgid "Too many failures. Giving up creating Volume name.\n"
+#~ msgstr "Занадто багато провалів. Відмова у створенні імені Тому.\n"
+
+#, fuzzy
+#~ msgid "Purging oldest volume \"%s\"\n"
+#~ msgstr "Починається чистка файлів Клієнта \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Catalog error updating volume \"%s\". ERR=%s"
+#~ msgstr "Помилка під час оновлення відбитку файлу. %s"
+
+#, fuzzy
+#~ msgid "Unable to get Pool record: ERR=%s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to move Scratch Volume. ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not get storage resource '%s'.\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not acquire read storage lock for \"%s\""
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Restore Canceled"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "Could not find specified Pool Resource: %s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not find specified Storage Resource: %s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not find specified Messages Resource: %s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Job %s not found\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Bad response from SD to %s command. Wanted %s, got %s len=%ld\n"
+#~ msgstr "Невірна відповідь від Збирача на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Snapshot not found\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Client resource not found\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Connecting to Client %s at %s:%d\n"
+#~ msgstr "Приєднуюсь до Клієнта %s:%d\n"
+
+#, fuzzy
+#~ msgid "Failed to connect to Client.\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Update snapshot parameters"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Unable to get Snapshot record.\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "New retention period is: %s\n"
+#~ msgstr "Помилка автентифікації : %s"
+
+#, fuzzy
+#~ msgid "Snapshot Comment"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Terminate Bconsole session"
+#~ msgstr "вивести версію Консолі"
+
+#, fuzzy
+#~ msgid "Print current memory usage"
+#~ msgstr "вивести поточний час"
+
+#, fuzzy
+#~ msgid "Run a job"
+#~ msgstr "Останні задачі відсутні"
+
+#, fuzzy
+#~ msgid "Restart a job"
+#~ msgstr "Останні задачі відсутні"
+
+#, fuzzy
+#~ msgid "Stop a job"
+#~ msgstr "Останні задачі відсутні"
+
+#, fuzzy
+#~ msgid "Show resource records"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Print current time"
+#~ msgstr "вивести поточний час"
+
+#, fuzzy
+#~ msgid "Print Director version"
+#~ msgstr "Керівник"
+
+#, fuzzy
+#~ msgid "%s: is an invalid command.\n"
+#~ msgstr ": неправильна команда\n"
+
+#, fuzzy
+#~ msgid "The number must be between 0 and %d\n"
+#~ msgstr "Ви повинні увести номер із проміжку 1..%d\n"
+
+#, fuzzy
+#~ msgid "Pool %s created.\n"
+#~ msgstr "Не можливо створити відбиток.\n"
+
+#, fuzzy
+#~ msgid "Client \"%s\" not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Client \"%s\" address set to %s\n"
+#~ msgstr "Клієнт: назва=%s address=%s FDport=%d\n"
+
+#, fuzzy
+#~ msgid "Job \"%s\" %sabled\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "Client \"%s\" %sabled\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "Schedule \"%s\" %sabled\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "Connecting to Storage daemon %s at %s:%d\n"
+#~ msgstr "Приєднуюсь до Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Connected to storage daemon\n"
+#~ msgstr "Приєднуюсь до Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Available daemons are: \n"
+#~ msgstr "Наявні Керівники:\n"
+
+#, fuzzy
+#~ msgid "Director"
+#~ msgstr "Керівник"
+
+#, fuzzy
+#~ msgid "Storage"
+#~ msgstr "Зберігач"
+
+#, fuzzy
+#~ msgid "Client"
+#~ msgstr "Збирач"
+
+#, fuzzy
+#~ msgid "No authorization for Client \"%s\"\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Client name missing.\n"
+#~ msgstr "Збирач"
+
+#, fuzzy
+#~ msgid "No authorization for Job \"%s\"\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Fileset \"%s\" not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "No authorization for FileSet \"%s\"\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "No job specified.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Error sending include list.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error sending exclude list.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Choose catalog item to delete"
+#~ msgstr "Оберіть те, що Ви хочете вичистити"
+
+#, fuzzy
+#~ msgid "Unable to %s for volume \"%s\"\n"
+#~ msgstr "Не можливо встановити параметри файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "ERR: Can't open db\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Can't find %s command.\n"
+#~ "\n"
+#~ msgstr ": неправильна команда\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "When at a prompt, entering a period cancels the command.\n"
+#~ "\n"
+#~ msgstr "Уведіть цятку для переривання команди.\n"
+
+#, fuzzy
+#~ msgid "No authorization for Catalog \"%s\"\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Could not find a Catalog resource\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open catalog database \"%s\".\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Using Catalog \"%s\"\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ": is an invalid command.\n"
+#~ msgstr ": неправильна команда\n"
+
+#, fuzzy
+#~ msgid "Failed to send command to Client.\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get Job record for Job=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get last Job record for Job=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get Client record for Client=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get last Job record for Client=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get Job record for JobId=%s: ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unknown command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Invalid argument for %s\n"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Unable to open the catalog.\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Query failed: %s. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "query keyword not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "List MediaType failed: ERR=%s\n"
+#~ msgstr "Невдале встановлення з'єднання TLS\n"
+
+#, fuzzy
+#~ msgid "List Media failed: ERR=%s\n"
+#~ msgstr "Невдале встановлення з'єднання TLS\n"
+
+#, fuzzy
+#~ msgid "List Location failed: ERR=%s\n"
+#~ msgstr "Невдале встановлення з'єднання TLS\n"
+
+#, fuzzy
+#~ msgid "Illegal character \"%c\" in a comment.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Command input"
+#~ msgstr "Не зрозумілий параметр командного рядка"
+
+#, fuzzy
+#~ msgid "Catalog record for Volume \"%s\" updated to reference slot %d.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Catalog record for Volume \"%s\" is up to date.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Media record for new Volume \"%s\" already exists.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Delete of Volume \"%s\" failed. ERR=%s"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Media record for Slot %d Volume \"%s\" already exists.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Error setting InChanger: ERR=%s"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Catalog error on cleaning tape: %s"
+#~ msgstr "Помилка під час оновлення відбитку файлу. %s"
+
+#, fuzzy
+#~ msgid "Illegal character \"%c\" in a volume name.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Sending label command for Volume \"%s\" Slot %d ...\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Catalog record for Volume \"%s\", Slot %d  successfully created.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Could not open SD socket.\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "%s resource %s not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Resource %s not found\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Unknown order type %s\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Unknown ObjectType %s\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "No Pool specified.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Error obtaining pool ids. ERR=%s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unknown list keyword: %s\n"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "%s is not a job name.\n"
+#~ msgstr "%c: не вірний пристрій.\n"
+
+#, fuzzy
+#~ msgid "Could not find Pool for Job %s\n"
+#~ msgstr "Не вдалось перевстановити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not find next Volume for Job %s (Pool=%s, Level=%s).\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not find next Volume for Job %s.\n"
+#~ msgstr "Не вдалось перевстановити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Pool %s not in database. %s"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Choose item to prune"
+#~ msgstr "Оберіть те, що Ви хочете вичистити"
+
+#, fuzzy
+#~ msgid "Begin pruning Files.\n"
+#~ msgstr "Починається чистка файлів Клієнта \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Begin pruning Jobs older than %s.\n"
+#~ msgstr "Починається чистка файлів Клієнта \"%s\"\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "This command can be DANGEROUS!!!\n"
+#~ "\n"
+#~ "It purges (deletes) all Files from a Job,\n"
+#~ "JobId, Client or Volume; or it purges (deletes)\n"
+#~ "all Jobs from a Client or Volume without regard\n"
+#~ "to retention periods. Normally you should use the\n"
+#~ "PRUNE command, which respects retention periods.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Ця команда НЕБЕЗПЕЧНА!!!\n"
+#~ "\n"
+#~ "Вона вичистить(знищить) усі Файли із Задачі,\n"
+#~ "Номера Задачі, Клієнта або Тома; або вичистить(знищить)\n"
+#~ "усі Задачі із Клієнта або Тома не враховуючи\n"
+#~ "термінів зберігання. Зазвичай ви повинні використовувати\n"
+#~ "команду PRUNE для дотримання термінів зберігання.\n"
+
+#~ msgid "Choose item to purge"
+#~ msgstr "Оберіть те, що Ви хочете вичистити"
+
+#~ msgid "Begin purging files for Client \"%s\"\n"
+#~ msgstr "Починається чистка файлів Клієнта \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Begin purging jobs from Client \"%s\"\n"
+#~ msgstr "Починається чистка файлів Клієнта \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Can't update volume size in the catalog\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Unable to truncate volume \"%s\"\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#~ msgid "Could not open %s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Available queries:\n"
+#~ msgstr "Наявні Керівники:\n"
+
+#, fuzzy
+#~ msgid "No files selected to be restored.\n"
+#~ msgstr "Невідомий тип файлу %d: не відновлено: %s\n"
+
+#, fuzzy
+#~ msgid "No Client resource found!\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Unknown keyword: %s\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Select item: "
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Enter SQL list command: "
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Enter full filename: "
+#~ msgstr "Пуста назва файлу: %s\n"
+
+#, fuzzy
+#~ msgid "Cannot open file %s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error occurred on line %d of file \"%s\"\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "No database record found for: %s\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "No JobId specified cannot continue.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "No table found: %s\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Regex compile error: %s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to create component file %s. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to fdopen component file %s. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error writing component file.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error getting FileSet \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "FileSet"
+#~ msgstr "Дата файлу"
+
+#, fuzzy
+#~ msgid "Select FileSet resource"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Job %s failed.\n"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "A job name must be specified.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "No authorization. Job \"%s\".\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Pool \"%s\" not found.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "No authorization. Pool \"%s\".\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "NextPool \"%s\" not found.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "No authorization. NextPool \"%s\".\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "No authorization. Client \"%s\".\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "FileSet \"%s\" not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "No authorization. FileSet \"%s\".\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Storage \"%s\" not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "No authorization. Storage \"%s\".\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "No JobId specified.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Enter the JobId list to select: "
+#~ msgstr "Оберіть те, що Ви хочете вичистити"
+
+#, fuzzy
+#~ msgid "Could not get job record for selected JobId=%d. ERR=%s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to use current plugin configuration, discarding it."
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Plugins to configure:\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Can't configure %32s\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "File Relocation"
+#~ msgstr "Збирач"
+
+#, fuzzy
+#~ msgid "Warning cannot open %s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Select replace option"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Invalid replace option: %s\n"
+#~ msgstr "Помилка оновлення Каталогу: БД не відкрита: %s"
+
+#, fuzzy
+#~ msgid "Cannot use your regexp\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot use your regexp.\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not get job record for selected JobId. ERR=%s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "User specified"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Unknown Job Type=%d\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "JobId specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Client specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "FileSet specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Level specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Storage specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "RegexWhere or Where specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "No authorization for \"regexwhere\" specification.\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Where or RegexWhere specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "No authoriztion for \"where\" specification.\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Bootstrap specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Replace specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "When specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Priority specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Verify Job specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Migration Job specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Pool specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Restore Client specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Plugin Options specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Spool flag specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "IgnoreDuplicateCheck flag specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Accurate flag specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Job name specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Media Type specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "NextPool specified twice.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Catalog \"%s\" not found\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "No authorization. Catalog \"%s\".\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Verify Job \"%s\" not found.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Migration Job \"%s\" not found.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Select Storage resource"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Select Catalog resource"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Select Job resource"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Select Restore Job"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Select Client resource"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Error: Client resource %s does not exist.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Could not find Client %s: ERR=%s"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not find Client \"%s\": ERR=%s"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error obtaining client ids. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Select the Client"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Could not find Pool \"%s\": ERR=%s"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "No access to Pool \"%s\"\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Select Pool resource"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Could not find Job \"%s\": ERR=%s"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#~ msgid ""
+#~ "Your request has multiple choices for \"%s\". Selection is not possible "
+#~ "in batch mode.\n"
+#~ msgstr ""
+#~ "Ваш запит до \"%s\" має декілька можливостей вибору. У пакетному режимі "
+#~ "вибір не можливий.\n"
+
+#, fuzzy
+#~ msgid "Please enter a number between 1 and %d\n"
+#~ msgstr "Ви повинні увести номер із проміжку 1..%d\n"
+
+#, fuzzy
+#~ msgid "Storage resource \"%s\": not found\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Media Types defined in conf file:\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "No Jobs running.\n"
+#~ msgstr "Статус задачі: Працює"
+
+#, fuzzy
+#~ msgid "Choose Job list to %s"
+#~ msgstr "Оберіть те, що Ви хочете вичистити"
+
+#, fuzzy
+#~ msgid "Cannot create UA thread: %s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Connecting to Storage %s at %s:%d\n"
+#~ msgstr "Приєднуюсь до Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "Failed to connect to Storage.\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Status available for:\n"
+#~ msgstr "Наявні Керівники:\n"
+
+#, fuzzy
+#~ msgid "No authorization for Storage \"%s\"\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Failed to connect to Storage daemon %s.\n"
+#~ "====\n"
+#~ msgstr "Відкриті з'єднання із Зберігачем.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Failed to connect to Client %s.\n"
+#~ "====\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Connected to file daemon\n"
+#~ msgstr "Не можу приєднатись до демону.\n"
+
+#, fuzzy
+#~ msgid "Console connected %sat %s\n"
+#~ msgstr "Вже приєднано\"%s\".\n"
+
+#, fuzzy
+#~ msgid "has terminated"
+#~ msgstr "Статус задачі: Виконана"
+
+#, fuzzy
+#~ msgid "has a fatal error"
+#~ msgstr "Статус задачі: Ватальна помилка"
+
+#, fuzzy
+#~ msgid "has verify differences"
+#~ msgstr "Статус задачі: Паревірка різниць"
+
+#, fuzzy
+#~ msgid "has been canceled"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "is waiting on Client"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "is waiting on Client %s"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "is waiting on Storage \"%s\""
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "is waiting on Storage"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "is waiting on max Storage jobs"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "is waiting on max Client jobs"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "is waiting on max Job jobs"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "is waiting on max total jobs"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#, fuzzy
+#~ msgid "is waiting for its start time (%s)"
+#~ msgstr "Статус задачі: Очікування часу початку"
+
+#, fuzzy
+#~ msgid "is waiting for higher priority jobs to finish"
+#~ msgstr "Статус задачі: Очікування завершення пріоритетніших задач"
+
+#, fuzzy
+#~ msgid "is waiting for a Shared Storage device"
+#~ msgstr "Статус задачі: Очікування Зберігача"
+
+#, fuzzy
+#~ msgid "Dir inserting Attributes"
+#~ msgstr "Атрибули Unix"
+
+#, fuzzy
+#~ msgid "is in unknown state %c"
+#~ msgstr "Невідомий статус задачі %c. "
+
+#, fuzzy
+#~ msgid "is waiting for a mount request"
+#~ msgstr "Статус задачі: Очікування часу початку"
+
+#, fuzzy
+#~ msgid "is waiting for an appendable Volume"
+#~ msgstr "Статус задачі: Очікування Зберігача"
+
+#, fuzzy
+#~ msgid "is waiting for Client to connect to Storage daemon"
+#~ msgstr "Статус задачі: Очікування Зберігача"
+
+#, fuzzy
+#~ msgid "is waiting for Client %s to connect to Storage %s"
+#~ msgstr "Статус задачі: Очікування часу початку"
+
+#, fuzzy
+#~ msgid "change current directory"
+#~ msgstr "Не можливо отримати поточну теку: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "print current working directory"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "No file specification given.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Too few or too many arguments. Try using double quotes.\n"
+#~ msgstr "Забагато параметрів. Оточіть комінду подвійними лапками.\n"
+
+#, fuzzy
+#~ msgid "Volume parameters"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Snapshot parameters"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Choose catalog item to update"
+#~ msgstr "Оберіть те, що Ви хочете вичистити"
+
+#, fuzzy
+#~ msgid "Error updating media record Slot: ERR=%s"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error updating Volume record: ERR=%s"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error updating Volume records: ERR=%s"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error updating media record Enabled: ERR=%s"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Current Volume status is: %s\n"
+#~ msgstr ""
+#~ "Поточна задача: %s\n"
+#~ "Остання задача: %s"
+
+#, fuzzy
+#~ msgid "Current max jobs is: %u\n"
+#~ msgstr ""
+#~ "Поточна задача: %s\n"
+#~ "Остання задача: %s"
+
+#, fuzzy
+#~ msgid "Current Pool is: %s\n"
+#~ msgstr ""
+#~ "Поточна задача: %s\n"
+#~ "Остання задача: %s"
+
+#, fuzzy
+#~ msgid "No current RecyclePool\n"
+#~ msgstr "Задачі відсутні"
+
+#, fuzzy
+#~ msgid "Error getting Job record for previous Job: ERR=%s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not get job record for previous Job. ERR=%s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not get fileset record from previous Job. ERR=%s"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not get FileSet resource for verify Job."
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Verify Canceled"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "Verify Differences"
+#~ msgstr "Статус задачі: Паревірка різниць"
+
+#, fuzzy
+#~ msgid "Cannot verify checksum for %s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#~ msgid "%s digest initialization failed\n"
+#~ msgstr "Невдала ініціалізація відбитку %s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Authorization problem: Remote server did not advertize required TLS "
+#~ "support.\n"
+#~ msgstr ""
+#~ "Проблеми авторизації: Віддалений сервер не повідомив про необхідність "
+#~ "використання TLS.\n"
+
+#, fuzzy
+#~ msgid "     Could not access \"%s\": ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Could not follow link \"%s\": ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Could not stat \"%s\": ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Archive file not saved: %s\n"
+#~ msgstr "Оригінальний файл %s не збережено: тип=%d\n"
+
+#, fuzzy
+#~ msgid "     Could not open directory \"%s\": ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Unknown file type %d; not saved: %s\n"
+#~ msgstr "Невідомий тип файлу %d: не відновлено: %s\n"
+
+#, fuzzy
+#~ msgid "     Cannot open \"%s\": ERR=%s.\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Network send error to SD. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Read error on file %s. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Network send error to SD. Data=%s ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Cannot open resource fork for \"%s\": ERR=%s.\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bfdjson [options] [config_file]\n"
+#~ "        -r <res>    get resource type <res>\n"
+#~ "        -n <name>   get resource <name>\n"
+#~ "        -l <dirs>   get only directives matching dirs (use with -r)\n"
+#~ "        -D          get only data\n"
+#~ "        -c <file>   use <file> as configuration file\n"
+#~ "        -d <nn>     set debug level to <nn>\n"
+#~ "        -dt         print a timestamp in debug output\n"
+#~ "        -t          test configuration file and exit\n"
+#~ "        -v          verbose user messages\n"
+#~ "        -?          print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Автор Nicolas Boichat (2004)\n"
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: tray-monitor [-c config_file] [-d debug_level]\n"
+#~ "       -c <file>     задати конфігураційний файл <file>\n"
+#~ "       -d <nn>       встановити рівень відлагоджування у <nn>\n"
+#~ "       -dt           виводити часову мітку у даних відлагоджування\n"
+#~ "       -t            перевірка - прогитати конфігурацію і завершити\n"
+#~ "       -?            показати це повідомлення.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "No File daemon resource defined in %s\n"
+#~ "Without that I don't know who I am :-(\n"
+#~ msgstr ""
+#~ "У %s не задано ресурсу Керівника\n"
+#~ "Без цього я не знаю як спілкуватись із Керівником :-(\n"
+
+#, fuzzy
+#~ msgid "Only one Client resource permitted in %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined "
+#~ "for File daemon in %s.\n"
+#~ msgstr ""
+#~ "Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" "
+#~ "не задано для Консолі \"%s\" у %s.\n"
+
+#, fuzzy
+#~ msgid "No Director resource defined in %s\n"
+#~ msgstr "Ресурс %s не визначено\n"
+
+#, fuzzy
+#~ msgid "Failed to initialize encryption context.\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "%s signature digest initialization failed\n"
+#~ msgstr "Невдала ініціалізація відбитку %s\n"
+
+#, fuzzy
+#~ msgid "Unsupported cipher on this system.\n"
+#~ msgstr "Цей тип відбитку не підтримується: %d\n"
+
+#, fuzzy
+#~ msgid "An error occurred while encrypting the stream.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "An error occurred while adding signer the stream.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "An error occurred while signing the stream.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "An error occurred finalizing signing the stream.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Plugin save packet not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Plugin=%s not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#~ msgid "Could not create %s: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error while creating command string %s.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error while executing \"%s\" %s. %s %s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to parse snapshot command output\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to create snapshot record. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to create snapshot record, got %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to delete snapshot record. ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to delete snapshot record, got %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get snapshot record. ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get snapshot record, got %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to parse command output\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "   Delete Snapshot for %s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "   Unable to delete snapshot of %s ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "   Create Snapshot for %s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "   Unable to create snapshot of %s ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Version: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bacula-fd [-f -s] [-c config_file] [-d debug_level]\n"
+#~ "     -c <file>        use <file> as configuration file\n"
+#~ "     -d <n>[,<tags>]  set debug level to <nn>, debug tags to <tags>\n"
+#~ "     -dt              print a timestamp in debug output\n"
+#~ "     -f               run in foreground (for debugging)\n"
+#~ "     -g               groupid\n"
+#~ "     -k               keep readall capabilities\n"
+#~ "     -m               print kaboom output (for debugging)\n"
+#~ "     -s               no signals (for debugging)\n"
+#~ "     -t               test configuration file and exit\n"
+#~ "     -T               set trace on\n"
+#~ "     -u               userid\n"
+#~ "     -v               verbose user messages\n"
+#~ "     -?               print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -dnn        set debug level to nn\n"
+#~ "       -s          без сигналів\n"
+#~ "       -t          перевірка - прочитати конфігурацію і вийти\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "Disable Command \"%s\" not found.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Failed to initialize TLS context for Console \"%s\" in %s.\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Cannot find any Console resource for remote access\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad Hello command from Director at %s. Len=%d.\n"
+#~ msgstr "Від'єднуюсь від Керівника %s:%d\n"
+
+#, fuzzy
+#~ msgid "Bad Hello command from Director at %s: %s\n"
+#~ msgstr "Від'єднуюсь від Керівника %s:%d\n"
+
+#, fuzzy
+#~ msgid "Connection from unknown Director %s at %s rejected.\n"
+#~ msgstr "Від'єднуюсь від Керівника %s:%d\n"
+
+#, fuzzy
+#~ msgid "SD connect failed: Bad Hello command\n"
+#~ msgstr "Керівник не прийняв команду Hello\n"
+
+#, fuzzy
+#~ msgid "SD connect failed: Job name not found: %s\n"
+#~ msgstr "Керівник не прийняв команду Hello\n"
+
+#, fuzzy
+#~ msgid "SD \"%s\" tried to connect two times.\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Command: \"%s\" is disabled.\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "Bad command from %s. Len=%d.\n"
+#~ msgstr "Від'єднуюсь від Клієнта %s:%d\n"
+
+#, fuzzy
+#~ msgid "2902 Error scanning cancel command.\n"
+#~ msgstr "Уведіть цятку для переривання команди.\n"
+
+#, fuzzy
+#~ msgid "2991 Bad setbandwidth command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "2991 Bad setdebug command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad estimate command: %s"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad Job Command: %s"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad RunBeforeJob command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "2905 Bad RunBeforeJob command.\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad RunAfter command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad RunScript command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "2905 Bad RunScript command.\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad RestoreObject command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "2909 Bad RestoreObject command.\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error running program: %s. stat=%d: ERR=%s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot open FileSet input file: %s. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "REGEX %s compile error. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Invalid FileSet command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#~ msgid "Unknown include/exclude option: %c\n"
+#~ msgstr "Не зрозуміла опція параметру include/exclude: %c\n"
+
+#, fuzzy
+#~ msgid "Unknown backup level: %s\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Bad level command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad session command: %s"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad storage command: %s"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to connect to Storage daemon: %s:%d\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Failed connect from Storage daemon. SD bsock=NULL.\n"
+#~ msgstr "Відкриті з'єднання із Зберігачем.\n"
+
+#, fuzzy
+#~ msgid "ACL support not configured for Client.\n"
+#~ msgstr "TLS необхідний, але не налаштовано у Bacula.\n"
+
+#, fuzzy
+#~ msgid "Cannot contact Storage daemon\n"
+#~ msgstr "Не можу приєднатись до демону.\n"
+
+#, fuzzy
+#~ msgid "Bad response to append open: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad response from stored to open command\n"
+#~ msgstr "Невірна відповідь від Збирача на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "2994 Bad verify command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad replace command. CMD=%s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad response to SD read open: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad response from stored to read open command\n"
+#~ msgstr "Невірна відповідь від Збирача на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Bad response from SD to %s command. Wanted %s, got len=%ld msg=\"%s\"\n"
+#~ msgstr "Невірна відповідь від Збирача на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad response from SD to %s command. Wanted %s, got SIGNAL %s\n"
+#~ msgstr "Невірна відповідь від Збирача на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Size of data or stream of %s not correct. Original %s, restored %s.\n"
+#~ msgstr ""
+#~ "Не правильний розмір відновленого файлу %s. Оригінальний %s, відновлений "
+#~ "%s.\n"
+
+#, fuzzy
+#~ msgid "Error setting Finder Info on \"%s\"\n"
+#~ msgstr "Не вдалось перевстановити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "LZO init failed\n"
+#~ msgstr "Невдале встановлення з'єднання TLS\n"
+
+#, fuzzy
+#~ msgid "Data record error. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#~ msgid "Could not create digest.\n"
+#~ msgstr "Не можливо створити відбиток.\n"
+
+#, fuzzy
+#~ msgid "Unsupported digest algorithm. Decrypt failed.\n"
+#~ msgstr "Відбиток"
+
+#, fuzzy
+#~ msgid "Unsupported encryption algorithm. Decrypt failed.\n"
+#~ msgstr "Відбиток"
+
+#, fuzzy
+#~ msgid ""
+#~ "An error=%d occurred while decoding encrypted session data stream: ERR="
+#~ "%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Missing encryption session data stream for %s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to initialize decryption context for %s\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Cannot open resource fork for %s.\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to decode message signature for %s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Zlib data error"
+#~ msgstr " (%d помилка)"
+
+#, fuzzy
+#~ msgid "Seek to %s error on %s: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "LZO uncompression error on file %s. ERR=%d\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Uncompression error on file %s. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Write error at byte=%lld block=%d write_len=%d lerror=%d on %s: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Signature validation failed for file %s: ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Digest one file failed for file: %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Director connected %sat: %s\n"
+#~ msgstr "Керівник від'єднано"
+
+#, fuzzy
+#~ msgid "    Processing file: %s\n"
+#~ msgstr "Пуста назва файлу: %s\n"
+
+#, fuzzy
+#~ msgid "Bad .status command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Could not access %s: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Could not follow link %s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Could not stat %s: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Could not open directory %s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Unknown file type %d: %s\n"
+#~ msgstr "Невідомий тип файлу %d: не відновлено: %s\n"
+
+#, fuzzy
+#~ msgid "Network error in send to Director: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Cannot open %s: ERR=%s.\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "     Cannot open resource fork for %s: ERR=%s.\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error reading file %s: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to stat file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to serialize extended attributes on file \"%s\"\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Illegal empty xattr attribute name\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "pioctl VIOCGETAL error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "pioctl VIOCSETAL error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "pathconf error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to convert %d into namespace on file \"%s\"\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "acl_to_text error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "acl_get_file error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "acl_delete_def_file error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "acl_from_text error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "acl_set_file error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "extattr_list_link error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "extattr_get_link error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to split %s into namespace and name part on file \"%s\"\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Failed to convert %s into namespace on file \"%s\"\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "extattr_set_link error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "acl_valid error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "llistxattr error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "lgetxattr error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "setxattr error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get status on xattr \"%s\" on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to send extended attribute \"%s\" on file \"%s\"\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Failed to restore extensible attributes on file \"%s\"\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Failed to restore extended attributes on file \"%s\"\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "acl_get error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get xattr acl on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get acl on xattr %s on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get acl text on xattr %s on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to convert acl from text on file \"%s\"\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Unable to restore acl of xattr %s on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "acl_fromtext error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "wrong encoding of acl type in acl stream on file \"%s\"\n"
+#~ msgstr "Невідомий тип файлу %d: не відновлено: %s\n"
+
+#, fuzzy
+#~ msgid "acl_set error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to open xattr on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to list the xattr on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to close xattr list on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to stat xattr \"%s\" on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to open file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to link xattr %s to %s on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to open attribute \"%s\" at file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to restore data of xattr %s on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unsupported xattr type %s on file \"%s\"\n"
+#~ msgstr "Заданий тип відбитку=%d не підтримується\n"
+
+#, fuzzy
+#~ msgid "Unable to restore owner of xattr %s on file \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to restore filetimes of xattr %s on file \"%s\": ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#~ msgid "Unable to set file owner %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#~ msgid "Unable to set file modes %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити параметри файлу %s: ERR=%s\n"
+
+#~ msgid "Unable to set file times %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#~ msgid ""
+#~ "File size of restored file %s not correct. Original %s, restored %s.\n"
+#~ msgstr ""
+#~ "Не правильний розмір відновленого файлу %s. Оригінальний %s, відновлений "
+#~ "%s.\n"
+
+#~ msgid "Unable to set file flags %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити прапорці файлу %s: ERR=%s\n"
+
+#~ msgid "Unix attributes"
+#~ msgstr "Атрибули Unix"
+
+#~ msgid "File data"
+#~ msgstr "Дата файлу"
+
+#~ msgid "MD5 digest"
+#~ msgstr "Відбиток MD5"
+
+#~ msgid "GZIP data"
+#~ msgstr "Дані, запаковані GZIP"
+
+#, fuzzy
+#~ msgid "Compressed data"
+#~ msgstr "Замало даних"
+
+#~ msgid "Extended attributes"
+#~ msgstr "Додаткові атрибути"
+
+#~ msgid "Sparse data"
+#~ msgstr "Замало даних"
+
+#~ msgid "GZIP sparse data"
+#~ msgstr "Замало даних GZIP "
+
+#, fuzzy
+#~ msgid "Compressed sparse data"
+#~ msgstr "Замало даних GZIP "
+
+#~ msgid "Program names"
+#~ msgstr "Назви програми"
+
+#~ msgid "Program data"
+#~ msgstr "Програмні дані"
+
+#~ msgid "SHA1 digest"
+#~ msgstr "Відбиток HA1"
+
+#~ msgid "Win32 data"
+#~ msgstr "Дані Win32"
+
+#~ msgid "Win32 GZIP data"
+#~ msgstr "Дані Win32 GZIP"
+
+#, fuzzy
+#~ msgid "Win32 compressed data"
+#~ msgstr "Дані Win32"
+
+#~ msgid "MacOS Fork data"
+#~ msgstr "Дані MacOS Fork"
+
+#~ msgid "HFS+ attribs"
+#~ msgstr "Атрибути HFS+"
+
+#~ msgid "Standard Unix ACL attribs"
+#~ msgstr "Стандартні атрибути Unix ACL"
+
+#~ msgid "Default Unix ACL attribs"
+#~ msgstr "Звичійні атрибути Unix ACL"
+
+#~ msgid "SHA256 digest"
+#~ msgstr "Відбиток SHA256"
+
+#~ msgid "SHA512 digest"
+#~ msgstr "Відбиток SHA512"
+
+#~ msgid "Signed digest"
+#~ msgstr "Підписаний відбиток"
+
+#~ msgid "Encrypted File data"
+#~ msgstr "Зашифровані файли"
+
+#~ msgid "Encrypted Win32 data"
+#~ msgstr "Зашифровані дані Win32"
+
+#~ msgid "Encrypted session data"
+#~ msgstr "Зашифровані дані сесій"
+
+#~ msgid "Encrypted GZIP data"
+#~ msgstr "Зашифровані дані GZIP"
+
+#, fuzzy
+#~ msgid "Encrypted compressed data"
+#~ msgstr "Зашифровані дані сесій"
+
+#~ msgid "Encrypted Win32 GZIP data"
+#~ msgstr "Зашифровані дані Win32 GZIP"
+
+#, fuzzy
+#~ msgid "Encrypted Win32 Compressed data"
+#~ msgstr "Зашифровані дані Win32"
+
+#~ msgid "Encrypted MacOS fork data"
+#~ msgstr "Зашифровані дані MacOS Fork "
+
+#, fuzzy
+#~ msgid "AIX ACL attribs"
+#~ msgstr "Специфічні атрибути AIX ACL"
+
+#, fuzzy
+#~ msgid "Darwin ACL attribs"
+#~ msgstr "Специфічні атрибути Darwin ACL"
+
+#, fuzzy
+#~ msgid "FreeBSD Default ACL attribs"
+#~ msgstr "Специфічні атрибути FreeBSD Default ACL"
+
+#, fuzzy
+#~ msgid "FreeBSD Access ACL attribs"
+#~ msgstr "Специфічні атрибути FreeBSD Access ACL"
+
+#, fuzzy
+#~ msgid "HPUX ACL attribs"
+#~ msgstr "Специфічні атрибути HPUX ACL"
+
+#, fuzzy
+#~ msgid "Irix Default ACL attribs"
+#~ msgstr "Специфічні атрибути Irix Default ACL"
+
+#, fuzzy
+#~ msgid "Irix Access ACL attribs"
+#~ msgstr "Специфічні атрибути Irix Access ACL"
+
+#, fuzzy
+#~ msgid "Linux Default ACL attribs"
+#~ msgstr "Специфічні атрибути Linux Default ACL"
+
+#, fuzzy
+#~ msgid "Linux Access ACL attribs"
+#~ msgstr "Специфічні атрибути Linux Access ACL"
+
+#, fuzzy
+#~ msgid "TRU64 Default ACL attribs"
+#~ msgstr "Специфічні атрибути Irix Default ACL"
+
+#, fuzzy
+#~ msgid "TRU64 Access ACL attribs"
+#~ msgstr "Специфічні атрибути Irix Access ACL"
+
+#, fuzzy
+#~ msgid "Solaris POSIX ACL attribs"
+#~ msgstr "Специфічні атрибути Solaris ACL"
+
+#, fuzzy
+#~ msgid "Solaris NFSv4/ZFS ACL attribs"
+#~ msgstr "Специфічні атрибути Solaris ACL"
+
+#, fuzzy
+#~ msgid "AFS ACL attribs"
+#~ msgstr "Специфічні атрибути AIX ACL"
+
+#, fuzzy
+#~ msgid "AIX POSIX ACL attribs"
+#~ msgstr "Специфічні атрибути AIX ACL"
+
+#, fuzzy
+#~ msgid "AIX NFSv4 ACL attribs"
+#~ msgstr "Специфічні атрибути AIX ACL"
+
+#, fuzzy
+#~ msgid "FreeBSD NFSv4/ZFS ACL attribs"
+#~ msgstr "Специфічні атрибути FreeBSD Access ACL"
+
+#, fuzzy
+#~ msgid "GNU Hurd Default ACL attribs"
+#~ msgstr "Специфічні атрибути Irix Default ACL"
+
+#, fuzzy
+#~ msgid "GNU Hurd Access ACL attribs"
+#~ msgstr "Специфічні атрибути Irix Access ACL"
+
+#, fuzzy
+#~ msgid "GNU Hurd Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути Linux"
+
+#, fuzzy
+#~ msgid "IRIX Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути Linux"
+
+#, fuzzy
+#~ msgid "TRU64 Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути Linux"
+
+#, fuzzy
+#~ msgid "AIX Extended attribs"
+#~ msgstr "Додаткові атрибути"
+
+#, fuzzy
+#~ msgid "OpenBSD Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути NetBSD"
+
+#, fuzzy
+#~ msgid "Solaris Extensible attribs or System Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути Solaris"
+
+#, fuzzy
+#~ msgid "Solaris Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути Solaris"
+
+#, fuzzy
+#~ msgid "Darwin Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути Darwin"
+
+#, fuzzy
+#~ msgid "FreeBSD Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути FreeBS"
+
+#, fuzzy
+#~ msgid "Linux Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути Linux"
+
+#, fuzzy
+#~ msgid "NetBSD Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути NetBSD"
+
+#~ msgid "File skipped. Not newer: %s\n"
+#~ msgstr "Файл пропущено. Не новий: %s\n"
+
+#~ msgid "File skipped. Not older: %s\n"
+#~ msgstr "Файл пропущено. Не застарілий: %s\n"
+
+#~ msgid "File skipped. Already exists: %s\n"
+#~ msgstr "Файл пропущено. Вже існує: %s\n"
+
+#~ msgid "File %s already exists and could not be replaced. ERR=%s.\n"
+#~ msgstr "Файл %s існує та його не вдалось замінити. ERR=%s.\n"
+
+#~ msgid "Cannot make fifo %s: ERR=%s\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#~ msgid "Cannot make node %s: ERR=%s\n"
+#~ msgstr "Не вдалось створити ноду(node) %s: ERR=%s\n"
+
+#~ msgid "Could not symlink %s -> %s: ERR=%s\n"
+#~ msgstr "Не вдалось створити лінку(symlink) %s -> %s: ERR=%s\n"
+
+#~ msgid "Could not restore file flags for file %s: ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#~ msgid "Could not hard link %s -> %s: ERR=%s\n"
+#~ msgstr "Не вдалось створити жорстку лінку(hardlink) %s -> %s: ERR=%s\n"
+
+#~ msgid "Could not reset file flags for file %s: ERR=%s\n"
+#~ msgstr "Не вдалось перевстановити прапорці для файлу %s: ERR=%s\n"
+
+#~ msgid "Original file %s have been deleted: type=%d\n"
+#~ msgstr "Оригінальний файл %s було видалено: тип=%d\n"
+
+#~ msgid "Original file %s not saved: type=%d\n"
+#~ msgstr "Оригінальний файл %s не збережено: тип=%d\n"
+
+#~ msgid "Unknown file type %d; not restored: %s\n"
+#~ msgstr "Невідомий тип файлу %d: не відновлено: %s\n"
+
+#~ msgid "Zero length filename: %s\n"
+#~ msgstr "Пуста назва файлу: %s\n"
+
+#, fuzzy
+#~ msgid "Plugin: \"%s\" not found.\n"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Cannot stat file %s: ERR=%s\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#~ msgid "%s mtime changed during backup.\n"
+#~ msgstr "%s mtime змінився під час резервування.\n"
+
+#~ msgid "%s ctime changed during backup.\n"
+#~ msgstr "%s ctime змінився під час резервування.\n"
+
+#, fuzzy
+#~ msgid "%s size of %lld changed during backup to %lld.n"
+#~ msgstr "%s розмір змінився під час резервування.\n"
+
+#~ msgid "Top level directory \"%s\" has unlisted fstype \"%s\"\n"
+#~ msgstr "Вища тека \"%s\" має незрозумілий тип файлової системи \"%s\"\n"
+
+#~ msgid "Top level directory \"%s\" has an unlisted drive type \"%s\"\n"
+#~ msgstr "Вища тека \"%s\" має незрозумілий тип пристрою \"%s\"\n"
+
+#~ msgid "Cannot create directory %s: ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#~ msgid "%s exists but is not a directory.\n"
+#~ msgstr "%s існує, але не є текою.\n"
+
+#~ msgid "Cannot change owner and/or group of %s: ERR=%s\n"
+#~ msgstr "Не можливо змінити власника та/або групу для %s: ERR=%s\n"
+
+#~ msgid "Cannot change permissions of %s: ERR=%s\n"
+#~ msgstr "Не можливо змінити дозволи для %s: ERR=%s\n"
+
+#~ msgid "Too many subdirectories. Some permissions not reset.\n"
+#~ msgstr "Забагато підтек. Деякі обмеження не перевстановлено.\n"
+
+#~ msgid "Cannot open current directory: ERR=%s\n"
+#~ msgstr "Не можливо відкрити поточну теку: ERR=%s\n"
+
+#~ msgid "Cannot get current directory: ERR=%s\n"
+#~ msgstr "Не можливо отримати поточну теку: ERR=%s\n"
+
+#~ msgid "Cannot reset current directory: ERR=%s\n"
+#~ msgstr "Не можливо перевстановити поточну теку: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error scanning attributes: %s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "TLS connection initialization failed.\n"
+#~ msgstr "Невдала ініціалізація відбитку %s\n"
+
+#, fuzzy
+#~ msgid "TLS Negotiation failed.\n"
+#~ msgstr "Невдале встановлення з'єднання TLS\n"
+
+#, fuzzy
+#~ msgid "TLS enabled but not configured.\n"
+#~ msgstr "TLS необхідний, але не налаштовано у Bacula.\n"
+
+#, fuzzy
+#~ msgid "TLS enable but not configured.\n"
+#~ msgstr "TLS необхідний, але не налаштовано у Bacula.\n"
+
+#, fuzzy
+#~ msgid "Unknown error."
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Unknown sig %d"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Cannot bind port %d: ERR=%s.\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not init client queue: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error in select: %s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not create client BSOCK.\n"
+#~ msgstr "Не можливо створити відбиток.\n"
+
+#, fuzzy
+#~ msgid "Could not add job to client queue: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not destroy client queue: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not connect to %s on %s:%d. ERR=%s\n"
+#~ "Retrying ...\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to connect to %s on %s:%d. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "gethostbyname() for host \"%s\" failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Socket open error. proto=%d port=%d. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not init bsock read mutex. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not init bsock write mutex. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not init bsock attribute mutex. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Write error sending %d bytes to %s:%s:%d: ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Read error from %s:%s:%d: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not malloc BSOCK data buffer\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "sockopt error: %s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "fcntl F_GETFL error. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "fcntl F_SETFL error. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Director authorization error at \"%s:%d\"\n"
+#~ msgstr "Проблеми авторизації Директора \"%s:%d\"\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Authorization error: Remote server at \"%s:%d\" did not advertise "
+#~ "required TLS support.\n"
+#~ msgstr ""
+#~ "Проблеми авторизації: Віддалений сервер \"%s:%d\" не повідомляє про "
+#~ "необхідність використання TLS.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Authorization error with Director at \"%s:%d\": Remote server requires "
+#~ "TLS.\n"
+#~ msgstr ""
+#~ "Проблеми авторизації Керівника \"%s:%d\": Віддалений сепвер вимагає TLS.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Bad errmsg to Hello command: ERR=%s\n"
+#~ "The Director at \"%s:%d\" may not be running.\n"
+#~ msgstr ""
+#~ "Погана відповідь на команду Hello: ERR=%s\n"
+#~ "Керівник \"%s:%d\" ймовірно не запущений.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Authorization error with Director at \"%s:%d\"\n"
+#~ "Most likely the passwords do not agree.\n"
+#~ "If you are using TLS, there may have been a certificate validation error "
+#~ "during the TLS handshake.\n"
+#~ "For help, please see: "
+#~ msgstr ""
+#~ "Проблеми авторизації із Керівником \"%s:%d\"\n"
+#~ "Швидше за все, проблема у паролях.\n"
+#~ "Якщо Ви використовуєте TLS, можливо, невдала перевірка сертифікату під "
+#~ "час TLS handshake.\n"
+#~ "Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/"
+#~ "rel-manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#, fuzzy
+#~ msgid "safe_unlink could not compile regex pattern \"%s\" ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Out of memory: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad errno"
+#~ msgstr " (%d помилка)"
+
+#, fuzzy
+#~ msgid "Cannot open %s file. %s ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open %s file. %s ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot lock %s file. %s ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot not open %s file. %s ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not create state file. %s ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Write final hdr error: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "1999 Authorization failed.\n"
+#~ msgstr "Невдале встановлення з'єднання TLS\n"
+
+#, fuzzy
+#~ msgid "Unable to open certificate file"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to read certificate from file"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unsupported key type provided: %d\n"
+#~ msgstr "Цей тип відбитку не підтримується: %d\n"
+
+#, fuzzy
+#~ msgid "Unable to open private key file"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to read private key from file"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#~ msgid "Unsupported digest type: %d\n"
+#~ msgstr "Цей тип відбитку не підтримується: %d\n"
+
+#~ msgid "OpenSSL digest initialization failed"
+#~ msgstr "Відбиток"
+
+#~ msgid "OpenSSL digest update failed"
+#~ msgstr "Відбиток"
+
+#~ msgid "OpenSSL digest finalize failed"
+#~ msgstr "Відбиток"
+
+#, fuzzy
+#~ msgid "OpenSSL digest_new failed"
+#~ msgstr "Відбиток"
+
+#~ msgid "OpenSSL sign get digest failed"
+#~ msgstr "Відбиток"
+
+#~ msgid "OpenSSL digest Verify final failed"
+#~ msgstr "Відбиток"
+
+#, fuzzy
+#~ msgid "Signature creation failed"
+#~ msgstr "Невдале встановлення з'єднання TLS\n"
+
+#, fuzzy
+#~ msgid "Unsupported cipher type specified\n"
+#~ msgstr "Заданий тип відбитку=%d не підтримується\n"
+
+#, fuzzy
+#~ msgid "Unsupported contentEncryptionAlgorithm: %d\n"
+#~ msgstr "Відбиток"
+
+#, fuzzy
+#~ msgid "OpenSSL cipher context initialization failed"
+#~ msgstr "Відбиток"
+
+#, fuzzy
+#~ msgid "Encryption session provided an invalid IV"
+#~ msgstr "Зашифровані дані сесій"
+
+#, fuzzy
+#~ msgid "OpenSSL cipher context key/IV initialization failed"
+#~ msgstr "Відбиток"
+
+#~ msgid "Unsupported digest type=%d specified\n"
+#~ msgstr "Заданий тип відбитку=%d не підтримується\n"
+
+#, fuzzy
+#~ msgid "No error"
+#~ msgstr " (%d помилка)"
+
+#, fuzzy
+#~ msgid "Signer not found"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#, fuzzy
+#~ msgid "Recipient not found"
+#~ msgstr "Не знайдено відбиток MD5 Набору Файлів.\n"
+
+#~ msgid "Unsupported digest algorithm"
+#~ msgstr "Відбиток"
+
+#, fuzzy
+#~ msgid "Unsupported encryption algorithm"
+#~ msgstr "Відбиток"
+
+#, fuzzy
+#~ msgid "Cannot fork to become daemon: ERR=%s\n"
+#~ msgstr "Не можливо перевстановити поточну теку: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Illegal character \"%c\" in name.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Cannot open config file %s: %s\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot open lex\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unknown operation"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "verified"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "unknown action"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "pthread_once failed. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not init msg_queue mutex. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Config error: %s\n"
+#~ msgstr " (%d помилок)"
+
+#, fuzzy
+#~ msgid "Cannot open included config file %s: %s\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Mutex lock failure. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Mutex unlock failure. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "pthread_create failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open console message file %s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not get con mutex: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "open mail pipe %s failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "open mail pipe failed.\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "close error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "fopen %s failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Msg delivery error: fopen %s failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "%s JobId %u: Fatal error: "
+#~ msgstr "Статус задачі: Ватальна помилка"
+
+#, fuzzy
+#~ msgid "%s JobId %u: Error: "
+#~ msgstr "Статус задачі: Помилка"
+
+#, fuzzy
+#~ msgid "Unable to init mutex: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to destroy mutex: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to init OpenSSL threading: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Attempt to define second \"%s\" resource named \"%s\" is not permitted.\n"
+#~ msgstr ""
+#~ "Спроба визначити другий %s ресурс із назвою \"%s\" не дозволяється.\n"
+
+#, fuzzy
+#~ msgid "Unknown item code: %d\n"
+#~ msgstr "Невідомий статус задачі %c. "
+
+#, fuzzy
+#~ msgid ""
+#~ "Attempt to redefine \"%s\" from \"%s\" to \"%s\" referenced on line %d : "
+#~ "%s\n"
+#~ msgstr ""
+#~ "Спроба визначити другий %s ресурс із назвою \"%s\" не дозволяється.\n"
+
+#, fuzzy
+#~ msgid "Could not find config Resource \"%s\" referenced on line %d : %s\n"
+#~ msgstr ""
+#~ "Спроба визначити другий %s ресурс із назвою \"%s\" не дозволяється.\n"
+
+#, fuzzy
+#~ msgid "Attempt to redefine resource \"%s\" referenced on line %d : %s\n"
+#~ msgstr ""
+#~ "Спроба визначити другий %s ресурс із назвою \"%s\" не дозволяється.\n"
+
+#, fuzzy
+#~ msgid "Too many %s directives. Max. is %d. line %d: %s\n"
+#~ msgstr "Забагато елементів у ресурсі %s\n"
+
+#, fuzzy
+#~ msgid "Missing config Resource \"%s\" referenced on line %d : %s\n"
+#~ msgstr ""
+#~ "Спроба визначити другий %s ресурс із назвою \"%s\" не дозволяється.\n"
+
+#, fuzzy
+#~ msgid "Unable to initialize resource lock. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot open config file \"%s\": %s\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "not in resource definition: %s"
+#~ msgstr "Ресурс %s не визначено\n"
+
+#, fuzzy
+#~ msgid "Unknown parser state %d\n"
+#~ msgstr "Невідомий статус задачі %c. "
+
+#, fuzzy
+#~ msgid "Failed to open Plugin directory %s: ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "dlopen plugin %s failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Lookup of loadPlugin in plugin %s failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Lookup of unloadPlugin in plugin %s failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not find userid=%s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not find password entry. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not find group=%s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not initgroups for group=%s, userid=%s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not initgroups for userid=%s: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not set group=%s: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "prctl failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "setreuid failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "cap_from_text failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "cap_set_proc failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not set specified userid: %s\n"
+#~ msgstr "Не вдалось перевстановити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "rwl_writelock failure at %s:%d:  ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "rwl_writeunlock failure at %s:%d:. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fork error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "execv: %s failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "BUS error"
+#~ msgstr " (%d помилка)"
+
+#, fuzzy
+#~ msgid "Error loading certificate file"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to open DH parameters file"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Connect failure"
+#~ msgstr "З'єднано"
+
+#, fuzzy
+#~ msgid "Canceled"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "Verify differences"
+#~ msgstr "Статус задачі: Паревірка різниць"
+
+#, fuzzy
+#~ msgid "Waiting for mount"
+#~ msgstr "Статус задачі: Очікування монтування"
+
+#, fuzzy
+#~ msgid "Waiting for Storage resource"
+#~ msgstr "Статус задачі: Очікування ресурсу зберігання"
+
+#, fuzzy
+#~ msgid "Waiting for Job resource"
+#~ msgstr "Статус задачі: Очікування ресурсу задачі"
+
+#, fuzzy
+#~ msgid "Waiting for Client resource"
+#~ msgstr "Статус задачі: Очікування ресурсу Слієнту"
+
+#, fuzzy
+#~ msgid "Waiting for Start Time"
+#~ msgstr "Статус задачі: Очікування часу початку"
+
+#, fuzzy
+#~ msgid "Unknown Job termination status=%d"
+#~ msgstr "Невідомий статус задачі %c. "
+
+#, fuzzy
+#~ msgid "Terminated with errors"
+#~ msgstr "Статус задачі: Виконана із помилками"
+
+#, fuzzy
+#~ msgid "Fatal error"
+#~ msgstr "Статус задачі: Ватальна помилка"
+
+#, fuzzy
+#~ msgid "Verify found differences"
+#~ msgstr "Статус задачі: Паревірка різниць"
+
+#, fuzzy
+#~ msgid "Waiting for File daemon"
+#~ msgstr "Статус задачі: Очікування Збирача"
+
+#, fuzzy
+#~ msgid "Waiting for Storage daemon"
+#~ msgstr "Статус задачі: Очікування Зберігача"
+
+#, fuzzy
+#~ msgid "Waiting for higher priority jobs"
+#~ msgstr "Статус задачі: Очікування завершення пріоритетніших задач"
+
+#, fuzzy
+#~ msgid "Unknown term code"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Unknown Type"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Unable to initialize watchdog lock. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "rwl_writelock failure. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "rwl_writeunlock failure. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not init work queue: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not add work to queue: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error in workq_destroy: ERR=%s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Job %s canceled.\n"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "Read open %s device %s Volume \"%s\" failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Ready to read from volume \"%s\" on %s device %s.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Could not ready %s device %s for append.\n"
+#~ msgstr "Не можливо створити відбиток.\n"
+
+#, fuzzy
+#~ msgid "Could not create JobMedia record for Volume=\"%s\" Job=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Read error on device %s in ANSI label. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not write ANSI HDR1 label. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error writing EOF to tape. ERR=%s"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to set network buffer size.\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Write session label failed. ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Network send error to FD. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error reading data header from FD. n=%d msglen=%d ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Network error reading from FD. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fatal append error on device %s: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error writing end session label. ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error updating file attributes. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error getting Volume info: %s"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Didn't get vol info vol=%s: ERR=%s"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error creating JobMedia records: ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error creating JobMedia records: %s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "TLS negotiation failed with DIR at \"%s:%d\"\n"
+#~ msgstr "Встановлення TLS із Керівником невдале \"%s:%d\"\n"
+
+#, fuzzy
+#~ msgid "Unable to authenticate Director at %s.\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Incorrect authorization key from File daemon at %s rejected.\n"
+#~ "For help, please see: "
+#~ msgstr ""
+#~ "Проблеми під час авторизації Керівником.\n"
+#~ "Швидше за все, невірні паролі.\n"
+#~ "Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/"
+#~ "rel-manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#, fuzzy
+#~ msgid "TLS negotiation failed with FD at \"%s:%d\"\n"
+#~ msgstr "Встановлення TLS із Керівником невдале \"%s:%d\"\n"
+
+#, fuzzy
+#~ msgid "Lock failure on autochanger. ERR=%s\n"
+#~ msgstr "Проігноровано помилку SQL. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unlock failure on autochanger. ERR=%s\n"
+#~ msgstr "Проігноровано помилку SQL. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Volume \"%s\" wanted on %s is in use by device %s\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Autochanger error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bcopy [-d debug_level] <input-archive> <output-archive>\n"
+#~ "       -b bootstrap      specify a bootstrap file\n"
+#~ "       -c <file>         specify a Storage configuration file\n"
+#~ "       -d <nn>           set debug level to <nn>\n"
+#~ "       -dt               print timestamp in debug output\n"
+#~ "       -i                specify input Volume names (separated by |)\n"
+#~ "       -o                specify output Volume names (separated by |)\n"
+#~ "       -p                proceed inspite of errors\n"
+#~ "       -v                verbose\n"
+#~ "       -w <dir>          specify working directory (default /tmp)\n"
+#~ "       -?                print this message\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -dnn        set debug level to nn\n"
+#~ "       -s          без сигналів\n"
+#~ "       -t          перевірка - прочитати конфігурацію і вийти\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "dev open failed: %s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot fixup device error. %s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unknown"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bextract <options> <bacula-archive-device-name> <directory-to-"
+#~ "store-files>\n"
+#~ "       -b <file>       specify a bootstrap file\n"
+#~ "       -c <file>       specify a Storage configuration file\n"
+#~ "       -d <nn>         set debug level to <nn>\n"
+#~ "       -dt             print timestamp in debug output\n"
+#~ "       -T              send debug traces to trace file (stored in /tmp)\n"
+#~ "       -e <file>       exclude list\n"
+#~ "       -i <file>       include list\n"
+#~ "       -p              proceed inspite of I/O errors\n"
+#~ "       -t              read data from volume, do not write anything\n"
+#~ "       -v              verbose\n"
+#~ "       -V <volumes>    specify Volume names (separated by |)\n"
+#~ "       -?              print this message\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -dnn        set debug level to nn\n"
+#~ "       -s          без сигналів\n"
+#~ "       -t          перевірка - прочитати конфігурацію і вийти\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "Could not open exclude file: %s, ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open include file: %s, ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot stat %s. It must exist. ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "%s must be a directory.\n"
+#~ msgstr "%s існує, але не є текою.\n"
+
+#, fuzzy
+#~ msgid "Found %s error%s\n"
+#~ msgstr " (%d помилок)"
+
+#, fuzzy
+#~ msgid "Write error on %s: %s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot continue.\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Seek error Addr=%llu on %s: %s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Uncompression error. ERR=%d\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "LZO uncompression error. ERR=%d\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Attempt to write on closed device=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Write error at %s on device %s Vol=%s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Job failed or canceled.\n"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "The %sVolume=%s on device=%s appears to be unlabeled.%s\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Read error on fd=%d at addr=%s on device %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Read zero %sbytes Vol=%s at %s on device %s.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Backspace file at EOT failed. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Backspace record at EOT failed. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Re-read last block at EOT failed. ERR=%s"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error sending Volume info to Director.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bls [options] <device-name>\n"
+#~ "     -b <file>          specify a bootstrap file\n"
+#~ "     -c <file>          specify a Storage configuration file\n"
+#~ "     -d <nn>            set debug level to <nn>\n"
+#~ "     -dt                print timestamp in debug output\n"
+#~ "     -e <file>          exclude list\n"
+#~ "     -i <file>          include list\n"
+#~ "     -j                 list jobs\n"
+#~ "     -k                 list blocks\n"
+#~ "  (no j or k option)    list saved files\n"
+#~ "     -L                 dump label\n"
+#~ "     -p                 proceed inspite of errors\n"
+#~ "     -V                 specify Volume names (separated by |)\n"
+#~ "     -E                 Check records to detect errors\n"
+#~ "     -v                 be verbose\n"
+#~ "     -?                 print this message\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -dnn        set debug level to nn\n"
+#~ "       -s          без сигналів\n"
+#~ "       -t          перевірка - прочитати конфігурацію і вийти\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No archive name specified\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Got EOM at file %u on device %s, Volume \"%s\"\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "End of file %u on device %s, Volume \"%s\"\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bscan [ options ] <bacula-archive>\n"
+#~ "       -b bootstrap      specify a bootstrap file\n"
+#~ "       -c <file>         specify configuration file\n"
+#~ "       -d <nn>           set debug level to <nn>\n"
+#~ "       -dt               print timestamp in debug output\n"
+#~ "       -m                update media info in database\n"
+#~ "       -D <driver name>  specify the driver database name (default NULL)\n"
+#~ "       -n <name>         specify the database name (default bacula)\n"
+#~ "       -u <user>         specify database user name (default bacula)\n"
+#~ "       -P <password>     specify database password (default none)\n"
+#~ "       -h <host>         specify database host (default NULL)\n"
+#~ "       -t <port>         specify database port (default 0)\n"
+#~ "       -p                proceed inspite of I/O errors\n"
+#~ "       -r                list records\n"
+#~ "       -s                synchronize or store in database\n"
+#~ "       -S                show scan progress periodically\n"
+#~ "       -v                verbose\n"
+#~ "       -V <Volumes>      specify Volume names (separated by |)\n"
+#~ "       -w <dir>          specify working directory (default from conf "
+#~ "file)\n"
+#~ "       -?                print this message\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -dnn        set debug level to nn\n"
+#~ "       -s          без сигналів\n"
+#~ "       -t          перевірка - прочитати конфігурацію і вийти\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "Create JobMedia for Job %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not create JobMedia record for Volume=%s Job=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Pool record for %s found in DB.\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Media record for %s found in DB.\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Could not update job record. ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Got MD5 record: %s\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Got SHA1 record: %s\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#~ msgid "Got signed digest record\n"
+#~ msgstr "Отримано підписаний відбиток запису\n"
+
+#, fuzzy
+#~ msgid "Unknown stream type!!! stream=%d len=%i\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Could not create File Attributes record. ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Created File record: %s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not create media record. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not update media record. ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Created Media record for Volume: %s\n"
+#~ msgstr "Заборонені символи у назві Тому \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Could not create pool record. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Created Pool record for Pool: %s\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Could not get Client record. ERR=%s\n"
+#~ msgstr "Не можливо отримати поточну теку: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Created Client record for Client: %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fileset \"%s\" already exists.\n"
+#~ msgstr "Файл пропущено. Вже існує: %s\n"
+
+#, fuzzy
+#~ msgid "Could not create FileSet record \"%s\". ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not create JobId record. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not update job start record. ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Created new JobId=%u record for original JobId=%u\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not update JobId=%u record. ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Job Termination code: %d"
+#~ msgstr "Статус задачі: Виконана"
+
+#, fuzzy
+#~ msgid "Could not create JobMedia record. ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not add MD5/SHA1 to File record. ERR=%s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bsdjson [options] [config_file]\n"
+#~ "        -r <res>    get resource type <res>\n"
+#~ "        -n <name>   get resource <name>\n"
+#~ "        -l <dirs>   get only directives matching dirs (use with -r)\n"
+#~ "        -D          get only data\n"
+#~ "        -c <file>   use <file> as configuration file\n"
+#~ "        -d <nn>     set debug level to <nn>\n"
+#~ "        -dt         print timestamp in debug output\n"
+#~ "        -t          test - read config and exit\n"
+#~ "        -v          verbose user messages\n"
+#~ "        -?          print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Автор Nicolas Boichat (2004)\n"
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: tray-monitor [-c config_file] [-d debug_level]\n"
+#~ "       -c <file>     задати конфігураційний файл <file>\n"
+#~ "       -d <nn>       встановити рівень відлагоджування у <nn>\n"
+#~ "       -dt           виводити часову мітку у даних відлагоджування\n"
+#~ "       -t            перевірка - прогитати конфігурацію і завершити\n"
+#~ "       -?            показати це повідомлення.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No Storage resource defined in %s. Cannot continue.\n"
+#~ msgstr ""
+#~ "Помилка: %d ресурсів Спостерігача визначено у %s. Ви повинні визначити "
+#~ "одині тільки один ресурс Спостерігача.\n"
+
+#, fuzzy
+#~ msgid "Only one Storage resource permitted in %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "No Director resource defined in %s. Cannot continue.\n"
+#~ msgstr ""
+#~ "У %s не задано ресурсу Керівника\n"
+#~ "Без цього я не знаю як спілкуватись із Керівником :-(\n"
+
+#, fuzzy
+#~ msgid "\"TLS Certificate\" file not defined for Storage \"%s\" in %s.\n"
+#~ msgstr ""
+#~ "Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" "
+#~ "не задано для Консолі \"%s\" у %s.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined "
+#~ "for Storage \"%s\" in %s. At least one CA certificate store is required "
+#~ "when using \"TLS Verify Peer\".\n"
+#~ msgstr ""
+#~ "Жоден із параметрів \"TLS CA Certificate\" або \"TLS CA Certificate Dir\" "
+#~ "не задано для Керівника \"%s\" у %s. Необхідне щонайменше одне сховище "
+#~ "для сертифікату CA.\n"
+
+#, fuzzy
+#~ msgid "No archive name specified.\n"
+#~ msgstr "зазначений час сну"
+
+#, fuzzy
+#~ msgid "Device open failed. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "I/O error on device: ERR=%s"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Volume type error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Volume name error\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error creating label. ERR=%s"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Volume version error.\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unknown error.\n"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Bad status from load. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad status from rewind. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad status from weof. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad status from bsf. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Command aborted.\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "Error writing record to block.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error writing block to device.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Wrote first record of %d bytes.\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Wrote second record of %d bytes.\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Wrote third record of %d bytes.\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "Backspace file failed! ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Backspace record failed! ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Read block failed! ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Write failed at block %u. stat=%d ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Error writing record to block.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Error writing block to device.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Read block %d failed! ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Read record failed. Block %d! ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Read record failed! ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3991 Bad autochanger command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3992 Bad autochanger command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3993 Bad autochanger command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad status from fsr. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad status from fsf. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Wrote one record of %d bytes.\n"
+#~ msgstr "Відсутні записи для %d %s\n"
+
+#, fuzzy
+#~ msgid "read error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad status from read %d. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error reading block. ERR=%s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Wrote Start of Session label.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Job canceled.\n"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "Wrote End of Session label.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not create state file: %s ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "do_unfill failed.\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "Reposition error. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error reading block: ERR=%s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "clear tape errors"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "forward space a record"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "print this command"
+#~ msgstr ": неправильна команда\n"
+
+#, fuzzy
+#~ msgid "\"%s\" is an invalid command\n"
+#~ msgstr ": неправильна команда\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: btape <options> <device_name>\n"
+#~ "       -b <file>   specify bootstrap file\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -d <nn>     set debug level to <nn>\n"
+#~ "       -dt         print timestamp in debug output\n"
+#~ "       -p          proceed inspite of I/O errors\n"
+#~ "       -s          turn off signals\n"
+#~ "       -w <dir>    set working directory to dir\n"
+#~ "       -v          be verbose\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Автор Nicolas Boichat (2004)\n"
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: tray-monitor [-c config_file] [-d debug_level]\n"
+#~ "       -c <file>     задати конфігураційний файл <file>\n"
+#~ "       -d <nn>       встановити рівень відлагоджування у <nn>\n"
+#~ "       -dt           виводити часову мітку у даних відлагоджування\n"
+#~ "       -t            перевірка - прогитати конфігурацію і завершити\n"
+#~ "       -?            показати це повідомлення.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "End of Volume \"%s\" %d records.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Cannot open Dev=%s, Vol=%s\n"
+#~ msgstr "Не вдається відкрити файл %s для введення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot find device \"%s\" in config file %s.\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot init device %s\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot open %s\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not find device \"%s\" in config file %s.\n"
+#~ msgstr "Не можливо створити відбиток.\n"
+
+#, fuzzy
+#~ msgid "Seek error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "lseek error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error closing device %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "No FreeSpace command defined.\n"
+#~ msgstr "Ресурс %s не визначено\n"
+
+#, fuzzy
+#~ msgid "Cannot run free space command. Results=%s ERR=%s\n"
+#~ msgstr "Не вдалось створити ноду(node) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to write EOF. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "New volume \"%s\" mounted on device %s at %s.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "write_block_to_device Volume label failed. ERR=%s"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Connection request from %s failed.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SF0101] Bad client command: %s"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SF0102] Failed to connect to Client daemon: %s:%d\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "[SF0103] Bad storage command: %s"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SF0104] Failed to connect to Storage daemon: %s:%d\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "3991 Bad setdebug command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3903 Error scanning cancel command.\n"
+#~ msgstr "Уведіть цятку для переривання команди.\n"
+
+#, fuzzy
+#~ msgid "3900 Truncate cache for volume \"%s\" failed. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3912 Error scanning upload command: ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3999 Error with the upload: ERR=%s\n"
+#~ msgstr "Помилка у %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3929 Unable to open device \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3912 Failed to label Volume %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3913 Failed to open next part: ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3917 Failed to label Volume: ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3918 Failed to label Volume (no media): ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Specified slot ignored. "
+#~ msgstr "Проігноровано помилку SQL. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3901 Unable to open device \"%s\": ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3905 Unknown wait state %d\n"
+#~ msgstr "Невідомий статус задачі %c. "
+
+#, fuzzy
+#~ msgid "3002 Device \"%s\" enabled.\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "3002 Device \"%s\" disabled.\n"
+#~ msgstr "Помилка команди"
+
+#, fuzzy
+#~ msgid "[SF0110] Could not create bootstrap file %s: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SF0111] Error parsing bootstrap file.\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "FD command not found: %s\n"
+#~ msgstr "Керівник не прийняв команду Hello\n"
+
+#, fuzzy
+#~ msgid "Cannot open session, received bad parameters.\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open file device %s. No Volume name given.\n"
+#~ msgstr "Не можливо створити відбиток.\n"
+
+#, fuzzy
+#~ msgid "Could not open(%s,%s,0640): ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to truncate device %s. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to stat device %s. ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not reopen: %s, ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Ready to append to end of Volume \"%s\" size=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Connection from unknown Director %s at %s rejected.\n"
+#~ "Please see "
+#~ msgstr "Від'єднуюсь від Керівника %s:%d\n"
+
+#, fuzzy
+#~ msgid "Invalid connection from %s. Len=%d\n"
+#~ msgstr "Від'єднуюсь від Клієнта %s:%d\n"
+
+#, fuzzy
+#~ msgid "Invalid Hello from %s. Len=%d\n"
+#~ msgstr "Від'єднуюсь від Клієнта %s:%d\n"
+
+#, fuzzy
+#~ msgid "Client connect failed: Job name not found: %s\n"
+#~ msgstr "Керівник не прийняв команду Hello\n"
+
+#, fuzzy
+#~ msgid "Recv request to Client failed. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Bad Hello from Client: %s.\n"
+#~ msgstr "Від'єднуюсь від Керівника %s:%d\n"
+
+#, fuzzy
+#~ msgid "[SE0001] Unable to stat device %s at %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SA0003] Unable to stat mount point %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SA0009] Unable to init mutex: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SA0010] Unable to init cond variable: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SA0011] Unable to init cond variable: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SA0012] Unable to init spool mutex: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SA0013] Unable to init acquire mutex: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SA0014] Unable to init freespace mutex: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SA0015] Unable to init read acquire mutex: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SA0016] Unable to init volcat mutex: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SA0017] Unable to init dcrs mutex: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "[SF0020] dlopen of SD driver=%s at %s failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Couldn't rewind %s device %s: ERR=%s\n"
+#~ msgstr "Не вдалось створити жорстку лінку(hardlink) %s -> %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not unserialize Volume label: ERR=%s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Volume on %s device %s has bad Bacula label type: %ld\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Could not reserve volume %s on %s device %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot write Volume label to block for %s device %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Open %s device %s Volume \"%s\" failed: ERR=%s"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Open %s device %s Volume \"%s\" failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Rewind error on %s device %s: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Truncate error on %s device %s: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to re-open device after truncate on %s device %s: ERR=%s"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to write %s device %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Recycled volume \"%s\" on %s device %s, all previous data lost.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Wrote label to prelabeled Volume \"%s\" on %s device %s\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Unknown %d"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "pthread_cond_wait failure. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Too many errors trying to mount %s device %s.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Job %d canceled.\n"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "Open of %s device %s Volume \"%s\" failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to position to end of data on %s device %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Volume \"%s\" not loaded on %s device %s.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "%s device %s not configured to autolabel Volumes.\n"
+#~ msgstr "TLS необхідний, але не налаштовано у Bacula.\n"
+
+#, fuzzy
+#~ msgid "Cannot open %s Dev=%s, Vol=%s for reading.\n"
+#~ msgstr "Не вдається відкрити файл %s для введення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to set eotmodel on device %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid " Bacula status:"
+#~ msgstr "Монітор статусу демонів Bacula"
+
+#, fuzzy
+#~ msgid "ioctl MTIOCGET error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "unknown func code %d"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "I/O function \"%s\" not supported on this device.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Cannot open bootstrap file %s: %s\n"
+#~ msgstr "Не можливо створити чергу(fifo) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "REGEX '%s' compile error. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "VolumeName  : %s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error sending header to Client. ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error sending to FD. ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error sending data to Client. ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error sending to File daemon. ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "End of Volume \"%s\" at addr=%s on device %s.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "End Session"
+#~ msgstr "Зашифровані дані сесій"
+
+#, fuzzy
+#~ msgid "Unknown code %d\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Unable to initialize reservation lock. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3939 Could not get dcr\n"
+#~ msgstr "Не можливо створити відбиток.\n"
+
+#, fuzzy
+#~ msgid "Failed command: %s\n"
+#~ msgstr "Погана відповідь на команду Hello: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3926 Could not get dcr for device: %s\n"
+#~ msgstr "Не вдалось перевстановити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3611 JobId=%u Volume max jobs=%d exceeded on %s device %s.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "3607 JobId=%u wants Vol=\"%s\" drive has Vol=\"%s\" on %s device %s.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Job cancelled.\n"
+#~ msgstr "Статус задачі: Відмінена"
+
+#, fuzzy
+#~ msgid "Open data spool file %s failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Ftruncate spool file failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Spool header read error. ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error writing block to spool file. ERR=%s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fseek on attributes file failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Truncate on attributes file failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "fopen attr spool file %s failed: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "    %s Alert: at %s Volume=\"%s\" alert=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "   Device is blocked labeling a Volume.\n"
+#~ msgstr "TLS необхідний, але не налаштовано у Bacula.\n"
+
+#, fuzzy
+#~ msgid "%s Job %s waiting for Client connection.\n"
+#~ msgstr "Статус задачі: Очікування ресурсу Слієнту"
+
+#, fuzzy
+#~ msgid "3900 Unknown arg in .status command: %s\n"
+#~ msgstr "Невідомий статус задачі %c. "
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bacula-sd [options] [-c config_file] [config_file]\n"
+#~ "     -c <file>         use <file> as configuration file\n"
+#~ "     -d <nn>[,<tags>]  set debug level to <nn>, debug tags to <tags>\n"
+#~ "     -dt               print timestamp in debug output\n"
+#~ "     -T                set trace on\n"
+#~ "     -f                run in foreground (for debugging)\n"
+#~ "     -g <group>        set groupid to group\n"
+#~ "     -m                print kaboom output (for debugging)\n"
+#~ "     -p                proceed despite I/O errors\n"
+#~ "     -s                no signals (for debugging)\n"
+#~ "     -t                test - read config and exit\n"
+#~ "     -u <user>         userid to <user>\n"
+#~ "     -v                verbose user messages\n"
+#~ "     -?                print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -dnn        set debug level to nn\n"
+#~ "       -s          без сигналів\n"
+#~ "       -t          перевірка - прочитати конфігурацію і вийти\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "Unable to create thread. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not initialize SD device \"%s\"\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Unable to stat ControlDevice %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open device %s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not mount device %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Warning: no \"%s\" resource (%d) defined.\n"
+#~ msgstr "Ресурс %s не визначено\n"
+
+#, fuzzy
+#~ msgid "dump_resource type=%d\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Warning: unknown resource type %d\n"
+#~ msgstr "Невідомий тип ресурсу %d\n"
+
+#, fuzzy
+#~ msgid "Cannot find AutoChanger resource %s\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to init lock for Autochanger=%s: ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot find Device resource %s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Alert: Volume=\"%s\" alert=%d: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "3997 Bad alert command: %s: ERR=%s.\n"
+#~ msgstr "Не вдалось створити ноду(node) %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to open device %s: ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Rewind error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Ready to append to end of Volume \"%s\" at file=%d.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "ioctl MTEOM error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "ioctl MTLOAD error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "ioctl MTOFFL error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "ioctl MTFSF error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "ioctl MTBSF error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "ioctl MTFSR %d error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "ioctl MTBSR error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "ioctl MTWEOF error on %s. ERR=%s.\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to initialize volume list lock. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not reserve volume \"%s\", because job canceled.\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not reserve volume \"%s\" for append, because it will be read.\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "pthread timedwait error. ERR=%s\n"
+#~ msgstr "Помилка ініціалізації Pthread: %s\n"
+
+#, fuzzy
+#~ msgid "Could not init Bacula database\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error opening datafile %s\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error while inserting file\n"
+#~ msgstr "Помилка надсилання Hello до Збирача. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open data file: %s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fatal fgets error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Usage: %s [-f from] [-h mailhost] [-s subject] [-c copy] [recipient ...]\n"
+#~ "       -4          forces bsmtp to use IPv4 addresses only.\n"
+#~ "       -6          forces bsmtp to use IPv6 addresses only.\n"
+#~ "       -8          set charset to UTF-8\n"
+#~ "       -a          use any ip protocol for address resolution\n"
+#~ "       -c          set the Cc: field\n"
+#~ "       -d <nn>     set debug level to <nn>\n"
+#~ "       -dt         print a timestamp in debug output\n"
+#~ "       -f          set the From: field\n"
+#~ "       -h          use mailhost:port as the SMTP server\n"
+#~ "       -s          set the Subject: field\n"
+#~ "       -r          set the Reply-To: field\n"
+#~ "       -l          set the maximum number of lines to send (default: "
+#~ "unlimited)\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -dnn        set debug level to nn\n"
+#~ "       -s          без сигналів\n"
+#~ "       -t          перевірка - прочитати конфігурацію і вийти\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "Fatal gethostname error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fatal getaddrinfo for myself failed \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fatal gethostbyname for myself failed \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error unknown mail host \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to connect to mailhost %s\n"
+#~ msgstr "Ініціалізація контексту TLS для Консолі невдала \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Fatal socket error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fatal connect error to %s: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fatal _open_osfhandle error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fatal fdopen error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Fatal dup error: ERR=%s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to open -p argument for reading"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open, database \"%s\".\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error no Director resource defined.\n"
+#~ msgstr "Ресурс %s не визначено\n"
+
+#, fuzzy
+#~ msgid "Select function number: "
+#~ msgstr "Оберіть Керівника, увівши номер: "
+
+#, fuzzy
+#~ msgid "Found %d for: %s\n"
+#~ msgstr " (%d помилок)"
+
+#, fuzzy
+#~ msgid "Found %d Restore Job records.\n"
+#~ msgstr " (%d помилок)"
+
+#, fuzzy
+#~ msgid "Err: Could not access %s: %s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Err: Could not follow ff->link %s: %s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Err: Could not stat %s: %s\n"
+#~ msgstr "Не вдалось створити %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Err: Could not open directory %s: %s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Err: Unknown file ff->type %d: %s\n"
+#~ msgstr "Невідомий тип файлу %d: не відновлено: %s\n"
+
+#, fuzzy
+#~ msgid "Could not open include file: %s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Could not open exclude file: %s\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#~ msgid ""
+#~ "No Client, Storage or Director resource defined in %s\n"
+#~ "Without that I don't how to get status from the File, Storage or Director "
+#~ "Daemon :-(\n"
+#~ msgstr ""
+#~ "У %s не визначено жодного ресурсу Клієнту, Зберігача або Керівника\n"
+#~ "Без цього я не знаю як отримати статус Зберігача, Збирача або Керівника\n"
+
+#~ msgid ""
+#~ "Invalid refresh interval defined in %s\n"
+#~ "This value must be greater or equal to 1 second and less or equal to 10 "
+#~ "minutes (read value: %d).\n"
+#~ msgstr ""
+#~ "Задано поганий інтервал оновлення у %s\n"
+#~ "Це значення повинно бути не меньше 1 секунди та не більше 10 хвилин "
+#~ "(теперішнє значення: %d).\n"
+
+#~ msgid "Error, currentitem is not a Client or a Storage..\n"
+#~ msgstr "Помилка. Поточний пункт не є Клієнтом або Зберігачем.\n"
+
+#~ msgid "Connecting to Client %s:%d"
+#~ msgstr "Приєднуюсь до Клієнта %s:%d"
+
+#~ msgid "Connecting to Storage %s:%d"
+#~ msgstr "Приєднуюсь до Зберігача %s:%d"
+
+#~ msgid "Error, currentitem is not a Client, a Storage or a Director..\n"
+#~ msgstr "Помилка. Поточний пункт не є Клієнтом або Зберігачем.\n"
+
+#~ msgid "Cannot connect to daemon."
+#~ msgstr "Не можу приєднатись до демону."
+
+#~ msgid "Opened connection with Director daemon."
+#~ msgstr "Відкриті з'єднання із Керівником."
+
+#~ msgid "Opened connection with File daemon."
+#~ msgstr "Відкриті з'єднання із Збирачем."
+
+#~ msgid "Opened connection with Storage daemon."
+#~ msgstr "Відкриті з'єднання із Зберігачем."
+
+#~ msgid "Error : Connection closed."
+#~ msgstr "Помилка : З'єднання завершено"
+
+#, fuzzy
+#~ msgid "encode command string"
+#~ msgstr "луна командного рядку"
+
+#, fuzzy
+#~ msgid "Command line"
+#~ msgstr "Не зрозумілий параметр командного рядка"
+
+#, fuzzy
+#~ msgid "aclx_scanStr error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "aclx_put error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Generate VSS snapshots. Driver=\"%s\"\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "WriteEncryptedFileRaw failure: ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "attr_list error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "attr_set error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "getproplist error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "setproplist error on file \"%s\": ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Can't delete working directory %s. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unknown parameter or missing argument for %s.\n"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Unknown parameter for %s. Expecting block or file\n"
+#~ msgstr "Невідомий статус"
+
+#, fuzzy
+#~ msgid "Unable to create temporary file %s. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to detect the MySQL data_directory on this system.\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get the BINLOG list.\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to determine the last LSN for %s (Previous job is %s)\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get last LSN from the backup\n"
+#~ msgstr "Не вдалось відновити прапорці для файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Restoring target database \"%s\"\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Creating target database \"%s\"\n"
+#~ msgstr "Не вдалось відкрити%s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Can't determine the last WAL file\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Can't determine WAL directory\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to detect the PostgreSQL data_directory on this system.\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to find data_directory=%s on this system. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to start the PITR backup on this system.\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to determine the first WAL file on this system.\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to analyse tablespaces %s on this system. ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to analyse data_directory %s on this system. ERR=%s\n"
+#~ msgstr "Не можливо встановити час файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Can't create the %s file for recovery. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "DDE commit failed. ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Initializing DDE."
+#~ msgstr "Ініціалізація ..."
+
+#, fuzzy
+#~ msgid "Cannot create DedupIndexDirectory: %s"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot create recovery directory: %s"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Cannot delete temporary recovery directory: %s"
+#~ msgstr "Не можливо перевстановити поточну теку: ERR=%s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Got Aligned or File type Volume %s on Dedup device %s. Wanted File.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Got Aligned or Dedup type Volume %s on File device %s. Wanted File.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Got File or Dedup type Volume %s on Aligned device %s. Wanted Aligned.\n"
+#~ msgstr "У картотеці створено новий Том \"%s\".\n"
+
+#, fuzzy
+#~ msgid "Unable to parse user supplied restore configuration\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "AIX Specific Extended attribs"
+#~ msgstr "Специфічні додаткові атрибути Linux"
+
+#~ msgid ""
+#~ "Written by Nicolas Boichat (2004)\n"
+#~ "\n"
+#~ "Version: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Usage: tray-monitor [-c config_file] [-d debug_level]\n"
+#~ "       -c <file>     set configuration file to file\n"
+#~ "       -d <nn>       set debug level to <nn>\n"
+#~ "       -dt           print timestamp in debug output\n"
+#~ "       -t            test - read configuration and exit\n"
+#~ "       -?            print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Автор Nicolas Boichat (2004)\n"
+#~ "\n"
+#~ "Версія: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Використання: tray-monitor [-c config_file] [-d debug_level]\n"
+#~ "       -c <file>     задати конфігураційний файл <file>\n"
+#~ "       -d <nn>       встановити рівень відлагоджування у <nn>\n"
+#~ "       -dt           виводити часову мітку у даних відлагоджування\n"
+#~ "       -t            перевірка - прогитати конфігурацію і завершити\n"
+#~ "       -?            показати це повідомлення.\n"
+#~ "\n"
+
+#~ msgid "Open status window..."
+#~ msgstr "Відкрити вікно статусу"
+
+#~ msgid "Exit"
+#~ msgstr "Закінчити"
+
+#~ msgid " (DIR)"
+#~ msgstr "Керівник"
+
+#~ msgid " (FD)"
+#~ msgstr "Збирач"
+
+#~ msgid " (SD)"
+#~ msgstr "(Зберігач)"
+
+#~ msgid "Refresh interval in seconds: "
+#~ msgstr "Інтервал оновлення у секундах"
+
+#~ msgid "Refresh now"
+#~ msgstr "Оновити зараз"
+
+#~ msgid "About"
+#~ msgstr "Про..."
+
+#~ msgid "Close"
+#~ msgstr "Зачинити"
+
+#~ msgid "Disconnecting from Storage %s:%d\n"
+#~ msgstr "Від'єднуюсь від Зберігача %s:%d\n"
+
+#~ msgid "Version"
+#~ msgstr "Версія"
+
+#~ msgid "No last job."
+#~ msgstr "Останні задачі відсутні"
+
+#~ msgid "Job status: Blocked"
+#~ msgstr "Статус задачі: Заблокована"
+
+#~ msgid "Job status: Waiting for new media"
+#~ msgstr "Статус задачі: Очікування нового носія"
+
+#~ msgid "Job status: Waiting for maximum jobs"
+#~ msgstr "Статус задачі: Очікування кількості задач"
+
+#~ msgid "Job status: Unknown(%c)"
+#~ msgstr "Статус задачі: Невідомий(%c)"
+
+#~ msgid "Opened connection with Director daemon.\n"
+#~ msgstr "Відкриті з'єднання із Керівником.\n"
+
+#~ msgid "Opened connection with File daemon.\n"
+#~ msgstr "Відкриті з'єднання із Збирачем.\n"
+
+#~ msgid "Bad response to Hello command: ERR="
+#~ msgstr "Погана відповідь на команду Hello: ERR="
+
+#~ msgid "Welcome to bacula bwx-console %s (%s)!\n"
+#~ msgstr "Ласкаво просимо до bacula bwx-console %s (%s)!\n"
+
+#~ msgid "Passphrase for Console \"%s\" TLS private key: "
+#~ msgstr "Пароль для закритого ключа TLS Консолі \"%s\": "
+
+#~ msgid "Passphrase for Director \"%s\" TLS private key: "
+#~ msgstr "Пароль для закритого ключа TLS Керівника \"%s\": "
+
+#, fuzzy
+#~ msgid "%s blocks of %lld changed during backup to %lld.\n"
+#~ msgstr "%s розмір змінився під час резервування.\n"
+
+#, fuzzy
+#~ msgid "Unable to get the Full job for %s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to write to %s to save full job name. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to save last controlfile into file %s. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to save last SCN into file %s. ERR=%s\n"
+#~ msgstr "Не можливо встановити власника файлу %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Can't open /etc/oratab. ERR=%s\n"
+#~ msgstr "Не вдається відкрити файл %s для введення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to open %s to save RMAN output. ERR=%s\n"
+#~ msgstr "Не вдається відкрити файл %s для виведення. ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error occured while dumping tempfiles ERR=%s\n"
+#~ msgstr "Помилка у %s файл %s: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Can't create pipe to discuss with Oracle. ERR=%s\n"
+#~ msgstr "Не можливо створити теку %s: ERR=%s\n"
+
+#~ msgid ""
+#~ "Authorization key rejected by Storage daemon.\n"
+#~ "Please see http://www.bacula.org/en/rel-manual/Bacula_Freque_Asked_Questi."
+#~ "html#SECTION003760000000000000000 for help.\n"
+#~ msgstr ""
+#~ "Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/"
+#~ "rel-manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#~ msgid ""
+#~ "Director and Storage daemon passwords or names not the same.\n"
+#~ "Please see http://www.bacula.org/en/rel-manual/Bacula_Freque_Asked_Questi."
+#~ "html#SECTION003760000000000000000 for help.\n"
+#~ msgstr ""
+#~ "Керівник та Зберігач мають не однакові назви або паролі.\n"
+#~ "Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/"
+#~ "rel-manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#~ msgid ""
+#~ "Director and File daemon passwords or names not the same.\n"
+#~ "Please see http://www.bacula.org/en/rel-manual/Bacula_Freque_Asked_Questi."
+#~ "html#SECTION003760000000000000000 for help.\n"
+#~ msgstr ""
+#~ "Керівник та Збирач мають не однакові назви або паролі.\n"
+#~ "Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/"
+#~ "rel-manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#~ msgid "OSF1 Specific Default ACL attribs"
+#~ msgstr "Специфічні атрибути OSF1 Default ACL"
+
+#~ msgid "OSF1 Specific Access ACL attribs"
+#~ msgstr "Специфічні атрибути OSF1 Access ACL"
+
+#~ msgid ""
+#~ "Connection from unknown Director %s at %s rejected.\n"
+#~ "Please see http://www.bacula.org/en/rel-manual/Bacula_Freque_Asked_Questi."
+#~ "html#SECTION003760000000000000000 for help.\n"
+#~ msgstr ""
+#~ "Відмовлено у з'єднанні від невідомого Керівника %s %s.\n"
+#~ "Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/"
+#~ "rel-manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#~ msgid ""
+#~ "Incorrect password given by Director.\n"
+#~ "Please see http://www.bacula.org/en/rel-manual/Bacula_Freque_Asked_Questi."
+#~ "html#SECTION003760000000000000000 for help.\n"
+#~ msgstr ""
+#~ "Невірний пароль, наданий Керівником.\n"
+#~ "Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/"
+#~ "rel-manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#~ msgid ""
+#~ "Incorrect authorization key from File daemon at %s rejected.\n"
+#~ "Please see http://www.bacula.org/en/rel-manual/Bacula_Freque_Asked_Questi."
+#~ "html#SECTION003760000000000000000 for help.\n"
+#~ msgstr ""
+#~ "Авторизаційний ключ, отриманий від Збирача %s відкинуто.\n"
+#~ "Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/"
+#~ "rel-manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"
+
+#~ msgid ""
+#~ "Please see http://www.bacula.org/en/rel-manual/Bacula_Freque_Asked_Questi."
+#~ "html#SECTION003760000000000000000 for help.\n"
+#~ msgstr ""
+#~ "Для отримання допомоги, будь ласка, перегляньте http://www.bacula.org/en/"
+#~ "rel-manual/Bacula_Freque_Asked_Questi.html#SECTION003760000000000000000.\n"

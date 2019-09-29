@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# shell script to drop Bacula SQLite tables
+db_name=@db_name@
+
+cd @working_dir@
+rm -rf ${db_name}.db
+echo "SQLite database dropped."

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RestoreOptionsWizardPage</class>
+ <widget class="QWizardPage" name="RestoreOptionsWizardPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>419</width>
+    <height>304</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WizardPage</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="restoreClientLabel">
+     <property name="text">
+      <string>Restore Client:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="restoreClientComboxBox"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="whereLabel">
+     <property name="text">
+      <string>Where :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="whereLineEdit"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="replaceLabel">
+     <property name="text">
+      <string>Replace :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="replaceComboBox">
+     <item>
+      <property name="text">
+       <string>Never</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Always</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>IfNewer</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>IfOlder</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="commentLabel">
+     <property name="text">
+      <string>Comment :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="commentLineEdit"/>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

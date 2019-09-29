@@ -1,0 +1,94 @@
+#! /bin/sh
+#
+# Copyright (C) 2000-2015 Kern Sibbald
+# License: BSD 2-Clause; see file LICENSE-FOSS
+#
+# bacula       This shell script takes care of starting and stopping
+#	       the bacula Storage daemon.
+#
+# chkconfig: 2345 90 9
+# description: The Leading Open Source Backup Solution.
+#
+#  For Bacula release @VERSION@ (@DATE@) -- @DISTNAME@
+#
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+DAEMON_OPTIONS=''
+DAEMON_USER=yes
+SD_USER=@sd_user@
+SD_GROUP=@sd_group@
+SD_OPTIONS=''
+OS=`uname -s`
+
+# if /lib/tls exists, force Bacula to use the glibc pthreads instead
+if [ -d "/lib/tls" -a $OS = "Linux" -a `uname -r | cut -c1-3` = "2.4" ] ; then
+     export LD_ASSUME_KERNEL=2.4.19
+fi
+
+# pull in any user defined SD_OPTIONS, SD_USER, SD_GROUP or DAEMON_USER
+[ -f /etc/sysconfig/bacula ] && . /etc/sysconfig/bacula
+
+#
+# Disable Glibc malloc checks, it doesn't help and it keeps from getting
+#   good dumps
+MALLOC_CHECK_=0
+export MALLOC_CHECK_
+
+RETVAL=0
+case "$1" in
+    start)
+       if [ "${SD_USER}" != '' ]; then
+	  SD_OPTIONS="${SD_OPTIONS} -u ${SD_USER}"
+       fi
+										   
+       if [ "${SD_GROUP}" != '' ]; then
+	  SD_OPTIONS="${SD_OPTIONS} -g ${SD_GROUP}"
+       fi
+
+       if [ "${DAEMON_USER}" != '' -a "${SD_USER}" != '' ]; then
+	  SD_OPTIONS=""
+	  if [ "${SD_GROUP}" != '' ]; then
+	     chown ${SD_USER}:${SD_GROUP} @working_dir@/bacula-sd* 2> /dev/null
+	  else 
+	     chown ${SD_USER} @working_dir@/bacula-sd* 2> /dev/null
+	  fi
+	  DAEMON_OPTIONS="--user ${SD_USER}"
+       fi
+
+       echo -n "Starting Bacula Storage services: "
+       daemon $DAEMON_OPTIONS @sbindir@/bacula-sd $2 ${SD_OPTIONS} -c @sysconfdir@/bacula-sd.conf
+       RETVAL=$?
+       echo
+       if [ $RETVAL -eq 0 ]; then
+          touch @subsysdir@/bacula-sd
+          logger -p daemon.info "bacula-sd started" >/dev/null 2>/dev/null
+       fi
+       ;;
+    stop)
+       echo -n "Stopping Bacula Storage services: "
+       killproc @sbindir@/bacula-sd
+       RETVAL=$?
+       echo
+       if [ $RETVAL -eq 0 ]; then
+          rm -f @subsysdir@/bacula-sd
+          logger -p daemon.info "bacula-sd stopped" >/dev/null 2>/dev/null
+       fi
+       ;;
+    restart)
+       $0 stop
+       sleep 5
+       $0 start
+       RETVAL=$?
+       ;;
+    status)
+       status @sbindir@/bacula-sd
+       RETVAL=$?
+       ;;
+    *)
+       echo "Usage: $0 {start|stop|restart|status}"
+       exit 1
+       ;;
+esac
+exit $RETVAL
