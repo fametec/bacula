@@ -35,7 +35,7 @@ RUN cd /usr/src/bacula && ./configure \
 	--with-archivedir=/mnt/backup \
 	--with-job-email=$EMAIL \
 	--with-hostname=$HOST \
-	--with-dir-password=Dir_P4ssw0rd \
+	--with-dir-password=DIR_P4ssw0rd \
         --with-sd-password=SD_P4ssw0rd \
         --disable-build-stored \
 && make -j8 && make install 

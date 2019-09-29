@@ -1,20 +1,3 @@
-#!/bin/sh
-#
-# shell script to create Bacula PostgreSQL tables
-#
-# Copyright (C) 2000-2017 Kern Sibbald
-# License: BSD 2-Clause; see file LICENSE-FOSS
-#
-# Important note: 
-#   You won't get any support for performance issue if you changed the default
-#   schema.
-#
-bindir=/usr/lib/postgresql/11/bin
-PATH="$bindir:$PATH"
-db_name=${db_name:-bacula}
-
-psql -f - -d ${db_name} $* <<END-OF-DATA
-
 CREATE TABLE Filename
 (
     FilenameId	      serial	  not null,
@@ -485,14 +468,3 @@ CREATE UNIQUE INDEX snapshot_idx ON Snapshot (Device text_pattern_ops,
 INSERT INTO Version (VersionId) VALUES (16);
 
 -- Make sure we have appropriate permissions
-
-
-END-OF-DATA
-pstat=$?
-if test $pstat = 0; 
-then
-   echo "Creation of Bacula PostgreSQL tables succeeded."
-else
-   echo "Creation of Bacula PostgreSQL tables failed."
-fi
-exit $pstat
