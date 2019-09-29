@@ -46,5 +46,5 @@ EXPOSE 9103/tcp
 
 ENTRYPOINT ["bacula-sd"]
 
-CMD ["-fc","/etc/bacula/bacula-sd.conf"]
+CMD ["-vfc","/etc/bacula/bacula-sd.conf"]
 

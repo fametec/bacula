@@ -9,12 +9,12 @@ services:
       POSTGRES_PASSWORD: bacula
       POSTGRES_USER: bacula
       POSTGRES_DB: bacula
-    volumes:
-      - pgdata:/var/lib/postgresql/data:rw
+      #    volumes:
+      #- pgdata:/var/lib/postgresql/data:rw
     ports:
       - 5432
 #
-  director:
+  bacula-dir:
     build: bacula-dir/
     image: fametec/bacula-director:latest
     restart: unless-stopped
@@ -23,15 +23,15 @@ services:
     ports:
       - 9101
 #
-  storage:
+  bacula-sd:
     build: bacula-sd/
     image: fametec/bacula-storage:latest
     restart: unless-stopped
     depends_on:
-      - director
+      - bacula-dir
       - db
     ports:
       - 9103
 # 
-volumes: 
-  pgdata:
+#volumes: 
+#  pgdata:

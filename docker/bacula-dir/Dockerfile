@@ -46,6 +46,6 @@ EXPOSE 9101/tcp
 
 ENTRYPOINT ["bacula-dir"]
 
-CMD ["-fc","/etc/bacula/bacula-dir.conf"]
+CMD ["-ddd","-vfc","/etc/bacula/bacula-dir.conf"]
 
 # CMD [ "sleep","1000" ]	
