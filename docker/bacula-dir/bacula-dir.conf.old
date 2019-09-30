@@ -1,9 +1,9 @@
 Director {                            # define myself
   Name = bacula-dir
   DIRport = 9101                # where we listen for UA connections
-  QueryFile = "/opt/bacula/scripts/query.sql"
-  WorkingDirectory = "/opt/bacula/working"
-  PidDirectory = "/opt/bacula/working"
+  QueryFile = "/etc/bacula/scripts/query.sql"
+  WorkingDirectory = "/var/lib/bacula"
+  PidDirectory = "/var/run"
   Maximum Concurrent Jobs = 20
   Password = "DIR_P4ssw0rd"         # Console password
   Messages = Daemon
@@ -21,7 +21,7 @@ JobDefs {
   Pool = File
   SpoolAttributes = yes
   Priority = 10
-  Write Bootstrap = "/opt/bacula/working/%c.bsr"
+  Write Bootstrap = "/var/lib/bacula/%c.bsr"
 }
 
 Job {
@@ -35,13 +35,9 @@ Job {
   Level = Full
   FileSet="Catalog"
   Schedule = "WeeklyCycleAfterBackup"
-  # This creates an ASCII copy of the catalog
-  # Arguments to make_catalog_backup.pl are:
-  #  make_catalog_backup.pl <catalog-name>
-  RunBeforeJob = "/opt/bacula/scripts/make_catalog_backup.pl MyCatalog"
-  # This deletes the copy of the catalog
-  RunAfterJob  = "/opt/bacula/scripts/delete_catalog_backup"
-  Write Bootstrap = "/opt/bacula/working/%n.bsr"
+  RunBeforeJob = "/etc/bacula/scripts/make_catalog_backup.pl MyCatalog"
+  RunAfterJob  = "/etc/bacula/scripts/delete_catalog_backup"
+  Write Bootstrap = "/var/lib/bacula/%n.bsr"
   Priority = 11                   # run after main backup
 }
 
@@ -50,12 +46,10 @@ Job {
   Type = Restore
   Client=bacula-fd
   Storage = File1
-# The FileSet and Pool directives are not used by Restore Jobs
-# but must not be removed
   FileSet="Full Set"
   Pool = File
   Messages = Standard
-  Where = /tmp/bacula-restores
+  Where = /mnt/backup/bacula-restores
 }
 
 FileSet {
@@ -64,13 +58,12 @@ FileSet {
     Options {
       signature = MD5
     }
-    File = /opt/bacula/bin
-    File = /opt/bacula
+    File = /usr/sbin
   }
 
   Exclude {
-    File = /opt/bacula/working
-    File = /tmp
+    File = /var/lib/bacula
+    File = /mnt/backup
     File = /proc
     File = /tmp
     File = /sys
@@ -97,7 +90,7 @@ FileSet {
     Options {
       signature = MD5
     }
-    File = "/opt/bacula/working/bacula.sql"
+    File = "/var/lib/bacula/bacula.sql"
   }
 }
 
@@ -114,7 +107,6 @@ Client {
 
 Autochanger {
   Name = File1
-# Do not use "localhost" here
   Address = bacula-sd                # N.B. Use a fully qualified name here
   SDPort = 9103
   Password = "SD_P4ssw0rd"
@@ -126,7 +118,6 @@ Autochanger {
 
 Autochanger {
   Name = File2
-# Do not use "localhost" here
   Address = bacula-sd                # N.B. Use a fully qualified name here
   SDPort = 9103
   Password = "SD_P4ssw0rd"
@@ -141,28 +132,26 @@ Catalog {
   dbname = "bacula"
   dbuser = "bacula"
   dbpassword = "bacula"
-  DB address = "db"
+  DB Address = "db"
 }
 
 Messages {
   Name = Standard
-#  mailcommand = "/opt/bacula/bin/bsmtp -h smtp -f \"\(Bacula\) \<%r\>\" -s \"Bacula: %t %e of %c %l\" %r"
-#  operatorcommand = "/opt/bacula/bin/bsmtp -h smtp -f \"\(Bacula\) \<%r\>\" -s \"Bacula: Intervention needed for %j\" %r"
-#  mail = suporte@fametec.com.br = all, !skipped
-#  operator = suporte@fametec.com.br = mount
+  mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: %t %e of %c %l\" %r"
+  operatorcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: Intervention needed for %j\" %r"
+  mail = suporte@fametec.com.br = all, !skipped
+  operator = suporte@fametec.com.br = mount
   console = all, !skipped, !saved
-  append = "/opt/bacula/log/bacula.log" = all, !skipped
-  stdout = all, !skipped, !saved
+  append = "/var/log/bacula.log" = all, !skipped
   catalog = all
 }
 
 Messages {
   Name = Daemon
-#  mailcommand = "/opt/bacula/bin/bsmtp -h smtp -f \"\(Bacula\) \<%r\>\" -s \"Bacula daemon message\" %r"
-#  mail = suporte@fametec.com.br = all, !skipped
+  mailcommand = "/usr/sbin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula daemon message\" %r"
+  mail = suporte@fametec.com.br = all, !skipped
   console = all, !skipped, !saved
-  stdout = all, !skipped, !saved
-  append = "/opt/bacula/log/bacula.log" = all, !skipped
+  append = "/var/log/bacula.log" = all, !skipped
 }
 
 Pool {
@@ -186,6 +175,7 @@ Pool {
   Label Format = "Vol-"               # Auto label
 }
 
+
 Pool {
   Name = Scratch
   Pool Type = Backup
@@ -198,4 +188,4 @@ Console {
 }
 
 
-# @|"sh -c 'for f in /etc/bacula/conf.d/*.conf ; do echo @${f} ; done'"
+# @|"sh -c 'for f in /etc/bacula/bacula-dir.conf.d/*.conf ; do echo @${f} ; done'"
