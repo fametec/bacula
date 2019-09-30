@@ -5,7 +5,7 @@ Deploy the bacula community edition on Docker Containers.
 ## Workloads
 
 - [x] Bacula Catalog
-- [ ] Bacula Director
+- [x] Bacula Director
 - [ ] Bacula Storage Daemon
 - [ ] Bacula File Daemon
 - [ ] Baculum Web Gui
