@@ -2,6 +2,8 @@ FROM debian:10.1-slim AS base
 
 MAINTAINER eduardo@fametec.com.br
 
+ENV VERSION 9.4.4
+
 ENV EMAIL suporte@fametec.com.br
 
 ENV HOST localhost
@@ -35,7 +37,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	postgresql \
 && rm -rf /var/lib/apt/lists/*
 
-COPY bacula-9.4.4 /usr/src/bacula
+ADD https://ufpr.dl.sourceforge.net/project/bacula/bacula/$VERSION/bacula-$VERSION.tar.gz /tmp/bacula.tar.gz
+
+RUN tar -zxf /tmp/bacula.tar.gz -C /usr/src/bacula
+
+# COPY bacula-9.4.4 /usr/src/bacula
 
 RUN cd /usr/src/bacula \
 && PREFIX=/opt/bacula \
