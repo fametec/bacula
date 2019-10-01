@@ -12,17 +12,14 @@ Deploy the bacula community edition on Docker Containers.
 
 ## Docker Compose
 
-- [x] docker-compose.yaml
+docker-compose.yaml
 
 
     version: '3.1'
-    #
     services:
-
       base:
         build: bacula-base/
         image: fametec/bacula-base:latest
-    #
       db:
         build: bacula-catalog/
         image: fametec/bacula-catalog:latest
@@ -35,7 +32,6 @@ Deploy the bacula community edition on Docker Containers.
         - pgdata:/var/lib/postgresql/data:rw
         ports:
           - 5432
-    #
       bacula-dir:
         build: bacula-dir/
         image: fametec/bacula-director:latest
@@ -47,7 +43,6 @@ Deploy the bacula community edition on Docker Containers.
           - db
         ports:
           - 9101
-    #
       bacula-sd:
         build: bacula-sd/
         image: fametec/bacula-storage:latest
@@ -59,7 +54,6 @@ Deploy the bacula community edition on Docker Containers.
           - ./etc/bacula-sd.conf:/opt/bacula/etc/bacula-sd.conf:ro
         ports:
           - 9103
-    #
       bacula-fd:
         build: bacula-fd/
         image: fametec/bacula-client:latest
@@ -71,7 +65,6 @@ Deploy the bacula community edition on Docker Containers.
           - ./etc/bacula-fd.conf:/opt/bacula/etc/bacula-fd.conf:ro
         ports:
           - 9102
-    #
     volumes:
       pgdata:
 
