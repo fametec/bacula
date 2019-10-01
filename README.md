@@ -2,13 +2,13 @@
 
 Deploy the bacula community edition on Docker Containers. 
 
-## Workloads
+## Images
 
-- [x] Bacula Catalog
-- [x] Bacula Director
-- [x] Bacula Storage Daemon
-- [x] Bacula File Daemon
-- [ ] Baculum Web Gui
+- [x] Bacula Catalog fametec/bacula-catalog
+- [x] Bacula Director fametec/bacula-director
+- [x] Bacula Storage Daemon fametec/bacula-storage
+- [x] Bacula File Daemon fametec/bacula-client
+- [ ] Baculum Web Gui 
 
 ## Docker Compose
 
