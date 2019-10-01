@@ -10,6 +10,29 @@ Deploy the bacula community edition on Docker Containers.
 - [x] Bacula File Daemon fametec/bacula-client
 - [ ] Baculum Web Gui 
 
+## Install Docker 
+
+    curl -sSL https://get.docker.com | bash
+    
+## Install Docker-compose
+
+    curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+
+## Download and Install Bacula Container
+
+    git clone https://github.com/fametec/bacula
+    cd bacula/docker
+    docker-compose up
+
+## Tests
+
+    docker exec -it docker_bacula-dir_1 bash
+    > bconsole
+    * 
+    
+    
+
 ## Docker Compose
 
 docker-compose.yaml
