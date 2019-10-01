@@ -17,9 +17,9 @@ docker-compose.yaml
 
     version: '3.1'
     services:
-      base:
-        build: bacula-base/
-        image: fametec/bacula-base:latest
+      #base:
+        #build: bacula-base/
+        #image: fametec/bacula-base:latest
       db:
         build: bacula-catalog/
         image: fametec/bacula-catalog:latest
