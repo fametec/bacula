@@ -1,0 +1,6 @@
+[Bacula-Community]
+name=CentOS - Bacula - Community
+baseurl=http://www.bacula.org/packages/5cee4d079821e/rpms/9.4.4/el7/x86_64/
+enabled=1
+protect=0
+gpgcheck=0
