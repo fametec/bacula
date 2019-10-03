@@ -8,7 +8,7 @@ Deploy the bacula community edition on Docker Containers.
 - [x] Bacula Director fametec/bacula-director
 - [x] Bacula Storage Daemon fametec/bacula-storage
 - [x] Bacula File Daemon fametec/bacula-client
-- [ ] Baculum Web Gui 
+- [x] Baculum Web Gui 
 
 ## Install Docker 
 
