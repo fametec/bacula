@@ -1,0 +1,6 @@
+Defaults:apache "'!'"requiretty
+apache  ALL=NOPASSWD:  /usr/sbin/bconsole
+apache  ALL=NOPASSWD:  /usr/sbin/bdirjson
+apache  ALL=NOPASSWD:  /usr/sbin/bsdjson
+apache  ALL=NOPASSWD:  /usr/sbin/bfdjson
+apache  ALL=NOPASSWD:  /usr/sbin/bbconsjson
