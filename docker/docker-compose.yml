@@ -14,8 +14,8 @@ services:
       POSTGRES_PASSWORD: bacula
       POSTGRES_USER: bacula
       POSTGRES_DB: bacula
-    volumes:
-    - pgdata:/var/lib/postgresql/data:rw
+    # volumes:
+    #   - pgdata:/var/lib/postgresql/data:rw
     ports:
       - 5432
 #
@@ -54,6 +54,20 @@ services:
       - ./etc/bacula-fd.conf:/opt/bacula/etc/bacula-fd.conf:ro
     ports:
       - 9102
+#
+  baculum:
+    build: baculum/
+    image: fametec/baculum:latest
+    restart: unless-stopped
+    depends_on: 
+      - db
+      - bacula-dir
+    volumes:
+      - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
+        #- ./etc/baculum:/etc/baculum:rw
+    ports:
+      - 9095:9095
+      - 9096:9096
 # 
-volumes: 
-  pgdata:
+#volumes: 
+#  pgdata:

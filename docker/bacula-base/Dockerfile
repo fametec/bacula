@@ -1,4 +1,4 @@
-FROM centos
+FROM centos:7
 
 MAINTAINER Eduardo Fraga <eduardo.fraga@fametec.com.br>
 

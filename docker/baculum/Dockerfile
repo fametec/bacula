@@ -7,6 +7,7 @@ RUN rpm --import http://bacula.org/downloads/baculum/baculum.pub
 COPY baculum.repo /etc/yum.repos.d/baculum.repo
 
 RUN yum install -y \
+	sudo \
 	baculum-common \
 	baculum-api \
 	baculum-api-httpd \
