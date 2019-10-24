@@ -40,11 +40,7 @@ docker-compose.yaml
 
     version: '3.1'
     services:
-      # base:
-        # build: bacula-base/
-        # image: fametec/bacula-base:latest
       db:
-        build: bacula-catalog/
         image: fametec/bacula-catalog:latest
         restart: unless-stopped
         environment:
@@ -56,7 +52,6 @@ docker-compose.yaml
         ports:
           - 5432
       bacula-dir:
-        build: bacula-dir/
         image: fametec/bacula-director:latest
         restart: unless-stopped
         volumes:
@@ -67,7 +62,6 @@ docker-compose.yaml
         ports:
           - 9101
       bacula-sd:
-        build: bacula-sd/
         image: fametec/bacula-storage:latest
         restart: unless-stopped
         depends_on:
@@ -78,7 +72,6 @@ docker-compose.yaml
         ports:
           - 9103
       bacula-fd:
-        build: bacula-fd/
         image: fametec/bacula-client:latest
         restart: unless-stopped
         depends_on:
