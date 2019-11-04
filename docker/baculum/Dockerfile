@@ -24,10 +24,6 @@ RUN { \
   } > /etc/php.d/timezone.ini
 
 
-RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
-  && chmod -R g+rwx /opt/bacula/working /opt/bacula/etc
-
-
 VOLUME ["/etc/bacula/etc","/etc/baculum"]
 
 RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
