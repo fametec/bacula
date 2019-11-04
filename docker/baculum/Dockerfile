@@ -27,13 +27,8 @@ RUN { \
 VOLUME ["/opt/bacula/etc","/etc/baculum"]
 
 RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
-  && chmod -R g+rwx /opt/bacula/working /opt/bacula/etc
-  
-COPY Config-api-apache /etc/baculum/ 
-
-COPY Config-web-apache /etc/baculum/
-
-RUN chmod -R o+w /etc/baculum/Config-api-apache \
+  && chmod -R g+rwx /opt/bacula/working /opt/bacula/etc \
+  && chmod -R o+w /etc/baculum/Config-api-apache \
   && chmod -R o+w /etc/baculum/Config-web-apache
 
 EXPOSE 9095/tcp 9096/tcp
