@@ -18,6 +18,12 @@ RUN yum -y clean all && rm -rf /var/cache/yum
 
 COPY sudoers-baculum /etc/sudoers.d/sudoers-baculum 
 
+RUN { \
+        echo '[Date]'; \
+        echo 'date.timezone = UTC ; '; \
+  } > /etc/php.d/timezone.ini
+
+
 RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
   && chmod -R g+rwx /opt/bacula/working /opt/bacula/etc
 
