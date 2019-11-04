@@ -28,12 +28,16 @@ RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
   && chmod -R g+rwx /opt/bacula/working /opt/bacula/etc
 
 
-VOLUME ["/etc/bacula/etc"]
+VOLUME ["/etc/bacula/etc","/etc/baculum"]
+
+RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
+  && chmod -R g+rwx /opt/bacula/working /opt/bacula/etc \
+  && chmod -R o+w /usr/share/baculum/htdocs/protected/Web/Config/Config-api-apache \
+  && chmod -R o+w /usr/share/baculum/htdocs/protected/Web/Config/Config-web-apache
 
 EXPOSE 9095/tcp 9096/tcp
 
 # ENTRYPOINT [""]
 
 CMD ["httpd", "-D", "FOREGROUND"]
-
 
