@@ -54,7 +54,6 @@ services:
       - bacula-dir
     volumes:
       - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
-      - ./etc/baculum:/etc/baculum:rw
     ports:
       - 9095:9095
       - 9096:9096
