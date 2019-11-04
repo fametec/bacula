@@ -24,12 +24,17 @@ RUN { \
   } > /etc/php.d/timezone.ini
 
 
-VOLUME ["/etc/bacula/etc","/etc/baculum"]
+VOLUME ["/opt/bacula/etc","/etc/baculum"]
 
 RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
-  && chmod -R g+rwx /opt/bacula/working /opt/bacula/etc \
-  && chmod -R o+w /usr/share/baculum/htdocs/protected/Web/Config/Config-api-apache \
-  && chmod -R o+w /usr/share/baculum/htdocs/protected/Web/Config/Config-web-apache
+  && chmod -R g+rwx /opt/bacula/working /opt/bacula/etc
+  
+COPY etc/baculum/Config-api-apache /etc/baculum/ 
+
+COPY etc/baculum/Config-web-apache /etc/baculum/
+
+RUN chmod -R o+w /etc/baculum/Config-api-apache \
+  && chmod -R o+w /etc/baculum/Config-web-apache
 
 EXPOSE 9095/tcp 9096/tcp
 
