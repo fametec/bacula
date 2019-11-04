@@ -1,0 +1,1 @@
+a:1:{s:11:"host_params";a:1:{i:0;a:12:{s:4:"host";s:9:"localhost";s:8:"protocol";s:4:"http";s:7:"address";s:9:"localhost";s:4:"port";s:4:"9096";s:10:"url_prefix";s:0:"";s:9:"auth_type";s:5:"basic";s:5:"login";s:5:"admin";s:8:"password";s:5:"admin";s:9:"client_id";N;s:13:"client_secret";N;s:12:"redirect_uri";N;s:5:"scope";N;}}}
