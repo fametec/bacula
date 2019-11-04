@@ -29,9 +29,9 @@ VOLUME ["/opt/bacula/etc","/etc/baculum"]
 RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
   && chmod -R g+rwx /opt/bacula/working /opt/bacula/etc
   
-COPY etc/baculum/Config-api-apache /etc/baculum/ 
+COPY Config-api-apache /etc/baculum/ 
 
-COPY etc/baculum/Config-web-apache /etc/baculum/
+COPY Config-web-apache /etc/baculum/
 
 RUN chmod -R o+w /etc/baculum/Config-api-apache \
   && chmod -R o+w /etc/baculum/Config-web-apache
