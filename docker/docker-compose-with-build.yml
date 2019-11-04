@@ -17,19 +17,18 @@ services:
     # volumes:
     #   - pgdata:/var/lib/postgresql/data:rw
     ports:
-      - 5432
+      - 5432:5432
 #
   bacula-dir:
     build: bacula-dir/
     image: fametec/bacula-director:latest
     restart: unless-stopped
     volumes:
-      - ./etc/bacula-dir.conf:/opt/bacula/etc/bacula-dir.conf:ro
-      - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
+      - ./etc:/opt/bacula/etc:ro
     depends_on: 
       - db      
     ports:
-      - 9101
+      - 9101:9101
 #
   bacula-sd:
     build: bacula-sd/
@@ -39,9 +38,9 @@ services:
       - bacula-dir
       - db
     volumes:
-      - ./etc/bacula-sd.conf:/opt/bacula/etc/bacula-sd.conf:ro
+      - ./etc:/opt/bacula/etc:ro
     ports:
-      - 9103
+      - 9103:9103
 #
   bacula-fd:
     build: bacula-fd/
@@ -51,9 +50,9 @@ services:
       - bacula-sd
       - bacula-dir
     volumes:
-      - ./etc/bacula-fd.conf:/opt/bacula/etc/bacula-fd.conf:ro
+      - ./etc:/opt/bacula/etc:ro
     ports:
-      - 9102
+      - 9102:9102
 #
   baculum:
     build: baculum/
@@ -64,7 +63,7 @@ services:
       - bacula-dir
     volumes:
       - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
-        #- ./etc/baculum:/etc/baculum:rw
+      - ./etc/baculum:/etc/baculum:rw
     ports:
       - 9095:9095
       - 9096:9096
