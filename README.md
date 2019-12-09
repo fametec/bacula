@@ -32,6 +32,10 @@ Deploy the bacula community edition on Docker Containers.
     * 
     
     
+## Video
+
+[![asciicast](https://asciinema.org/a/279317.svg)](https://asciinema.org/a/279317)
+
 
 ## Docker Compose
 
