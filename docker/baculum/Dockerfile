@@ -1,10 +1,18 @@
-FROM fametec/bacula-base
+FROM fametec/bacula-base:9.6.3
 
 MAINTAINER eduardo@fametec.com.br
 
 RUN rpm --import http://bacula.org/downloads/baculum/baculum.pub
 
 COPY baculum.repo /etc/yum.repos.d/baculum.repo
+
+RUN yum install -y \
+	epel-release \
+        yum-utils
+
+RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+
+RUN yum-config-manager --enable remi-php73
 
 RUN yum install -y \
 	sudo \
@@ -18,10 +26,7 @@ RUN yum -y clean all && rm -rf /var/cache/yum
 
 COPY sudoers-baculum /etc/sudoers.d/sudoers-baculum 
 
-RUN { \
-        echo '[Date]'; \
-        echo 'date.timezone = UTC ; '; \
-  } > /etc/php.d/timezone.ini
+COPY timezone.ini /etc/php.d/timezone.ini
 
 
 VOLUME ["/opt/bacula/etc","/etc/baculum"]

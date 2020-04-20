@@ -1,4 +1,4 @@
-FROM fametec/bacula-base
+FROM fametec/bacula-base:9.6.3
 
 VOLUME ["/opt/bacula/etc"]
 

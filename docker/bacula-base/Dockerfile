@@ -1,8 +1,8 @@
-FROM centos:7
+FROM centos:centos7.7.1908
 
 MAINTAINER Eduardo Fraga <eduardo.fraga@fametec.com.br>
 
-ENV BACULA_VERSION 9.4.4
+ENV BACULA_VERSION 9.6.3
 
 ENV BACULA_KEY 5cee4d079821e
 
@@ -17,11 +17,13 @@ RUN sed -i s/BACULA_VERSION/$(echo $BACULA_VERSION)/g /etc/yum.repos.d/bacula-co
 
 RUN rpm -i https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
+RUN yum -y upgrade
+
 RUN yum -y install postgresql94 \
 	zip \
 	bzip2
 
-RUN yum install -y bacula-postgresql --exclude=bacula-mysql
+RUN yum install -y bacula-postgresql-$BACULA_VERSION --exclude=bacula-mysql
 
 RUN yum -y clean all && rm -rf /var/cache/yum
 
