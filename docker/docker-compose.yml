@@ -3,7 +3,7 @@ version: '3.1'
 services:
 #    
   db:
-    image: fametec/bacula-catalog:latest
+    image: fametec/bacula-catalog:9.6.3
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: bacula
@@ -15,7 +15,7 @@ services:
       - 5432:5432
 #
   bacula-dir:
-    image: fametec/bacula-director:latest
+    image: fametec/bacula-director:9.6.3
     restart: unless-stopped
     volumes:
       - ./etc:/opt/bacula/etc:ro
@@ -25,7 +25,7 @@ services:
       - 9101:9101
 #
   bacula-sd:
-    image: fametec/bacula-storage:latest
+    image: fametec/bacula-storage:9.6.3
     restart: unless-stopped
     depends_on:
       - bacula-dir
@@ -36,18 +36,19 @@ services:
       - 9103:9103
 #
   bacula-fd:
-    image: fametec/bacula-client:latest
+    image: fametec/bacula-client:9.6.3
     restart: unless-stopped
     depends_on:
       - bacula-sd
       - bacula-dir
+      - db
     volumes:
       - ./etc:/opt/bacula/etc:ro
     ports:
       - 9102:9102
 #
 #  baculum:
-#    image: fametec/baculum:latest
+#    image: fametec/baculum:9.6.3
 #    restart: unless-stopped
 #    depends_on: 
 #      - db
@@ -60,7 +61,7 @@ services:
 #      - 9096:9096
 #
 #  gmail:
-#    image: fametec/postfix-gmail
+#    image: fametec/postfix:gmail
 #    restart: unless-stopped
 #    depends_on:
 #      - bacula-dir

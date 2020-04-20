@@ -4,8 +4,3 @@ baseurl=http://bacula.org/downloads/baculum/stable/centos
 gpgcheck=1
 enabled=1
 
-[baculumrepo]
-name=Baculum Fedora repository
-baseurl=http://bacula.org/downloads/baculum/stable/fedora
-gpgcheck=1
-enabled=1

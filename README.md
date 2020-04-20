@@ -1,14 +1,16 @@
-# Bacula 9.4.4 Container
+# Bacula 9.6.3 Container
 
 Deploy the bacula community edition on Docker Containers. 
 
 ## Images
 
-- [x] Bacula Catalog fametec/bacula-catalog
-- [x] Bacula Director fametec/bacula-director
-- [x] Bacula Storage Daemon fametec/bacula-storage
-- [x] Bacula File Daemon fametec/bacula-client
-- [x] Baculum Web Gui 
+- [x] Bacula Catalog fametec/bacula-catalog:9.6.3
+- [x] Bacula Director fametec/bacula-director:9.6.3
+- [x] Bacula Storage Daemon fametec/bacula-storage:9.6.3
+- [x] Bacula File Daemon fametec/bacula-client:9.6.3
+- [x] Baculum Web Gui fametec/baculum:9.6.3
+- [x] Postfix SMTP Relay fametec/postfix:latest
+- [x] SMTP2TG SMTP Relay to Telegram b3vis/docker-smtp2tg
 
 ## Install Docker 
 
@@ -45,7 +47,7 @@ docker-compose.yaml
     version: '3.1'
     services:
       db:
-        image: fametec/bacula-catalog:latest
+        image: fametec/bacula-catalog:9.6.3
         restart: unless-stopped
         environment:
           POSTGRES_PASSWORD: bacula
@@ -56,7 +58,7 @@ docker-compose.yaml
         ports:
           - 5432
       bacula-dir:
-        image: fametec/bacula-director:latest
+        image: fametec/bacula-director:9.6.3
         restart: unless-stopped
         volumes:
           - ./etc/bacula-dir.conf:/opt/bacula/etc/bacula-dir.conf:ro
@@ -66,7 +68,7 @@ docker-compose.yaml
         ports:
           - 9101
       bacula-sd:
-        image: fametec/bacula-storage:latest
+        image: fametec/bacula-storage:9.6.3
         restart: unless-stopped
         depends_on:
           - bacula-dir
@@ -76,7 +78,7 @@ docker-compose.yaml
         ports:
           - 9103
       bacula-fd:
-        image: fametec/bacula-client:latest
+        image: fametec/bacula-client:9.6.3
         restart: unless-stopped
         depends_on:
           - bacula-sd
