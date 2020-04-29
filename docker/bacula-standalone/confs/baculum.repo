@@ -1,0 +1,6 @@
+[baculumrepo]
+name=Baculum CentOS repository
+baseurl=http://bacula.org/downloads/baculum/stable/centos
+gpgcheck=1
+enabled=1
+
