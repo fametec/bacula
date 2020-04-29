@@ -1,10 +1,6 @@
 version: '3.1'
 #
 services:
-
-  base: 
-    build: bacula-base/
-    image: fametec/bacula-base:9.6.3
 #    
   db:
     build: bacula-catalog/
@@ -24,25 +20,14 @@ services:
     image: fametec/bacula-standalone:9.6.3
     restart: unless-stopped
     volumes:
-      - ./etc:/opt/bacula/etc:ro
+      - ./etc:/opt/bacula/etc:rw
+      - ./etc/baculum:/etc/baculum:rw
     depends_on: 
       - db      
     ports:
       - 9101:9101
       - 9102:9102
       - 9103:9103
-#
-  baculum:
-    build: baculum/
-    image: fametec/baculum:9.6.3
-    restart: unless-stopped
-    depends_on: 
-      - db
-      - bacula-standalone
-    volumes:
-      - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
-      - ./etc/baculum:/etc/baculum:rw
-    ports:
       - 9095:9095
       - 9096:9096
 # 
