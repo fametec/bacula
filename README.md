@@ -4,6 +4,7 @@ Deploy the bacula community edition on Docker Containers.
 
 ## Images
 
+- [x] Bacula Standalone fametec/bacula-standalone:9.6.3 (NEW)
 - [x] Bacula Catalog fametec/bacula-catalog:9.6.3
 - [x] Bacula Director fametec/bacula-director:9.6.3
 - [x] Bacula Storage Daemon fametec/bacula-storage:9.6.3
