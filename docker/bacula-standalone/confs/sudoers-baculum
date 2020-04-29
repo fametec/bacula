@@ -13,4 +13,6 @@ apache  ALL=NOPASSWD:  /opt/bacula/bin/bfdjson
 apache  ALL=NOPASSWD:  /opt/bacula/bin/bbconsjson
 
 
+apache  ALL=NOPASSWD:  /usr/bin/supervisorctl
+
 
