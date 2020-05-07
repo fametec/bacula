@@ -21,7 +21,8 @@ RUN yum -y upgrade
 
 RUN yum -y install postgresql94 \
 	zip \
-	bzip2
+	bzip2 \
+	mtx
 
 RUN yum install -y bacula-postgresql-$BACULA_VERSION --exclude=bacula-mysql
 
