@@ -1,0 +1,32 @@
+Job {
+  Name = "BackupUbuntu"
+  JobDefs = "DefaultJobToCloudAWS"
+  FileSet = "ubuntu-fs"
+  Client = "ubuntu-fd"
+}
+
+Client {
+  Name = ubuntu-fd
+  Address = 128.199.45.192
+  FDPort = 9102
+  Catalog = MyCatalog
+  Password = "lE-6z_tYeiRRnNLt_5L4w8KplM9Qb43z7"
+  File Retention = 60 days
+  Job Retention = 6 months
+  AutoPrune = yes
+}
+
+FileSet {
+  Name = "ubuntu-fs"
+  Include {
+    Options {
+      Compression=GZIP
+      signature=MD5
+    }
+    File = /home
+    File = /var/lib/mysql
+    File = /root
+    File = /share
+    File = /etc
+  }
+}

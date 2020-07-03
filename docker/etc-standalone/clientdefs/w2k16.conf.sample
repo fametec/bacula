@@ -1,0 +1,38 @@
+Job {
+  Name = "BackupW2k16ToAWS"
+  JobDefs = "DefaultJobToCloudAWS"
+  Client = "w2k16-fd"
+  Fileset = "w2k16-fs"
+}
+
+FileSet {
+  Name = "w2k16-fs"
+  Include {
+    Options {
+      signature = MD5
+      compression = GZIP
+      IgnoreCase = yes
+    }
+    File = "C:/documents and settings"
+    File = "C:/Users"
+    File = "C:/share"
+  }
+  Exclude {
+    File = "*.mp3"
+    File = "*.mp4"
+    File = "*.dll"
+    File = "*.exe"
+    File = "*.bin"
+  }
+}
+
+Client {
+  Name = w2k16-fd
+  Address = 40.71.101.166
+  FDPort = 9102
+  Catalog = MyCatalog
+  Password = "abc123cde456fgh789"
+  File Retention = 60 days 
+  Job Retention = 6 months
+  AutoPrune = yes 
+}
