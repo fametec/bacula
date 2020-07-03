@@ -1,6 +1,6 @@
 [Bacula-Community]
 name=CentOS - Bacula - Community
-baseurl=http://www.bacula.org/packages/BACULA_KEY/rpms/BACULA_VERSION/el7/x86_64/
+baseurl=http://www.bacula.org/packages/BACULA_KEY/rpms/BACULA_VERSION/el8/x86_64/
 enabled=1
 protect=0
 gpgcheck=0

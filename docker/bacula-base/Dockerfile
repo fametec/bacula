@@ -1,8 +1,8 @@
-FROM centos:centos7.7.1908
+FROM centos:8.2.2004
 
 MAINTAINER Eduardo Fraga <eduardo.fraga@fametec.com.br>
 
-ENV BACULA_VERSION 9.6.3
+ENV BACULA_VERSION 9.6.5
 
 ENV BACULA_KEY 5cee4d079821e
 
@@ -15,17 +15,20 @@ COPY bacula-community.repo /etc/yum.repos.d/bacula-community.repo
 RUN sed -i s/BACULA_VERSION/$(echo $BACULA_VERSION)/g /etc/yum.repos.d/bacula-community.repo \
   && sed -i s/BACULA_KEY/$(echo $BACULA_KEY)/g /etc/yum.repos.d/bacula-community.repo
 
-RUN rpm -i https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+#RUN rpm -i https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
-RUN yum -y upgrade
+#RUN dnf -y upgrade
 
-RUN yum -y install postgresql94 \
+#RUN dnf -y install postgresql \
+RUN dnf -y install \
+	postgresql \
 	zip \
 	bzip2 \
-	mtx
+	mtx 
 
-RUN yum install -y bacula-postgresql-$BACULA_VERSION --exclude=bacula-mysql
+RUN dnf install -y bacula-postgresql-$BACULA_VERSION
 
-RUN yum -y clean all && rm -rf /var/cache/yum
+RUN dnf -y clean all && rm -rf /var/cache/yum
 
 RUN for i in `ls /opt/bacula/bin`; do ln -s /opt/bacula/bin/$i /usr/sbin/$i; done 
+

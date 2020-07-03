@@ -1,10 +1,10 @@
-FROM fametec/bacula-base:9.6.3
+FROM fametec/bacula-base:9.6.5
 
 MAINTAINER eduardo@fametec.com.br
 
 VOLUME ["/opt/bacula/etc","/etc/baculum"]
 
-RUN yum install -y bacula-cloud-storage --exclude=bacula-mysql
+RUN dnf install -y bacula-cloud-storage
 
 RUN for i in `ls /opt/bacula/bin`; do if test -z /usr/sbin/$i; then ln -s /opt/bacula/bin/$i /usr/sbin/$i; fi; done 
 
@@ -12,11 +12,12 @@ RUN rpm --import http://bacula.org/downloads/baculum/baculum.pub
 
 COPY confs/baculum.repo /etc/yum.repos.d/baculum.repo
 
-RUN yum install -y epel-release yum-utils
+RUN dnf install -y epel-release 
+#yum-utils
 
-RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+# RUN dnf install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
-RUN yum-config-manager --enable remi-php73
+# RUN yum-config-manager --enable remi-php73
 
 RUN yum install -y \
 	sudo \
@@ -24,7 +25,8 @@ RUN yum install -y \
 	baculum-api \
 	baculum-api-httpd \
 	baculum-web \
-	baculum-web-httpd
+	baculum-web-httpd \
+	supervisor
 
 COPY confs/sudoers-baculum /etc/sudoers.d/sudoers-baculum 
 
@@ -39,9 +41,11 @@ RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
   && chmod -R o+w /etc/baculum/Config-api-apache \
   && chmod -R o+w /etc/baculum/Config-web-apache
 
-RUN yum -y install python-setuptools && easy_install supervisor
+# RUN yum -y install python3-setuptools && easy_install supervisor
 
 ADD confs/supervisord.conf /etc/supervisord.conf
+
+RUN mkdir -p /run/php-fpm
 
 RUN yum -y clean all && rm -rf /var/cache/yum
 
