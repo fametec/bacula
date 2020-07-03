@@ -4,7 +4,8 @@ MAINTAINER Eduardo Fraga <eduardo.fraga@fametec.com.br>
 
 ENV BACULA_VERSION 9.4.4
 
-ENV BACULA_KEY 5cee4d079821e
+# get your key on: https://www.bacula.org/bacula-binary-package-download/
+ENV BACULA_KEY put_your_key_here
 
 ENV EMAIL suporte@fametec.com.br
 
