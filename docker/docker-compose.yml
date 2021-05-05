@@ -3,7 +3,7 @@ version: '3.1'
 services:
 #    
   db:
-    image: fametec/bacula-catalog:9.6.5
+    image: fametec/bacula-catalog:11.0.2
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: bacula
@@ -15,7 +15,7 @@ services:
       - 5432:5432
 #
   bacula-dir:
-    image: fametec/bacula-director:9.6.5
+    image: fametec/bacula-director:11.0.2
     restart: unless-stopped
     volumes:
       - ./etc:/opt/bacula/etc:ro
@@ -25,7 +25,7 @@ services:
       - 9101:9101
 #
   bacula-sd:
-    image: fametec/bacula-storage:9.6.5
+    image: fametec/bacula-storage:11.0.2
     restart: unless-stopped
     depends_on:
       - bacula-dir
@@ -36,7 +36,7 @@ services:
       - 9103:9103
 #
   bacula-fd:
-    image: fametec/bacula-client:9.6.5
+    image: fametec/bacula-client:11.0.2
     restart: unless-stopped
     depends_on:
       - bacula-sd
@@ -48,7 +48,7 @@ services:
       - 9102:9102
 #
 #  baculum:
-#    image: fametec/baculum:9.6.5
+#    image: fametec/baculum:11.0.2
 #    restart: unless-stopped
 #    depends_on: 
 #      - db

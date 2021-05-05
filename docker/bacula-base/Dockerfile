@@ -1,8 +1,8 @@
-FROM centos:8.2.2004
+FROM centos:8
 
 MAINTAINER Eduardo Fraga <eduardo.fraga@fametec.com.br>
 
-ENV BACULA_VERSION 9.6.5
+ENV BACULA_VERSION 11.0.2
 
 # get your key on: https://www.bacula.org/bacula-binary-package-download/
 ENV BACULA_KEY 5cee4d079821e
@@ -32,4 +32,3 @@ RUN dnf install -y bacula-postgresql-$BACULA_VERSION
 RUN dnf -y clean all && rm -rf /var/cache/yum
 
 RUN for i in `ls /opt/bacula/bin`; do ln -s /opt/bacula/bin/$i /usr/sbin/$i; done 
-
