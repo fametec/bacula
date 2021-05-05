@@ -3,7 +3,7 @@ version: '3.1'
 services:
 #    
   db:
-    image: fametec/bacula-catalog:11.0.1
+    image: fametec/bacula-catalog:11.0.2
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: bacula
@@ -15,7 +15,7 @@ services:
       - 5432:5432
 #
   bacula-standalone:
-    image: fametec/bacula-standalone:11.0.1
+    image: fametec/bacula-standalone:11.0.2
     restart: unless-stopped
     volumes:
       - ./etc-standalone:/opt/bacula/etc:rw
