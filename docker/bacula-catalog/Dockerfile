@@ -1,4 +1,4 @@
-FROM fametec/bacula-base:11.0.1 AS base
+FROM fametec/bacula-base:11.0.2 AS base
 
 FROM postgres:9.4
 
