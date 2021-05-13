@@ -14,7 +14,7 @@ COPY baculum.repo /etc/yum.repos.d/baculum.repo
 
 # RUN dnf-config-manager --enable remi-php73
 
-RUN dnf install -y \
+RUN yum install -y \
 	sudo \
 	baculum-common \
 	baculum-api \
@@ -22,7 +22,7 @@ RUN dnf install -y \
 	baculum-web \
 	baculum-web-httpd
 
-RUN dnf -y clean all && rm -rf /var/cache/yum
+RUN yum -y clean all && rm -rf /var/cache/yum
 
 COPY sudoers-baculum /etc/sudoers.d/sudoers-baculum 
 
@@ -38,9 +38,9 @@ RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
 
 EXPOSE 9095/tcp 9096/tcp
 
-RUN dnf -y install epel-release 
+RUN yum -y install epel-release 
 
-RUN dnf -y install supervisor
+RUN yum -y install supervisor
 # python3-setuptools && easy_install supervisor
 
 ADD confs/supervisord.conf /etc/supervisord.conf
