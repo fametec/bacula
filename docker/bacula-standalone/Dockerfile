@@ -4,7 +4,7 @@ MAINTAINER eduardo@fametec.com.br
 
 VOLUME ["/opt/bacula/etc","/etc/baculum"]
 
-RUN dnf install -y bacula-cloud-storage
+RUN yum install -y bacula-cloud-storage
 
 RUN for i in `ls /opt/bacula/bin`; do if test -z /usr/sbin/$i; then ln -s /opt/bacula/bin/$i /usr/sbin/$i; fi; done 
 
@@ -12,10 +12,10 @@ RUN rpm --import http://bacula.org/downloads/baculum/baculum.pub
 
 COPY confs/baculum.repo /etc/yum.repos.d/baculum.repo
 
-RUN dnf install -y epel-release 
+RUN yum install -y epel-release 
 #yum-utils
 
-# RUN dnf install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+# RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
 # RUN yum-config-manager --enable remi-php73
 
