@@ -12,12 +12,11 @@ RUN rpm --import http://bacula.org/downloads/baculum/baculum.pub
 
 COPY confs/baculum.repo /etc/yum.repos.d/baculum.repo
 
-RUN yum install -y epel-release 
-#yum-utils
+RUN yum install -y epel-release yum-utils
 
-# RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
-# RUN yum-config-manager --enable remi-php73
+RUN yum-config-manager --enable remi-php73
 
 RUN yum install -y \
 	sudo \
