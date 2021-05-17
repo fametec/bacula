@@ -16,18 +16,19 @@ RUN yum-config-manager --enable remi-php73
 
 RUN yum install -y \
 	sudo \
+	php-fpm \
 	baculum-common \
 	baculum-api \
 	baculum-api-httpd \
 	baculum-web \
-	baculum-web-httpd
-
-RUN yum -y clean all && rm -rf /var/cache/yum
+	baculum-web-httpd \
+	supervisor
 
 COPY sudoers-baculum /etc/sudoers.d/sudoers-baculum 
 
 COPY timezone.ini /etc/php.d/timezone.ini
 
+COPY confs/supervisord.conf /etc/supervisord.conf
 
 VOLUME ["/opt/bacula/etc","/etc/baculum"]
 
@@ -38,16 +39,8 @@ RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
 
 EXPOSE 9095/tcp 9096/tcp
 
-RUN yum -y install epel-release 
-
-RUN yum -y install supervisor
-# python3-setuptools && easy_install supervisor
-
-ADD confs/supervisord.conf /etc/supervisord.conf
-
 RUN mkdir -p /run/php-fpm
-# ENTRYPOINT [""]
 
-# CMD ["httpd", "-D", "FOREGROUND"]
+RUN yum -y clean all && rm -rf /var/cache/yum
 
 CMD ["/usr/bin/supervisord"]
