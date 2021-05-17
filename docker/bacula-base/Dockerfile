@@ -22,7 +22,7 @@ RUN yum -y install epel-release
 
 # RUN dnf -y install postgresql \
 RUN yum -y install \
-	postgresql94 \
+	postgresql10 \
 	zip \
 	bzip2 \
 	mtx 

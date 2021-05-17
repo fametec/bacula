@@ -1,6 +1,6 @@
 FROM fametec/bacula-base:11.0.2 AS base
 
-FROM postgres:9.4
+FROM postgres:10
 
 MAINTAINER eduardo@fametec.com.br
 
