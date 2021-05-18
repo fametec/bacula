@@ -1,7 +1,7 @@
 version: '3.1'
 #
 services:
-#    
+
   db:
     image: fametec/bacula-catalog:11.0.2
     restart: unless-stopped
@@ -47,18 +47,33 @@ services:
     ports:
       - 9102:9102
 #
-#  baculum:
-#    image: fametec/baculum:11.0.2
-#    restart: unless-stopped
-#    depends_on: 
-#      - db
-#      - bacula-dir
-#    volumes:
-#      - ./etc:/opt/bacula/etc:ro
-#      - ./etc/baculum:/opt/bacula/etc/baculum:rw
-#    ports:
-#      - 9095:9095
-#      - 9096:9096
+  baculum-api:
+    image: fametec/baculum-api:11.0.2
+    restart: unless-stopped
+    depends_on: 
+      - db
+      - bacula-dir
+    volumes:
+      - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
+      - ./etc/baculum:/etc/baculum:rw
+    ports:
+      - 9096:9096
+
+#
+  baculum-web:
+    image: fametec/baculum-web:11.0.2
+    restart: unless-stopped
+    depends_on: 
+      - baculum-api
+    volumes:
+      - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
+      - ./etc/baculum:/etc/baculum:rw
+    ports:
+      - 9095:9095
+
+# 
+#volumes: 
+#  pgdata:
 #
 #  gmail:
 #    image: fametec/postfix:gmail

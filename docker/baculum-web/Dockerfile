@@ -2,7 +2,7 @@ FROM fametec/bacula-base:11.0.2
 
 MAINTAINER eduardo@fametec.com.br
 
-RUN rpm --import http://bacula.org/downloads/baculum/baculum.pub
+RUN rpm --import https://www.bacula.org/downloads/baculum/baculum.pub
 
 COPY baculum.repo /etc/yum.repos.d/baculum.repo
 
@@ -18,8 +18,6 @@ RUN yum install -y \
 	sudo \
 	php-fpm \
 	baculum-common \
-	baculum-api \
-	baculum-api-httpd \
 	baculum-web \
 	baculum-web-httpd \
 	supervisor
@@ -32,12 +30,7 @@ COPY confs/supervisord.conf /etc/supervisord.conf
 
 VOLUME ["/opt/bacula/etc","/etc/baculum"]
 
-RUN chown -R apache:bacula /opt/bacula/working /opt/bacula/etc \
-  && chmod -R g+rwx /opt/bacula/working /opt/bacula/etc \
-  && chmod -R o+w /etc/baculum/Config-api-apache \
-  && chmod -R o+w /etc/baculum/Config-web-apache
-
-EXPOSE 9095/tcp 9096/tcp
+EXPOSE 9095/tcp
 
 RUN mkdir -p /run/php-fpm
 

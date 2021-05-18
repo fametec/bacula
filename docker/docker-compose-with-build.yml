@@ -55,9 +55,9 @@ services:
     ports:
       - 9102:9102
 #
-  baculum:
-    build: baculum/
-    image: fametec/baculum:11.0.2
+  baculum-api:
+    build: baculum-api/
+    image: fametec/baculum-api:11.0.2
     restart: unless-stopped
     depends_on: 
       - db
@@ -66,8 +66,46 @@ services:
       - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
       - ./etc/baculum:/etc/baculum:rw
     ports:
-      - 9095:9095
       - 9096:9096
+
+#
+  baculum-web:
+    build: baculum-web/
+    image: fametec/baculum-web:11.0.2
+    restart: unless-stopped
+    depends_on: 
+      - baculum-api
+    volumes:
+      - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
+      - ./etc/baculum:/etc/baculum:rw
+    ports:
+      - 9095:9095
+
+# 
+#volumes: 
+#  pgdata:
+#
+#  gmail:
+#    image: fametec/postfix:gmail
+#    restart: unless-stopped
+#    depends_on:
+#      - bacula-dir
+#    # ports:
+#    #  - 30025:25
+#    environment:
+#      GMAIL_USER: xxxxxxxx
+#      GMAIL_PASS: xxxxxxxx
+#
+#  smtp2tg:
+#    image: b3vis/docker-smtp2tg
+#    restart: unless-stopped
+#    volumes:
+#      - ./etc/smtp2tg.toml:/config/smtp2tg.toml:ro
+#    #    ports:
+#    #  - "31025:25"
+#    depends_on:
+#      - bacula-dir
+#
 # 
 #volumes: 
 #  pgdata:
