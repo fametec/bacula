@@ -1,0 +1,16 @@
+Defaults:apache !requiretty
+apache  ALL=NOPASSWD:  /usr/sbin/bconsole
+apache  ALL=NOPASSWD:  /usr/sbin/bdirjson
+apache  ALL=NOPASSWD:  /usr/sbin/bsdjson
+apache  ALL=NOPASSWD:  /usr/sbin/bfdjson
+apache  ALL=NOPASSWD:  /usr/sbin/bbconsjson
+
+
+apache  ALL=NOPASSWD:  /opt/bacula/bin/bconsole
+apache  ALL=NOPASSWD:  /opt/bacula/bin/bdirjson
+apache  ALL=NOPASSWD:  /opt/bacula/bin/bsdjson
+apache  ALL=NOPASSWD:  /opt/bacula/bin/bfdjson
+apache  ALL=NOPASSWD:  /opt/bacula/bin/bbconsjson
+
+
+
