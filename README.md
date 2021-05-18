@@ -4,14 +4,16 @@ Deploy the bacula community edition on Docker Containers.
 
 ## Images
 
-- [x] Bacula Standalone fametec/bacula-standalone:11.0.2 (NEW)
-- [x] Bacula Catalog fametec/bacula-catalog:11.0.2
-- [x] Bacula Director fametec/bacula-director:11.0.2
-- [x] Bacula Storage Daemon fametec/bacula-storage:11.0.2
-- [x] Bacula File Daemon fametec/bacula-client:11.0.2
-- [x] Baculum Web Gui fametec/baculum:11.0.2
-- [x] Postfix SMTP Relay fametec/postfix:latest
-- [x] SMTP2TG SMTP Relay to Telegram b3vis/docker-smtp2tg
+- [ ] Bacula Standalone                 fametec/bacula-standalone:11.0.2 (DEPRECATED)
+- [x] Bacula Catalog                    fametec/bacula-catalog:11.0.2
+- [x] Bacula Director                   fametec/bacula-director:11.0.2
+- [x] Bacula Storage Daemon             fametec/bacula-storage:11.0.2
+- [x] Bacula File Daemon                fametec/bacula-client:11.0.2
+- [ ] Baculum Web Gui                   fametec/baculum:11.0.2 (DEPRECATED)
+- [x] Baculum Web Gui                   fametec/baculum-web:11.0.2 (NEW)
+- [x] Baculum API                       fametec/baculum-api:11.0.2 (NEW)
+- [x] Postfix SMTP Relay                fametec/postfix:latest
+- [x] SMTP2TG SMTP Relay to Telegram    b3vis/docker-smtp2tg
 
 ## Install Docker 
 
