@@ -1,4 +1,4 @@
-FROM fametec/bacula-base:11.0.2
+FROM fametec/bacula-base:11.0.5
 
 RUN yum install -y bacula-cloud-storage --exclude=bacula-mysql
 
