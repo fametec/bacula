@@ -25,7 +25,8 @@ RUN yum -y install \
 	postgresql10 \
 	zip \
 	bzip2 \
-	mtx 
+	mtx \
+	mt-st
 
 RUN yum install -y bacula-postgresql-$BACULA_VERSION --exclude=bacula-mysql
 
