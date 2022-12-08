@@ -1,15 +1,15 @@
-# Bacula 11.0.5 Container
+# Bacula 13.0.1 Container
 
 Deploy the bacula community edition on Docker Containers. 
 
 ## Images
 
-- [x] Bacula Catalog                    fametec/bacula-catalog:11.0.5
-- [x] Bacula Director                   fametec/bacula-director:11.0.5
-- [x] Bacula Storage Daemon             fametec/bacula-storage:11.0.5
-- [x] Bacula File Daemon                fametec/bacula-client:11.0.5
-- [x] Baculum Web Gui                   fametec/baculum-web:11.0.5 (NEW)
-- [x] Baculum API                       fametec/baculum-api:11.0.5 (NEW)
+- [x] Bacula Catalog                    fametec/bacula-catalog:13.0.1
+- [x] Bacula Director                   fametec/bacula-director:13.0.1
+- [x] Bacula Storage Daemon             fametec/bacula-storage:13.0.1
+- [x] Bacula File Daemon                fametec/bacula-client:13.0.1
+- [x] Baculum Web Gui                   fametec/baculum-web:13.0.1 (NEW)
+- [x] Baculum API                       fametec/baculum-api:13.0.1 (NEW)
 - [x] Postfix SMTP Relay                fametec/postfix:latest
 - [x] SMTP2TG SMTP Relay to Telegram    b3vis/docker-smtp2tg
 
@@ -48,7 +48,7 @@ docker-compose.yaml
     version: '3.1'
     services:
       db:
-        image: fametec/bacula-catalog:11.0.5
+        image: fametec/bacula-catalog:13.0.1
         restart: unless-stopped
         environment:
           POSTGRES_PASSWORD: bacula
@@ -59,7 +59,7 @@ docker-compose.yaml
         ports:
           - 5432
       bacula-dir:
-        image: fametec/bacula-director:11.0.5
+        image: fametec/bacula-director:13.0.1
         restart: unless-stopped
         volumes:
           - ./etc/bacula-dir.conf:/opt/bacula/etc/bacula-dir.conf:ro
@@ -69,7 +69,7 @@ docker-compose.yaml
         ports:
           - 9101
       bacula-sd:
-        image: fametec/bacula-storage:11.0.5
+        image: fametec/bacula-storage:13.0.1
         restart: unless-stopped
         depends_on:
           - bacula-dir
@@ -79,7 +79,7 @@ docker-compose.yaml
         ports:
           - 9103
       bacula-fd:
-        image: fametec/bacula-client:11.0.5
+        image: fametec/bacula-client:13.0.1
         restart: unless-stopped
         depends_on:
           - bacula-sd

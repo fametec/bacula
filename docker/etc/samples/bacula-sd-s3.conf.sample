@@ -36,7 +36,7 @@ Cloud {
   Name = "S3-cloud-us-west-2"
   Driver = "S3"
   HostName = "s3.us-west-2.amazonaws.com"
-  BucketName = "fametec-backup"
+  BucketName = "eftechcombr-backup"
   AccessKey = "ABC"
   SecretKey = "DEF"
   Protocol = HTTPS
