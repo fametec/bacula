@@ -8,12 +8,14 @@ RUN apt update && \
   apt -y install \
     php-bcmath \
 	php*-mbstring \
+	php-fpm \
 	baculum-api \
 	baculum-api-apache2 \
 	baculum-common \
 	bacula-console \
 	baculum-web \
-	baculum-web-apache2
+	baculum-web-apache2 \
+	supervisor 
 
 COPY sudoers-baculum /etc/sudoers.d/sudoers-baculum 
 
@@ -25,14 +27,12 @@ RUN usermod -aG bacula www-data && \
 
 COPY timezone.ini /etc/php.d/timezone.ini
 
-# COPY confs/supervisord.conf /etc/supervisord.conf
+COPY confs/supervisord.conf /etc/supervisord.conf
 
 VOLUME ["/opt/bacula/etc","/etc/baculum"]
 
 EXPOSE 9096/tcp
 
-# RUN mkdir -p /run/php-fpm
+RUN mkdir -p /run/php
 
-# RUN yum -y clean all && rm -rf /var/cache/yum
-
-# CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord"]
