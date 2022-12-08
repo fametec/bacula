@@ -1,4 +1,4 @@
-FROM eftechcombr/bacula-base:13.0.1 AS base
+FROM eftechcombr/bacula:13.0.1-base AS base
 
 FROM postgres:13.7
 

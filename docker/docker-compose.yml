@@ -48,7 +48,7 @@ services:
       - 9102:9102
 #
 #   baculum-api:
-#     image: eftechcombr/baculum-api:13.0.1
+#     image: eftechcombr/baculum:11.0.6-api
 #     restart: unless-stopped
 #     depends_on: 
 #       - db
@@ -61,7 +61,7 @@ services:
 
 # #
 #   baculum-web:
-#     image: eftechcombr/baculum-web:13.0.1
+#     image: eftechcombr/baculum:11.0.6-web
 #     restart: unless-stopped
 #     depends_on: 
 #       - baculum-api

@@ -4,11 +4,11 @@ services:
 
   base: 
     build: bacula-base/
-    image: eftechcombr/bacula-base:13.0.1
+    image: eftechcombr/bacula:13.0.1-base
 #    
   db:
     build: bacula-catalog/
-    image: eftechcombr/bacula-catalog:13.0.1
+    image: eftechcombr/bacula:13.0.1-catalog
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: bacula
@@ -21,7 +21,7 @@ services:
 #
   bacula-dir:
     build: bacula-dir/
-    image: eftechcombr/bacula-director:13.0.1
+    image: eftechcombr/bacula:13.0.1-director
     restart: unless-stopped
     volumes:
       - ./etc:/opt/bacula/etc:ro
@@ -32,7 +32,7 @@ services:
 #
   bacula-sd:
     build: bacula-sd/
-    image: eftechcombr/bacula-storage:13.0.1
+    image: eftechcombr/bacula:13.0.1-storage
     restart: unless-stopped
     depends_on:
       - bacula-dir
@@ -44,7 +44,7 @@ services:
 #
   bacula-fd:
     build: bacula-fd/
-    image: eftechcombr/bacula-client:13.0.1
+    image: eftechcombr/bacula:13.0.1-client
     restart: unless-stopped
     depends_on:
       - bacula-sd
@@ -57,7 +57,7 @@ services:
 #
   baculum-api:
     build: baculum-api/
-    image: eftechcombr/baculum-api:13.0.1
+    image: eftechcombr/baculum:11.0.6-api
     restart: unless-stopped
     depends_on: 
       - db
@@ -71,7 +71,7 @@ services:
 #
   baculum-web:
     build: baculum-web/
-    image: eftechcombr/baculum-web:13.0.1
+    image: eftechcombr/baculum:11.0.6-web
     restart: unless-stopped
     depends_on: 
       - baculum-api

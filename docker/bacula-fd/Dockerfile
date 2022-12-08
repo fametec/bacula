@@ -1,4 +1,4 @@
-FROM eftechcombr/bacula-base:13.0.1
+FROM eftechcombr/bacula:13.0.1-base
 
 VOLUME ["/opt/bacula/etc"]
 
