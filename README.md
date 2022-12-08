@@ -95,11 +95,11 @@ docker-compose.yaml
 
 For technical support please contact us. 
 
-suporte@eftechcombr.com.br
+suporte@eftech.com.br
 
 ## e-Learning 
 
-https://www.eftechcombr.com.br
+https://www.eftech.com.br
 
 
 ## Reference
