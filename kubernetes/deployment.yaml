@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bacula-dir
+  name: bacula-dir
+  namespace: backup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bacula-dir
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: bacula-dir
+    spec:
+      containers:
+      - image: eftechcombr/bacula:13.0.1-director
+        name: bacula
+        ports:
+        - containerPort: 9101
+        resources: {}
+status: {}
+
+
+
