@@ -137,7 +137,7 @@ data:
         File = /.fsck
       }
     }
-
+    #
     #
     # When to do the backups, full backup on first sunday of the month,
     #  differential (i.e. incremental since full) every other sunday,
@@ -148,13 +148,13 @@ data:
       Run = Differential 2nd-5th sun at 23:05
       Run = Incremental mon-sat at 23:05
     }
-
+    #
     # This schedule does the catalog. It starts after the WeeklyCycle
     Schedule {
       Name = "WeeklyCycleAfterBackup"
       Run = Full sun-sat at 23:10
     }
-
+    #
     # This is the backup of the catalog
     FileSet {
       Name = "Catalog"
@@ -471,8 +471,8 @@ data:
     #  Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
     #}
     #
-
-
+      
+      
   bconsole.conf: |-
     #
     # Bacula User Agent (or Console) Configuration File
@@ -480,7 +480,6 @@ data:
     # Copyright (C) 2000-2015 Kern Sibbald
     # License: BSD 2-Clause; see file LICENSE-FOSS
     #
-
     Director {
       Name = bacula-dir
       DIRport = 9101
