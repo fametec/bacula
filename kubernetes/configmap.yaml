@@ -4,7 +4,7 @@ metadata:
   name: bacula-dir
   namespace: backup
 data: 
-  bacula-dir.conf |
+  bacula-dir.conf: |
     #
     # Default Bacula Director Configuration file
     #
