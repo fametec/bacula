@@ -31,6 +31,22 @@ spec:
       - name: bacula-dir
         configMap:
           name: bacula-dir
-
 status: {}
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bacula-dir
+  name: bacula-dir
+  namespace: backup
+spec:
+  ports:
+  - port: 9101
+    protocol: TCP
+    targetPort: 9101
+  selector:
+    app: bacula-dir
+status:
+  loadBalancer: {}
