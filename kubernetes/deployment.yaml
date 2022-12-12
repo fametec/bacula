@@ -22,8 +22,18 @@ spec:
         name: bacula
         ports:
         - containerPort: 9101
+        volumeMounts:
+        - name: bacula-dir
+          mountPath: "/opt/bacula/etc/bacula-dir.conf"
+          subPath: bacula-dir.conf
+          readOnly: true
         resources: {}
+      volumes:
+      - name: bacula-dir
+        configMap:
+          name: bacula-dir
+          items: 
+          - key: "bacula-dir.conf"
+            path: "bacula-dir.conf"
 status: {}
-
-
 

@@ -236,7 +236,7 @@ data:
       dbname = "bacula"
       dbuser = "bacula"
       dbpassword = "bacula"
-      DB address = "db"
+      DB address = "postgresql-headless.backup.svc.cluster.local"
     }
     # Reasonable message delivery -- send most everything to email address
     #  and to the console
