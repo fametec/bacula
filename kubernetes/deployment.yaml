@@ -18,7 +18,7 @@ spec:
         app: bacula-dir
     spec:
       containers:
-      - image: eftechcombr/bacula:13.0.1-director
+      - image: docker.io/eftechcombr/bacula:13.0.1-director
         name: bacula
         ports:
         - containerPort: 9101
