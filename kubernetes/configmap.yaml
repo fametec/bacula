@@ -4,7 +4,7 @@ metadata:
   name: bacula-dir
   namespace: backup
 data: 
-  bacula-dir.conf: |
+  bacula-dir.conf: |-
     #
     # Default Bacula Director Configuration file
     #
@@ -320,7 +320,7 @@ data:
     # Include bacula-dir-cloud.conf for Wasabi cloud provider
     # @/opt/bacula/etc/bacula-dir-cloud.conf
     # Include bacula-dir-cloud-aws.conf for AWS S3 cloud provider
-    @/opt/bacula/etc/bacula-dir-cloud-aws.conf
+    # @/opt/bacula/etc/bacula-dir-cloud-aws.conf
     # Include subfiles associated with configuration of clients.
     # # They define the bulk of the Clients, Jobs, and FileSets.
     # # Remember to "reload" the Director after adding a client file.
@@ -471,3 +471,20 @@ data:
     #  Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
     #}
     #
+
+
+  bconsole.conf: |-
+    #
+    # Bacula User Agent (or Console) Configuration File
+    #
+    # Copyright (C) 2000-2015 Kern Sibbald
+    # License: BSD 2-Clause; see file LICENSE-FOSS
+    #
+
+    Director {
+      Name = bacula-dir
+      DIRport = 9101
+      address = bacula-dir
+      Password = "XDnaVZYU9F4QhqUGMPxiOXsJaji23mNG3FaAM9Z2q1c/"
+    }
+  
