@@ -32,8 +32,6 @@ spec:
       - name: bacula-dir
         configMap:
           name: bacula-dir
-          items: 
-          - key: "bacula-dir.conf"
-            path: "bacula-dir.conf"
+
 status: {}
 
