@@ -138,7 +138,7 @@ spec:
         - name: baculum-api
           mountPath: "/tmp/baculum/Config-api-apache"
           readOnly: true
-        - name: etc-baculum
+        - name: etc-baculum-api
           mountPath: "/etc/baculum"
         command:
           - bash
@@ -150,7 +150,7 @@ spec:
         ports:
         - containerPort: 9096
         volumeMounts:
-        - name: etc-baculum
+        - name: etc-baculum-api
           mountPath: "/etc/baculum"
         - name: bconsole
           mountPath: "/opt/bacula/etc/bconsole.conf"
@@ -185,7 +185,7 @@ spec:
       - name: bconsole
         configMap: 
           name: bconsole
-      - name: etc-baculum
+      - name: etc-baculum-api
         emptyDir: {}
 status: {}
 
@@ -210,19 +210,33 @@ spec:
       labels:
         app: baculum-web
     spec:
+      initContainers:
+      - image: docker.io/eftechcombr/baculum:11.0.6-web
+        name: baculum-init
+        volumeMounts:
+        - name: baculum-web
+          mountPath: "/tmp/baculum/Config-web-apache"
+          readOnly: true
+        - name: etc-baculum-web
+          mountPath: "/etc/baculum"
+        command:
+          - bash
+          - -c
+          - "cp -Rf /tmp/baculum/Config-web-apache /etc/baculum && chmod a+w /etc/baculum/Config-web-apache"
       containers:
       - image: docker.io/eftechcombr/baculum:11.0.6-web
         name: baculum-web
         ports:
         - containerPort: 9095
         volumeMounts:
-        - name: baculum-web
-          mountPath: "/etc/baculum/Config-web-apache"
-          readOnly: true
+        - name: etc-baculum-web
+          mountPath: "/etc/baculum"
         resources: {}
       volumes:
       - name: baculum-web
         configMap:
           name: baculum-web
+      - name: etc-baculum-web
+        emptyDir: {}          
 
 status: {}
