@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: bacula-dir
+  name: bacula-sd
   namespace: backup
 data: 
   bacula-sd.conf: |-
