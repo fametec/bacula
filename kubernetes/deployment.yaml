@@ -131,15 +131,27 @@ spec:
       labels:
         app: baculum-api
     spec:
+      initContainers:
+      - image: docker.io/eftechcombr/baculum:11.0.6-api
+        name: baculum-init
+        volumeMounts:
+        - name: baculum-api
+          mountPath: "/tmp/baculum/Config-api-apache"
+          readOnly: true
+        - name: etc-baculum
+          mountPath: "/etc/baculum"
+        args:
+          - bash
+          - -c
+          - "cp -Rf /tmp/baculum/Config-api-apache /etc/baculum"
       containers:
       - image: docker.io/eftechcombr/baculum:11.0.6-api
         name: baculum-api
         ports:
         - containerPort: 9096
         volumeMounts:
-        - name: baculum-api
-          mountPath: "/etc/baculum/Config-api-apache"
-          readOnly: true
+        - name: etc-baculum
+          mountPath: "/etc/baculum"
         - name: bconsole
           mountPath: "/opt/bacula/etc/bconsole.conf"
           subPath: bconsole.conf
@@ -173,6 +185,8 @@ spec:
       - name: bconsole
         configMap: 
           name: bconsole
+      - name: etc-baculum
+        emptyDir: {}
 status: {}
 
 
