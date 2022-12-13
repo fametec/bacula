@@ -138,7 +138,7 @@ spec:
         - containerPort: 9096
         volumeMounts:
         - name: baculum-api
-          mountPath: "/etc/baculum"
+          mountPath: "/etc/baculum/Config-api-apache"
           readOnly: true
         - name: bconsole
           mountPath: "/opt/bacula/etc/bconsole.conf"
@@ -173,4 +173,42 @@ spec:
       - name: bconsole
         configMap: 
           name: bconsole
+status: {}
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: baculum-web
+  name: baculum-web
+  namespace: backup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: baculum-web
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: baculum-web
+    spec:
+      containers:
+      - image: docker.io/eftechcombr/baculum:11.0.6-web
+        name: baculum-web
+        ports:
+        - containerPort: 9095
+        volumeMounts:
+        - name: baculum-web
+          mountPath: "/etc/baculum/Config-web-apache"
+          readOnly: true
+        resources: {}
+      volumes:
+      - name: baculum-web
+        configMap:
+          name: baculum-web
+
 status: {}
