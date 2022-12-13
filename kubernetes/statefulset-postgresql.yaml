@@ -136,4 +136,4 @@ spec:
   sessionAffinity: None
   type: ClusterIP
 status:
-  loadBalancer: {}
+  loadBalancer: {}  

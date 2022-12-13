@@ -1,0 +1,71 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: baculum-web
+  name: baculum-web
+  namespace: backup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: baculum-web
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: baculum-web
+    spec:
+      initContainers:
+      - image: docker.io/eftechcombr/baculum:11.0.6-web
+        name: baculum-init
+        volumeMounts:
+        - name: baculum-web
+          mountPath: "/tmp/baculum/Config-web-apache"
+          readOnly: true
+        - name: etc-baculum-web
+          mountPath: "/etc/baculum"
+        command:
+          - bash
+          - -c
+          - "cp -Rf /tmp/baculum/Config-web-apache /etc/baculum && chmod a+w /etc/baculum/Config-web-apache"
+      containers:
+      - image: docker.io/eftechcombr/baculum:11.0.6-web
+        name: baculum-web
+        ports:
+        - containerPort: 9095
+        volumeMounts:
+        - name: etc-baculum-web
+          mountPath: "/etc/baculum"
+        resources: {}
+      volumes:
+      - name: baculum-web
+        configMap:
+          name: baculum-web
+      - name: etc-baculum-web
+        emptyDir: {}          
+
+status: {}
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: baculum-web
+  name: baculum-web
+  namespace: backup
+spec:
+  ports:
+  - port: 9095
+    protocol: TCP
+    targetPort: 9095
+  selector:
+    app: baculum-web
+status:
+  loadBalancer: {}  
+
+
