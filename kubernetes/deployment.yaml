@@ -140,7 +140,7 @@ spec:
           readOnly: true
         - name: etc-baculum
           mountPath: "/etc/baculum"
-        args:
+        command:
           - bash
           - -c
           - "cp -Rf /tmp/baculum/Config-api-apache /etc/baculum"
