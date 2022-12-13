@@ -34,3 +34,21 @@ spec:
     app: bacula-sd
 status:
   loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bacula-sd
+  name: bacula-sd
+  namespace: backup
+spec:
+  ports:
+  - port: 9103
+    protocol: TCP
+    targetPort: 9103
+  selector:
+    app: bacula-sd
+status:
+  loadBalancer: {}
