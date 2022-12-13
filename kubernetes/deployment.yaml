@@ -143,7 +143,7 @@ spec:
         command:
           - bash
           - -c
-          - "cp -Rf /tmp/baculum/Config-api-apache /etc/baculum"
+          - "cp -Rf /tmp/baculum/Config-api-apache /etc/baculum && chmod a+w /etc/baculum/Config-api-apache"
       containers:
       - image: docker.io/eftechcombr/baculum:11.0.6-api
         name: baculum-api
