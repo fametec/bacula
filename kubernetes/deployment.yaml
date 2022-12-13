@@ -24,13 +24,21 @@ spec:
         - containerPort: 9101
         volumeMounts:
         - name: bacula-dir
-          mountPath: "/opt/bacula/etc"
+          mountPath: "/opt/bacula/etc/bacula-dir.conf"
+          subPath: bacula-dir.conf
+          readOnly: true
+        - name: bconsole
+          mountPath: "/opt/bacula/etc/bconsole.conf"
+          subPath: bconsole.conf
           readOnly: true
         resources: {}
       volumes:
       - name: bacula-dir
         configMap:
           name: bacula-dir
+      - name: bconsole
+        configMap: 
+          name: bconsole
 status: {}
 
 ---
@@ -101,4 +109,68 @@ spec:
       - name: bacula-fd
         configMap:
           name: bacula-fd
+status: {}
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: baculum-api
+  name: baculum-api
+  namespace: backup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: baculum-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: baculum-api
+    spec:
+      containers:
+      - image: docker.io/eftechcombr/baculum:11.0.6-api
+        name: baculum-api
+        ports:
+        - containerPort: 9096
+        volumeMounts:
+        - name: baculum-api
+          mountPath: "/etc/baculum"
+          readOnly: true
+        - name: bconsole
+          mountPath: "/opt/bacula/etc/bconsole.conf"
+          subPath: bconsole.conf
+          readOnly: true 
+        - name: bacula-dir
+          mountPath: "/opt/bacula/etc/bacula-dir.conf"
+          subPath: bacula-dir.conf
+          readOnly: true 
+        - name: bacula-fd
+          mountPath: "/opt/bacula/etc/bacula-fd.conf"
+          subPath: bacula-fd.conf 
+          readOnly: true
+        - name: bacula-sd
+          mountPath: "/opt/bacula/etc/bacula-sd.conf"
+          subPath: bacula-sd.conf 
+          readOnly: true
+        resources: {}
+      volumes:
+      - name: bacula-sd
+        configMap:
+          name: bacula-sd
+      - name: bacula-dir
+        configMap:
+          name: bacula-dir
+      - name: bacula-fd
+        configMap:
+          name: bacula-fd
+      - name: baculum-api
+        configMap:
+          name: baculum-api
+      - name: bconsole
+        configMap: 
+          name: bconsole
 status: {}
