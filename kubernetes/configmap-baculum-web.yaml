@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: baculum-api
+  name: baculum-web
   namespace: backup
 data:
   baculum.users: |-
