@@ -21,9 +21,9 @@ data:
     # Copyright (C) 2000-2017 Kern Sibbald
     # License: BSD 2-Clause; see file LICENSE-FOSS
     #
-    Director {                            # define myself
+    Director {                                                          # define myself
       Name = bacula-dir
-      DIRport = 9101                # where we listen for UA connections
+      DIRport = 9101                                                    # where we listen for UA connections
       QueryFile = "/opt/bacula/scripts/query.sql"
       WorkingDirectory = "/opt/bacula/working"
       PidDirectory = "/opt/bacula/working"
@@ -31,6 +31,7 @@ data:
       Password = "XDnaVZYU9F4QhqUGMPxiOXsJaji23mNG3FaAM9Z2q1c/"         # Console password
       Messages = Daemon
     }
+    #
     JobDefs {
       Name = "DefaultJob"
       Type = Backup
@@ -52,19 +53,7 @@ data:
       Name = "BackupClient1"
       JobDefs = "DefaultJob"
     }
-    #Job {
-    #  Name = "BackupClient2"
-    #  Client = bacula2-fd
-    #  JobDefs = "DefaultJob"
-    #}
-    #Job {
-    #  Name = "BackupClient1-to-Tape"
-    #  JobDefs = "DefaultJob"
-    #  Storage = LTO-4
-    #  Spool Data = yes    # Avoid shoe-shine
-    #  Pool = Default
-    #}
-    #}
+    #
     # Backup the catalog database (after the nightly save)
     Job {
       Name = "BackupCatalog"
@@ -104,25 +93,11 @@ data:
         Options {
           signature = MD5
         }
-    #
-    #  Put your list of files here, preceded by 'File =', one per line
-    #    or include an external list with:
-    #
-    #    File = <file-name
-    #
-    #  Note: / backs up everything on the root partition.
-    #    if you have other partitions such as /usr or /home
-    #    you will probably want to add them too.
-    #
-    #  By default this is defined to point to the Bacula binary
-    #    directory to give a reasonable FileSet to backup to
-    #    disk storage during initial testing.
-    #
         File = /opt/bacula/bin
         File = /opt/bacula
         File = /opt/bacula/etc
       }
-
+    #
     #
     # If you backup the root directory, the following two excluded
     #   files can be useful
@@ -168,7 +143,6 @@ data:
     # Client (File Services) to backup
     Client {
       Name = bacula-fd
-    #  Address = bacula-standalone
       Address = bacula-fd
       FDPort = 9102
       Catalog = MyCatalog
@@ -178,24 +152,10 @@ data:
       AutoPrune = yes                     # Prune expired Jobs/Files
     }
     #
-    # Second Client (File Services) to backup
-    #  You should change Name, Address, and Password before using
-    #
-    #Client {
-    #  Name = bacula2-fd
-    #  Address = bacula2
-    #  FDPort = 9102
-    #  Catalog = MyCatalog
-    #  Password = "eso80TrxzhXkRgaQVI6ZYrSzAZ4E9KFNp0Y+T1HHVWBi2"        # password for FileDaemon 2
-    #  File Retention = 60 days           # 60 days
-    #  Job Retention = 6 months           # six months
-    #  AutoPrune = yes                    # Prune expired Jobs/Files
-    #}
     # Definition of file Virtual Autochanger device
     Autochanger {
       Name = File1
     # Do not use "localhost" here
-    #  Address = bacula-standalone
       Address = bacula-sd                # N.B. Use a fully qualified name here
       SDPort = 9103
       Password = "TS8EQJ99iLFSK39oJy33YqkZ98v4ZapjRcA+j1N6ED1n"
@@ -209,7 +169,6 @@ data:
     Autochanger {
       Name = File2
     # Do not use "localhost" here
-    #  Address = bacula-standalone                # N.B. Use a fully qualified name here
       Address = bacula-sd                # N.B. Use a fully qualified name here
       SDPort = 9103
       Password = "TS8EQJ99iLFSK39oJy33YqkZ98v4ZapjRcA+j1N6ED1n"
@@ -218,18 +177,6 @@ data:
       Autochanger = File2                 # point to ourself
       Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
     }
-    # Definition of LTO-4 tape Autochanger device
-    #Autochanger {
-    #  Name = LTO-4
-    #  Do not use "localhost" here
-    #  Address = bacula               # N.B. Use a fully qualified name here
-    #  SDPort = 9103
-    #  Password = "TS8EQJ99iLFSK39oJy33YqkZ98v4ZapjRcA+j1N6ED1n"         # password for Storage daemon
-    #  Device = LTO-4                     # must be same as Device in Storage daemon
-    #  Media Type = LTO-4                 # must be same as MediaType in Storage daemon
-    #  Autochanger = LTO-4                # enable for autochanger device
-    #  Maximum Concurrent Jobs = 10
-    #}
     # Generic catalog service
     Catalog {
       Name = MyCatalog
@@ -256,7 +203,7 @@ data:
     #  mailcommand = "/opt/bacula/bin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: %t %e of %c %l\" %r"
     #  operatorcommand = "/opt/bacula/bin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: Intervention needed for %j\" %r"
     #  mail = root@localhost = all, !skipped
-      operator = root@localhost = mount
+    #  operator = root@localhost = mount
       console = all, !skipped, !saved
     #
     # WARNING! the following will create a file that you must cycle from
@@ -305,10 +252,10 @@ data:
       Label Format = "Vol-"               # Auto label
     }
     # Scratch pool definition
-    Pool {
-      Name = Scratch
-      Pool Type = Backup
-    }
+    # Pool {
+    #   Name = Scratch
+    #   Pool Type = Backup
+    # }
     #
     # Restricted console used by tray-monitor to get the status of the director
     #
@@ -317,16 +264,15 @@ data:
       Password = "r0V/Hx0TUwQ4TlnX1lyUHf8J8v9XvRBqnHTRW9+CB614"
       CommandACL = status, .status
     }
-    # Include bacula-dir-cloud.conf for Wasabi cloud provider
-    # @/opt/bacula/etc/bacula-dir-cloud.conf
-    # Include bacula-dir-cloud-aws.conf for AWS S3 cloud provider
-    # @/opt/bacula/etc/bacula-dir-cloud-aws.conf
     # Include subfiles associated with configuration of clients.
     # # They define the bulk of the Clients, Jobs, and FileSets.
     # # Remember to "reload" the Director after adding a client file.
-    # @|"sh -c 'for f in /opt/bacula/etc/clientdefs/*.conf ; do echo @${f} ; done'"
+    @|"sh -c 'for f in /opt/bacula/etc/bacula-dir.d/*.conf ; do echo @${f} ; done'"
     #
-    # bacula-dir-cloud.conf
+
+
+  bacula-dir.d/bacula-dir-cloud-aws.conf.sample: |-
+    # bacula-dir-cloud-aws.conf
     #
     # JobDefs
     # Job
@@ -387,6 +333,9 @@ data:
       Media Type = "CloudType"
       Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
     }
+
+
+  bacula-dir.d/bacula-dir-cloud.conf.sample: |-
     # bacula-dir-cloud.conf 
     # 
     # JobDefs
