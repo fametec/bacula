@@ -40,15 +40,15 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: bacula-sd
-  name: bacula-sd
+    app: bacula-fd
+  name: bacula-fd
   namespace: backup
 spec:
   ports:
-  - port: 9103
+  - port: 9102
     protocol: TCP
-    targetPort: 9103
+    targetPort: 9102
   selector:
-    app: bacula-sd
+    app: bacula-fd
 status:
   loadBalancer: {}
