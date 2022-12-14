@@ -267,7 +267,7 @@ data:
     # Include subfiles associated with configuration of clients.
     # # They define the bulk of the Clients, Jobs, and FileSets.
     # # Remember to "reload" the Director after adding a client file.
-    @|"sh -c 'for f in /opt/bacula/etc/bacula-dir.d/*.conf ; do echo @${f} ; done'"
+    # @|"sh -c 'for f in /opt/bacula/etc/bacula-dir.d/*.conf ; do echo @${f} ; done'"
     #
     # bacula-dir-cloud-aws.conf
     #
