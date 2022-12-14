@@ -269,9 +269,6 @@ data:
     # # Remember to "reload" the Director after adding a client file.
     @|"sh -c 'for f in /opt/bacula/etc/bacula-dir.d/*.conf ; do echo @${f} ; done'"
     #
-
-
-  bacula-dir.d/bacula-dir-cloud-aws.conf.sample: |-
     # bacula-dir-cloud-aws.conf
     #
     # JobDefs
@@ -333,9 +330,6 @@ data:
       Media Type = "CloudType"
       Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
     }
-
-
-  bacula-dir.d/bacula-dir-cloud.conf.sample: |-
     # bacula-dir-cloud.conf 
     # 
     # JobDefs
@@ -421,3 +415,4 @@ data:
     #}
     #
       
+

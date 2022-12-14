@@ -36,8 +36,6 @@ spec:
           mountPath: "/opt/bacula/etc/bconsole.conf"
           subPath: bconsole.conf
           readOnly: true
-        - name: bacula-dir-d
-          mountPath: "/opt/bacula/etc/bacula-dir.d"
         resources: {}
       volumes:
       - name: bacula-dir
@@ -46,8 +44,6 @@ spec:
       - name: bconsole
         configMap: 
           name: bconsole
-      - name: bacula-dir-d
-        emptyDir: {}
 status: {}
 
 
