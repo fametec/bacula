@@ -39,7 +39,7 @@ spec:
         command: 
         - bash
         - -c 
-        - "if [ ! -z /opt/bacula/etc/bacula-dir.conf ]; then cp -Rf /tmp/bacula/* /opt/bacula/etc/; fi"
+        - "if [ -z /opt/bacula/etc/bacula-dir.conf ]; then cp -Rf /tmp/bacula/* /opt/bacula/etc/; fi"
       containers:
       - image: docker.io/eftechcombr/bacula:13.0.1-director
         name: bacula-dir
