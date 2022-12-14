@@ -22,20 +22,32 @@ spec:
       labels:
         app: bacula-dir
     spec:
+      initContainers:
+      - image: docker.io/eftechcombr/bacula:13.0.1-director
+        name: bacula-init
+        volumeMounts: 
+        - name: bacula-dir
+          mountPath: "/tmp/bacula/bacula-dir.conf"
+          subPath: bacula-dir.conf
+          readOnly: true
+        - name: bconsole
+          mountPath: "/tmp/bacula/bconsole.conf"
+          subPath: bconsole.conf
+          readOnly: true
+        - name: bacula-etc
+          mmountPath: "/opt/bacula/etc"
+        command: 
+        - bash
+        - -c 
+        - "if [ ! -z /opt/bacula/etc/bacula-dir.conf ]; then cp -Rf /tmp/bacula/* /opt/bacula/etc/; fi"
       containers:
       - image: docker.io/eftechcombr/bacula:13.0.1-director
         name: bacula-dir
         ports:
         - containerPort: 9101
         volumeMounts:
-        - name: bacula-dir
-          mountPath: "/opt/bacula/etc/bacula-dir.conf"
-          subPath: bacula-dir.conf
-          readOnly: true
-        - name: bconsole
-          mountPath: "/opt/bacula/etc/bconsole.conf"
-          subPath: bconsole.conf
-          readOnly: true
+        - name: bacula-etc
+          mountPath: "/opt/bacula/etc"
         resources: {}
       volumes:
       - name: bacula-dir
@@ -44,6 +56,8 @@ spec:
       - name: bconsole
         configMap: 
           name: bconsole
+      - name: bacula-etc
+        emptyDir: {}
 status: {}
 
 
