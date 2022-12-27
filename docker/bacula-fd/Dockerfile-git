@@ -1,0 +1,21 @@
+FROM eftechcombr/bacula:13.0.1-base
+
+ENV USERNAME ${USERNAME}
+
+ENV TOKEN ${TOKEN}
+
+ENV ORG ${ORG}
+
+ADD scripts/*.sh /usr/local/bin/
+
+RUN chmod a+x /usr/local/bin/*.sh
+
+RUN apt -y install git curl jq 
+
+VOLUME ["/opt/bacula/etc"]
+
+EXPOSE 9102/tcp
+
+ENTRYPOINT ["/opt/bacula/bin/bacula-fd"]
+
+CMD ["-f", "-c", "/opt/bacula/etc/bacula-fd.conf"]

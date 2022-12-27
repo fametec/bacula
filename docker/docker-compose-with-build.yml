@@ -55,6 +55,46 @@ services:
     ports:
       - 9102:9102
 #
+  bacula-fd-git:
+    build: 
+      context: bacula-fd/
+      dockerfile: Dockerfile-git
+    image: eftechcombr/bacula:13.0.1-client-git
+    restart: unless-stopped
+    environment: 
+      USERNAME: <username>
+      TOKEN: <token>
+      ORG: <org>
+    volumes:
+      - ./etc:/opt/bacula/etc:ro
+    ports:
+      - 9202:9102
+
+
+  # bacula-fd-s3fs:
+  #   build: 
+  #     context: bacula-fd/
+  #     dockerfile: Dockerfile-s3fs
+  #   image: eftechcombr/bacula:13.0.1-client-s3fs
+  #   restart: unless-stopped
+  #   cap_add:
+  #     - SYS_ADMIN
+  #   # security_opt:
+  #   #   - 'apparmor:unconfined'
+  #   devices:
+  #     - /dev/fuse
+  #   # volumes:
+  #   #   - bucket:/opt/s3fs/bucket
+  #   environment:
+  #     AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+  #     AWS_S3_ACCESS_KEY_ID: ${AWS_S3_ACCESS_KEY_ID}
+  #     AWS_S3_SECRET_ACCESS_KEY: ${AWS_S3_SECRET_ACCESS_KEY} 
+  #   volumes:
+  #     - ./etc:/opt/bacula/etc:ro
+  #   ports:
+  #     - 9112:9102
+
+#
   baculum-api:
     build: baculum-api/
     image: eftechcombr/baculum:11.0.6-api
@@ -67,7 +107,6 @@ services:
       - ./etc/baculum:/etc/baculum:rw
     ports:
       - 9096:9096
-
 #
   baculum-web:
     build: baculum-web/
@@ -80,7 +119,6 @@ services:
       - ./etc/baculum:/etc/baculum:rw
     ports:
       - 9095:9095
-
 # 
 #volumes: 
 #  pgdata:
@@ -107,5 +145,6 @@ services:
 #      - bacula-dir
 #
 # 
-#volumes: 
-#  pgdata:
+# volumes: 
+#   pgdata:
+#   bucket:
