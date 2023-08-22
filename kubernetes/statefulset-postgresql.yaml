@@ -50,7 +50,7 @@ spec:
           value: "bacula"
         - name: POSTGRES_INITDB_ARGS
           value: '--encoding=SQL_ASCII --lc-collate=C --lc-ctype=C'
-        image: docker.io/eftechcombr/bacula:13.0.1-catalog
+        image: docker.io/eftechcombr/bacula:13.0.3-catalog
         imagePullPolicy: IfNotPresent
         name: postgresql
         ports:

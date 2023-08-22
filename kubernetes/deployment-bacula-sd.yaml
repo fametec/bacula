@@ -18,7 +18,7 @@ spec:
         app: bacula-sd
     spec:
       containers:
-      - image: docker.io/eftechcombr/bacula:13.0.1-storage
+      - image: docker.io/eftechcombr/bacula:13.0.3-storage
         name: bacula-sd
         ports:
         - containerPort: 9103

@@ -1,4 +1,4 @@
-FROM eftechcombr/bacula:13.0.1-base
+FROM eftechcombr/bacula:13.0.3-base
 
 RUN apt -y install bacula-cloud-storage-common bacula-cloud-storage-s3 bacula-aligned
 

@@ -18,7 +18,7 @@ spec:
         app: bacula-fd
     spec:
       containers:
-      - image: docker.io/eftechcombr/bacula:13.0.1-client
+      - image: docker.io/eftechcombr/bacula:13.0.3-client
         name: bacula-fd
         ports:
         - containerPort: 9102
