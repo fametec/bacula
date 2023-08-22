@@ -55,20 +55,20 @@ services:
     ports:
       - 9102:9102
 #
-  bacula-fd-git:
-    build: 
-      context: bacula-fd/
-      dockerfile: Dockerfile-git
-    image: eftechcombr/bacula:13.0.3-client-git
-    restart: unless-stopped
-    environment: 
-      USERNAME: <username>
-      TOKEN: <token>
-      ORG: <org>
-    volumes:
-      - ./etc:/opt/bacula/etc:ro
-    ports:
-      - 9202:9102
+  # bacula-fd-git:
+  #   build: 
+  #     context: bacula-fd/
+  #     dockerfile: Dockerfile-git
+  #   image: eftechcombr/bacula:13.0.3-client-git
+  #   restart: unless-stopped
+  #   environment: 
+  #     USERNAME: <username>
+  #     TOKEN: <token>
+  #     ORG: <org>
+  #   volumes:
+  #     - ./etc:/opt/bacula/etc:ro
+  #   ports:
+  #     - 9202:9102
 
 
   # bacula-fd-s3fs:
