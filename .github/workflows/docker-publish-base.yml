@@ -28,7 +28,7 @@ env:
 jobs:
   build-base:
     env: 
-      CONTEXT: ./docker/bacula/base
+      CONTEXT: ./docker/bacula-base
       SUFFIX: base
 
     runs-on: ubuntu-latest
