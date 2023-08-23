@@ -1,0 +1,69 @@
+
+###############################################################################
+# 
+###############################################################################
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bacula-dir
+  name: bacula-dir
+  namespace: backup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bacula-dir
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: bacula-dir
+    spec:
+      containers:
+      - image: docker.io/eftechcombr/bacula:13.0.3-director
+        name: bacula-dir
+        ports:
+        - containerPort: 9101
+        volumeMounts:
+        - name: bacula-dir
+          mountPath: "/opt/bacula/etc/bacula-dir.conf"
+          subPath: bacula-dir.conf
+          readOnly: true
+        - name: bconsole
+          mountPath: "/opt/bacula/etc/bconsole.conf"
+          subPath: bconsole.conf
+          readOnly: true
+        resources: {}
+      volumes:
+      - name: bacula-dir
+        configMap:
+          name: bacula-dir
+      - name: bconsole
+        configMap: 
+          name: bconsole
+status: {}
+
+
+###############################################################################
+# 
+###############################################################################
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bacula-dir
+  name: bacula-dir
+  namespace: backup
+spec:
+  ports:
+  - port: 9101
+    protocol: TCP
+    targetPort: 9101
+  selector:
+    app: bacula-dir
+status:
+  loadBalancer: {}

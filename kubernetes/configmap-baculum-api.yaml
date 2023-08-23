@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: baculum-api
+  namespace: backup
+data:
+  baculum.users: |-
+    admin:YWG41BPzVAkN6
+
+
+  api.conf: |-
+    [api]
+    auth_type = "basic"
+    debug = "0"
+    lang = "en"
+
+    [db]
+    enabled = "1"
+    type = "pgsql"
+    name = "bacula"
+    login = "bacula"
+    password = "bacula"
+    ip_addr = "postgresql-headless"
+    port = "5432"
+    path = ""
+
+    [bconsole]
+    enabled = "1"
+    bin_path = "/opt/bacula/bin/bconsole"
+    cfg_path = "/opt/bacula/etc/bconsole.conf"
+    use_sudo = "0"
+
+    [jsontools]
+    enabled = "1"
+    use_sudo = "0"
+    bconfig_dir = "/etc/baculum/"
+    bdirjson_path = "/opt/bacula/bin/bdirjson"
+    dir_cfg_path = "/opt/bacula/etc/bacula-dir.conf"
+    bsdjson_path = "/opt/bacula/bin/bsdjson"
+    sd_cfg_path = "/opt/bacula/etc/bacula-sd.conf"
+    bfdjson_path = "/opt/bacula/bin/bfdjson"
+    fd_cfg_path = "/opt/bacula/etc/bacula-fd.conf"
+    bbconsjson_path = "/opt/bacula/bin/bbconsjson"
+    bcons_cfg_path = "/opt/bacula/etc/bconsole.conf"
+
+
+  

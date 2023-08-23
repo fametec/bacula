@@ -1,13 +1,11 @@
-FROM fametec/bacula-base:11.0.5
+FROM eftechcombr/bacula:13.0.3-base
 
-RUN yum install -y bacula-cloud-storage --exclude=bacula-mysql
-
-RUN for i in `ls /opt/bacula/bin`; do if test -z /usr/sbin/$i; then ln -s /opt/bacula/bin/$i /usr/sbin/$i; fi; done 
+RUN apt -y install bacula-cloud-storage-common bacula-cloud-storage-s3 bacula-aligned
 
 VOLUME ["/opt/bacula/etc"]
 
 EXPOSE 9103/tcp
 
-ENTRYPOINT ["bacula-sd"]
+ENTRYPOINT ["/opt/bacula/bin/bacula-sd"]
 
 CMD ["-f", "-c", "/opt/bacula/etc/bacula-sd.conf"]

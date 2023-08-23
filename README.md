@@ -1,16 +1,18 @@
-# Bacula 11.0.5 Container
+# Bacula 13.0.3 Container
 
 Deploy the bacula community edition on Docker Containers. 
 
 ## Images
 
-- [x] Bacula Catalog                    fametec/bacula-catalog:11.0.5
-- [x] Bacula Director                   fametec/bacula-director:11.0.5
-- [x] Bacula Storage Daemon             fametec/bacula-storage:11.0.5
-- [x] Bacula File Daemon                fametec/bacula-client:11.0.5
-- [x] Baculum Web Gui                   fametec/baculum-web:11.0.5 (NEW)
-- [x] Baculum API                       fametec/baculum-api:11.0.5 (NEW)
-- [x] Postfix SMTP Relay                fametec/postfix:latest
+- [x] Bacula Catalog                    eftechcombr/bacula:13.0.3-catalog
+- [x] Bacula Director                   eftechcombr/bacula:13.0.3-director
+- [x] Bacula Storage Daemon             eftechcombr/bacula:13.0.3-storage
+- [x] Bacula File Daemon                eftechcombr/bacula:13.0.3-client
+- [x] Bacula File Daemon S3             eftechcombr/bacula:13.0.3-client-s3fs (NEW)
+- [x] Bacula File Daemon Git            eftechcombr/bacula:13.0.3-client-git (NEW)
+- [x] Baculum Web Gui                   eftechcombr/baculum:11.0.6-web
+- [x] Baculum API                       eftechcombr/baculum:11.0.6-api
+- [x] Postfix SMTP Relay                eftechcombr/postfix:latest
 - [x] SMTP2TG SMTP Relay to Telegram    b3vis/docker-smtp2tg
 
 ## Install Docker 
@@ -22,9 +24,14 @@ Deploy the bacula community edition on Docker Containers.
     curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
 
+## Set permission on etc/baculum 
+
+    chmod -R a+rwx etc/baculum
+    
+
 ## Download and Install Bacula Container
 
-    git clone https://github.com/fametec/bacula
+    git clone https://github.com/eftechcombr/bacula
     cd bacula/docker
     docker-compose up
 
@@ -48,7 +55,7 @@ docker-compose.yaml
     version: '3.1'
     services:
       db:
-        image: fametec/bacula-catalog:11.0.5
+        image: eftechcombr/bacula:13.0.3-catalog
         restart: unless-stopped
         environment:
           POSTGRES_PASSWORD: bacula
@@ -59,7 +66,7 @@ docker-compose.yaml
         ports:
           - 5432
       bacula-dir:
-        image: fametec/bacula-director:11.0.5
+        image: eftechcombr/bacula:13.0.3-director
         restart: unless-stopped
         volumes:
           - ./etc/bacula-dir.conf:/opt/bacula/etc/bacula-dir.conf:ro
@@ -69,7 +76,7 @@ docker-compose.yaml
         ports:
           - 9101
       bacula-sd:
-        image: fametec/bacula-storage:11.0.5
+        image: eftechcombr/bacula:13.0.3-storage
         restart: unless-stopped
         depends_on:
           - bacula-dir
@@ -79,7 +86,7 @@ docker-compose.yaml
         ports:
           - 9103
       bacula-fd:
-        image: fametec/bacula-client:11.0.5
+        image: eftechcombr/bacula:13.0.3-client
         restart: unless-stopped
         depends_on:
           - bacula-sd
@@ -95,11 +102,11 @@ docker-compose.yaml
 
 For technical support please contact us. 
 
-suporte@fametec.com.br
+suporte@eftech.com.br
 
 ## e-Learning 
 
-https://www.fametec.com.br
+https://www.eftech.com.br
 
 
 ## Reference

@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   db:
-    image: fametec/bacula-catalog:11.0.5
+    image: eftechcombr/bacula:13.0.3-catalog
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: bacula
@@ -15,7 +15,7 @@ services:
       - 5432:5432
 #
   bacula-dir:
-    image: fametec/bacula-director:11.0.5
+    image: eftechcombr/bacula:13.0.3-director
     restart: unless-stopped
     volumes:
       - ./etc:/opt/bacula/etc:ro
@@ -25,7 +25,7 @@ services:
       - 9101:9101
 #
   bacula-sd:
-    image: fametec/bacula-storage:11.0.5
+    image: eftechcombr/bacula:13.0.3-storage
     restart: unless-stopped
     depends_on:
       - bacula-dir
@@ -36,7 +36,7 @@ services:
       - 9103:9103
 #
   bacula-fd:
-    image: fametec/bacula-client:11.0.5
+    image: eftechcombr/bacula:13.0.3-client
     restart: unless-stopped
     depends_on:
       - bacula-sd
@@ -47,36 +47,36 @@ services:
     ports:
       - 9102:9102
 #
-  baculum-api:
-    image: fametec/baculum-api:11.0.5
-    restart: unless-stopped
-    depends_on: 
-      - db
-      - bacula-dir
-    volumes:
-      - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
-      - ./etc/baculum:/etc/baculum:rw
-    ports:
-      - 9096:9096
+#   baculum-api:
+#     image: eftechcombr/baculum:11.0.6-api
+#     restart: unless-stopped
+#     depends_on: 
+#       - db
+#       - bacula-dir
+#     volumes:
+#       - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
+#       - ./etc/baculum:/etc/baculum:rw
+#     ports:
+#       - 9096:9096
 
-#
-  baculum-web:
-    image: fametec/baculum-web:11.0.5
-    restart: unless-stopped
-    depends_on: 
-      - baculum-api
-    volumes:
-      - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
-      - ./etc/baculum:/etc/baculum:rw
-    ports:
-      - 9095:9095
+# #
+#   baculum-web:
+#     image: eftechcombr/baculum:11.0.6-web
+#     restart: unless-stopped
+#     depends_on: 
+#       - baculum-api
+#     volumes:
+#       - ./etc/bconsole.conf:/opt/bacula/etc/bconsole.conf:ro
+#       - ./etc/baculum:/etc/baculum:rw
+#     ports:
+#       - 9095:9095
 
 # 
 #volumes: 
 #  pgdata:
 #
 #  gmail:
-#    image: fametec/postfix:gmail
+#    image: eftechcombr/postfix:gmail
 #    restart: unless-stopped
 #    depends_on:
 #      - bacula-dir

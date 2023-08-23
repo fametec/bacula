@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bacula-sd
+  name: bacula-sd
+  namespace: backup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bacula-sd
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: bacula-sd
+    spec:
+      containers:
+      - image: docker.io/eftechcombr/bacula:13.0.3-storage
+        name: bacula-sd
+        ports:
+        - containerPort: 9103
+        volumeMounts:
+        - name: bacula-sd
+          mountPath: "/opt/bacula/etc"
+          readOnly: true
+        resources: {}
+      volumes:
+      - name: bacula-sd
+        configMap:
+          name: bacula-sd
+status: {}
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bacula-sd
+  name: bacula-sd
+  namespace: backup
+spec:
+  ports:
+  - port: 9103
+    protocol: TCP
+    targetPort: 9103
+  selector:
+    app: bacula-sd
+status:
+  loadBalancer: {}
+

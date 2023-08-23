@@ -1,0 +1,2 @@
+deb [ arch=amd64 ] https://www.bacula.org/downloads/baculum/stable-11/debian bullseye main
+deb-src https://www.bacula.org/downloads/baculum/stable-11/debian bullseye main

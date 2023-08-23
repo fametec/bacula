@@ -88,7 +88,7 @@ Cloud {
   Name = "WasabiS3-cloud-us-east-2"
   Driver = "S3"
   HostName = "s3.us-east-2.wasabisys.com"
-  BucketName = "fametec-backup"
+  BucketName = "eftechcombr-backup"
   AccessKey = "ABC"
   SecretKey = "DEF"
   Protocol = HTTPS
@@ -102,7 +102,7 @@ Cloud {
 #  Name = "WasabiS3-cloud-eu-central-1"
 #  Driver = "S3"
 #  HostName = "s3.eu-central-1.wasabisys.com"
-#  BucketName = "fametec-backup2"
+#  BucketName = "eftechcombr-backup2"
 #  AccessKey = "ABC"
 #  SecretKey = "DEF"
 #  Protocol = HTTPS
@@ -117,7 +117,7 @@ Cloud {
 #  Name = "WasabiS3-cloud-us-west-1"
 #  Driver = "S3"
 #  HostName = "s3.us-west-1.wasabisys.com"
-#  BucketName = "fametec-backup3"
+#  BucketName = "eftechcombr-backup3"
 #  AccessKey = "ABC"
 #  SecretKey = "DEF"
 #  Protocol = HTTPS

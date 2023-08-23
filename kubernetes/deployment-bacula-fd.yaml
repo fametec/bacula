@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bacula-fd
+  name: bacula-fd
+  namespace: backup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bacula-fd
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: bacula-fd
+    spec:
+      containers:
+      - image: docker.io/eftechcombr/bacula:13.0.3-client
+        name: bacula-fd
+        ports:
+        - containerPort: 9102
+        volumeMounts:
+        - name: bacula-fd
+          mountPath: "/opt/bacula/etc"
+          readOnly: true
+        resources: {}
+      volumes:
+      - name: bacula-fd
+        configMap:
+          name: bacula-fd
+status: {}
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bacula-fd
+  name: bacula-fd
+  namespace: backup
+spec:
+  ports:
+  - port: 9102
+    protocol: TCP
+    targetPort: 9102
+  selector:
+    app: bacula-fd
+status:
+  loadBalancer: {}

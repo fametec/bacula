@@ -4,11 +4,11 @@ services:
 
   base: 
     build: bacula-base/
-    image: fametec/bacula-base:11.0.5
+    image: eftechcombr/bacula:13.0.3-base
 #    
   db:
     build: bacula-catalog/
-    image: fametec/bacula-catalog:11.0.5
+    image: eftechcombr/bacula:13.0.3-catalog
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: bacula
@@ -21,7 +21,7 @@ services:
 #
   bacula-dir:
     build: bacula-dir/
-    image: fametec/bacula-director:11.0.5
+    image: eftechcombr/bacula:13.0.3-director
     restart: unless-stopped
     volumes:
       - ./etc:/opt/bacula/etc:ro
@@ -32,7 +32,7 @@ services:
 #
   bacula-sd:
     build: bacula-sd/
-    image: fametec/bacula-storage:11.0.5
+    image: eftechcombr/bacula:13.0.3-storage
     restart: unless-stopped
     depends_on:
       - bacula-dir
@@ -44,7 +44,7 @@ services:
 #
   bacula-fd:
     build: bacula-fd/
-    image: fametec/bacula-client:11.0.5
+    image: eftechcombr/bacula:13.0.3-client
     restart: unless-stopped
     depends_on:
       - bacula-sd
@@ -55,9 +55,49 @@ services:
     ports:
       - 9102:9102
 #
+  # bacula-fd-git:
+  #   build: 
+  #     context: bacula-fd/
+  #     dockerfile: Dockerfile-git
+  #   image: eftechcombr/bacula:13.0.3-client-git
+  #   restart: unless-stopped
+  #   environment: 
+  #     USERNAME: <username>
+  #     TOKEN: <token>
+  #     ORG: <org>
+  #   volumes:
+  #     - ./etc:/opt/bacula/etc:ro
+  #   ports:
+  #     - 9202:9102
+
+
+  # bacula-fd-s3fs:
+  #   build: 
+  #     context: bacula-fd/
+  #     dockerfile: Dockerfile-s3fs
+  #   image: eftechcombr/bacula:13.0.3-client-s3fs
+  #   restart: unless-stopped
+  #   cap_add:
+  #     - SYS_ADMIN
+  #   # security_opt:
+  #   #   - 'apparmor:unconfined'
+  #   devices:
+  #     - /dev/fuse
+  #   # volumes:
+  #   #   - bucket:/opt/s3fs/bucket
+  #   environment:
+  #     AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+  #     AWS_S3_ACCESS_KEY_ID: ${AWS_S3_ACCESS_KEY_ID}
+  #     AWS_S3_SECRET_ACCESS_KEY: ${AWS_S3_SECRET_ACCESS_KEY} 
+  #   volumes:
+  #     - ./etc:/opt/bacula/etc:ro
+  #   ports:
+  #     - 9112:9102
+
+#
   baculum-api:
     build: baculum-api/
-    image: fametec/baculum-api:11.0.5
+    image: eftechcombr/baculum:11.0.6-api
     restart: unless-stopped
     depends_on: 
       - db
@@ -67,11 +107,10 @@ services:
       - ./etc/baculum:/etc/baculum:rw
     ports:
       - 9096:9096
-
 #
   baculum-web:
     build: baculum-web/
-    image: fametec/baculum-web:11.0.5
+    image: eftechcombr/baculum:11.0.6-web
     restart: unless-stopped
     depends_on: 
       - baculum-api
@@ -80,13 +119,12 @@ services:
       - ./etc/baculum:/etc/baculum:rw
     ports:
       - 9095:9095
-
 # 
 #volumes: 
 #  pgdata:
 #
 #  gmail:
-#    image: fametec/postfix:gmail
+#    image: eftechcombr/postfix:gmail
 #    restart: unless-stopped
 #    depends_on:
 #      - bacula-dir
@@ -107,5 +145,6 @@ services:
 #      - bacula-dir
 #
 # 
-#volumes: 
-#  pgdata:
+# volumes: 
+#   pgdata:
+#   bucket:

@@ -1,0 +1,26 @@
+FROM eftechcombr/bacula:13.0.3-base
+
+ENV AWS_S3_ACCESS_KEY_ID "${AWS_S3_ACCESS_KEY_ID}"
+
+ENV AWS_S3_BUCKET "${AWS_S3_BUCKET}"
+
+ENV AWS_S3_SECRET_ACCESS_KEY "${AWS_S3_SECRET_ACCESS_KEY}"
+
+RUN apt -y install s3fs
+
+RUN { \
+        echo '#!/bin/sh' ; \
+        echo ; \
+        echo 'echo ${AWS_S3_ACCESS_KEY_ID}:${AWS_S3_SECRET_ACCESS_KEY} > ${HOME}/.passwd-s3fs' ; \
+        echo 'chmod 0600 ${HOME}/.passwd-s3fs' ; \
+        echo 'mkdir -p /${AWS_S3_BUCKET}' ; \
+        echo 's3fs ${AWS_S3_BUCKET} /${AWS_S3_BUCKET} -o passwd_file=${HOME}/.passwd-s3fs' ; \
+        echo '/opt/bacula/bin/bacula-fd -f -c /opt/bacula/etc/bacula-fd.conf' ; \
+        echo ; \
+   } > /entrypoint.sh && chmod +x /entrypoint.sh
+
+VOLUME ["/opt/bacula/etc"]
+
+EXPOSE 9102/tcp
+
+CMD ["/entrypoint.sh"]

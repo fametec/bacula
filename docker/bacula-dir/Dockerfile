@@ -1,11 +1,9 @@
-FROM fametec/bacula-base:11.0.5
-
-MAINTAINER eduardo@fametec.com.br
+FROM eftechcombr/bacula:13.0.3-base
 
 VOLUME ["/opt/bacula/etc"]
 
 EXPOSE 9101/tcp
 
-ENTRYPOINT ["bacula-dir"]
+ENTRYPOINT ["/opt/bacula/bin/bacula-dir"]
 
 CMD ["-f", "-c", "/opt/bacula/etc/bacula-dir.conf"]

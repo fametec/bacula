@@ -1,28 +1,29 @@
-FROM fametec/bacula-base:11.0.5
+FROM eftechcombr/bacula:13.0.3-base
 
-MAINTAINER eduardo@fametec.com.br
+RUN curl https://www.bacula.org/downloads/baculum/baculum.pub | apt-key add -
 
-RUN rpm --import https://www.bacula.org/downloads/baculum/baculum.pub
+COPY baculum.list /etc/apt/sources.list.d/baculum.list
 
-COPY baculum.repo /etc/yum.repos.d/baculum.repo
-
-RUN yum install -y \
-	epel-release \
-        yum-utils
-
-RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-
-RUN yum-config-manager --enable remi-php73
-
-RUN yum install -y \
-	sudo \
+RUN apt update && \
+  apt -y install \
+    php-bcmath \
+	php*-mbstring \
 	php-fpm \
-	baculum-common \
 	baculum-api \
-	baculum-api-httpd \
-	supervisor
+	baculum-api-apache2 \
+	baculum-common \
+	bacula-console \
+	baculum-web \
+	baculum-web-apache2 \
+	supervisor 
 
 COPY sudoers-baculum /etc/sudoers.d/sudoers-baculum 
+
+RUN usermod -aG bacula www-data && \
+  chown -R www-data:bacula /opt/bacula/working /opt/bacula/etc && \
+  chmod -R g+rwx /opt/bacula/working /opt/bacula/etc && \
+  a2enmod rewrite && \
+  a2ensite baculum-api
 
 COPY timezone.ini /etc/php.d/timezone.ini
 
@@ -32,8 +33,6 @@ VOLUME ["/opt/bacula/etc","/etc/baculum"]
 
 EXPOSE 9096/tcp
 
-RUN mkdir -p /run/php-fpm
-
-RUN yum -y clean all && rm -rf /var/cache/yum
+RUN mkdir -p /run/php
 
 CMD ["/usr/bin/supervisord"]

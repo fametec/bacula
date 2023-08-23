@@ -1,0 +1,418 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bacula-dir
+  namespace: backup
+data: 
+  bacula-dir.conf: |-
+    #
+    # Default Bacula Director Configuration file
+    #
+    #  The only thing that MUST be changed is to add one or more
+    #   file or directory names in the Include directive of the
+    #   FileSet resource.
+    #
+    #  For Bacula release 9.4.4 (28 May 2019) -- redhat Enterprise release
+    #
+    #  You might also want to change the default email address
+    #   from root to your address.  See the "mail" and "operator"
+    #   directives in the Messages resource.
+    #
+    # Copyright (C) 2000-2017 Kern Sibbald
+    # License: BSD 2-Clause; see file LICENSE-FOSS
+    #
+    Director {                                                          # define myself
+      Name = bacula-dir
+      DIRport = 9101                                                    # where we listen for UA connections
+      QueryFile = "/opt/bacula/scripts/query.sql"
+      WorkingDirectory = "/opt/bacula/working"
+      PidDirectory = "/opt/bacula/working"
+      Maximum Concurrent Jobs = 20
+      Password = "XDnaVZYU9F4QhqUGMPxiOXsJaji23mNG3FaAM9Z2q1c/"         # Console password
+      Messages = Daemon
+    }
+    #
+    JobDefs {
+      Name = "DefaultJob"
+      Type = Backup
+      Level = Incremental
+      Client = bacula-fd
+      FileSet = "Full Set"
+      Schedule = "WeeklyCycle"
+      Storage = File1
+      Messages = Standard
+      Pool = File
+      SpoolAttributes = yes
+      Priority = 10
+      Write Bootstrap = "/opt/bacula/working/%c.bsr"
+    }
+    #
+    # Define the main nightly save backup job
+    #   By default, this job will back up to disk in /tmp
+    Job {
+      Name = "BackupClient1"
+      JobDefs = "DefaultJob"
+    }
+    #
+    # Backup the catalog database (after the nightly save)
+    Job {
+      Name = "BackupCatalog"
+      JobDefs = "DefaultJob"
+      Level = Full
+      FileSet="Catalog"
+      Schedule = "WeeklyCycleAfterBackup"
+      # This creates an ASCII copy of the catalog
+      # Arguments to make_catalog_backup.pl are:
+      #  make_catalog_backup.pl <catalog-name>
+      ClientRunBeforeJob = "/opt/bacula/scripts/make_catalog_backup.pl MyCatalog"
+      # This deletes the copy of the catalog
+      ClientRunAfterJob = "/opt/bacula/scripts/delete_catalog_backup"
+      Write Bootstrap = "/opt/bacula/working/%n.bsr"
+      Priority = 11                   # run after main backup
+    }
+    #
+    # Standard Restore template, to be changed by Console program
+    #  Only one such job is needed for all Jobs/Clients/Storage ...
+    #
+    Job {
+      Name = "RestoreFiles"
+      Type = Restore
+      Client=bacula-fd
+      Storage = File1
+    # The FileSet and Pool directives are not used by Restore Jobs
+    # but must not be removed
+      FileSet="Full Set"
+      Pool = File
+      Messages = Standard
+      Where = /tmp/bacula-restores
+    }
+    # List of files to be backed up
+    FileSet {
+      Name = "Full Set"
+      Include {
+        Options {
+          signature = MD5
+        }
+        File = /opt/bacula/bin
+        File = /opt/bacula
+        File = /opt/bacula/etc
+      }
+    #
+    #
+    # If you backup the root directory, the following two excluded
+    #   files can be useful
+    #
+      Exclude {
+        File = /opt/bacula/working
+        File = /tmp
+        File = /proc
+        File = /tmp
+        File = /sys
+        File = /.journal
+        File = /.fsck
+      }
+    }
+    #
+    #
+    # When to do the backups, full backup on first sunday of the month,
+    #  differential (i.e. incremental since full) every other sunday,
+    #  and incremental backups other days
+    Schedule {
+      Name = "WeeklyCycle"
+      Run = Full 1st sun at 23:05
+      Run = Differential 2nd-5th sun at 23:05
+      Run = Incremental mon-sat at 23:05
+    }
+    #
+    # This schedule does the catalog. It starts after the WeeklyCycle
+    Schedule {
+      Name = "WeeklyCycleAfterBackup"
+      Run = Full sun-sat at 23:10
+    }
+    #
+    # This is the backup of the catalog
+    FileSet {
+      Name = "Catalog"
+      Include {
+        Options {
+          signature = MD5
+        }
+        File = "/opt/bacula/working/bacula.sql"
+      }
+    }
+    # Client (File Services) to backup
+    Client {
+      Name = bacula-fd
+      Address = bacula-fd
+      FDPort = 9102
+      Catalog = MyCatalog
+      Password = "eso80TrxzhXkRgaQVI6ZYrSzAZ4E9KFNp0Y+T1HHVWBi"          # password for FileDaemon
+      File Retention = 60 days            # 60 days
+      Job Retention = 6 months            # six months
+      AutoPrune = yes                     # Prune expired Jobs/Files
+    }
+    #
+    # Definition of file Virtual Autochanger device
+    Autochanger {
+      Name = File1
+    # Do not use "localhost" here
+      Address = bacula-sd                # N.B. Use a fully qualified name here
+      SDPort = 9103
+      Password = "TS8EQJ99iLFSK39oJy33YqkZ98v4ZapjRcA+j1N6ED1n"
+      Device = FileChgr1
+      Media Type = File1
+      Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
+      Autochanger = File1                 # point to ourself
+    }
+    # Definition of a second file Virtual Autochanger device
+    #   Possibly pointing to a different disk drive
+    Autochanger {
+      Name = File2
+    # Do not use "localhost" here
+      Address = bacula-sd                # N.B. Use a fully qualified name here
+      SDPort = 9103
+      Password = "TS8EQJ99iLFSK39oJy33YqkZ98v4ZapjRcA+j1N6ED1n"
+      Device = FileChgr2
+      Media Type = File2
+      Autochanger = File2                 # point to ourself
+      Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
+    }
+    # Generic catalog service
+    Catalog {
+      Name = MyCatalog
+      dbname = "bacula"
+      dbuser = "bacula"
+      dbpassword = "bacula"
+      DB address = "postgresql-headless.backup.svc.cluster.local"
+    }
+    # Reasonable message delivery -- send most everything to email address
+    #  and to the console
+    Messages {
+      Name = Standard
+    #
+    # NOTE! If you send to two email or more email addresses, you will need
+    #  to replace the %r in the from field (-f part) with a single valid
+    #  email address in both the mailcommand and the operatorcommand.
+    #  What this does is, it sets the email address that emails would display
+    #  in the FROM field, which is by default the same email as they're being
+    #  sent to.  However, if you send email to more than one address, then
+    #  you'll have to set the FROM address manually, to a single address.
+    #  for example, a 'no-reply@mydomain.com', is better since that tends to
+    #  tell (most) people that its coming from an automated source.
+    #
+    #  mailcommand = "/opt/bacula/bin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: %t %e of %c %l\" %r"
+    #  operatorcommand = "/opt/bacula/bin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: Intervention needed for %j\" %r"
+    #  mail = root@localhost = all, !skipped
+    #  operator = root@localhost = mount
+      console = all, !skipped, !saved
+    #
+    # WARNING! the following will create a file that you must cycle from
+    #          time to time as it will grow indefinitely. However, it will
+    #          also keep all your messages if they scroll off the console.
+    #
+    #  append = "/opt/bacula/log/bacula.log" = all, !skipped
+      stdout = all, !skipped
+      catalog = all
+      # Telegram
+      # mailcommand = "/opt/bacula/bin/bsmtp -h smtp2tg -f \"\(Bacula\) \<%r\>\" -s \"Bacula: %t %e of %c %l\" %r"
+      # mail = eduardo@smtp2tg = all, !skipped
+    }
+    #
+    # Message delivery for daemon messages (no job).
+    Messages {
+      Name = Daemon
+    #  mailcommand = "/opt/bacula/bin/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula daemon message\" %r"
+    #  mail = root@localhost = all, !skipped
+      console = all, !skipped, !saved
+      stdout = all, !skipped
+    #  append = "/opt/bacula/log/bacula.log" = all, !skipped
+      # Telegram
+      # mailcommand = "/opt/bacula/bin/bsmtp -h smtp2tg -f \"\(Bacula\) \<%r\>\" -s \"Bacula: %t %e of %c %l\" %r"
+      # mail = eduardo@smtp2tg = all, !skipped
+    }
+    # Default pool definition
+    Pool {
+      Name = Default
+      Pool Type = Backup
+      Recycle = yes                       # Bacula can automatically recycle Volumes
+      AutoPrune = yes                     # Prune expired volumes
+      Volume Retention = 365 days         # one year
+      Maximum Volume Bytes = 50G          # Limit Volume size to something reasonable
+      Maximum Volumes = 100               # Limit number of Volumes in Pool
+    }
+    # File Pool definition
+    Pool {
+      Name = File
+      Pool Type = Backup
+      Recycle = yes                       # Bacula can automatically recycle Volumes
+      AutoPrune = yes                     # Prune expired volumes
+      Volume Retention = 365 days         # one year
+      Maximum Volume Bytes = 50G          # Limit Volume size to something reasonable
+      Maximum Volumes = 100               # Limit number of Volumes in Pool
+      Label Format = "Vol-"               # Auto label
+    }
+    # Scratch pool definition
+    # Pool {
+    #   Name = Scratch
+    #   Pool Type = Backup
+    # }
+    #
+    # Restricted console used by tray-monitor to get the status of the director
+    #
+    Console {
+      Name = bacula-mon
+      Password = "r0V/Hx0TUwQ4TlnX1lyUHf8J8v9XvRBqnHTRW9+CB614"
+      CommandACL = status, .status
+    }
+    # Include subfiles associated with configuration of clients.
+    # # They define the bulk of the Clients, Jobs, and FileSets.
+    # # Remember to "reload" the Director after adding a client file.
+    @|"sh -c 'for f in /opt/bacula/etc/bacula-dir.d/*.conf ; do echo @${f} ; done'"
+    #
+    # bacula-dir-cloud-aws.conf
+    #
+    # JobDefs
+    # Job
+    # Restore
+    # Pool
+    # Autochanger
+    #
+    # Template to store in cloud
+    JobDefs {
+      Name = "DefaultJobToCloudAWS"
+      Type = Backup
+      Level = Incremental
+      Client = bacula-fd
+      FileSet = "Full Set"
+      Schedule = "WeeklyCycle"
+      Storage = "CloudS3AWS"
+      Messages = Standard
+      Pool = CloudAWS
+      SpoolAttributes = yes
+      Priority = 10
+      Write Bootstrap = "/opt/bacula/working/%c.bsr"
+    }
+    # Jobs
+    Job {
+      Name = "BackupClient1ToCloudAWS"
+      JobDefs = "DefaultJobToCloudAWS"
+    }
+    # Restore
+    Job {
+      Name = "RestoreFromCloudAWS"
+      Type = Restore
+      Client=bacula-fd
+      Storage = CloudS3AWS
+      FileSet="Full Set"
+      Pool = CloudAWS
+      Messages = Standard
+      Where = /tmp/bacula-restores
+    }
+    # Cloud Pool definition
+    Pool {
+      Name = CloudAWS
+      Pool Type = Backup
+      Recycle = no                        # Bacula can automatically recycle Volumes
+      AutoPrune = yes                     # Prune expired volumes
+      Volume Retention = 365 days         # one year
+      Maximum Volume Jobs = 1             #
+      # Maximum Volume Bytes = 100M          # Limit Volume size to something reasonable
+      Label Format = "Vol-JobId-${JobId}"      # Auto label
+    }
+    # Autochanger definition
+    Autochanger {
+      Name = "CloudS3AWS"
+    # Do not use "localhost" here
+      Address = bacula-sd                # N.B. Use a fully qualified name here
+      SDPort = 9103
+      Password = "TS8EQJ99iLFSK39oJy33YqkZ98v4ZapjRcA+j1N6ED1n"
+      Device = "CloudAutoChangerS3"
+      Media Type = "CloudType"
+      Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
+    }
+    # bacula-dir-cloud.conf 
+    # 
+    # JobDefs
+    # Job
+    # Restore
+    # Pool
+    # Autochanger
+    # 
+    # Template to store in cloud
+    JobDefs {
+      Name = "DefaultJobToCloud"
+      Type = Backup
+      Level = Incremental
+      Client = bacula-fd
+      FileSet = "Full Set"
+      Schedule = "WeeklyCycle"
+      Storage = "CloudS3"
+      Messages = Standard
+      Pool = Cloud
+      SpoolAttributes = yes
+      Priority = 10
+      Write Bootstrap = "/opt/bacula/working/%c.bsr"
+    }
+    # Jobs 
+    Job {
+      Name = "BackupClient1ToCloud"
+      JobDefs = "DefaultJobToCloud"
+    }
+    # Restore
+    Job {
+      Name = "RestoreFromCloud"
+      Type = Restore
+      Client=bacula-fd
+      Storage = CloudS3
+      FileSet="Full Set"
+      Pool = Cloud
+      Messages = Standard
+      Where = /tmp/bacula-restores
+    }
+    # Cloud Pool definition
+    Pool {
+      Name = Cloud
+      Pool Type = Backup
+      Recycle = no                        # Bacula can automatically recycle Volumes
+      AutoPrune = yes                     # Prune expired volumes
+      Volume Retention = 365 days         # one year
+      Maximum Volume Jobs = 1             # 
+      # Maximum Volume Bytes = 100M          # Limit Volume size to something reasonable
+      Label Format = "Vol-JobId-${JobId}"      # Auto label
+    }
+    # Autochanger definition
+    Autochanger {
+      Name = "CloudS3"
+    # Do not use "localhost" here
+      Address = bacula-sd                # N.B. Use a fully qualified name here
+      SDPort = 9103
+      Password = "TS8EQJ99iLFSK39oJy33YqkZ98v4ZapjRcA+j1N6ED1n"
+      Device = "CloudAutoChanger1"
+      Media Type = "CloudType"
+      Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
+    }
+    #
+    #Autochanger {
+    #  Name = "CloudS3-2"
+    ## Do not use "localhost" here
+    #  Address = bacula-sd                # N.B. Use a fully qualified name here
+    #  SDPort = 9103
+    #  Password = "TS8EQJ99iLFSK39oJy33YqkZ98v4ZapjRcA+j1N6ED1n"
+    #  Device = "CloudAutoChanger2"
+    #  Media Type = "CloudType"
+    #  Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
+    #}
+    #
+    #Autochanger {
+    #  Name = "CloudS3-3"
+    ## Do not use "localhost" here
+    #  Address = bacula-sd                # N.B. Use a fully qualified name here
+    #  SDPort = 9103
+    #  Password = "TS8EQJ99iLFSK39oJy33YqkZ98v4ZapjRcA+j1N6ED1n"
+    #  Device = "CloudAutoChanger3"
+    #  Media Type = "CloudType"
+    #  Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
+    #}
+    #
+      
+
